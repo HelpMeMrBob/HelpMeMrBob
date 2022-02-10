@@ -26,35 +26,36 @@
           <!-- Contains donation button for mobile and tablet devices -->
           <li class="header__extra">
             <div class="cta">
-              <a href="donations.html" class="button button-block-sm button--primary button--fill">Donate</a>
+              <a href="donations.html" class="button button-block-sm button--primary button--fill">로그인</a>
             </div>
           </li><!-- .header__extra ends -->
-
-          <li class="header__list active"><a href="">Home</a></li><!-- .header__list ends -->
-
-          <li class="header__list"><a href="about.html">About</a></li><!-- .header__list ends -->
+<!-- 홈은 따로 쓰지말고 좌측상단의 로고 클릭하면 홈으로 이동하게 만들께요.
+          <li class="header__list active"><a href=""></a></li>.header__list ends
+ -->
+          <li class="header__list"><a href="about.html">메뉴추천</a></li><!-- .header__list ends -->
 
           <li class="header__list">
-            <a href="" class="dropdown-link caret">Ministries</a>
+            <a href="" class="dropdown-link caret">지도</a>
 
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="ministries-layout.html">Ministries layout</a></li>
-                <li class="header__list"><a href="ministries-single.html">Ministries single</a></li>
+                <li class="header__list"><a href="ministries-layout.html">1</a></li>
+                <li class="header__list"><a href="ministries-single.html">2</a></li>
 
               </ul>
             </div><!-- .header__submenu ends -->
           </li><!-- .header__list ends -->
 
           <li class="header__list">
-            <a href="" class="dropdown-link caret">Sermons</a>
+            <a href="" class="dropdown-link caret">커뮤니티</a>
 
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="sermons-layout.html">Sermons layout</a></li>
-                <li class="header__list"><a href="sermons-single.html">Sermons single</a></li>
+                <li class="header__list"><a href="sermons-layout.html">리뷰 게시판</a></li>
+                <li class="header__list"><a href="sermons-single.html">푸드 캘린더</a></li>
+                <li class="header__list"><a href="sermons-single.html">음식 토론</a></li>
 
               </ul>
 
@@ -62,18 +63,20 @@
           </li><!-- .header__list ends -->
 
           <li class="header__list">
-            <a href="" class="dropdown-link caret">Events</a>
+            <a href="" class="dropdown-link caret">밥알상점</a>
 
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="events-layout.html">Events layout</a></li>
-                <li class="header__list"><a href="events-single.html">Events single</a></li>
+                <li class="header__list"><a href="events-layout.html">1</a></li>
+                <li class="header__list"><a href="events-single.html">2</a></li>
 
               </ul>
             </div><!-- .header__submenu ends -->
           </li><!-- .header__list ends -->
-
+          
+          
+<!-- 필요한 경우 주석해제해서 사용
           <li class="header__list">
             <a href="" class="dropdown-link caret">Causes</a>
 
@@ -84,8 +87,8 @@
                 <li class="header__list"><a href="causes-single.html">Causes single</a></li>
 
               </ul>
-            </div><!-- .header__submenu ends -->
-          </li><!-- .header__list ends -->
+            </div>.header__submenu ends
+          </li>.header__list ends
 
           <li class="header__list">
             <a href="" class="dropdown-link caret">Pages</a>
@@ -100,8 +103,8 @@
                 <li class="header__list"><a href="staffs-single.html">Staffs single</a></li>
 
               </ul>
-            </div><!-- .header__submenu ends -->
-          </li><!-- .header__list ends -->
+            </div>.header__submenu ends
+          </li>.header__list ends
 
           <li class="header__list">
             <a href="" class="dropdown-link caret">Blog</a>
@@ -113,25 +116,34 @@
                 <li class="header__list"><a href="blog-single.html">Blog single</a></li>
 
               </ul>
-            </div><!-- .header__submenu ends -->
-          </li><!-- .header__list ends -->
+            </div>.header__submenu ends
+          </li>.header__list ends
 
+<<<<<<< HEAD
           <li class="header__list"><a href="infomation.do">지도</a></li>
           <!-- .header__list ends -->
 
+=======
+          <li class="header__list"><a href="contact.html">Contact</a></li>
+          .header__list ends
+ -->
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
         </ul><!-- .header__navitems ends -->
 
         <!-- Contains Search button and donation button -->
         <div class="header__extra desktop-version">
-          <div class="search">
+          <div class="search"> 
             <div class="search-icon">
               <button class="modal-button" data-modal-target="site-search"><i class="ri-search-line"></i></button>
             </div>
           </div>
 
-          <div class="cta hide-on-sm show-on-lg">
-            <a href="donations.html" class="button button--primary button--fill">Donate</a>
+          <div class="cta hide-on-sm show-on-lg" style="">
+            <a href="donations.html" class="button button--primary button--fill">
+            	로그인
+            </a>
           </div>
+          
         </div><!-- .header__extra ends -->
 
       </div><!-- .header__nav ends -->
