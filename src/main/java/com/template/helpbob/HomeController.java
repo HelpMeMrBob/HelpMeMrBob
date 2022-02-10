@@ -33,6 +33,8 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+		String hello = "커밋 테스트합니다";
+		
 		return "main/index";
 	}
 }
