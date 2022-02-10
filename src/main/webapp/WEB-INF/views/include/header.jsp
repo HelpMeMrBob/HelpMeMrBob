@@ -35,12 +35,12 @@
           <li class="header__list"><a href="about.html">메뉴추천</a></li><!-- .header__list ends -->
 
           <li class="header__list">
-            <a href="" class="dropdown-link caret">지도</a>
+            <a href="infomation.do" class="dropdown-link caret">지도</a>
 
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="ministries-layout.html">1</a></li>
+                <li class="header__list"><a href="infomation.do">1</a></li>
                 <li class="header__list"><a href="ministries-single.html">2</a></li>
 
               </ul>
@@ -119,15 +119,7 @@
             </div>.header__submenu ends
           </li>.header__list ends
 
-<<<<<<< HEAD
-          <li class="header__list"><a href="infomation.do">지도</a></li>
           <!-- .header__list ends -->
-
-=======
-          <li class="header__list"><a href="contact.html">Contact</a></li>
-          .header__list ends
- -->
->>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
         </ul><!-- .header__navitems ends -->
 
         <!-- Contains Search button and donation button -->
