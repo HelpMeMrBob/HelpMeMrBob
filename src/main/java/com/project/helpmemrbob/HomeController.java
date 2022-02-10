@@ -37,4 +37,9 @@ public class HomeController {
 		
 		return "main/index";
 	}
+	
+	@RequestMapping("/infomation.do")
+	public String infomation() {
+		return "main/contact";
+	}
 }

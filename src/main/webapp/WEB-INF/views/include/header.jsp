@@ -116,7 +116,7 @@
             </div><!-- .header__submenu ends -->
           </li><!-- .header__list ends -->
 
-          <li class="header__list"><a href="contact.html">Contact</a></li>
+          <li class="header__list"><a href="infomation.do">지도</a></li>
           <!-- .header__list ends -->
 
         </ul><!-- .header__navitems ends -->
