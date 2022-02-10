@@ -9,7 +9,7 @@
 
           <form class="form form--search">
 
-            <div class="row">
+            <div class="row"> 
 
               <div class="flex-lg-9">
                 <div class="form__group">
