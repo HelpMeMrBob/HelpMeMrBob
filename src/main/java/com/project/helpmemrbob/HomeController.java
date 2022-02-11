@@ -33,11 +33,10 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		String hello = "커밋 테스트합니다";
-		
 		return "main/index";
 	}
 	
+	//지도 화면 매핑
 	@RequestMapping("/infomation.do")
 	public String infomation() {
 		return "main/contact";

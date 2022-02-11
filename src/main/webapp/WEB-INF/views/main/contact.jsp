@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
@@ -18,7 +18,11 @@
     <main>
 	
       <!-- BANNER SECTION STARTS -->
+      
+      <!-- 지도를 띄울 div태그 -->
       <div id="map" style="width: auto;height: 800px;"></div>
+      
+      <!-- 카카오 지도 API -->
       <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1c4c2a88f75c42cd25f8a7382dc6c49"></script>
       <script>
       	var container = document.getElementById('map');
