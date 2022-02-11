@@ -38,7 +38,7 @@ public class HomeController {
 		return "main/index";
 	}
 	
-	//吏��룄 �솕硫� 留ㅽ븨
+	//지도 화면 매핑
 	@RequestMapping("/infomation.do")
 	public String infomation() {
 		return "main/contact";
