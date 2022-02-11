@@ -42,4 +42,5 @@ public class HomeController {
 	public String infomation() {
 		return "main/contact";
 	}
+
 }

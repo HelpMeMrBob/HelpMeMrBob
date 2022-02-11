@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 
   <body>
@@ -62,16 +66,31 @@
 
       </div><!-- .inner-pages-header ends -->
       <!-- INNER PAGES HEADER ENDS -->
+      
+      
+      
+      
+      
 
+<!-- /////////////////////여기가 리스트////////////////////// -->
 
       <!-- ALL RESULTS SECTION STARTS -->
+      	<c:choose>
+			<c:when test="${empty listRows }">
+				<li>
+					<p>등록된 게시물이 없습니다.</p>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${listRows }" var="row" 
+					varStatus="loop">
       <section class="all-results all-results--causes">
 
         <div class="container">
 
           <div class="row">
 
-            <div class="flex-md-6 flex-lg-4">
+            <div class="col-sm-3">
 
               <div class="card cause">
 
@@ -83,237 +102,7 @@
 
                 <div class="card__body">
 
-                  <h3 class="cause__tile mar-b-sm-2">Education for children</h3>
-
-                  <div class="progress">
-
-                    <div class="progress__context mar-b-sm-06">
-                      <span class="current"></span>
-                      <span class="end"></span>
-                    </div><!-- .progress__context ends -->
-
-                    <div class="progress__bar" data-current="9020" data-end="12000">
-                      <div class="fill"></div>
-                    </div><!-- .progress__bar ends -->
-
-                  </div><!-- .progress ends -->
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-
-                  <div class="card__cta">
-                    <a href="causes-single.html" class="button button--primary button--fill">Donate now</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-4">
-
-              <div class="card cause">
-
-                <div class="card__header no-overlay">
-
-                  <img src="./resources/images/cause-1.jpg" alt="" class="card__image">
-
-                </div><!-- .card__header ends -->
-
-                <div class="card__body">
-
-                  <h3 class="cause__tile mar-b-sm-2">Clean water &amp; food in Syria</h3>
-
-                  <div class="progress">
-
-                    <div class="progress__context mar-b-sm-06">
-                      <span class="current"></span>
-                      <span class="end"></span>
-                    </div><!-- .progress__context ends -->
-
-                    <div class="progress__bar" data-current="52058" data-end="135000">
-                      <div class="fill"></div>
-                    </div><!-- .progress__bar ends -->
-
-                  </div><!-- .progress ends -->
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-
-                  <div class="card__cta">
-                    <a href="causes-single.html" class="button button--primary button--fill">Donate now</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-4 mar-t-md-2 mar-t-lg-0">
-
-              <div class="card cause">
-
-                <div class="card__header no-overlay">
-
-                  <img src="./resources/images/causes-2.jpg" alt="" class="card__image">
-
-                </div><!-- .card__header ends -->
-
-                <div class="card__body">
-
-                  <h3 class="cause__tile mar-b-sm-2">Shelters for the homeless</h3>
-
-                  <div class="progress">
-
-                    <div class="progress__context mar-b-sm-06">
-                      <span class="current"></span>
-                      <span class="end"></span>
-                    </div><!-- .progress__context ends -->
-
-                    <div class="progress__bar" data-current="32058" data-end="105000">
-                      <div class="fill"></div>
-                    </div><!-- .progress__bar ends -->
-
-                  </div><!-- .progress ends -->
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-
-                  <div class="card__cta">
-                    <a href="causes-single.html" class="button button--primary button--fill">Donate now</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-4 mar-t-md-2">
-
-              <div class="card cause">
-
-                <div class="card__header no-overlay">
-
-                  <img src="./resources/images/cause-1.jpg" alt="" class="card__image">
-
-                </div><!-- .card__header ends -->
-
-                <div class="card__body">
-
-                  <h3 class="cause__tile mar-b-sm-2">Clean water &amp; food in Syria</h3>
-
-                  <div class="progress">
-
-                    <div class="progress__context mar-b-sm-06">
-                      <span class="current"></span>
-                      <span class="end"></span>
-                    </div><!-- .progress__context ends -->
-
-                    <div class="progress__bar" data-current="52058" data-end="135000">
-                      <div class="fill"></div>
-                    </div><!-- .progress__bar ends -->
-
-                  </div><!-- .progress ends -->
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-
-                  <div class="card__cta">
-                    <a href="causes-single.html" class="button button--primary button--fill">Donate now</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-4 mar-t-md-2">
-
-              <div class="card cause">
-
-                <div class="card__header no-overlay">
-
-                  <img src="./resources/images/causes-2.jpg" alt="" class="card__image">
-
-                </div><!-- .card__header ends -->
-
-                <div class="card__body">
-
-                  <h3 class="cause__tile mar-b-sm-2">Shelters for the homeless</h3>
-
-                  <div class="progress">
-
-                    <div class="progress__context mar-b-sm-06">
-                      <span class="current"></span>
-                      <span class="end"></span>
-                    </div><!-- .progress__context ends -->
-
-                    <div class="progress__bar" data-current="32058" data-end="105000">
-                      <div class="fill"></div>
-                    </div><!-- .progress__bar ends -->
-
-                  </div><!-- .progress ends -->
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-
-                  <div class="card__cta">
-                    <a href="causes-single.html" class="button button--primary button--fill">Donate now</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-4 mar-t-md-2">
-
-              <div class="card cause">
-
-                <div class="card__header no-overlay">
-
-                  <img src="./resources/images/causes-3.jpg" alt="" class="card__image">
-
-                </div><!-- .card__header ends -->
-
-                <div class="card__body">
-
-                  <h3 class="cause__tile mar-b-sm-2">Education for children</h3>
+                  <h3 class="cause__tile mar-b-sm-2">${row.title}</h3>
 
                   <div class="progress">
 
@@ -352,8 +141,11 @@
         </div><!-- .container ends -->
 
       </section><!-- .all-results -->
+      </c:forEach>
+			</c:otherwise>
+		</c:choose>
       <!-- ALL RESULTS SECTION ENDS -->
-
+<!--//////////////////////////리스트끝///////////////////////////  -->
       <div class="inner-pages-navigation pad-t-sm-4 pad-b-sm-4">
 
         <div class="container">
