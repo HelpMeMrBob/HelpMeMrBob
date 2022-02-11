@@ -19,6 +19,8 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	String hello = ".class 제외 테스트";
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -36,7 +38,7 @@ public class HomeController {
 		return "main/index";
 	}
 	
-	//지도 화면 매핑
+	//吏��룄 �솕硫� 留ㅽ븨
 	@RequestMapping("/infomation.do")
 	public String infomation() {
 		return "main/contact";
