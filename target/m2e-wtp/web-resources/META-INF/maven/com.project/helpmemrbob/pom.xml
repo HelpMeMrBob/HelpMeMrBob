@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>${org.springframework-version}</version> 
 		</dependency>
 				
 		<!-- AspectJ -->

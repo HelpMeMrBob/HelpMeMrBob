@@ -37,11 +37,4 @@ public class HomeController {
 		
 		return "main/index";
 	}
-	
-	//지도 화면 매핑
-	@RequestMapping("/infomation.do")
-	public String infomation() {
-		return "main/contact";
-	}
-
 }
