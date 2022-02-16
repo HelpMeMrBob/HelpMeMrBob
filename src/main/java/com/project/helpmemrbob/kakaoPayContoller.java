@@ -24,19 +24,25 @@ import item.ItemDAO;
 
 @Controller
 public class kakaoPayContoller {
+	
+	//결제실패
+		@RequestMapping("/payDisplay.do")
+		public String payDisplay() {
+			return "buyPoint/payPoint";
+		}
 
 	//결제성공
-	@RequestMapping("/payResult/resultSuccess.do")
+	@RequestMapping("/resultSuccess.do")
 	public String payResultSuccess() {
 		return "payResult/success";
 	}
 	//결제실패
-	@RequestMapping("/payResult/resultFailure.do")
+	@RequestMapping("/resultFailure.do")
 	public String payResultFailure() {
 		return "payResult/failure";
 	}
 	//결제실패
-	@RequestMapping("/payResult/resultCancel.do")
+	@RequestMapping("/resultCancel.do")
 	public String payResultCancel() {
 		return "payResult/cancel";
 	}
@@ -67,9 +73,9 @@ public class kakaoPayContoller {
 					+ "&total_amount="+amount // 총 금액
 					+ "&vat_amount=200" // 부가세
 					+ "&tax_free_amount=0" // 상품 비과세 금액
-					+ "&approval_url=http://localhost:8081/finalMe/payResult/resultSuccess.do" // 결제 성공 시
-					+ "&fail_url=http://localhost:8081/finalMe/payResult/resultFailure.do" // 결제 실패 시
-					+ "&cancel_url=http://localhost:8081/finalMe/payResult/resultCancel.do";
+					+ "&approval_url=http://localhost:8081/helpmemrbob/resultSuccess.do" // 결제 성공 시
+					+ "&fail_url=http://localhost:8081/helpmemrbob/resultFailure.do" // 결제 실패 시
+					+ "&cancel_url=http://localhost:8081/helpmemrbob/resultCancel.do";
 			
 			//서버에 전달하기 위한
 			OutputStream out = connection.getOutputStream();
@@ -112,7 +118,7 @@ public class kakaoPayContoller {
 	}
 	
 	//oriKaKao.jsp에서 사용한 컨트롤러
-	@RequestMapping("/emoticon/kakaopay2")
+	@RequestMapping("/kakaopay2")
 	@ResponseBody
 	public String kakaopay2() {
 		

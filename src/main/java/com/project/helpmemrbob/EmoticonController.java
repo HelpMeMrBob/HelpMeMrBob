@@ -44,11 +44,10 @@ public class EmoticonController {
 			return "emoticon/display";
 		}
 	//이모티콘 구매과정
-	@RequestMapping("/emoticon/buyProcess.do")
+	@RequestMapping("/buyProcess.do")
 	public String buyProcess(HttpServletRequest request, PointDTO pdto, Model model) {
 		//String pr = request.getParameter("pr"); //여기까지는 pr이 넘어오지만, model을 통해서는 pr값을 넘길 수 없음.
 		//String sticker = request.getParameter("sticker"); //PointDAO에 정의되어있기때문에 pr이 넘어감
-	
 		model.addAttribute("pdto",pdto);
 		
 		return "emoticon/buyProcess";
@@ -61,15 +60,15 @@ public class EmoticonController {
 	}
 	
 	//카카오페이 실행 연습페이지
-	@RequestMapping("/emoticon/imKakaopayPage.do")
+	@RequestMapping("/imKakaopayPage.do")
 	public String kakaopayPage() {
 		return "emoticon/imKakaopay";
 	}
 	//카카오페이 실행 연습페이지
-		@RequestMapping("/emoticon/oriKakaopayPage.do")
-		public String kakaopayPageOri() {
-			return "emoticon/oriKakaoPay";
-		}
+	@RequestMapping("/oriKakaopayPage.do")
+	public String kakaopayPageOri() {
+		return "emoticon/oriKakaoPay";
+	}
 	
 	
 	

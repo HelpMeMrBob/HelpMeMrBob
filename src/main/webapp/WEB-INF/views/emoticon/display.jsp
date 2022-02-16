@@ -55,51 +55,55 @@
 	
       <!-- STAFFS SINGLE SECTION STARTS -->
       <section class="staffs-single default-section-spacing">
-     
-		<h1>스티커 출력하기1</h1>
-		<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
-		<table class="table table-bordered" style="width:500px; height:500px;">
-		<tr>
-			<td >
-				<img src="./resources/img/sticker1.jpg" style="width:100px; height:100px; align:center;">
-				<br/><br/><label for="earth">지구</label>
-				<input type="radio" id="earth" name="sticker" value="earth">
-			</td>
-			<td>
-				<img src="./resources/img/sticker2.jpg" style="width:100px; height:100px;">
-				<br/><br/><label for="sun">태양</label>
-				<input type="radio" id="sun" name="sticker" value="sun">
-			</td>
-			<td>
-				<img src="./resources/img/sticker6.jpg" style="width:100px; height:100px;">
-				<br/><br/><label for="smile">표정</label>
-				<input type="radio" id="smile" name="sticker" value="smile">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<img src="./resources/img/sticker3.jpg"  style="width:100px; height:100px;" >
-				<br/><br/><label for="redheart">빨간하트</label>
-				<input type="radio" id="redheart" name="sticker" value="redheart">
-			</td>
-			<td>
-				<img src="./resources/img/sticker4.jpg" style="width:100px; height:100px;">
-				<br/><br/><label for="blueheart">파란하트</label>
-				<input type="radio" id="blueheart" name="sticker" value="blueheart">
-			</td>
-			<td>
-				<img src="./resources/img/sticker5.jpg" style="width:100px; height:100px;">
-				<br/><br/><label for="iceflake">빙수</label>
-				<input type="radio" id="iceflake" name="sticker" value="iceflake">
-			</td>
-		</tr>
-		 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-		
-	</table>
-	<button type="submit" class="btn btn-danger" >구매하기</button>
-</form>
-        
-
+      <div class="staffs-single__content">
+          <div class="container">
+            <div class="row">
+              <div class="flex-lg-7">
+						<h2>꾸미기 상점입니다.</h2>
+						<br/><br/><br/>
+						<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
+							<table class="table table-bordered" style="width:500px; height:500px;">
+								<tr>
+									<td >
+										<img src="./resources/img/sticker1.jpg" style="width:100px; height:100px; align:center;">
+										<br/><br/><label for="earth">지구</label>
+										<input type="radio" id="earth" name="sticker" value="earth">
+									</td>
+									<td>
+										<img src="./resources/img/sticker2.jpg" style="width:100px; height:100px;">
+										<br/><br/><label for="sun">태양</label>
+										<input type="radio" id="sun" name="sticker" value="sun">
+									</td>
+									<td>
+										<img src="./resources/img/sticker6.jpg" style="width:100px; height:100px;">
+										<br/><br/><label for="smile">표정</label>
+										<input type="radio" id="smile" name="sticker" value="smile">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<img src="./resources/img/sticker3.jpg"  style="width:100px; height:100px;" >
+										<br/><br/><label for="redheart">빨간하트</label>
+										<input type="radio" id="redheart" name="sticker" value="redheart">
+									</td>
+									<td>
+										<img src="./resources/img/sticker4.jpg" style="width:100px; height:100px;">
+										<br/><br/><label for="blueheart">파란하트</label>
+										<input type="radio" id="blueheart" name="sticker" value="blueheart">
+									</td>
+									<td>
+										<img src="./resources/img/sticker5.jpg" style="width:100px; height:100px;">
+										<br/><br/><label for="iceflake">빙수</label>
+										<input type="radio" id="iceflake" name="sticker" value="iceflake">
+									</td>
+								</tr>
+							</table>
+						<button type="submit" class="btn btn-danger" >구매하기</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
       </section><!-- .staffs-single ends -->
       <!-- STAFFS SINGLE SECTION ENDS -->
 

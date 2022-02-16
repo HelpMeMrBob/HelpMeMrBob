@@ -72,7 +72,7 @@
               <ul>
 
                 <li class="header__list"><a href="./displayEmoticon.do">아이템 구매하기</a></li>
-                <li class="header__list"><a href="events-single.html">2</a></li>
+                <li class="header__list"><a href="./payDisplay.do">밥알 충전하기</a></li>
 
               </ul>
             </div><!-- .header__submenu ends -->
