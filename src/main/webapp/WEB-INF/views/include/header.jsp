@@ -43,8 +43,8 @@
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="infomation.do">1</a></li>
-                <li class="header__list"><a href="ministries-single.html">2</a></li>
+                <li class="header__list"><a href="infomation.do">지도 보러가기</a></li>
+                <!-- <li class="header__list"><a href="ministries-single.html">2</a></li> -->
 
               </ul>
             </div><!-- .header__submenu ends -->
