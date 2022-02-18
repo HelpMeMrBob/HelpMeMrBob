@@ -133,10 +133,53 @@
             </div>
           </div>
 
-          <div class="cta hide-on-sm show-on-lg" style="">
-            <a href="donations.html" class="button button--primary button--fill">
-            	로그인
-            </a>
+	      <div class="cta hide-on-sm show-on-lg" style="">
+			<c:choose>
+				<c:when test="${ not empty sessionScope.siteUserInfo }">
+					<table>
+						<tr>
+							<td>
+								<button onclick="location.href='./mypage.do';"
+										style="background-color: #ED6A5A; color: #F5F5F5;
+										       width: 150px; height: 70px; font-size: 16px;
+										       border: none; border-right: 5px solid #0F202E">
+									<strong>마이페이지</strong>
+								</button>
+							</td>
+							<td>
+								<button onclick="location.href='./logout.do';"
+										style="background-color: #ED6A5A; color: #F5F5F5;
+											   width: 150px ; height: 70px; font-size: 16px;
+											   border: none; border-left: 3px solid #0f202e">
+									<strong>로그아웃</strong>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</c:when>
+				<c:otherwise><!-- 로그인 되지 않았을때 ──────────────────────────────────────-->
+					<table>
+						<tr>
+							<td>
+								<button onclick="location.href='./login.do';"
+										  style="background-color: #ED6A5A; color: #F5F5F5;
+												 width: 150px; height: 70px; font-size: 16px;
+												 border: none; border-right: 3px solid #0F202E">
+									<strong>로그인</strong>
+								</button>
+							</td>
+							<td>
+								<button onclick="location.href='./login.do';"
+										style="background-color: #ED6A5A; color: #F5F5F5;
+											   width: 150px; height: 70px; font-size: 16px;
+											   border: none; border-left: 3px solid #0F202E">
+									<strong>회원가입</strong>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</c:otherwise>
+			</c:choose>
           </div>
           
         </div><!-- .header__extra ends -->
