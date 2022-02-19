@@ -15,234 +15,36 @@
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 
     <main>
-
-      <!-- HERO SECTION STARTS -->
-      <section class="hero hero--regular full-width display-flex justify-align-center">
-
-        <div class="hero__content full-width text-center-sm">
-
-          <div class="container">
-
-            <div class="heading mar-b-sm-2">
-              <span class="section-intro mar-b-sm-2">Jesus is Lord</span>
-              <h1 class="color-off-white">Welcome to Faith in Christ Church. <br>We hope you enjoy your visit and
-                worship with us</h1>
-            </div>
-
-            <div class="hero__cta"><a href="#" class="button button--primary button--fill">Learn more</a></div>
-
-          </div><!-- .container ends -->
-
-        </div><!-- .hero__content ends -->
-
-      </section><!-- .hero ends -->
-      <!-- HERO SECTION ENDS -->
-
-
-      <!-- UPCOMING EVENTS SECTION STARTS -->
-      <section class="upcoming-events">
-
-        <div class="upcoming-events__content">
-
-          <div class="row no-gutter">
-
-            <div class="flex-md-6 flex-lg-3">
-
-              <div class="upcoming-intro background-secondary">
-
-                <div class="section-heading">
-                  <span class="section-intro">Events</span>
-                  <h2>Our upcoming events</h2>
-                </div><!-- .section-heading ends -->
-
-                <a href="events-layout.html" class="button button--primary button--fill">View all events</a>
-
-              </div><!-- .upcoming-intro ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3">
-
-              <div class="card events">
-
-                <div class="card__body">
-
-                  <div class="label uppercase">Free</div>
-
-                  <div class="event__details mar-t-sm-2 mar-b-sm-2">
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-calendar-line"></i></span>
-                      <span class="text">02/28/2020</span>
-                    </div><!-- .icon-text ends -->
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-time-line"></i></span>
-                      <span class="text">11:45 AM - 12:45PM</span>
-                    </div><!-- .icon-text ends -->
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-map-pin-line"></i></span>
-                      <span class="text">123 Jay St, Albany, NY 12203</span>
-                    </div><!-- .icon-text ends -->
-
-                  </div><!-- .event__details ends -->
-
-                  <h3 class="event__tile">Prayer gathering</h3>
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-
-                  <div class="card__cta">
-                    <a href="events-single.html" class="button button--primary button--fill">Learn more</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3">
-
-              <div class="card events">
-
-                <div class="card__body">
-
-                  <div class="label uppercase">Free</div>
-
-                  <div class="event__details mar-t-sm-2 mar-b-sm-2">
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-calendar-line"></i></span>
-                      <span class="text">04/28/2020</span>
-                    </div><!-- .icon-text ends -->
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-time-line"></i></span>
-                      <span class="text">11:45 AM - 12:45PM</span>
-                    </div><!-- .icon-text ends -->
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-map-pin-line"></i></span>
-                      <span class="text">123 Jay St, Albany, NY 12203</span>
-                    </div><!-- .icon-text ends -->
-
-                  </div><!-- .event__details ends -->
-
-                  <h3 class="event__tile">Homeless shelter outreach</h3>
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-
-                  <div class="card__cta">
-                    <a href="events-single.html" class="button button--primary button--fill">Learn more</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3">
-
-              <div class="card events">
-
-                <div class="card__body">
-
-                  <div class="label uppercase">Free</div>
-
-                  <div class="event__details mar-t-sm-2 mar-b-sm-2">
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-calendar-line"></i></span>
-                      <span class="text">06/28/2020</span>
-                    </div><!-- .icon-text ends -->
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-time-line"></i></span>
-                      <span class="text">11:45 AM - 12:45PM</span>
-                    </div><!-- .icon-text ends -->
-
-                    <div class="icon-text">
-                      <span class="icon"><i class="ri-map-pin-line"></i></span>
-                      <span class="text">123 Jay St, Albany, NY 12203</span>
-                    </div><!-- .icon-text ends -->
-
-                  </div><!-- .event__details ends -->
-
-                  <h3 class="event__tile">Scholarship fundraiser</h3>
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-
-                  <div class="card__cta">
-                    <a href="events-single.html" class="button button--primary button--fill">Learn more</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-          </div><!-- .row ends -->
-
-        </div><!-- .upcoming-events__content ends -->
-
-      </section><!-- .upcoming-events ends -->
-      <!-- UPCOMING EVENTS SECTION ENDS -->
-
-
-      <!-- WELCOME SECTION STARTS -->
-      <section class="welcome text-center-sm default-section-spacing">
-
-        <div class="welcome__content">
-
-          <div class="container">
-
-            <div class="section-heading">
-              <span class="section-intro">Welcome</span>
-              <h2>A warm welcome from us</h2>
-            </div><!-- .section-heading ends -->
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsum quae,
-              ullam officia ratione earum
-              aliquam reiciendis culpa. Fugiat quia iusto provident doloremque! Incidunt, magnam. Itaque voluptatem ut
-              iure temporibus harum dolorem totam quidem iste animi similique eum repellendus aspernatur perspiciatis
-              doloribus incidunt nemo ratione voluptate veniam sequi tenetur, non exercitationem quo quam. Blanditiis
-              recusandae odit facilis officia repellendus nulla vel commodi quos quis, officiis in voluptatem molestiae
-              quas fugit modi.</p>
-
-            <div class="welcome__image">
-              <img src="./resources/images/praying-girl.png" alt="A girl praying">
-            </div>
-
-          </div><!-- .container ends -->
-
-        </div><!-- .welcome__content ends -->
-
-      </section><!-- .welcome ends -->
-      <!-- WELCOME SECTION ENDS -->
+		
+
+	    <!-- WELCOME SECTION STARTS -->
+	    <section class="welcome text-center-sm default-section-spacing">
+	
+		    <div class="welcome__content">
+		
+			    <div class="container">
+			
+				    <div class="section-heading">
+					    <span class="section-intro">Welcome</span>
+					    <h2>A warm welcome from us</h2>
+				    </div><!-- .section-heading ends -->
+				    <div class="welcome__image">
+    					<img src="./resources/images/praying-girl.png" alt="A girl praying">
+				    </div>
+				    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsum quae,
+				      ullam officia ratione earum
+				      aliquam reiciendis culpa. Fugiat quia iusto provident doloremque! Incidunt, magnam. Itaque voluptatem ut
+				      iure temporibus harum dolorem totam quidem iste animi similique eum repellendus aspernatur perspiciatis
+				      doloribus incidunt nemo ratione voluptate veniam sequi tenetur, non exercitationem quo quam. Blanditiis
+				      recusandae odit facilis officia repellendus nulla vel commodi quos quis, officiis in voluptatem molestiae
+				      quas fugit modi.</p>
+				
+			    </div><!-- .container ends -->
+		
+		    </div><!-- .welcome__content ends -->
+	
+	    </section><!-- .welcome ends -->
+	    <!-- WELCOME SECTION ENDS -->
 
 
       <!-- RECENT SERMONS SECTION STARTS -->

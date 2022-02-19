@@ -12,7 +12,9 @@
       <div class="header__nav">
 
         <div class="header__logo brand--logo">
-          <a href="index.html"><img src="${path}/resources/images/bob_logo2.png" alt="Faith in Christ Church"></a>
+          <a href="./">
+          	<img src="${path}/resources/images/bob_logo2.png">
+          </a>
         </div>
 
         <div class="header__mobile--opener hide-on-lg">
