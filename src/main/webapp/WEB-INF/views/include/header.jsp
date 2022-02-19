@@ -5,7 +5,7 @@
 
 <header class="header light-text" data-onscroll-classes="fixed-header animate-header">
 
-  <nav class="bottom-nav">
+  <nav class="bottom-nav" style="background-color : #0a151f;">
 
     <div class="container">
 
@@ -166,7 +166,7 @@
 								<button onclick="location.href='./login.do';"
 										  style="background-color: #ED6A5A; color: #F5F5F5;
 												 width: 150px; height: 70px; font-size: 16px;
-												 border: none; border-right: 3px solid #0F202E">
+												 border: none; border-right: 3px solid #0a151f">
 									<strong>로그인</strong>
 								</button>
 							</td>
@@ -174,7 +174,7 @@
 								<button onclick="location.href='./memberRegister.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
 											   width: 150px; height: 70px; font-size: 16px;
-											   border: none; border-left: 3px solid #0F202E">
+											   border: none; border-left: 3px solid #0a151f">
 									<strong>회원가입</strong>
 								</button>
 							</td>

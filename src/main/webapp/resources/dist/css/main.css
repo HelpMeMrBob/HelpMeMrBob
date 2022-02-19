@@ -460,6 +460,7 @@ s { text-decoration: line-through; }
 .color-dark-gray { color: #d1d1d1 !important; }
 
 .color-off-white { color: #f5f5f5 !important; }
+.color-off-white-with-border { color: #f5f5f5 !important; text-shadow: -1px 0 #0a151f, 0 1px #0a151f, 1px 0 #0a151f, 0 -1px #0a151f !important; }
 
 .color-body-text { color: #0f202e !important; }
 
@@ -2881,7 +2882,12 @@ body .ui-tooltip { border-width: 2px; }
 
 .separator { height: 15rem; -webkit-clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%); clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%); }
 
-.podcast-cta { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../images/podcast-cta-bg.jpg"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
+
+.category-menu { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/recommand.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
+.category-map { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/map.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
+.category-community { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/community.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
+.category-pointshop { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/pointshop.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
+
 
 .combine-section { position: relative; }
 
