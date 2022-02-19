@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import board.model.JDBCTemplateDAO;
 
-
+ 
 public class DeleteActionCommand implements BbsCommandImpl{
 	
 	@Override
