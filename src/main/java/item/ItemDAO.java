@@ -19,7 +19,7 @@ public class ItemDAO {
 		this.template = JdbcTemplateConst.template;
 		System.out.println("ItemDAO 생성자 호출");
 	}
-	
+	//실험22
 	public void getItem(String id, String temOname) {
 		try {
 			String sql = " INSERT INTO haveItem (id, temOname )"
