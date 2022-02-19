@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var = "path" value = "${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="${path}/resources/css/MemberJoin.css" rel="stylesheet">
+</head>
 <meta charset="UTF-8">
 <title>회원 정보 수정</title>
 <script type="text/javascript">
@@ -34,6 +38,7 @@
 	})
 </script>
 <body>
+<div class="member-register__wrapper">
 		<form action="/member/memberRegister" method="post">
 			<div class="form-group has-feedback">
 				<input class="form-control" type="text" value="아이디" />
@@ -60,5 +65,6 @@
 				<button class="cencle btn btn-danger" type="button">취소</button>
 			</div>
 		</form>
+		</div>
 </body>
 </html>
