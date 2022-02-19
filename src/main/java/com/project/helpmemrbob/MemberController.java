@@ -121,4 +121,12 @@ public class MemberController
 		
 		return "Member/MyPage";
 	}
+	
+	//회원가입 페이지 이동
+	@RequestMapping("/memberRegister.do")
+	public String memberJoin (Model model)
+	{
+		return "Member/MemberRegister";
+	}
+	
 }

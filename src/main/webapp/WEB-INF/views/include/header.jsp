@@ -171,7 +171,7 @@
 								</button>
 							</td>
 							<td>
-								<button onclick="location.href='./login.do';"
+								<button onclick="location.href='./memberRegister.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
 											   width: 150px; height: 70px; font-size: 16px;
 											   border: none; border-left: 3px solid #0F202E">
