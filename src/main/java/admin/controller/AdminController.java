@@ -12,7 +12,7 @@ public class AdminController {
 		return "admin/main";
 	}
 	
-	//회원 관리 매핑 처리
+	//회원 관리 매핑 처리 테스트ㅇㄹㅇㄹㅇㄹㅇ
 	@RequestMapping("/member.do")
 	public String member() {
 		return "admin/member";
