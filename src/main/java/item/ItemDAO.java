@@ -15,7 +15,7 @@ public class ItemDAO {
 	@Autowired
 	JdbcTemplate template;
 	
-	public ItemDAO() {
+	public ItemDAO() {//실험
 		this.template = JdbcTemplateConst.template;
 		System.out.println("ItemDAO 생성자 호출");
 	}
