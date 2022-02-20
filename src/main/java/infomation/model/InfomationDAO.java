@@ -17,7 +17,7 @@ public class InfomationDAO {
 		System.out.println("DB연결 확인");
 	}
 	
-	//키워드 확인용 메서드
+	//DB에서 키워드에 맞는 레코드 꺼내오기
 	public ArrayList<InfomationDTO> keyword(String key) {
 		
 		String query = "SELECT * FROM restaurant WHERE food LIKE '%"+ key +"%'";
