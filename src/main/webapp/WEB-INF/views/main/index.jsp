@@ -4,10 +4,6 @@
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 
 <style>
-#category {
-	margin-top: 50px;
-	margin-bottom: 100px;
-}
 img {
 	margin-bottom: 30px;
 }

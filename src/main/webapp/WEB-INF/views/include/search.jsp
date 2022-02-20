@@ -13,12 +13,12 @@
 
               <div class="flex-lg-9">
                 <div class="form__group">
-                  <input type="text" class="form__input" placeholder="무엇을 도와드릴까요?">
+                  <input type="text" class="form__input" placeholder="검색어를 입력하세요.">
                 </div>
               </div><!-- .flex-* ends -->
 
               <div class="flex-lg-3">
-                <button type="submit" class="button--fill button--primary button-block-lg">알려주세요</button>
+                <button type="submit" class="button--fill button--primary button-block-lg">검색</button>
               </div><!-- .flex-* ends -->
 
             </div><!-- .row ends -->

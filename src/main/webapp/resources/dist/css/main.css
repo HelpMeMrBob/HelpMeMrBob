@@ -33,7 +33,7 @@ figcaption, figure, main { /* 1 */ display: block; }
 */
 figure { margin: 1em 40px; }
 
-a { background-color: transparent; /* 1 */ -webkit-text-decoration-skip: objects; /* 2 */ }
+a { background-color: transparent; /* 1 */ -webkit-text-decoration-skip: objects; /* 2 */ text-decoration: none !important; }
 
 /**
 * Remove the outline on focused links when they are also active or hovered
@@ -725,6 +725,8 @@ s { text-decoration: line-through; }
   .header.dark-text .header__navitems .header__submenu a { color: #000000; } }
 
 .banner { background-image: linear-gradient(rgba(15, 32, 46, 0.7), rgba(15, 32, 46, 0.7)), url("../../images/banner.jpg"); background-position: left; background-size: cover; background-repeat: no-repeat; height: 40rem; margin-top: -8rem; padding: 15rem 0 10rem; color: #f5f5f5; }
+
+.worldcup-banner { background-image: linear-gradient(rgba(15, 32, 46, 0.7), rgba(15, 32, 46, 0.7)), url("../../banner_img/worldcup.png"); background-position: left; background-size: cover; background-repeat: no-repeat; height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem; color: #f5f5f5; }
 
 .banner .section-heading { margin-bottom: 2.5rem; }
 
