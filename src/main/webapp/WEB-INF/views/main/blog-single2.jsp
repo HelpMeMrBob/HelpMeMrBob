@@ -2,7 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"></head>
+<script>
+function deleteRow(idx){
+	if(confirm("정말로 삭제하시겠습니까?")){
+		location.href="delete.do?idx="+idx;
+	}
+}
+function writeValidate(f)
+{
+	if(f.content.value==""){
+		alert("내용을 입력하세요");
+		f.content.focus(); 
+		return false;
+	} 
+}
+</script>
   <body>
 
 
@@ -16,6 +31,7 @@
 
 
     <!-- =================== MAIN SECTION BEGINS ============================= -->
+	
 
     <main>
 
@@ -62,199 +78,25 @@
                 <div class="text-block mar-b-sm-4">
                 	<!-- 제목 -->
                   <h2 class="mar-b-sm-2">${viewRow.title }</h2>
+                  
                   <!-- 내용 -->
                   <p>${viewRow.contents }</p>
                 </div><!-- .text-block ends -->
-
+				<p>${viewRow.id}</p>
+                <p>${viewRow.postdate }</p>
+				<p>${viewRow.visitCnt }</p>
                 
-
-                
-
-                
-
               <div class="single-page__share pad-b-sm-2">
 
                 <div class="display-flex align-items-center">
 
-                  <div class="bold leading text">Share</div>
-
                   <div class="social">
-                    <a href="" class="transparent button button--primary button--outline share-button"><i
-                        class="ri-facebook-line"></i></a>
-                  </div><!-- .social ends -->
-
-                  <div class="social">
-                    <a href="" class="transparent button button--primary button--outline share-button"><i
-                        class="ri-linkedin-line"></i></a>
-                  </div><!-- .social ends -->
-
-                  <div class="social">
-                    <a href="" class="transparent button button--primary button--outline share-button"><i
-                        class="ri-twitter-line"></i></a>
-                  </div><!-- .social ends -->
-
-                  <div class="social">
-                    <a href="" class="transparent button button--primary button--outline share-button"><i
-                        class="ri-instagram-line"></i></a>
+                    <a href="" class="transparent button button--primary button--outline share-button"><p>좋아</p></a>
                   </div><!-- .social ends -->
 
                 </div><!-- .display-flex ends -->
 
               </div><!-- .single-page__share ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-4 flex-lg-3">
-
-              <div class="sidebar">
-
-                <div class="sidebar__widget text-center-sm mar-b-sm-2">
-
-                  <h3 class="widget__title">Author</h3>
-
-                  <div class="author-box">
-                    <!-- See _author.scss for styling -->
-
-                    <div class="author-box__image avatar avatar--large mar-b-sm-06"><img src="./resources/images/avatar-10.png"
-                        alt=""></div>
-                        <!-- /////////사용자아이디////////// -->
-                    <p class="leading bold mar-b-sm-06">${viewRow.id}</p>
-                    <p class="mar-b-sm-06">22 posts</p>
-                    <a href="staffs-single.html" class="bold mar-b-sm-2">View profile</a>
-
-                    <div class="author-social display-flex justify-align-center">
-
-                      <div class="social">
-                        <a href="" class="transparent button button--primary button--outline share-button"><i
-                            class="ri-facebook-line"></i></a>
-                      </div><!-- .social ends -->
-
-                      <div class="social">
-                        <a href="" class="transparent button button--primary button--outline share-button"><i
-                            class="ri-linkedin-line"></i></a>
-                      </div><!-- .social ends -->
-
-                      <div class="social">
-                        <a href="" class="transparent button button--primary button--outline share-button"><i
-                            class="ri-twitter-line"></i></a>
-                      </div><!-- .social ends -->
-
-                    </div><!-- .author-social ends -->
-
-                  </div><!-- .author-box ends -->
-
-                </div><!-- .sidebar__widget ends -->
-
-                <div class="sidebar__widget mar-b-sm-2">
-
-                  <h3 class="widget__title">작성정보</h3>
-
-                  <div class="icon-text">
-                    <span class="icon"><i class="ri-calendar-line"></i></span>
-                    <span class="text bold">${viewRow.postdate }</span>
-                  </div>
-
-                  <div class="icon-text">
-                    <span class="icon"><i class="ri-eye-line"></i></span>
-                    <span class="text bold">${viewRow.visitCnt }</span>
-                  </div>
-
-                  <div class="icon-text">
-                    <span class="icon"><i class="ri-time-line"></i></span>
-                    <span class="text bold">45:15</span>
-                  </div>
-
-                  <div class="icon-text mar-b-sm-2">
-                    <span class="icon"><i class="ri-briefcase-line"></i></span>
-                    <span class="text bold">Faith &amp; Kingdom</span>
-                  </div>
-
-                </div><!-- .sidebar__widget ends -->
-
-                <div class="sidebar__widget mar-b-sm-2">
-
-                  <h3 class="widget__title">Recent posts</h3>
-
-                  <div class="display-flex mar-b-sm-2">
-
-                    <div class="post-thumbnail"><img src="./resources/images/bible-sm.jpg" alt=""></div>
-
-                    <div class="post-details">
-                      <p class="bold mar-b-sm-06"><a href="">Jesus is the Way, Truth, and Life</a></p>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-calendar-line"></i></span>
-                        <span class="text bold">02/28/2020</span>
-                      </div>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-eye-line"></i></span>
-                        <span class="text bold">323</span>
-                      </div>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-time-line"></i></span>
-                        <span class="text bold">45:15</span>
-                      </div>
-                    </div>
-
-                  </div><!-- .display-flex ends -->
-
-                  <div class="display-flex mar-b-sm-2">
-
-                    <div class="post-thumbnail"><img src="./resources/images/podcast-thumb-2.jpg" alt=""></div>
-
-                    <div class="post-details">
-                      <p class="bold mar-b-sm-06"><a href="">Jesus is the Way, Truth, and Life</a></p>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-calendar-line"></i></span>
-                        <span class="text bold">02/28/2020</span>
-                      </div>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-eye-line"></i></span>
-                        <span class="text bold">323</span>
-                      </div>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-time-line"></i></span>
-                        <span class="text bold">45:15</span>
-                      </div>
-                    </div>
-
-                  </div><!-- .display-flex ends -->
-
-                  <h3 class="widget__title">Popular posts</h3>
-
-                  <div class="display-flex">
-
-                    <div class="post-thumbnail"><img src="./resources/images/bible-sm.jpg" alt=""></div>
-
-                    <div class="post-details">
-                      <p class="bold mar-b-sm-06"><a href="">Jesus is the Way, Truth, and Life</a></p>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-calendar-line"></i></span>
-                        <span class="text bold">02/28/2020</span>
-                      </div>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-eye-line"></i></span>
-                        <span class="text bold">323</span>
-                      </div>
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-time-line"></i></span>
-                        <span class="text bold">45:15</span>
-                      </div>
-                    </div>
-
-                  </div><!-- .display-flex ends -->
-
-                </div><!-- .sidebar__widget ends -->
-
-              </div><!-- .sidebar ends -->
 
             </div><!-- .flex-* ends -->
 
@@ -264,23 +106,98 @@
 
         <!-- See _singles.scss for styling -->
         
-        <!-- #####버튼들##### -->
-        <div class="flex-md-12">
-            <button class="button--primary button--fill" type="submit" 
-            onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
-			수정하기</button>
-			<button class="button--primary button--fill" type="submit" 
-			onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
-			삭제하기</button>
-       		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>
-       </div><!-- .flex-* ends -->
-        
-        
-        
-        
-        
-        
-        <div class="single-page__navigation background-off-white mar-t-sm-4 mar-t-md-0 pad-t-sm-2 pad-b-sm-2">
+      </section><!-- .single-page ends -->
+      <!-- SINGLE PAGE SECTION ENDS -->
+
+    </main><!-- main ends -->
+    <!-- =================== MAIN SECTION ENDS ============================= -->
+
+	<!-- =================== 댓글창s ============================= -->
+ 	
+		<!-- =================== 댓글창뷰s ============================= -->
+		<section class="single-page single-cause default-section-spacing">
+
+        <div class="single-page__share background-off-white pad-t-sm-2 pad-b-sm-2">
+
+          <div class="container">
+		<h3 class="mar-b-sm-2">댓글창</h3>
+		<c:forEach items="${lists }" var="row">		
+		<div class="border mt-2 mb-2">
+			<div class="media">
+				<!-- 여기다가 회원 프사같은거 넣을수있어여 -->
+				<!-- <div class="media-left mr-3">
+					<img src="../images/img_avatar3.png" class="media-object" style="width:60px">
+				</div> -->
+				<div class="media-body">
+					<h4 class="media-heading">작성자:${row.name }(${row.id })</h4>
+					<p>${row.contents }</p>
+				</div>	  
+				<!--  수정,삭제버튼 -->
+				<div class="media-right">
+					<!-- 작성자 본인에게만 수정/삭제 버튼 보임 처리 -->
+					<c:if test="${sessionScope.siteUserInfo.id eq row.id}">
+						<button class="btn btn-primary" 
+						onclick="location.href='modify.do?idx=${row.idx}';">
+						수정</button>
+						
+						<!-- 삭제 버튼을 누를 경우 idx값을 JS의 함수로 전달한다. -->
+						<button class="btn btn-danger" 
+						onclick="javascript:deleteRow(${row.idx});">
+						삭제</button>
+					</c:if>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+	<!-- 댓글페이징 -->
+	<ul class="pagination justify-content-center">
+		${pagingImg }
+	</ul>
+	
+	</div>
+	</div>
+	</section>
+	
+	<!-- =================== 댓글창뷰e ============================= -->	
+		<section class="contact default-section-spacing">
+        <div class="container">
+
+		<form name="writeFrm" method="post" 
+			onsubmit="return writeValidate(this);"
+			action="<c:url value="/replyWrite.do" />" 
+			class="form contact__form">
+			<input type="hidden" name="idx" value="${viewRow.idx }" />
+			
+            <div class="row">
+            
+            <div class="flex-md-6">
+				
+                <div class="form__group">
+                  <label for="fname" class="form__label">작성자 <span class="color-danger">*</span></label>
+                  <input type="text" id="fname" class="form__input" name="name" value="${sessionScope.siteUserInfo.name }">
+                </div><!-- .form__group ends -->
+				
+              </div><!-- .flex-* ends -->
+			
+              <div class="flex-md-12 mar-b-md-2">
+
+                <div class="form__group">
+                  <textarea name="contents" id="message-2" class="form__textarea form__input"
+                    placeholder="댓글을 입력하세요..."></textarea>
+                </div><!-- .form__group ends -->
+
+              </div><!-- .flex-* ends -->
+
+				<div class="flex-md-12">
+
+                <button class="button--primary button--fill" type="submit" name="submit">댓글쓰기</button>
+
+              </div><!-- .flex-* ends -->
+
+            </div><!-- .row ends -->
+
+          </form><!-- .form ends -->
+          <div class="single-page__navigation background-off-white mar-t-sm-4 mar-t-md-0 pad-t-sm-2 pad-b-sm-2">
 
           <div class="container">
 
@@ -303,19 +220,28 @@
           </div><!-- .container ends -->
 
         </div><!-- .single-page__navigation ends -->
-
-      </section><!-- .single-page ends -->
-      <!-- SINGLE PAGE SECTION ENDS -->
-
-
-    </main><!-- main ends -->
-
-    <!-- =================== MAIN SECTION ENDS ============================= -->
-
-
+	
     <!-- SCROLL BACK TO TOP BEGINS -->
     <div class="scroll-to-top"><i class="ri-arrow-up-line"></i></div>
     <!-- SCROLL BACK TO TOP ENDS -->
+          <!-- #####버튼들##### -->
+        <div class="flex-md-12">
+            <button class="button--primary button--fill" type="submit" 
+            onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
+			수정하기</button>
+			<button class="button--primary button--fill" type="submit" 
+			onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
+			삭제하기</button>
+       		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>
+       </div><!-- .flex-* ends -->
+
+        </div><!-- .container ends -->
+
+      </section><!-- .contact ends -->
+
+	<!-- =================== 댓글창e ============================= -->
+	
+	
 
     <!-- =================== ALL MODALS ============================= -->
 

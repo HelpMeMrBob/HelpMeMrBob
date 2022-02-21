@@ -85,7 +85,7 @@
 				
 				${(row.idx!=0 && (row.idx % 3==0))?"</div><div class='row'>":"" }
 
-            <div class="col-lg">
+            <div class="col-4">
 			
 			<a href="./reviewView.do?idx=${row.idx}&nowPage=${nowPage}">
 								

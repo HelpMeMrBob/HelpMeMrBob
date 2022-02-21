@@ -189,7 +189,8 @@
 			<artifactId>javax.websocket-api</artifactId>
 			<version>1.1</version>
 		</dependency>
-		<!-- 파일업로드를 위한 의존설정 -->
+		
+		<!-- 파일업로드 의존설정 -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -200,7 +201,6 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		
 		
 	</dependencies>
     <build>

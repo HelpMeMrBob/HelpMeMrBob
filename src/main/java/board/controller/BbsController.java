@@ -1,7 +1,11 @@
 package board.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -14,14 +18,27 @@ import board.command.DeleteActionCommand;
 import board.command.EditActionCommand;
 import board.command.EditCommand;
 import board.command.ListCommand;
+import board.command.MybatisDAOImpl;
 import board.command.ViewCommand;
 import board.command.WriteActionCommand;
 import board.model.BoardDTO;
+import board.model.BoardReplyVO;
 import board.model.JDBCTemplateDAO;
 import board.model.JdbcTemplateConst;
+import util.PagingUtil;
 
 @Controller
 public class BbsController {
+	/*
+	Mybatis를 사용하기 위해 빈을 자동주입 받는다.
+	servlet-context.xml에서 생성함
+	 */
+	private SqlSession sqlSession;
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession=sqlSession;
+		System.out.println("Mybatis 사용 준비 끝");
+	}
 	
 	BbsCommandImpl command=null;
 	
@@ -43,6 +60,11 @@ public class BbsController {
 		command.execute(model);//해당 객체로 Model객체 자체를 전달
 		
 		return "main/causes-layout";
+	}
+	@RequestMapping("/Calendar.do")
+	public String Calendar(Model model, HttpServletRequest req) {
+		
+		return "main/blog-single3";
 	}
 	
 	//글쓰기 페이지로 진입하기 위한 매핑처리
@@ -66,6 +88,7 @@ public class BbsController {
 		return "redirect:reviewList.do?nowPage=1";
 	}
 	
+	//HttpSession session 에러뜨면 얘떄문임
 	@RequestMapping("/reviewView.do")
 	public String reviewView(Model model, HttpServletRequest req)
 	{
@@ -73,6 +96,47 @@ public class BbsController {
 		model.addAttribute("req",req);
 		command=new ViewCommand();
 		command.execute(model);
+		
+		//여기는 댓글불러오기
+		//방명록 테이블의 게시물 갯수 카운트
+				int totalRecordCount=sqlSession.getMapper(MybatisDAOImpl.class)
+						.getTotalCount();
+				//페이지 처리를 위한 설정값
+				int pageSize=4;//한 페이지당 출력할 게시물의 갯수
+				int blockPage=2;//한 블럭당 출력할 페이지 번호의 갯수
+				//전체 페이지 수 계산
+				int totalPage=(int)Math.ceil((double)totalRecordCount/pageSize);
+				//현재페이지 번호 설정
+				/*
+				 방명록URL?nowPage=		->이 경우 페이지번호는 빈값
+				 방명록URL?nowPage=10		->10으로 설정
+				 방명록URL				->null로 판단
+				 */
+				//페이지 번호가 null이거나 빈값인 경우 1페이지로 설정한다.
+				int nowPage=(req.getParameter("nowPage")==null || req.getParameter("nowPage").equals(""))
+						? 1:Integer.parseInt(req.getParameter("nowPage"));
+				//해당 페이지에 출력할 게시물의 구간을 계산한다.
+				int start=(nowPage-1)*pageSize+1;
+				int end=nowPage*pageSize;
+				
+				/*
+				 서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨
+				 전달된 파라미터는 #{param1}과 같이 순서대로 사용한다.
+				 */
+				ArrayList<BoardReplyVO> lists=
+						sqlSession.getMapper(MybatisDAOImpl.class).listPage(start, end);
+				String pagingImg=
+						PagingUtil.pagingImg(totalRecordCount,pageSize, blockPage, nowPage,
+								req.getContextPath()+"/reviewView.do?");
+				model.addAttribute("pagingImg",pagingImg);
+				
+				for(BoardReplyVO dto: lists)
+				{
+					String temp=dto.getContents().replace("\r\n", "<br/>");
+					dto.setContents(temp);
+				}
+				model.addAttribute("lists",lists);
+				//댓글불러오기끝
 		
 		return "main/blog-single2";
 	}

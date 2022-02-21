@@ -14,6 +14,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/adsources/**" location="/adsources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -22,9 +23,11 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.project.helpmemrbob" />
-	<!--Auto버전에서는 해당 패키지 하위의 모든 클래스를 scan 대상으로 범위를 확대한다.
-	-->
+	<!--Auto버전에서는 해당 패키지 하위의 모든 클래스를 scan 대상으로 범위를 확대한다.-->
+	<context:component-scan base-package="infomation" />
+	<context:component-scan base-package="recommand" />
 	<context:component-scan base-package="board" />
+	<context:component-scan base-package="admin" />
 
 	<!--  SPRING JDBC를 사용하기 위한 빈 생성 -->	
 	<beans:bean name="dataSource" 
@@ -39,17 +42,18 @@
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 	
-	<!-- 파일 업로드를 위한 빈 생성 -->
+	<!-- Mybatis -->
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource" />
+        <beans:property name="mapperLocations" value="classpath:member/mapper/*.xml" />
+    </beans:bean>
+    <beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <beans:constructor-arg index="0" ref="sqlSessionFactory" />
+    </beans:bean>
+    <!-- 파일 업로드를 위한 빈 생성 -->
 	<beans:bean id="multipartResolver" 
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 업로드 할 파일의 최대용량 : 1Mb -->
-		<beans:property name="maxUploadSize" value="2000000" />
+		<!-- 업로드 할 파일의 최대용량 : 10Mb -->
+		<beans:property name="maxUploadSize" value="10000000" />
 	</beans:bean>
-	<!-- 파일 다운로드를 위한 빈 생성 -->
-	<beans:bean id="fileDownloadView" class="common.FileDownLoadView" />
-	<beans:bean id="fileViewResolver" 
-		class="org.springframework.web.servlet.view.BeanNameViewResolver">
-		<beans:property name="order" value="0" />		
-	</beans:bean>
-	
 </beans:beans>

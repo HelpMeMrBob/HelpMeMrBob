@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member.model.MemberDAOImpl">
+	<!-- 회원 가입 (favMenu 추가 예정) -->
+	<insert id="memberRegister">
+		INSERT INTO member (id, name, pass, email, telNum)
+			VALUES ( #{ id }, #{ name }, #{ pass }, #{ email }, #{ telNum } )
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="login" resultType="member.model.MemberVO">
+		SELECT id, pass, name, email, telNum FROM member WHERE id = #{ 0 } AND pass = #{ 1 }
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="memberUpdateAction" parameterType="member.model.MemberVO">
+		UPDATE member SET email = #{ email }, telNum = #{ telNum } where id = #{ id } 
+	</update>
+</mapper>
+

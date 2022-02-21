@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<header class="header light-text" data-onscroll-classes="fixed-header">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var = "path" value = "${pageContext.request.contextPath}" />
+
+<header class="header light-text" data-onscroll-classes="fixed-header animate-header">
 
   <nav class="bottom-nav">
 
@@ -9,7 +12,7 @@
       <div class="header__nav">
 
         <div class="header__logo brand--logo">
-          <a href="index.html"><img src="./resources/images/bob_logo2.png" alt="Faith in Christ Church"></a>
+          <a href="index.html"><img src="${path}/resources/images/bob_logo2.png" alt="Faith in Christ Church"></a>
         </div>
 
         <div class="header__mobile--opener hide-on-lg">
@@ -40,8 +43,8 @@
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="infomation.do">1</a></li>
-                <li class="header__list"><a href="ministries-single.html">2</a></li>
+                <li class="header__list"><a href="infomation.do">지도 보러가기</a></li>
+                <!-- <li class="header__list"><a href="ministries-single.html">2</a></li> -->
 
               </ul>
             </div><!-- .header__submenu ends -->
@@ -68,8 +71,8 @@
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="events-layout.html">1</a></li>
-                <li class="header__list"><a href="events-single.html">2</a></li>
+                <li class="header__list"><a href="./displayEmoticon.do">아이템 구매하기</a></li>
+                <li class="header__list"><a href="./payDisplay.do">밥알 충전하기</a></li>
 
               </ul>
             </div><!-- .header__submenu ends -->
@@ -130,10 +133,53 @@
             </div>
           </div>
 
-          <div class="cta hide-on-sm show-on-lg" style="">
-            <a href="donations.html" class="button button--primary button--fill">
-            	로그인
-            </a>
+	      <div class="cta hide-on-sm show-on-lg" style="">
+			<c:choose>
+				<c:when test="${ not empty sessionScope.siteUserInfo }">
+					<table>
+						<tr>
+							<td>
+								<button onclick="location.href='./mypage.do';"
+										style="background-color: #ED6A5A; color: #F5F5F5;
+										       width: 150px; height: 70px; font-size: 16px;
+										       border: none; border-right: 5px solid #0F202E">
+									<strong>마이페이지</strong>
+								</button>
+							</td>
+							<td>
+								<button onclick="location.href='./logout.do';"
+										style="background-color: #ED6A5A; color: #F5F5F5;
+											   width: 150px ; height: 70px; font-size: 16px;
+											   border: none; border-left: 3px solid #0f202e">
+									<strong>로그아웃</strong>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</c:when>
+				<c:otherwise><!-- 로그인 되지 않았을때 ──────────────────────────────────────-->
+					<table>
+						<tr>
+							<td>
+								<button onclick="location.href='./login.do';"
+										  style="background-color: #ED6A5A; color: #F5F5F5;
+												 width: 150px; height: 70px; font-size: 16px;
+												 border: none; border-right: 3px solid #0F202E">
+									<strong>로그인</strong>
+								</button>
+							</td>
+							<td>
+								<button onclick="location.href='./memberRegister.do';"
+										style="background-color: #ED6A5A; color: #F5F5F5;
+											   width: 150px; height: 70px; font-size: 16px;
+											   border: none; border-left: 3px solid #0F202E">
+									<strong>회원가입</strong>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</c:otherwise>
+			</c:choose>
           </div>
           
         </div><!-- .header__extra ends -->

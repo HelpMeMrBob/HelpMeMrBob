@@ -595,7 +595,7 @@ s { text-decoration: line-through; }
 
 @media screen and (min-width: 87.5625em) { .row .flex-xl-12 { flex: 0 0 100%; max-width: 100%; } }
 
-.header { width: 100%; position: relative; z-index: 100; background-color: #0f202e; }
+.header { width: 100%; position: relative; z-index: 100; }
 
 .header .header__nav { position: relative; padding: 2rem 0; }
 
@@ -689,7 +689,7 @@ s { text-decoration: line-through; }
 
 .header.fixed-header .bottom-nav { background-color: #0f202e; }
 
-/* .header.animate-header .bottom-nav, .header.animate-header .header__top-nav { animation: slideDown 1s ease-in-out forwards; } */
+.header.animate-header .bottom-nav, .header.animate-header .header__top-nav { animation: slideDown 1s ease-in-out forwards; }
 
 @keyframes slideDown { from { transform: translateY(-10rem);
     opacity: 0.5; }
