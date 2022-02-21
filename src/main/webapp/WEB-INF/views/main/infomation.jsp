@@ -7,16 +7,40 @@
 function toggle(flag) {
 	var sidebar = document.getElementById("sidebar");
 	var button = document.getElementById("open");
+	var bob_map = document.getElementById("bob_map");
+	var favo = document.getElementById("favo");
 	
 	if (flag == 'close') {
 		sidebar.hidden = true;
 		button.style.display = "inline";
+		bob_map.hidden = true;
+		favo.hidden = true;
 		
 		relayout();
 	}
 	else if (flag == 'open') {
 		sidebar.hidden = false;
 		button.style.display = "none";
+		bob_map.hidden = false;
+		favo.hidden = false;
+		
+		relayout();
+	}
+}
+
+function sidebarChange(flag) {
+	var bob_mapArea = document.getElementById("bob_mapArea");
+	var favoriteArea = document.getElementById("favoriteArea");
+	
+	if (flag == 'bob_map') {
+		bob_mapArea.style.display = "block";
+		favoriteArea.style.display = "none";
+		
+		relayout();
+	}
+	else if (flag == 'favo') {
+		bob_mapArea.style.display = "none";
+		favoriteArea.style.display = "block";
 		
 		relayout();
 	}
@@ -43,6 +67,7 @@ function vali() {
 </script>
 
 <style>
+#title {font-size: 30px;}
 #sidebar {background-color: pink;}
 #submit1 {width: 3px;height: 3px;padding-left: 3rem;padding-right: 3rem;}
 #submit2 {all: unset;font-size: 14px;cursor: pointer;background-color: yellow;font-weight: bold;padding: 5px;}
@@ -76,37 +101,86 @@ function vali() {
     
     <!-- 왼쪽 사이드 바 -->
     <div>
-	    <div id="sidebar" style="overflow: auto;float: left;width: 300px; height: 87vh;">
+    	<!-- 지도/즐겨찾기 탭 -->
+    	<div>
+	  		<button id="bob_map" style="width:147px;font-size:16px;" class="btn btn-warning" 
+	  			onclick="sidebarChange(id);">지도</button>
+	  		<button id="favo" style="width:147px;font-size:16px;" class="btn btn-warning" 
+	  			onclick="sidebarChange(id);">즐겨찾기</button>
+   		</div>
+   		
+	    <div id="sidebar" style="overflow: auto;float: left;width: 300px; height: 85vh;">
+	    	
 	    	<!-- 접기 버튼 -->
 	   		<div align="right" style="margin-top: 5px;margin-bottom: 5px;padding-right: 5px;">
 	   			<button type="button" id="close" onclick="toggle(id);"
 	   				class="btn-close"></button>
    			</div>
    			
-   			<!-- 타이틀 -->
-   			<div align="center" style="margin-top: 5px;margin-bottom: 5px;">
-   				<span style="font-size: 30px;">밥&nbsp;지도</span>
-	   		</div>
-	   		<!-- 검색 -->
-	   		<div id="menu_wrap">
-		   		<div class="option">
-			   		<div>
-				   		<form onsubmit="return vali();" name="frm">
-				   			<span style="font-size: 16px;">검색 : </span>
-							<input type="text" id="keyword" name="search" style="width: 150px;" />
-							<button type="submit" id="submit1" class="btn btn-primary">Search</button>
-				   		</form>
-			   		</div>
+   			
+   			<!-- 밥 지도 영역 S -->
+   			<div id="bob_mapArea">
+   				<!-- 타이틀 -->
+	   			<div align="center" style="margin-top: 5px;margin-bottom: 5px;">
+	   				<span id="title">밥&nbsp;지도</span>
 		   		</div>
-		   		
-		   		
+		   		<!-- 검색 -->
+		   		<div id="menu_wrap">
+			   		<div class="option">
+				   		<div>
+					   		<form onsubmit="return vali();" name="frm">
+					   			<span style="font-size: 16px;">검색 : </span>
+								<input type="text" id="keyword" name="search" style="width: 150px;" />
+								<button type="submit" id="submit1" class="btn btn-primary">Search</button>
+					   		</form>
+				   		</div>
+			   		</div>
+			   		
+			   		
+			   		<!-- 내 위치 버튼 -->
+			   		<div id="favorite" class="m-3" align="center">
+			   			<button type="button" class="btn btn-primary" onclick="gps_tracking();">내 위치</button>
+			   		</div>
+			   		
+			   		<hr />
+			   		<ul id="placesList">
+			   			<c:choose>
+							<c:when test="${ empty keyword }">
+								검색어를 입력해주세요!
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${ keyword }" var="row" varStatus="loop">
+									<ul style="font-size: 15px;">
+										<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
+										<li>주소 : ${ row.address }</li>
+										<li>전화번호 : ${ row.plcNum }</li>
+										<li>메뉴 : ${ row.menu }</li>
+										<li>영업시간 : ${ row.operTime }</li>
+										<button type="button" class="btn btn-success" onclick="marker('${row.address}', '${ row.place }');">위치보기</button>
+									</ul>
+									<hr />
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+			   		</ul>
+	   			</div>
+   			</div>
+   			<!-- 밥 지도 영역 E -->
+   			
+   			
+   			<!-- 즐겨찾기 영역 S -->
+   			<div id="favoriteArea" style="display: none;">
+	   			<!-- 타이틀 -->
+	   			<div align="center" style="margin-top: 5px;margin-bottom: 5px;">
+	   				<span id="title">즐겨찾기</span>
+		   		</div>
 		   		<!-- 내 위치 버튼 -->
-		   		<div id="favorite" class="m-5" align="center">
+		   		<div id="favorite" class="m-3" align="center">
 		   			<button type="button" class="btn btn-primary" onclick="gps_tracking();">내 위치</button>
 		   		</div>
 		   		
 		   		<hr />
-		   		<ul id="placesList">
+		   		<%-- <ul id="favoriteList">
 		   			<c:choose>
 						<c:when test="${ empty keyword }">
 							검색어를 입력해주세요!
@@ -125,8 +199,9 @@ function vali() {
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-		   		</ul>
+		   		</ul> --%>
    			</div>
+   			<!-- 즐겨찾기 영역 E -->
 	    </div>
 	    
 	    <!-- 펼치기 버튼 -->
