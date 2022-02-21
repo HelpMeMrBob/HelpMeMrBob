@@ -1,5 +1,14 @@
 package point;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +21,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import item.ItemDAO;
 import item.ItemDTO;
@@ -42,8 +53,10 @@ public class PointDAO {
 	  
 	  구매완료시 해당 id의 item에 temOName에 등록됨.
 	 */
-	public void buySticker(final PointDTO pdto, final ItemDTO idto) {
+	public boolean buySticker(final PointDTO pdto, final ItemDTO idto) {
 		final ItemDAO idao = new ItemDAO();
+		boolean flag = false;
+		
 		
 		if(getTotalPoint(pdto.getId())>=10000) {
 			String sql = " UPDATE point SET point = point - 10000 "
@@ -56,21 +69,20 @@ public class PointDAO {
 				SQLException{
 					ps.setString(1, pdto.getId());
 					idto.setId(pdto.getId());
-					idto.setTemOname("pr");
+					System.out.println("구매한 아이템 :"+ pdto.getSticker());
+					idto.setTemOname(pdto.getSticker());
 					idao.getItem(idto);
 					//idao.getItem2(idto);
 				}
 				});
-			getTotalPoint(pdto.getId());
+			flag=true;
 			System.out.println(getTotalPoint(pdto.getId()));
 			System.out.println("buyTicket()실행 완료");
 		}
 		else {
 			System.out.println(" buyTicket()오류 :포인트 잔액 부족");
 		}
-		
-		
-			
+		return flag;
 	}
 	public void buySticker2(final PointDTO pdto, final ItemDTO idto) {
 		
@@ -159,16 +171,14 @@ public class PointDAO {
 	}
 	
 	//카카오페이 결제시 밥알(포인트)가 충전됨.
-	public void buyPonts(final PointDTO pdto) {
+	public void buyPonts(final PointDTO pdto, String payResult) {
 		int pt =0;
 		
-		int payResult=0;
-		
-		if(payResult == 1) {
+		if(payResult.equals("1000")) {
 			pt = 50000;
-		}else if(payResult == 2) {
+		}else if(payResult.equals("3000")) {
 			pt = 157500;
-		}else if(payResult == 3) {
+		}else if(payResult.equals("5000")) {
 		    pt = 275000;
 		}
 		String sql = " UPDATE point SET point = point + "+ pt
@@ -184,13 +194,14 @@ public class PointDAO {
 					ps.setString(1, pdto.getId());
 				}
 				});
-			
+		System.out.println("밥알교환 addPoint() 실행 완료");	
 			
 		}catch(Exception e) {
 			System.out.println(" addPoint() 실행중 오류");
 		}
 		
 	}
+	
 	
 	
 	

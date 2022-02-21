@@ -5,14 +5,16 @@
 
 <header class="header light-text" data-onscroll-classes="fixed-header animate-header">
 
-  <nav class="bottom-nav">
+  <nav class="bottom-nav" style="background-color : #0a151f;">
 
     <div class="container">
 
       <div class="header__nav">
 
         <div class="header__logo brand--logo">
-          <a href="index.html"><img src="${path}/resources/images/bob_logo2.png" alt="Faith in Christ Church"></a>
+          <a href="./">
+          	<img id="bob_logo2" src="${path}/resources/include_img/bob_logo2.png">
+          </a>
         </div>
 
         <div class="header__mobile--opener hide-on-lg">
@@ -35,21 +37,29 @@
 <!-- 홈은 따로 쓰지말고 좌측상단의 로고 클릭하면 홈으로 이동하게 만들께요.
           <li class="header__list active"><a href=""></a></li>.header__list ends
  -->
-          <li class="header__list"><a href="about.html">메뉴추천</a></li><!-- .header__list ends -->
-
+        <li class="header__list">
+          	<a href="./roulette.do" class="dropdown-link caret">메뉴추천</a>
+          	<div class="header__submenu">
+	            <ul>
+		            <li class="header__list"><a href="./roulette.do">룰렛</a></li>
+		            <li class="header__list"><a href="./worldcup.do">음식 월드컵</a></li>
+	            </ul>
+            </div><!-- .header__submenu ends -->
+       	</li><!-- .header__list ends -->
+		&nbsp;&nbsp;&nbsp;
           <li class="header__list">
-            <a href="infomation.do" class="dropdown-link caret">지도</a>
+            <a href="./infomation.do" class="dropdown-link caret">지도</a>
 
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="infomation.do">지도 보러가기</a></li>
+                <li class="header__list"><a href="./infomation.do">밥 지도</a></li>
                 <!-- <li class="header__list"><a href="ministries-single.html">2</a></li> -->
 
               </ul>
             </div><!-- .header__submenu ends -->
           </li><!-- .header__list ends -->
-
+		&nbsp;&nbsp;&nbsp;
           <li class="header__list">
             <a href="" class="dropdown-link caret">커뮤니티</a>
 
@@ -64,7 +74,7 @@
 
             </div><!-- .header__submenu ends -->
           </li><!-- .header__list ends -->
-
+		&nbsp;&nbsp;&nbsp;
           <li class="header__list">
             <a href="" class="dropdown-link caret">밥알상점</a>
 
@@ -164,7 +174,7 @@
 								<button onclick="location.href='./login.do';"
 										  style="background-color: #ED6A5A; color: #F5F5F5;
 												 width: 150px; height: 70px; font-size: 16px;
-												 border: none; border-right: 3px solid #0F202E">
+												 border: none; border-right: 3px solid #0a151f">
 									<strong>로그인</strong>
 								</button>
 							</td>
@@ -172,7 +182,7 @@
 								<button onclick="location.href='./memberRegister.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
 											   width: 150px; height: 70px; font-size: 16px;
-											   border: none; border-left: 3px solid #0F202E">
+											   border: none; border-left: 3px solid #0a151f">
 									<strong>회원가입</strong>
 								</button>
 							</td>

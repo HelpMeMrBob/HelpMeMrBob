@@ -12,8 +12,8 @@ import member.command.MemberViewCommand;
 import member.model.MemberDAO;
 import member.model.MemberDTO;
  
-@Controller
-public class MemberController
+@Controller 
+public class MemberController 
 {
 	@Autowired
 	private MemberDAO dao;
