@@ -75,23 +75,20 @@
 <!-- /////////////////////여기가 리스트////////////////////// -->
 
       <!-- ALL RESULTS SECTION STARTS -->
-      	<c:choose>
-			<c:when test="${empty listRows }">
-				<li>
-					<p>등록된 게시물이 없습니다.</p>
-				</li>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${listRows }" var="row" 
-					varStatus="loop">
-      <section class="all-results all-results--causes">
+      	<section class="all-results all-results--causes">
 
         <div class="container">
 
           <div class="row">
+			
+			<c:forEach items="${listRows }" var="row"  varStatus="loop">
+				
+				${(row.idx!=0 && (row.idx % 3==0))?"</div><div class='row'>":"" }
 
-            <div class="col-sm-3">
-
+            <div class="col-4">
+			
+			<a href="./reviewView.do?idx=${row.idx}&nowPage=${nowPage}">
+								
               <div class="card cause">
 
                 <div class="card__header no-overlay">
@@ -133,17 +130,18 @@
                 </div><!-- .card__footer ends -->
 
               </div><!-- .card ends -->
-
+			
+			</a>
+			
             </div><!-- .flex-* ends -->
-
-          </div><!-- .row ends -->
+          
+      </c:forEach>
+      
+      </div><!-- .row ends -->
 
         </div><!-- .container ends -->
 
       </section><!-- .all-results -->
-      </c:forEach>
-			</c:otherwise>
-		</c:choose>
       <!-- ALL RESULTS SECTION ENDS -->
 <!--//////////////////////////리스트끝///////////////////////////  -->
       <div class="inner-pages-navigation pad-t-sm-4 pad-b-sm-4">
@@ -166,6 +164,13 @@
                 class="ri-arrow-right-s-line"></i></button>
           </div><!-- .pagination ends -->
 
+			<!-- #####버튼들##### -->
+			<div class="flex-md-12">
+	           <button class="button--primary button--fill" type="submit" 
+	           onclick="location.href='./reviewWrite.do';">
+					글쓰기</button>
+			</div><!-- .flex-* ends -->
+			
         </div><!-- .container ends -->
 
       </div><!-- .inner-pages-navigation ends -->

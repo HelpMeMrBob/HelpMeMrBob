@@ -17,7 +17,7 @@
     <title>골라줘요 밥선생님</title>
 
     <!-- Place Custom Favicon here -->
-    <link rel="shortcut icon" href="${path}/resources/images/bob_logo1.png" type="image/png">
+    <link rel="shortcut icon" href="${path}/resources/include_img/bob_favicon.ico" type="image/png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
