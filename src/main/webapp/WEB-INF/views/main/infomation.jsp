@@ -68,7 +68,8 @@ function vali() {
 
 <style>
 #title {font-size: 30px;}
-#sidebar {background-color: pink;}
+#locationCheck {padding: 5px;font-size: 14px;width: 100px;}
+#sidebar {background-color: white;}
 #submit1 {width: 3px;height: 3px;padding-left: 3rem;padding-right: 3rem;}
 #submit2 {all: unset;font-size: 14px;cursor: pointer;background-color: yellow;font-weight: bold;padding: 5px;}
 #menu_wrap {height: inherit;}
@@ -102,11 +103,11 @@ function vali() {
     <!-- 왼쪽 사이드 바 -->
     <div>
     	<!-- 지도/즐겨찾기 탭 -->
-    	<div>
-	  		<button id="bob_map" style="width:147px;font-size:16px;" class="btn btn-warning" 
-	  			onclick="sidebarChange(id);">지도</button>
-	  		<button id="favo" style="width:147px;font-size:16px;" class="btn btn-warning" 
-	  			onclick="sidebarChange(id);">즐겨찾기</button>
+    	<div style="background-color: #09151F;">
+	  		<button id="bob_map" style="width:147px;font-size:16px;background-color: #09151F;color: white;border: solid 1px white;" 
+	  			onclick="sidebarChange(id);">지도 ∨</button>
+	  		<button id="favo" style="width:147px;font-size:16px;background-color: #09151F;color: white;border: solid 1px white;"
+	  			onclick="sidebarChange(id);">즐겨찾기 ∨</button>
    		</div>
    		
 	    <div id="sidebar" style="overflow: auto;float: left;width: 300px; height: 85vh;">
@@ -116,7 +117,6 @@ function vali() {
 	   			<button type="button" id="close" onclick="toggle(id);"
 	   				class="btn-close"></button>
    			</div>
-   			
    			
    			<!-- 밥 지도 영역 S -->
    			<div id="bob_mapArea">
@@ -135,37 +135,38 @@ function vali() {
 					   		</form>
 				   		</div>
 			   		</div>
-			   		
-			   		
-			   		<!-- 내 위치 버튼 -->
-			   		<div id="favorite" class="m-3" align="center">
-			   			<button type="button" class="btn btn-primary" onclick="gps_tracking();">내 위치</button>
-			   		</div>
-			   		
-			   		<hr />
-			   		<ul id="placesList">
-			   			<c:choose>
-							<c:when test="${ empty keyword }">
-								검색어를 입력해주세요!
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${ keyword }" var="row" varStatus="loop">
-									<ul style="font-size: 15px;">
-										<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
-										<li>주소 : ${ row.address }</li>
-										<li>전화번호 : ${ row.plcNum }</li>
-										<li>메뉴 : ${ row.menu }</li>
-										<li>영업시간 : ${ row.operTime }</li>
-										<button type="button" class="btn btn-success" onclick="marker('${row.address}', '${ row.place }');">위치보기</button>
-									</ul>
-									<hr />
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-			   		</ul>
-	   			</div>
+			   	</div>
+			   	
+		   		<!-- 내 위치 버튼 -->
+		   		<div id="favorite" class="m-3" align="center">
+		   			<button type="button" class="btn btn-primary" onclick="gps_tracking();">내 위치</button>
+		   		</div>
+		   		
+		   		<div style="margin: 0;padding: 0;">
+		   			<hr />
+		   			<c:choose>
+						<c:when test="${ empty keyword }">
+							검색어를 입력해주세요!
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${ keyword }" var="row" varStatus="loop">
+								<ul style="font-size: 15px;">
+									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
+									<li>주소 : ${ row.address }</li>
+									<li>전화번호 : ${ row.plcNum }</li>
+									<li>메뉴 : ${ row.menu }</li>
+									<li>영업시간 : ${ row.operTime }</li>
+									<button id="locationCheck" type="button" class="button button-block-sm button--primary button--fill" 
+										onclick="marker('${row.address}', '${ row.place }');">위치보기</button>
+								</ul>
+								<hr />
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+		   		</div>
    			</div>
    			<!-- 밥 지도 영역 E -->
+   			
    			
    			
    			<!-- 즐겨찾기 영역 S -->
@@ -205,9 +206,9 @@ function vali() {
 	    </div>
 	    
 	    <!-- 펼치기 버튼 -->
-	    <div>
-	    	<button type="button" id="open" onclick="toggle(id);" style="display: none;font-size: 10px;"
-	    		class="btn btn-outline-primary">〉</button>
+	    <div style="background-color: #09151F">
+	    	<button type="button" id="open" onclick="toggle(id);" style="display: none;font-size: 14px;color: white;border: solid 1px white;"
+	    		class="btn btn-outline-primary">사이드 바 펼치기</button>
 		</div>
 	    
 	    <!-- 지도를 띄울 div태그 -->
