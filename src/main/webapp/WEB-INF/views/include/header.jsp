@@ -13,7 +13,7 @@
 
         <div class="header__logo brand--logo">
           <a href="./">
-          	<img id="bob_logo2" src="${path}/resources/images/bob_logo2.png">
+          	<img id="bob_logo2" src="${path}/resources/include_img/bob_logo2.png">
           </a>
         </div>
 
