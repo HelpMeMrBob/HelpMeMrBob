@@ -4,30 +4,31 @@
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />   
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
 <script type = "text/javascript">
-	var isValidate = function(frm){
+var isValidate = function(frm){
 	var isOk = false;
-	for(var i = 0; i<frm.sticker.length;i++){
-		if(frm.sticker[i].checked == true){
+	for(var i = 0; i<frm.money.length;i++){
+		if(frm.money[i].checked == true){
 			isOk = true;
 			break;
 		}
 	}
 	
 	if(isOk != true){
-		alert('구매하실 스티커를 선택해주세요.');
+		alert('충전 금액을 선택해주세요.');
 		return false;
 	}
 	
-	var confirmed = confirm("정말로 구매하시겠습니까?");
+	var confirmed = confirm("정말로 충전하시겠습니까?");
 	if(confirmed){
 		var form = document.buyFrm;
 		form.method="post"; 
-		form.action="./buyProcess.do";
+		form.action="./chargeProcess.do";
 		form.submit(); 	
 	}
+		
 }
 </script>
 
