@@ -68,6 +68,7 @@ public class PointDAO {
 				public void setValues(PreparedStatement ps ) throws
 				SQLException{
 					ps.setString(1, pdto.getId());
+					System.out.println("구매 아이디: "+ pdto.getId());
 					idto.setId(pdto.getId());
 					System.out.println("구매한 아이템 :"+ pdto.getSticker());
 					idto.setTemOname(pdto.getSticker());

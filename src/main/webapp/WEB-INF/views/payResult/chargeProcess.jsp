@@ -14,8 +14,8 @@
 				url:'kakaopay2' ,
 				dataType : 'json',
 				success:function(data){
-					alert("ajax 통신완료");
-					alert(data.tid);
+					//alert("ajax 통신완료");
+					//alert(data.tid);
 					var box = data.next_redirect_pc_url;
 					window.open(box);
 				},
