@@ -89,7 +89,7 @@ public class EmoticonController {
 			ItemDAO idao = new ItemDAO();
 			//원래 sessionId를 넣어야할 자리에 임으로 ptest를 넣어줌
 			pdto.setId("ptest");
-			
+			System.out.println("포인트 dto아이디"+pdto.getId());
 			pdto.setSticker(sticker);
 			idto.setTemOname(sticker);
 			//구매실행 
@@ -234,6 +234,7 @@ public class EmoticonController {
 		public String uploadList(HttpServletRequest req, Model model){
 			//물리적경로 얻어오기
 			String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+			System.out.println(path);
 			//경로를 기반으로 파일객체 생성
 			File file = new File(path);
 			//파일의 목록을 배열 형태로 얻어옴
