@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="admin.do">홈페이지 관리</a>
+            <a class="navbar-brand ps-3" href="<%= request.getContextPath() %>/admin.do">홈페이지 관리</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             
@@ -22,18 +22,14 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">회원</div>
-                            <a class="nav-link" href="admin/member.do">
+                            <a class="nav-link" href="<%= request.getContextPath() %>/admin/member.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-person-circle"></i></div>
-                                휴면 및 탈퇴
+                                회원 비활성화
                             </a>
-                            <a class="nav-link" href="index.jsp">
-                                <div class="sb-nav-link-icon"><i class="bi bi-exclamation-circle"></i></div>
-                                블랙리스트 
-                            </a>
-                            <a class="nav-link" href="index.jsp">
+                            <!--<a class="nav-link" href="<%= request.getContextPath() %>/admin/point.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-gem"></i></div>
                                 포인트 관리
-                            </a>
+                            </a>-->
                             
                             
                             <div class="sb-sidenav-menu-heading">메뉴 및 식당</div>
@@ -44,8 +40,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.jsp">룰렛 관리</a>
-                                    <a class="nav-link" href="layout-sidenav-light.jsp">월드컵 관리</a>
+                                    <a class="nav-link" href="<%= request.getContextPath() %>/admin/roullet.do">룰렛 관리</a>
+                                    <a class="nav-link" href="<%= request.getContextPath() %>/admin/worldCup.do">월드컵 관리</a>
                                 </nav>
                             </div>
                             <a class="nav-link" href="index.jsp">
@@ -54,24 +50,24 @@
                             </a>
                             
                             <div class="sb-sidenav-menu-heading">커뮤니티 게시판</div>
-                            <a class="nav-link" href="index.jsp">
+                            <a class="nav-link" href="<%= request.getContextPath() %>/admin/photo.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-layout-text-window-reverse"></i></div>
-                                리뷰 관리
+                                게시글 관리
                             </a>
-                            <a class="nav-link" href="index.jsp">
+                            <a class="nav-link" href="<%= request.getContextPath() %>/admin/reply.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-chat-square-dots"></i></div>
                                 댓글 관리
                             </a>
-                            <a class="nav-link" href="index.jsp">
+                            <a class="nav-link" href="<%= request.getContextPath() %>/admin/vsTalk.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-stack"></i></div>
                                 VS투표 관리
                             </a>
                             
-                            <div class="sb-sidenav-menu-heading">밥알</div>
-                            <a class="nav-link" href="index.jsp">
+                            <%-- <div class="sb-sidenav-menu-heading">밥알</div>
+                            <a class="nav-link" href="<%= request.getContextPath() %>/admin/">
                                 <div class="sb-nav-link-icon"><i class="bi bi-coin"></i></div>
                                 포인트 관리
-                            </a>
+                            </a> --%>
                             
                             <div class="sb-sidenav-menu-heading">상점</div>
                             <a class="nav-link" href="index.jsp">

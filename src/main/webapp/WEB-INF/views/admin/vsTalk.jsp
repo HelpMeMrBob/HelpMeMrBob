@@ -25,48 +25,44 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">회원 관리</h1>
+                        <h1 class="mt-4">투표 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">회원을 비활성화 처리하여 휴면 계정으로 전환합니다.</li>
+                            <li class="breadcrumb-item active">VS투표를 관리합니다.</li>
                         </ol>
 							<div class="row">
-							<form action="" name="memberFrm">
+							<form action="./delete.do?';" name="repFrm">
 							
 							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-dark" id="btnOff">비활성화</button>
-							</div>		
-															
-							<table class="table table-bordered" id="memberTb">
+							<button type="submit" class="btn btn-dark" id="write" >등록</button>
+							
+							<button type="submit" class="btn btn-dark" id="edit" >수정</button>
+							
+							<button type="submit" class="btn btn-dark" id="delete" >삭제</button>
+							</div>
+														
+							<table class="table table-bordered" id="repTb">
 								
 								 <colgroup>
 								 	<col width=5%>
-						            <col width=*>
-						            <col width=*>
-						            <col width=*>
-						            <col width=*>
 						            <col width=5%>
+						            <col width=*>
+						            
 						        </colgroup>
 							
 								<tr class="table-success">
+									<th></th>
 									<th>번호</th>
-									<th>아이디</th>
-									<th>이름</th>
-									<th>이메일</th>
-									<th>전화번호</th>
-									<th>선택</th>
+									<th>주제</th>
 								</tr>
 								
 								<!-- 반복 시작 -->
 								<c:forEach items="${lists }" var="row" varStatus="loop">	
 								<tr>
-									<td>${row.virtualNum }</td>
-									<td>${row.id }</td>
-									<td>${row.name }</td>
-									<td>${row.email }</td>
-									<td>${row.telNum }</td>
 									<td>
-									<input type="checkbox" name="memberCheck" value="Off"/>
+									<input type="checkbox" name="idx" value="${row.idx }"/>
 									</td>
+									<td>${row.topic }</td>
+									<td>${row.id }</td>
 								</tr>
 								</c:forEach>
 								<!-- 반복 끝 -->
