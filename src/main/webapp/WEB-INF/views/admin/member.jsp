@@ -31,10 +31,11 @@
                         </ol>
 							<div>
 							<form action="" name="memberFrm">
+							
+							<c:forEach items="${lists }" var="row">	
 							<table class="table table-bordered" id="memberTb">
 								
 								 <colgroup>
-						            <col width=5%>
 						            <col width=*>
 						            <col width=*>
 						            <col width=*>
@@ -44,7 +45,6 @@
 						        </colgroup>
 							
 								<tr class="table-success">
-									<th>번호</th>
 									<th>아이디</th>
 									<th>이름</th>
 									<th>이메일</th>
@@ -53,11 +53,10 @@
 									<th>선택</th>
 								</tr>
 								<tr>
-									<td>1</td>
-									<td>cookie</td>
-									<td>박국희</td>
-									<td>coo@naver.com</td>
-									<td>010-1234-1234</td>
+									<td>${row.id }</td>
+									<td>${row.name }</td>
+									<td>${row.email }</td>
+									<td>${row.telNum }</td>
 									<td>
 									 <select name="select1">
 						                <option value="On">활성화</option>
@@ -65,10 +64,11 @@
 						            </select>
 									</td>
 									<td>
-									<input type="radio" name="select2" value=""/>
+									<input type="radio" name="select2" value="black"/>
 									</td>
 								</tr>
 							</table>
+							</c:forEach>
 							</form>
 							</div>
 							

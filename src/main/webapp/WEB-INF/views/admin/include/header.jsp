@@ -22,7 +22,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">회원</div>
-                            <a class="nav-link" href="member.do">
+                            <a class="nav-link" href="admin/member.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-person-circle"></i></div>
                                 휴면 및 탈퇴
                             </a>
