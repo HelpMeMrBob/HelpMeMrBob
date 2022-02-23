@@ -44,11 +44,10 @@ public class kakaoPayContoller {
 		return "payResult/cancel";
 	}
 	//결제선택
-		@RequestMapping("/chargeBob.do")
-		public String chargeBob() {
-			return "payResult/chargeBob";
-		}
-	
+	@RequestMapping("/chargeBob.do")
+	public String chargeBob() {
+		return "payResult/chargeBob";
+	}
 	//전체에서 사용할 변수 여기서 선언!	
 	String amount;
 	//결제과정
@@ -85,9 +84,9 @@ public class kakaoPayContoller {
 								+ "&total_amount="+amount// 총 금액
 								+ "&vat_amount=200" // 부가세
 								+ "&tax_free_amount=0" // 상품 비과세 금액
-								+ "&approval_url=http://localhost:8081/HelpMeMrBob/resultSuccess.do" // 결제 성공 시
-								+ "&fail_url=http://localhost:8081/HelpMeMrBob/resultFailure.do" // 결제 실패 시
-								+ "&cancel_url=http://localhost:8081/HelpMeMrBob/resultCancel.do";
+								+ "&approval_url=http://localhost:8081/helpmemrbob/resultSuccess.do" // 결제 성공 시
+								+ "&fail_url=http://localhost:8081/helpmemrbob/resultFailure.do" // 결제 실패 시
+								+ "&cancel_url=http://localhost:8081/helpmemrbob/resultCancel.do";
 						
 						//서버에 전달하기 위한
 						OutputStream out = connection.getOutputStream();
@@ -160,9 +159,9 @@ public class kakaoPayContoller {
 								+ "&total_amount="+amount // 총 금액
 								+ "&vat_amount=200" // 부가세
 								+ "&tax_free_amount=0" // 상품 비과세 금액
-								+ "&approval_url=http://localhost:8081/finalMe/resultSuccess.do" // 결제 성공 시
-								+ "&fail_url=http://localhost:8081/finalMe/resultFailure.do" // 결제 실패 시
-								+ "&cancel_url=http://localhost:8081/finalMe/resultCancel.do";
+								+ "&approval_url=http://localhost:8081/helpmemrbob/resultSuccess.do" // 결제 성공 시
+								+ "&fail_url=http://localhost:8081/helpmemrbob/resultFailure.do" // 결제 실패 시
+								+ "&cancel_url=http://localhost:8081/helpmemrbob/resultCancel.do";
 						
 						//서버에 전달하기 위한
 						OutputStream out = connection.getOutputStream();
