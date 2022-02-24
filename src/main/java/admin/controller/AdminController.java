@@ -16,8 +16,10 @@ import admin.command.AdActiveCommand;
 import admin.command.AdBlackCommand;
 import admin.command.AdBoardCommand;
 import admin.command.AdMemberCommand;
+import admin.command.AdReplyCommand;
 import admin.command.AdminCommandImpl;
 import admin.command.DeleteActionCommand;
+import admin.command.DeleteReplyCommand;
 import admin.model.AdMemberDAO;
 
 @Controller
@@ -39,12 +41,19 @@ public class AdminController {
 	AdBlackCommand adblackCommand;
 	@Autowired
 	AdActiveCommand adactiveCommand;
+	@Autowired
+	AdReplyCommand adreplyCommand;
+	@Autowired
+	DeleteReplyCommand deleteReplyCommand;
+	
 	
 	//어드민 메인 진입
 	@RequestMapping("/admin.do")
 	public String goAdmin() {
 		return "admin/main";
 	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	//회원 관리 진입
 	@RequestMapping("/admin/member.do")
@@ -80,6 +89,8 @@ public class AdminController {
 		return "redirect:member.do";
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	//게시판 관리 진입
 	@RequestMapping("/admin/photo.do")
 	public String board(Model model, HttpServletRequest req) {
@@ -104,15 +115,32 @@ public class AdminController {
 		return "redirect:photo.do";
 	}
 	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	//리뷰 관리 진입
 	@RequestMapping("/admin/reply.do")
 	public String reply(Model model, HttpServletRequest req) {
-	
+		model.addAttribute("req", req);
+		
+		command = adreplyCommand;
+		command.execute(model);
 		
 		return "admin/reply";
-	}   
+	}
 	
-	
+	//리뷰 삭제
+	@RequestMapping(value="/admin/delReply.do", method=RequestMethod.POST)
+	public String delReply(
+			@RequestParam List<String> rno, Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		
+		command = deleteReplyCommand;
+		command.execute(model);
+		
+		return "redirect:reply.do";
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//투표 관리 진입
 	@RequestMapping("/admin/vsTalk.do")
 	public String vsTalk(Model model, HttpServletRequest req) {
@@ -120,5 +148,4 @@ public class AdminController {
 		
 		return "admin/vsTalk";
 	}
-
 }

@@ -27,10 +27,10 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">회원 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">회원을 비활성화 처리하여 휴면 계정으로 전환합니다.</li>
+                            <li class="breadcrumb-item active">회원을 비활성화 처리하여 휴면 또는 접근 불가 계정으로 전환합니다.</li>
                         </ol>
 							<div class="row">
-							<form action="black.do" name="memberFrm" method="POST">	
+							<form name="memberFrm" method="POST">	
 															
 							<table class="table table-bordered" id="memberTb">
 								
@@ -63,10 +63,10 @@
 									<td>
 									<c:choose>
 									<c:when test="${row.grade eq 'black'}">
-									<button type="submit" name="id" class="btn btn-info btn-sm" value="${row.id}">활성화</button>
+									<button type="submit" name="id" class="btn btn-info btn-sm" value="${row.id}" formaction="active.do">활성화</button>
 									</c:when>
 									<c:otherwise>
-									<button type="button" btn="active" name="id" class="btn btn-dark btn-sm" value="${row.id}">비활성화</button>
+									<button type="submit" name="id" class="btn btn-dark btn-sm" value="${row.id}" formaction="black.do">비활성화</button>
 									</c:otherwise>
 									</c:choose>
 									</td>

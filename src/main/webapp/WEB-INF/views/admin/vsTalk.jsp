@@ -50,7 +50,9 @@
 						        </colgroup>
 							
 								<tr class="table-success">
-									<th></th>
+									<th>
+									<input type="checkbox" id="allCheck" name="allCheck" />
+									</th>
 									<th>번호</th>
 									<th>주제</th>
 								</tr>
@@ -59,7 +61,7 @@
 								<c:forEach items="${lists }" var="row" varStatus="loop">	
 								<tr>
 									<td>
-									<input type="checkbox" name="idx" value="${row.idx }"/>
+									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
 									</td>
 									<td>${row.topic }</td>
 									<td>${row.id }</td>

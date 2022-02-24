@@ -20,15 +20,36 @@
     <style>
     	.row { width: 90% ;}
     </style>
-    <script>
-       
+    <script type="text/javascript">
+    
+	    $(function(){
+            var chkObj = document.getElementById("RowCheck");
+            var rowCnt = chkObj.length;
+
+            $("input[id='allCheck']").click(function(){
+
+                var chk_listArr = $("input[id='RowCheck']");
+                for(var i=0; i<chk_listArr.length; i++){
+                    chk_listArr[i].checked = this.checked;
+                }
+            })
+            $("input[id='RowCheck']").click(function(){
+                if($("input[id='RowCheck']:checked").length == rowCnt){
+                    $("input[id='allCheck']")[0].checked = true;
+                }
+                else{
+                    $("input[id='allCheck']")[0].checked = false;
+                }
+            })
+        });
+
        function deleteValue() {
     	   	
     	   var url = "delete.do"
     	   var checkArr = [];     // 배열 초기화
-    	   $("input[name='idx']:checked").each(function(i)) {
+    	   $("input[name='idx']:checked").each(function(i){
     	        checkArr.push($(this).val());// 체크된 것만 값을 뽑아서 배열에 push
-    	   }
+    	   });
     	 
     	   $.ajax({
     	       url: url
@@ -41,6 +62,7 @@
     	}
 
     </script>
+    
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -73,7 +95,7 @@
 							
 								<tr class="table-success">
 									<th>
-									<input type="checkbox" id="allCheck" />
+									<input type="checkbox" id="allCheck" name="allCheck" />
 									</th>
 									<th>번호</th>
 									<th>이미지</th>

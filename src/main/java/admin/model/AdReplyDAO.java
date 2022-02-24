@@ -39,15 +39,15 @@ public class AdReplyDAO {
 		return template.queryForObject(sql, Integer.class);
 	}
 	
-	//review리스트 가져오기 (페이징)
-	public ArrayList<AdReplyDTO> boardlist(Map<String, Object> map){
+	//reply 리스트 가져오기 (페이징)
+	public ArrayList<AdReplyDTO> replylist(Map<String, Object> map){
 		
 		int start = Integer.parseInt(map.get("start").toString());
 		int end = Integer.parseInt(map.get("end").toString());
 		
 		String sql = "SELECT * FROM " 
 			     +" (SELECT Tb.*, rownum rNum FROM "
-			     +" (SELECT * FROM board_rep ORDER BY idx DESC) Tb) "
+			     +" (SELECT * FROM board_rep ORDER BY rno DESC) Tb) "
 			     +" WHERE rNum BETWEEN " + start + " AND " + end;
 		
 		System.out.println(sql);
@@ -55,15 +55,15 @@ public class AdReplyDAO {
 				new BeanPropertyRowMapper<AdReplyDTO>(AdReplyDTO.class));	
 	}
 
-	//board 게시물 삭제
-	public void delete(final String idx) {
+	//reply 게시물 삭제
+	public void delete(final String rno) {
 		
-		String sql="DELETE FROM board_rep WHERE idx=?";
+		String sql="DELETE FROM board_rep WHERE rno=?";
 		
 		template.update(sql, new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {			
-				ps.setString(1, idx);
+				ps.setString(1, rno);
 			}
 		});
 	}
