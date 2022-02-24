@@ -47,6 +47,8 @@
 								 	<col width=5%>
 						            <col width=5%>
 						            <col width=*>
+						            <col width=7%>
+						            <col width=7%>
 						            
 						        </colgroup>
 							
@@ -56,6 +58,8 @@
 									</th>
 									<th>번호</th>
 									<th>주제</th>
+									<th>1:투표수</th>
+									<th>2:투표수</th>
 								</tr>
 								
 								<!-- 반복 시작 -->
@@ -64,8 +68,10 @@
 									<td>
 									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
 									</td>
+									<td>${row.idx }</td>
 									<td>${row.topic }</td>
-									<td>${row.id }</td>
+									<td>${row.sel1vote }</td>								
+									<td>${row.sel2vote }</td>								
 								</tr>
 								</c:forEach>
 								<!-- 반복 끝 -->

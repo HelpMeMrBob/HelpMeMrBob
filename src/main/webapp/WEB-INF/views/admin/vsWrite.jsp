@@ -33,42 +33,36 @@
 							<form id="vsFrm" name="vsFrm" method="post" 
 							action="uploadAction.do" enctype="multipart/form-data"> 
 							
-							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-dark" id="write" 
-								onclick="location.href='vsWrite.do';">등록</button>
-							
-							<button type="button" class="btn btn-dark" id="edit" >수정</button>
-							
-							<button type="button" class="btn btn-dark" id="delete" >삭제</button>
-							</div>
-														
-							<table class="table table-bordered" id="repTb">
+							<table class="table table-bordered" id="vsTb">
 								
 								 <colgroup>
-								 	<col width=5%>
-						            <col width=5%>
+								 	<col width=10%>
 						            <col width=*>
 						            
 						        </colgroup>
 							
-								<tr class="table-success">
-									<th>
-									<input type="checkbox" id="allCheck" name="allCheck" />
-									</th>
-									<th>번호</th>
-									<th>주제</th>
-								</tr>
-									
 								<tr>
+									<th class="table-primary">주제</th>
 									<td>
-									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
+									<input type="text" name="topic"/>
 									</td>
-									<td>${row.topic }</td>
-									<td>${row.id }</td>
 								</tr>
-								
+								<tr>
+									<th class="table-primary">아이템 1</th>
+									<td>
+								 	<input type="file" name="file1" />
+									</td>
+								</tr>
+								<tr>
+									<th class="table-primary">아이템 2</th>
+									<td>
+									<input type="file" name="file2" />
+									</td>
+								</tr>				
 							</table>
-							
+							<div class="col-lg-6 text-lg-end mb-1">
+							<button type="submit" class="btn btn-dark" >등록</button>
+							</div>
 							</form>
 							</div>
 							

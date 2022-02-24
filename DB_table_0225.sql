@@ -116,8 +116,8 @@ drop table VStalk;
 create table VStalk(
     idx varchar2(30) NOT NULL,
     topic varchar(200), --주제
-    sel1vote varchar2(30), --선택1에 대한 투표수
-    sel2vote varchar2(30), --선택2에 대한 투표수
+    sel1vote number default 0, --선택1에 대한 투표수
+    sel2vote number default 0, --선택2에 대한 투표수
     sel1img varchar2(80), --선택1에 대한 이미지
     sel2img varchar2(80), --선택2에 대한 이미지
     primary KEY (idx));
