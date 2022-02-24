@@ -31,29 +31,55 @@ function toggle(flag) {
 function sidebarChange(flag) {
 	var bob_mapArea = document.getElementById("bob_mapArea");
 	var favoriteArea = document.getElementById("favoriteArea");
+	var favoriteMemo = document.getElementById("favoriteMemo");
+	var modify = document.getElementById("modify");
 	
 	if (flag == 'bob_map') {
 		bob_mapArea.style.display = "block";
 		favoriteArea.style.display = "none";
-		
-		relayout();
+		favoriteMemo.style.display = "none";
+		modify.style.display = "none";
 	}
 	else if (flag == 'favo') {
 		bob_mapArea.style.display = "none";
 		favoriteArea.style.display = "block";
-		
-		relayout();
+		favoriteList.style.display = "block";
+		favoriteMemo.style.display = "none";
+		modify.style.display = "none";
 	}
 }
 
-function favorite() {
-	var star = document.getElementById("star");
-	star.innerHTML = "★";
-	alert("즐겨찾기 등록 완료");
+function favorite(flag) {
+	var bob_mapArea = document.getElementById("bob_mapArea");
+	var modify = document.getElementById("modify");
+	var favoriteArea = document.getElementById("favoriteArea");
+	var favoriteMemo = document.getElementById("favoriteMemo");
+	var favoriteList = document.getElementById("favoriteList");
+	var placeName = document.getElementById("placeName");
+	var addressName = document.getElementById("addressName");
+	var place = placeName.innerText.split(" : ");
+	var address = addressName.innerText.split(" : ");
+	var form = document.favoFrm;
+	
+	//로그인이 된 상태
+	if (flag == 1) {
+		bob_mapArea.style.display = "none";
+		favoriteArea.style.display = "none";
+		modify.style.display = "none";
+		favoriteMemo.style.display = "block";
+		
+		form.place.value = place[1];
+		form.address.value = address[1];
+	}
+	//로그인이 되지 않은 상태
+	else if (flag == 2) {
+		alert("로그인이 필요한 서비스 입니다.");
+		location.href = "./login.do";
+	}
 }
 
 function vali() {
-	var form = document.frm;
+	var form = document.searchFrm;
 	
 	if (form.keyword.value == "") {
 		alert("검색어를 입력해주세요!");
@@ -64,14 +90,62 @@ function vali() {
 	form.action = "./restaurant.do";
 	form.submit();
 }
+
+function deleteRow(idx) {
+	console.log(idx);
+	if (confirm("정말로 삭제하시겠습니까?")) {
+		location.href="favoriteDelete.do?idx="+idx;
+	}
+}
+
+function modifyRow(idx, place, address) {
+	var bob_mapArea = document.getElementById("bob_mapArea");
+	var favoriteList = document.getElementById("favoriteList");
+	var modify = document.getElementById("modify");
+	
+	var location = "./favoriteList.do";
+	
+	bob_mapArea.style.display = "none";
+	favoriteList.style.display = "none";
+	modify.style.display = "block";
+	
+	var form =  '<div style="text-align:center;">';
+		form += '<hr />';
+		form += '<form action="./favoriteModify.do">';
+		form += 	'<input type="hidden" name="idx" value="'+idx+'" />';
+		form += 	'<div style="padding:5px;font-size:14px;">이름 : '+ place +'</div>';
+		form +=		'<div style="padding:5px;font-size:14px;">주소 : '+ address +'</div>';
+		form +=		'<textarea name="memo" id="memo" cols="40" rows="5" placeholder="수정할 내용을 작성해주세요!(최대 50자)"' +
+						'style="margin-left:10px;"></textarea>';
+		form +=		'<button type="submit" id="submit1" style="text-align:center;margin-left:10px;">확인</button>';
+		form +=		'<button type="button" id="submit1" style="text-align:center;margin-left:10px;"' +
+						'onclick="cancel();">취소</button>';
+		form += '</form>';
+		form += '<hr />';
+		form += '</div>';
+	
+	modify.innerHTML = form;
+}
+
+function cancel() {
+	location.href="./favoriteList.do";
+}
 </script>
 
 <style>
-#title {font-size: 30px;}
-#locationCheck {padding: 5px;font-size: 14px;width: 100px;}
-#sidebar {background-color: white;}
-#submit1 {width: 3px;height: 3px;padding-left: 3rem;padding-right: 3rem;}
+#close {margin-top: 5px;margin-bottom: 5px;padding-right: 5px;}
+#open {display: none;font-size: 14px;color: white;border: solid 1px white;}
+#title {font-size: 30px;margin-top: 5px;margin-bottom: 5px;}
+#favo {padding: 0;width: 147px;font-size: 16px;background-color: #09151F;color: white;border: solid 1px white;}
+#bob_map {width:147px;font-size:16px;background-color: #09151F;color: white;border: solid 1px white;}
+#locationCheck {padding: 5px;font-size: 14px;width: 80px;}
+#favoriteModify {padding: 5px;font-size: 14px;width: 80px;}
+#favoriteDelete {padding: 5px;font-size: 14px;width: 80px;}
+#modifyBtn {padding: 5px;font-size: 14px;width: 80px;}
+#sidebar {background-color: white;overflow: auto;float: left;width: 300px; height: 85vh;}
+#submit1 {all: unset;width:50px;height:auto;font-size: 14px;cursor: pointer;padding: 5px;background-color:#085FD7;color:white;border-radius:3px;}
 #submit2 {all: unset;font-size: 14px;cursor: pointer;background-color: yellow;font-weight: bold;padding: 5px;}
+#submit3 {all: unset;font-size: 14px;cursor: pointer;background-color: yellow;font-weight: bold;padding: 5px;}
 #menu_wrap {height: inherit;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -104,16 +178,14 @@ function vali() {
     <div>
     	<!-- 지도/즐겨찾기 탭 -->
     	<div style="background-color: #09151F;">
-	  		<button id="bob_map" style="width:147px;font-size:16px;background-color: #09151F;color: white;border: solid 1px white;" 
-	  			onclick="sidebarChange(id);">지도 ∨</button>
-	  		<button id="favo" style="width:147px;font-size:16px;background-color: #09151F;color: white;border: solid 1px white;"
-	  			onclick="sidebarChange(id);">즐겨찾기 ∨</button>
+			<button id="bob_map" type="button" onclick="sidebarChange(id);">지도 ∨</button>
+			<button id="favo" type="button" onclick="sidebarChange(id);">즐겨찾기 ∨</button>
    		</div>
    		
-	    <div id="sidebar" style="overflow: auto;float: left;width: 300px; height: 85vh;">
+	    <div id="sidebar">
 	    	
 	    	<!-- 접기 버튼 -->
-	   		<div align="right" style="margin-top: 5px;margin-bottom: 5px;padding-right: 5px;">
+	   		<div id="close" align="right">
 	   			<button type="button" id="close" onclick="toggle(id);"
 	   				class="btn-close"></button>
    			</div>
@@ -121,17 +193,18 @@ function vali() {
    			<!-- 밥 지도 영역 S -->
    			<div id="bob_mapArea">
    				<!-- 타이틀 -->
-	   			<div align="center" style="margin-top: 5px;margin-bottom: 5px;">
+	   			<div align="center">
 	   				<span id="title">밥&nbsp;지도</span>
 		   		</div>
+		   		
 		   		<!-- 검색 -->
 		   		<div id="menu_wrap">
 			   		<div class="option">
 				   		<div>
-					   		<form onsubmit="return vali();" name="frm">
+					   		<form onsubmit="return vali();" name="searchFrm">
 					   			<span style="font-size: 16px;">검색 : </span>
 								<input type="text" id="keyword" name="search" style="width: 150px;" />
-								<button type="submit" id="submit1" class="btn btn-primary">Search</button>
+								<button type="submit" id="submit1">확인</button>
 					   		</form>
 				   		</div>
 			   		</div>
@@ -139,17 +212,18 @@ function vali() {
 			   	
 		   		<!-- 내 위치 버튼 -->
 		   		<div id="favorite" class="m-3" align="center">
-		   			<button type="button" class="btn btn-primary" onclick="gps_tracking();">내 위치</button>
+		   			<button type="button" class="btn btn-primary" onclick="geo_tracking();">내 위치</button>
 		   		</div>
 		   		
-		   		<div style="margin: 0;padding: 0;">
+		   		<!-- 검색 목록 -->
+		   		<div>
 		   			<hr />
 		   			<c:choose>
 						<c:when test="${ empty keyword }">
-							검색어를 입력해주세요!
+							<div style="font-size:16px;text-align:center;">검색어를 입력해주세요!</div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${ keyword }" var="row" varStatus="loop">
+							<c:forEach items="${ keyword }" var="row">
 								<ul style="font-size: 15px;">
 									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
 									<li>주소 : ${ row.address }</li>
@@ -172,43 +246,68 @@ function vali() {
    			<!-- 즐겨찾기 영역 S -->
    			<div id="favoriteArea" style="display: none;">
 	   			<!-- 타이틀 -->
-	   			<div align="center" style="margin-top: 5px;margin-bottom: 5px;">
+	   			<div align="center">
 	   				<span id="title">즐겨찾기</span>
 		   		</div>
+		   		
 		   		<!-- 내 위치 버튼 -->
 		   		<div id="favorite" class="m-3" align="center">
-		   			<button type="button" class="btn btn-primary" onclick="gps_tracking();">내 위치</button>
+		   			<button type="button" class="btn btn-primary" onclick="geo_tracking();">내 위치</button>
 		   		</div>
 		   		
-		   		<hr />
-		   		<%-- <ul id="favoriteList">
+		   		<!-- 즐겨찾기 목록 -->
+		   		<div id="favoriteList">
+		   			<c:if test="${ param.string eq 'error' }">
+		   				<div style="font-size:16px;text-align:center;">이미 추가한 즐겨찾기 입니다!</div>
+		   			</c:if>
+		   			<hr />
 		   			<c:choose>
-						<c:when test="${ empty keyword }">
-							검색어를 입력해주세요!
+						<c:when test="${ empty favoriteList }">
+							<div style="font-size:16px;text-align:center;">즐겨찾기 항목을 추가해보세요!</div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${ keyword }" var="row" varStatus="loop">
+							<c:forEach items="${ favoriteList }" var="row">
 								<ul style="font-size: 15px;">
 									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
 									<li>주소 : ${ row.address }</li>
-									<li>전화번호 : ${ row.plcNum }</li>
-									<li>메뉴 : ${ row.menu }</li>
-									<li>영업시간 : ${ row.operTime }</li>
-									<button type="button" class="btn btn-success" onclick="marker('${row.address}', '${ row.place }');">위치보기</button>
+									<li>메모 : ${ row.memo }</li>
+									<button id="locationCheck" type="button" class="button button-sm button--primary button--fill" 
+										onclick="marker('${row.address}', '${ row.place }');">위치보기</button>
+									<button id="favoriteModify" type="submit" class="button button-sm button--primary button--fill"
+										onclick="modifyRow('${row.idx}', '${ row.place }', '${ row.address }');">수정하기</button>
+									<button id="favoriteDelete" type="submit" class="button button-sm button--primary button--fill"
+										onclick="javascript:deleteRow('${row.idx}');">삭제하기</button>
 								</ul>
 								<hr />
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-		   		</ul> --%>
+		   		</div>
+		   		<div id="modify"></div>
    			</div>
    			<!-- 즐겨찾기 영역 E -->
+   			
+   			
+   			<div id="favoriteMemo" style="text-align:center;display:none;">
+   				<hr />
+   				<form action="./favorite.do" name="favoFrm" method="post">
+   					<input type="hidden" name="id" value="${ siteUserInfo.id }" />
+   					<input type="hidden" name="place" value="" />
+   					<input type="hidden" name="address" value="" />
+   					<span style="font-weight:bold;font-size:14px;">장소에 대한 간단한 메모를 작성해주세요! <br />
+   					(최대 50자)</span>
+   					<textarea name="memo" id="memo" cols="40" rows="5" maxlength="50"></textarea>
+   					<button type="submit" id="submit1">등록</button>
+   					<button type="button" id="submit1" style="text-align:center;margin-left:10px;"
+						onclick="cancel();">취소</button>
+   				</form>
+				<hr />
+   			</div>
 	    </div>
 	    
 	    <!-- 펼치기 버튼 -->
 	    <div style="background-color: #09151F">
-	    	<button type="button" id="open" onclick="toggle(id);" style="display: none;font-size: 14px;color: white;border: solid 1px white;"
-	    		class="btn btn-outline-primary">사이드 바 펼치기</button>
+	    	<button type="button" id="open" onclick="toggle(id);" class="btn btn-outline-primary">사이드 바 펼치기</button>
 		</div>
 	    
 	    <!-- 지도를 띄울 div태그 -->
@@ -222,7 +321,6 @@ function vali() {
 	
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/include/jquery.jsp" />
-	
 </body>
 
 
@@ -248,7 +346,7 @@ function vali() {
 	 	
 	   	// 주소로 좌표를 검색합니다
 	   	geocoder.addressSearch(address, function(result, status) {
-			
+	   		
 	   	    // 정상적으로 검색이 완료됐으면 
 	   	    if (status === kakao.maps.services.Status.OK) {
 				
@@ -260,19 +358,21 @@ function vali() {
 	   	            position: coords,
 	   	         	clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
 	   	        });
-				
-	   	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	   	        /* var infowindow = new kakao.maps.InfoWindow({
-	   	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+ place +'</div>'
-	   	        });
-	   	        infowindow.open(map, marker); */
 	   	        
 		   	  	// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-				var iwContent = '<div style="padding:5px;font-size:14px;">이름 : '+ place +'</div>' + 
-								'<div style="padding:5px;font-size:14px;width:350px;">주소 : '+ address +'</div>' + 
-								'<div style="padding:5px;font-size:14px;"><a href="#">상세보기</a></div>' + 
-								'<div style="padding:5px;"><button type="submit" id="submit2" onclick="favorite();">즐겨찾기 등록 <span id="star">☆</span></button></div>', 
-				    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+				var iwContent =	'<div id="placeName" style="padding:5px;font-size:14px;">이름 : '+ place +'</div>' +
+								'<div id="addressName" style="padding:5px;font-size:14px;width:350px;">주소 : '+ address +'</div>' + 
+								'<div style="padding:5px;font-size:14px;"><a href="#">상세보기</a></div>' +
+						<c:choose>
+					   	  	<c:when test="${ not empty siteUserInfo }">
+				   	 			'<div style="padding:5px;"><button type="button" id="submit2" onclick="favorite(1);">즐겨찾기 등록</button></div>';
+						   	</c:when>
+							<c:otherwise>
+								'<div style="padding:5px;"><button type="button" id="submit3" onclick="favorite(2);">로그인하고 즐겨찾기 하기</button></div>';
+						   	</c:otherwise>
+						</c:choose>
+						
+				var iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 				    
 				if (place === '내 위치') {
 					iwContent = '<div style="padding:5px;font-size:14px;">내 위치</div>';
@@ -299,31 +399,49 @@ function vali() {
 	   	});
    	}
    	
-   	var gps_use = null; //gps의 사용가능 여부
-   	var gps_lat = null; // 위도
-   	var gps_lng = null; // 경도
-   	var gps_position;   // gps 위치 객체
+   	<c:forEach items="${ keyword }" var="row">
+		marker('${row.address}', '${ row.place }');
+	</c:forEach>
+	<c:forEach items="${ favoriteList }" var="row">
+		marker('${row.address}', '${ row.place }');
+	</c:forEach>
+   	
+   	/* setInterval함수 */
+   	var timer;
+   	function reGeo() {
+   		timer = window.setInterval("geo_check()", 3000);
+   	}
+   	reGeo();
+   	
+   	var geo_use = null; //geo의 사용가능 여부
+   	var geo_lat = null; // 위도
+   	var geo_lng = null; // 경도
+   	var geo_position;   // geo 위치 객체
 	
-   	gps_check();
+   	geo_check();
    	// gps가 이용가능한지 체크하는 함수이며, 이용가능하다면 show location 함수를 불러온다.
    	// 만약 작동되지 않는다면 경고창을 띄우고, 에러가 있다면 errorHandler 함수를 불러온다.
    	// timeout을 통해 시간제한을 둔다.
-   	function gps_check(){
+   	function geo_check(){
+   		console.log("reGeo()");
    	    if (navigator.geolocation) {
-   	        var options = {timeout:60000};
+   	        var options = {
+        		enbleHighAccurcy : true, /* 정확도 설정 */
+        		timeout:50000 /* 대기시간 */
+       		};
    	        navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
    	    } 
    	    else {
-   	        alert("GPS_추적이 불가합니다.");
-   	        gps_use = false;
+   	        alert("GeoLocation_추적이 불가합니다.");
+   	        geo_use = false;
    	    }
    	}
 	
    	// gps 이용 가능 시, 위도와 경도를 반환하는 showlocation함수.
    	function showLocation(position) {
-   	    gps_use = true;
-   	    gps_lat = position.coords.latitude;
-   	    gps_lng = position.coords.longitude;
+   	    geo_use = true;
+   	    geo_lat = position.coords.latitude;
+   	    geo_lng = position.coords.longitude;
    	}
 	
    	// error발생 시 에러의 종류를 알려주는 함수.
@@ -334,17 +452,17 @@ function vali() {
    	    else if(err.code == 2) {
    	        alert("위치를 반환할 수 없습니다.");
    	    }
-   	    gps_use = false;
+   	    geo_use = false;
    	}
    	
    	//내 위치를 눌렀을 경우
-   	function gps_tracking(){
-   	    if (gps_use) {
-   	        map.panTo(new kakao.maps.LatLng(gps_lat, gps_lng));
+   	function geo_tracking(){
+   	    if (geo_use) {
+   	        map.panTo(new kakao.maps.LatLng(geo_lat, geo_lng));
    	        
 			var geocoder = new kakao.maps.services.Geocoder();
 			
-			var coord = new kakao.maps.LatLng(gps_lat, gps_lng);
+			var coord = new kakao.maps.LatLng(geo_lat, geo_lng);
 			var callback = function(result, status) {
 			    if (status === kakao.maps.services.Status.OK) {
 			        console.log(result[0].address.address_name);
@@ -359,9 +477,30 @@ function vali() {
    	    } 
    	    else {
 		    alert("접근차단하신 경우 새로고침, 아닌 경우 잠시만 기다려주세요.");
-		    gps_check();
+		    geo_check();
    	    }
    	    
+   	}
+   	
+   	//키워드로 검색하기
+   	function keywordSearch(key, rad) {
+   		
+	   	var places = new kakao.maps.services.Places();
+	   	var latl = new kakao.maps.LatLng(geo_lat, geo_lng);
+	   	
+	   	var keyOptions = {
+	   			category_group_code : "FD6",
+	   			location : latl, 
+	   			radius : 300
+	   	};
+	   	
+	   	var callback = function(result, status) {
+	   	    if (status === kakao.maps.services.Status.OK) {
+	   	        console.log(result);
+	   	    }
+	   	};
+	   	
+	   	places.keywordSearch(key, callback, keyOptions);
    	}
    	
    	function relayout() {

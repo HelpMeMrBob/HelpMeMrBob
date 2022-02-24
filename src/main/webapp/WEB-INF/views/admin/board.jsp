@@ -15,10 +15,71 @@
         <link href="${ path }/adsources/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <style>
     	.row { width: 90% ;}
     </style>
+    <script>
+	    $(function(){
+	        var chkObj = document.getElementById("RowCheck");
+	        var rowCnt = chkObj.length;
+	
+	        $("input[id='allCheck']").click(function(){
+	            var chk_listArr = $("input[id='RowCheck']");
+	            for(var i=0; i<chk_listArr.length; i++){
+	                chk_listArr[i].checked = this.checked;
+	            }
+	        });
+	        $("input[id='RowCheck']").click(function(){
+	            if($("input[id='RowCheck']:checked").length == rowCnt){
+	                $("input[id='allCheck']")[0].checked = true;
+	            }
+	            else{
+	                $("input[id='allCheck']")[0].checked = false;
+	            }
+	        });
+	    });	
+    
+        function deleteValue(){
+        	//컨트롤러로 보내고자하는 URL
+            var url = "delete.do"; 
+            var valueArr = new Array();
+            var list = $("input[id='RowCheck']");
+
+            for(var i=0; i<list.length; i++){
+                //선택된 값이 있을 때
+                if(list[i].checked){
+                    //배열에 값을 저장
+                    valueArr.push(list[i].vlaue);
+                }
+            }
+            if(valueArr.length == 0){
+                alert("선택된 글이 없습니다.");
+            }
+            else{
+                var chk = confirm("정말 삭제하시겠습니까?");
+                $.ajax({
+                    url : url,
+                    type : 'POST',
+                    traditional : true,
+                    data : {
+                        valueArr : valueArr
+                    },
+                    success: function(jdata){
+                        if(jdata=1){
+                            alert("삭제했습니다.");
+                            location.replace("photo.do"); //페이지 새로고침
+                        }
+                        else{
+                            alert("삭제에 실패했습니다.");
+                        }
+                        
+                    }
+                });
+            }
+        }
+    </script>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -30,10 +91,10 @@
                             <li class="breadcrumb-item active">게시판에 올라온 글을 관리합니다.</li>
                         </ol>
 							<div class="row">
-							<form action="./delete.do?';" name="boardFrm">
+							<form name="boardFrm">
 							
 							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="submit" class="btn btn-dark" id="delete" >삭제</button>
+							<button type="button" class="btn btn-dark" id="delete" onclick="deleteValue();">선택 삭제</button>
 							</div>								
 							<table class="table table-bordered" id="boardTb">
 								
@@ -49,7 +110,9 @@
 						        </colgroup>
 							
 								<tr class="table-success">
-									<th></th>
+									<th>
+									<input type="checkbox" id="allCheck" name="allCheck" />
+									</th>
 									<th>번호</th>
 									<th>이미지</th>
 									<th>제목</th>
@@ -63,7 +126,7 @@
 								<c:forEach items="${lists }" var="row" varStatus="loop">	
 								<tr>
 									<td>
-									<input type="checkbox" name="idx" value="${row.idx }"/>
+									<input type="checkbox" id="RowCheck" name="RowCheck" value="${row.idx }"/>
 									</td>
 									<td>${row.virtualNum }</td>
 									<td>${row.sfile }</td>

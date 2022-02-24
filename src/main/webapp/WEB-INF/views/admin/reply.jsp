@@ -30,7 +30,7 @@
                             <li class="breadcrumb-item active">게시글에 달린 댓글을 삭제합니다.</li>
                         </ol>
 							<div class="row">
-							<form action="./delete.do?';" name="repFrm">
+							<form action="./delete.do';" name="repFrm">
 							
 							<div class="col-lg-12 text-lg-end mb-1">
 							<button type="submit" class="btn btn-dark" id="delete" >삭제</button>
