@@ -54,19 +54,17 @@ public class InfomationController {
 		}
 		else{
 			model.addAttribute("loginCheck", "Login");
+			//DB에서 즐겨찾기 리스트목록 가져오기
+			MemberVO vo = (MemberVO)session.getAttribute("siteUserInfo");
+			ArrayList<FavoriteDTO> favoriteList = 
+					sqlSession2.getMapper(InfomationDAOInter.class).favoriteList(vo.getId());
+			model.addAttribute("favoriteList", favoriteList);
 		}
 		
 		//DB에서 검색어에 맞는 결과 리스트 가져오기
 		String search = req.getParameter("search");
 		ArrayList<InfomationDTO> keyword = sqlSession2.getMapper(InfomationDAOInter.class).keyword(search);
 		model.addAttribute("keyword", keyword);
-		
-		//DB에서 즐겨찾기 리스트목록 가져오기
-		MemberVO vo = (MemberVO)session.getAttribute("siteUserInfo");
-		ArrayList<FavoriteDTO> favoriteList = 
-				sqlSession2.getMapper(InfomationDAOInter.class).favoriteList(vo.getId());
-		
-		model.addAttribute("favoriteList", favoriteList);
 		
 		return "main/infomation";
 	}
@@ -88,6 +86,7 @@ public class InfomationController {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("이미 추가한 즐겨찾기 항목");
 			model.addAttribute("error");
 		}
 		

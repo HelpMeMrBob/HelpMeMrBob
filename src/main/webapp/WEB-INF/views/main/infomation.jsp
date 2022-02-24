@@ -49,17 +49,16 @@ function sidebarChange(flag) {
 	}
 }
 
-function favorite(flag) {
+function favorite(flag, place, address) {
 	var bob_mapArea = document.getElementById("bob_mapArea");
 	var modify = document.getElementById("modify");
 	var favoriteArea = document.getElementById("favoriteArea");
 	var favoriteMemo = document.getElementById("favoriteMemo");
 	var favoriteList = document.getElementById("favoriteList");
-	var placeName = document.getElementById("placeName");
-	var addressName = document.getElementById("addressName");
-	var place = placeName.innerText.split(" : ");
-	var address = addressName.innerText.split(" : ");
 	var form = document.favoFrm;
+	
+	form.place.value = place;
+	form.address.value = address;
 	
 	//로그인이 된 상태
 	if (flag == 1) {
@@ -67,9 +66,6 @@ function favorite(flag) {
 		favoriteArea.style.display = "none";
 		modify.style.display = "none";
 		favoriteMemo.style.display = "block";
-		
-		form.place.value = place[1];
-		form.address.value = address[1];
 	}
 	//로그인이 되지 않은 상태
 	else if (flag == 2) {
@@ -92,7 +88,6 @@ function vali() {
 }
 
 function deleteRow(idx) {
-	console.log(idx);
 	if (confirm("정말로 삭제하시겠습니까?")) {
 		location.href="favoriteDelete.do?idx="+idx;
 	}
@@ -213,6 +208,15 @@ function cancel() {
 		   		<!-- 내 위치 버튼 -->
 		   		<div id="favorite" class="m-3" align="center">
 		   			<button type="button" class="btn btn-primary" onclick="geo_tracking();">내 위치</button>
+		   			<select name="radius" id="radius" onchange="rad(this.value);">
+		   				<option value="0">--선택--</option>
+		   				<option value="300">300M</option>
+		   				<option value="500">500M</option>
+		   				<option value="1000">1KM</option>
+		   			</select><br />
+		   			<span style="margin-top:20px;font-size:14px;">내 위치가 이상하신가요?</span><br />
+		   			<input type="text" name="userLocation" id="userLocation" size="25" value="" />
+		   			<button type="button" id="submit1" onclick="myLocation();">확인</button>
 		   		</div>
 		   		
 		   		<!-- 검색 목록 -->
@@ -253,12 +257,18 @@ function cancel() {
 		   		<!-- 내 위치 버튼 -->
 		   		<div id="favorite" class="m-3" align="center">
 		   			<button type="button" class="btn btn-primary" onclick="geo_tracking();">내 위치</button>
+		   			<select name="radius" id="radius"  onchange="rad(this.value);">
+		   				<option value="0">--선택--</option>
+		   				<option value="300">300M</option>
+		   				<option value="500">500M</option>
+		   				<option value="1000">1KM</option>
+		   			</select>
 		   		</div>
 		   		
 		   		<!-- 즐겨찾기 목록 -->
 		   		<div id="favoriteList">
 		   			<c:if test="${ param.string eq 'error' }">
-		   				<div style="font-size:16px;text-align:center;">이미 추가한 즐겨찾기 입니다!</div>
+		   				<div style="font-size:16px;text-align:center;font-weight:bold;">이미 추가한 즐겨찾기 입니다!</div>
 		   			</c:if>
 		   			<hr />
 		   			<c:choose>
@@ -330,7 +340,8 @@ function cancel() {
 <script>
 	// 마커를 담을 배열입니다
   	var markers = [];
-	
+  	var userLatitude; //위도
+   	var userLongitude; //경도
    	var container = document.getElementById('map');
    	var options = {
    			center : new kakao.maps.LatLng(37.47868297981449, 126.87866945602173),
@@ -340,7 +351,6 @@ function cancel() {
    	var map = new kakao.maps.Map(container, options);
    	
    	function marker(address, place) {
-   		
 	 	// 주소-좌표 변환 객체를 생성합니다
 	   	var geocoder = new kakao.maps.services.Geocoder();
 	 	
@@ -360,15 +370,15 @@ function cancel() {
 	   	        });
 	   	        
 		   	  	// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-				var iwContent =	'<div id="placeName" style="padding:5px;font-size:14px;">이름 : '+ place +'</div>' +
-								'<div id="addressName" style="padding:5px;font-size:14px;width:350px;">주소 : '+ address +'</div>' + 
+				var iwContent =	'<div style="padding:5px;font-size:14px;">이름 : '+ place +'</div>' +
+								'<div style="padding:5px;font-size:14px;width:350px;">주소 : '+ address +'</div>' + 
 								'<div style="padding:5px;font-size:14px;"><a href="#">상세보기</a></div>' +
 						<c:choose>
 					   	  	<c:when test="${ not empty siteUserInfo }">
-				   	 			'<div style="padding:5px;"><button type="button" id="submit2" onclick="favorite(1);">즐겨찾기 등록</button></div>';
+				   	 			'<div style="padding:5px;"><button type="button" id="submit2" onclick="favorite(1,'+'\''+place+'\''+','+'\''+address+'\''+');">즐겨찾기 등록</button></div>';
 						   	</c:when>
 							<c:otherwise>
-								'<div style="padding:5px;"><button type="button" id="submit3" onclick="favorite(2);">로그인하고 즐겨찾기 하기</button></div>';
+								'<div style="padding:5px;"><button type="button" id="submit3" onclick="favorite(2,'+'\''+""+'\''+','+'\''+""+'\''+');">로그인하고 즐겨찾기 하기</button></div>';
 						   	</c:otherwise>
 						</c:choose>
 						
@@ -387,7 +397,7 @@ function cancel() {
 				// 마커에 클릭이벤트를 등록합니다
 				kakao.maps.event.addListener(marker, 'click', function() {
 				    // 마커 위에 인포윈도우를 표시합니다
-				    infowindow.open(map, marker);  
+				    infowindow.open(map, marker);
 				});
 				
 	   	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -423,7 +433,6 @@ function cancel() {
    	// 만약 작동되지 않는다면 경고창을 띄우고, 에러가 있다면 errorHandler 함수를 불러온다.
    	// timeout을 통해 시간제한을 둔다.
    	function geo_check(){
-   		console.log("reGeo()");
    	    if (navigator.geolocation) {
    	        var options = {
         		enbleHighAccurcy : true, /* 정확도 설정 */
@@ -458,7 +467,13 @@ function cancel() {
    	//내 위치를 눌렀을 경우
    	function geo_tracking(){
    	    if (geo_use) {
-   	        map.panTo(new kakao.maps.LatLng(geo_lat, geo_lng));
+   	    	
+   	    	if (userLatitude == null || userLongitude == null) {
+   	   			userLatitude = geo_lat;
+   	   			userLongitude = geo_lng;
+   	   		}
+   	    	
+   	        map.panTo(new kakao.maps.LatLng(userLatitude, userLongitude));
    	        
 			var geocoder = new kakao.maps.services.Geocoder();
 			
@@ -470,7 +485,6 @@ function cancel() {
 			};
 			
 	   	    geocoder.coord2Address(coord.getLng(), coord.getLat(), function(result) {
-	   	    	console.log(result[0].address.address_name);
    	    		marker(result[0].address.address_name, '내 위치');
 	   	    });
    	        
@@ -482,25 +496,91 @@ function cancel() {
    	    
    	}
    	
-   	//키워드로 검색하기
-   	function keywordSearch(key, rad) {
+   	//사용자로부터 정확한 위치 얻어오기
+   	function myLocation() {
    		
-	   	var places = new kakao.maps.services.Places();
-	   	var latl = new kakao.maps.LatLng(geo_lat, geo_lng);
-	   	
-	   	var keyOptions = {
-	   			category_group_code : "FD6",
-	   			location : latl, 
-	   			radius : 300
-	   	};
-	   	
-	   	var callback = function(result, status) {
+   		// 주소-좌표 변환 객체를 생성합니다
+	   	var geocoder = new kakao.maps.services.Geocoder();
+   		
+   		var address = document.getElementById("userLocation").value;
+   		console.log(address);
+	 	
+	   	// 주소로 좌표를 검색합니다
+	   	geocoder.addressSearch(address, function(result, status) {
+	   		
+	   	    // 정상적으로 검색이 완료됐으면 
 	   	    if (status === kakao.maps.services.Status.OK) {
-	   	        console.log(result);
+				
+	   	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	   	     	userLatitude = result[0].y;
+	   	     	userLongitude = result[0].x;
+	   	     	
+	   	     	console.log(userLatitude);
+	   	     	console.log(userLongitude);
+	   	     	
+				
+	   	        // 결과값으로 받은 위치를 마커로 표시합니다
+	   	        var marker = new kakao.maps.Marker({
+	   	            map: map,
+	   	            position: coords,
+	   	         	clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+	   	        });
+	   	        
+		   	  	// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+				var iwContent = '<div style="padding:5px;font-size:14px;">내 위치</div>';
+				var iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+				    
+				// 인포윈도우를 생성합니다
+				var infowindow = new kakao.maps.InfoWindow({
+				    content : iwContent,
+				    removable : iwRemoveable
+				});
+				
+				// 마커에 클릭이벤트를 등록합니다
+				kakao.maps.event.addListener(marker, 'click', function() {
+				    // 마커 위에 인포윈도우를 표시합니다
+				    infowindow.open(map, marker);
+				});
+				
+	   	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	   	        map.panTo(coords);
 	   	    }
-	   	};
-	   	
-	   	places.keywordSearch(key, callback, keyOptions);
+	   	    else {
+	   	    	console.log("검색 실패");
+	   	    }
+	   	});
+   	}
+   	
+   	//내 주변 반경 구하기
+	var beforeRadius;
+   	var beforeCircle;
+   	
+   	function rad(radius) {
+   		
+   		if (userLatitude == null || userLongitude == null) {
+   			userLatitude = geo_lat;
+   			userLongitude = geo_lng;
+   		}
+   		
+		// 지도에 표시할 원을 생성합니다
+	   	var circle = new kakao.maps.Circle({
+	   	    center : new kakao.maps.LatLng(userLatitude, userLongitude),  // 원의 중심좌표 입니다 
+	   	    radius: radius, // 미터 단위의 원의 반지름입니다 
+	   	    strokeWeight: 5, // 선의 두께입니다 
+	   	    strokeColor: '#75B8FA', // 선의 색깔입니다
+	   	    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	   	    strokeStyle: 'solid', // 선의 스타일 입니다
+	   	    fillColor: '#CFE7FF', // 채우기 색깔입니다
+	   	    fillOpacity: 0.3  // 채우기 불투명도 입니다   
+	   	});
+	 	
+	 	if(beforeCircle) {
+	   		beforeCircle.setMap(null);
+	 	}
+	 	
+	   	// 지도에 원을 표시합니다
+	   	circle.setMap(map);
+	   	beforeCircle = circle;
    	}
    	
    	function relayout() {
