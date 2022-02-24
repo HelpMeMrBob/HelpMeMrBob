@@ -28,8 +28,13 @@ public class DeleteActionCommand implements AdminCommandImpl{
 		HttpServletRequest req = 
 				(HttpServletRequest)paramMap.get("req");
 		
-		String idx=req.getParameter("idx");
+		String[] idx= req.getParameterValues("idx");
+		System.out.println(idx[0]);	
 		
-		dao.delete(idx);
+		for(int i=0; i<idx.length; i++) {
+			
+			dao.delete(idx[i]);
+		}
+
 	}
 }

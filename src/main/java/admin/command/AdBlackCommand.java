@@ -1,0 +1,34 @@
+package admin.command;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import admin.model.AdMemberDAO;
+
+@Service
+public class AdBlackCommand implements AdminCommandImpl{
+
+	@Autowired
+	AdMemberDAO dao;
+	public AdBlackCommand() {
+		System.out.println("AdBlackCommand 빈 자동 생성 됨");
+	}
+	
+	@Override
+	public void execute(Model model) {
+		System.out.println("AdBlackCommand -> execute() 호출");
+		
+		Map<String, Object> paramMap = model.asMap();
+		HttpServletRequest req = 
+				(HttpServletRequest)paramMap.get("req");
+		
+		String id= req.getParameter("id");
+		System.out.println(id);
+		
+		dao.memberBlack(id);
+	}
+}

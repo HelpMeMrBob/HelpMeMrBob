@@ -21,64 +21,25 @@
     	.row { width: 90% ;}
     </style>
     <script>
-	    $(function(){
-	        var chkObj = document.getElementById("RowCheck");
-	        var rowCnt = chkObj.length;
-	
-	        $("input[id='allCheck']").click(function(){
-	            var chk_listArr = $("input[id='RowCheck']");
-	            for(var i=0; i<chk_listArr.length; i++){
-	                chk_listArr[i].checked = this.checked;
-	            }
-	        });
-	        $("input[id='RowCheck']").click(function(){
-	            if($("input[id='RowCheck']:checked").length == rowCnt){
-	                $("input[id='allCheck']")[0].checked = true;
-	            }
-	            else{
-	                $("input[id='allCheck']")[0].checked = false;
-	            }
-	        });
-	    });	
-    
-        function deleteValue(){
-        	//컨트롤러로 보내고자하는 URL
-            var url = "delete.do"; 
-            var valueArr = new Array();
-            var list = $("input[id='RowCheck']");
+       
+       function deleteValue() {
+    	   	
+    	   var url = "delete.do"
+    	   var checkArr = [];     // 배열 초기화
+    	   $("input[name='idx']:checked").each(function(i)) {
+    	        checkArr.push($(this).val());// 체크된 것만 값을 뽑아서 배열에 push
+    	   }
+    	 
+    	   $.ajax({
+    	       url: url
+    	       , type: 'post'
+    	       , dataType: 'text'
+    	       , data: {
+    	    	   idx : checkArr
+    	       }
+    	   });
+    	}
 
-            for(var i=0; i<list.length; i++){
-                //선택된 값이 있을 때
-                if(list[i].checked){
-                    //배열에 값을 저장
-                    valueArr.push(list[i].vlaue);
-                }
-            }
-            if(valueArr.length == 0){
-                alert("선택된 글이 없습니다.");
-            }
-            else{
-                var chk = confirm("정말 삭제하시겠습니까?");
-                $.ajax({
-                    url : url,
-                    type : 'POST',
-                    traditional : true,
-                    data : {
-                        valueArr : valueArr
-                    },
-                    success: function(jdata){
-                        if(jdata=1){
-                            alert("삭제했습니다.");
-                            location.replace("photo.do"); //페이지 새로고침
-                        }
-                        else{
-                            alert("삭제에 실패했습니다.");
-                        }
-                        
-                    }
-                });
-            }
-        }
     </script>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
@@ -91,10 +52,11 @@
                             <li class="breadcrumb-item active">게시판에 올라온 글을 관리합니다.</li>
                         </ol>
 							<div class="row">
-							<form name="boardFrm">
+							
+							<form id="boardFrm" name="boardFrm" method="POST" action="delete.do">
 							
 							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-dark" id="delete" onclick="deleteValue();">선택 삭제</button>
+							<button type="submit" class="btn btn-dark" id="delete" onclick="deleteValue();">선택 삭제</button>
 							</div>								
 							<table class="table table-bordered" id="boardTb">
 								
@@ -111,7 +73,7 @@
 							
 								<tr class="table-success">
 									<th>
-									<input type="checkbox" id="allCheck" name="allCheck" />
+									<input type="checkbox" id="allCheck" />
 									</th>
 									<th>번호</th>
 									<th>이미지</th>
@@ -126,7 +88,7 @@
 								<c:forEach items="${lists }" var="row" varStatus="loop">	
 								<tr>
 									<td>
-									<input type="checkbox" id="RowCheck" name="RowCheck" value="${row.idx }"/>
+									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
 									</td>
 									<td>${row.virtualNum }</td>
 									<td>${row.sfile }</td>

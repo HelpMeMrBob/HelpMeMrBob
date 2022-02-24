@@ -58,8 +58,34 @@ public class AdMemberDAO {
 		return (ArrayList<AdMemberDTO>)template.query(sql, 
 				new BeanPropertyRowMapper<AdMemberDTO>(AdMemberDTO.class));	
 	}
-	//활성화&비활성화 처리
+	
+	//비활성화 처리
+	public void memberBlack(final String id) {
+		
+		String sql="UPDATE member SET grade='black' WHERE id=?";
+		
+		template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				
+				ps.setString(1, id);
+			}
+		});
+	}
+	
+	//활성화 처리
+	public void memberActive(final String id) {
+		String sql="UPDATE member SET grade='member' WHERE id=?";
+		
+		template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				
+				ps.setString(1, id);
+			}
+		});
+	}
 	
 	
-	//블랙리스트 처리
+	//활성화 처리 
 }

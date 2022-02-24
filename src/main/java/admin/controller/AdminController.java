@@ -1,5 +1,7 @@
 package admin.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import admin.command.AdActiveCommand;
+import admin.command.AdBlackCommand;
 import admin.command.AdBoardCommand;
 import admin.command.AdMemberCommand;
 import admin.command.AdminCommandImpl;
@@ -29,7 +35,10 @@ public class AdminController {
 	AdBoardCommand adboardCommand;
 	@Autowired
 	DeleteActionCommand deleteActionCommand;
-	
+	@Autowired
+	AdBlackCommand adblackCommand;
+	@Autowired
+	AdActiveCommand adactiveCommand;
 	
 	//어드민 메인 진입
 	@RequestMapping("/admin.do")
@@ -48,6 +57,29 @@ public class AdminController {
 		return "admin/member";
 	}
 	
+	//회원 비활성화
+	@RequestMapping(value="/admin/black.do", method=RequestMethod.POST)
+	public String black(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+	
+		command = adblackCommand;
+		command.execute(model);
+		
+		return "redirect:member.do";
+	}
+	//회원 활성화
+	@RequestMapping(value="/admin/active.do", method=RequestMethod.POST)
+	public String active(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+	
+		command = adactiveCommand;
+		command.execute(model);
+		
+		return "redirect:member.do";
+	}
+	
 	//게시판 관리 진입
 	@RequestMapping("/admin/photo.do")
 	public String board(Model model, HttpServletRequest req) {
@@ -60,8 +92,9 @@ public class AdminController {
 	}
 	
 	//게시판 삭제
-	@RequestMapping("/admin/delete.do")
-	public String boardDelete(Model model, HttpServletRequest req) {
+	@RequestMapping(value="/admin/delete.do", method=RequestMethod.POST)
+	public String boardDelete(
+			@RequestParam List<String> idx, Model model, HttpServletRequest req) {
 		
 		model.addAttribute("req", req);
 		

@@ -30,11 +30,7 @@
                             <li class="breadcrumb-item active">회원을 비활성화 처리하여 휴면 계정으로 전환합니다.</li>
                         </ol>
 							<div class="row">
-							<form action="" name="memberFrm">
-							
-							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-dark" id="btnOff">비활성화</button>
-							</div>		
+							<form action="black.do" name="memberFrm" method="POST">	
 															
 							<table class="table table-bordered" id="memberTb">
 								
@@ -44,7 +40,7 @@
 						            <col width=*>
 						            <col width=*>
 						            <col width=*>
-						            <col width=5%>
+						            <col width=7%>
 						        </colgroup>
 							
 								<tr class="table-success">
@@ -65,7 +61,14 @@
 									<td>${row.email }</td>
 									<td>${row.telNum }</td>
 									<td>
-									<input type="checkbox" name="memberCheck" value="Off"/>
+									<c:choose>
+									<c:when test="${row.grade eq 'black'}">
+									<button type="submit" name="id" class="btn btn-info btn-sm" value="${row.id}">활성화</button>
+									</c:when>
+									<c:otherwise>
+									<button type="button" btn="active" name="id" class="btn btn-dark btn-sm" value="${row.id}">비활성화</button>
+									</c:otherwise>
+									</c:choose>
 									</td>
 								</tr>
 								</c:forEach>
