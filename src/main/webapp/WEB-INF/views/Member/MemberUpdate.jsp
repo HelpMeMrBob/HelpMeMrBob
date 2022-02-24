@@ -18,27 +18,35 @@
 		<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;">
 			<table style="width: 60%; margin:0.5px">
 				<tr style="border: 1px solid #DFDFDF">
-					<td style="width: 20%;">
+					<td style="width: 15%;">
 						<button onclick="location.href='./mypage.do';"
 								style="background-color: #FFFFFF; color: #ED6A5A;
-									   width: 100%; height: 100px; font-size: 24px;
+									   width: 100%; height: 80px; font-size: 18px;
 		  							   ">
 							나의 정보 보기
 						</button>
 					</td>
-					<td style="width: 20%;">
+					<td style="width: 15%;">
 						<button onclick="location.href='./mylist.do';"
 								style="background-color: #FFFFFF; color: #ED6A5A;
-									   width: 100%; height: 100px; font-size: 24px;
+									   width: 100%; height: 80px; font-size: 18px;
 		  							   border-left: 1px solid #DFDFDF;
 		  							   border-right: 1px solid #DFDFDF;">
 							나의 작성 목록
 						</button>
 					</td>
-					<td style="width: 20%;">
+					<td style="width: 15%;">
+						<button onclick="location.href='./myscrap1.do';"
+								style="background-color: #FFFFFF; color: #ED6A5A;
+									   width: 100%; height: 80px; font-size: 18px;
+		  							   border-right: 1px solid #DFDFDF;">
+							나의 스크랩 목록
+						</button>
+					</td>
+					<td style="width: 15%;">
 						<button onclick="location.href='./memberUpdate.do';"
 								style="background-color: #ED6A5A; color: #FFFFFF;
-									   width: 100%; height: 100px; font-size: 24px;
+									   width: 100%; height: 80px; font-size: 18px;
 		  							   ">
 							회원 정보 수정
 						</button>
@@ -106,15 +114,15 @@
 				<tr>
 					<td colspan="4" style="text-align: center; padding: 40px">
 						<button type="submit" id="submit"
-								style="width: 150px; height: 60px; font-size: 16px;
-									   background-color: #0F202E; color: #F5F5F5;
+								style="width: 120px; height: 50px; font-size: 14px;
+									   background-color: #0F202E; color: #FFFFFF;
 									   padding: 20px; border-radius: 10px;">
 							수정완료
 						</button>
 						<button type="reset"
-								style="width: 150px; height: 60px ; font-size:16px;
-									   background-color: #0F202E; color: #F5F5F5;
-									   border-radius: 10px;">
+								style="width: 120px; height: 50px ; font-size:14px;
+									   background-color: #FFFFFF; color: #0F202E;
+									   border: 1px solid #0F202E; border-radius: 10px;">
 							다시작성
 						</button>
 					</td>

@@ -1,4 +1,3 @@
-<%@page import="java.util.Enumeration"%>
 <%@page import="member.model.MemberDAOImpl"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="member.model.MemberVO"%>
@@ -48,18 +47,20 @@
 				</td>
 			</tr>
 		</table>
-	<div>		
+	<div>
 	
+
 	<div style="margin-left: 4%; margin-top: 3%; margin-right: 4.5%">
 	<form method="get">
 		<button type="button" onclick="location.href='./mylist.do';"
-				style="width: 5%; height: 40px; font-size: 14px; font-weight: bold;
+				style="width: 5%; height: 40px; font-size: 14px;
 					   background-color: #FFFFFF; color: #10212F; border: none;">
 			리뷰 게시판
 		</button>
 		<button type="button" onclick="location.href='./mycommentlist.do';"
 				style="width: 5%; height: 40px; font-size: 14px; margin-right: 28%;
-					   background-color: #FFFFFF; color: #10212F; border: none ">
+					   background-color: #FFFFFF; color: #10212F; border: none;
+					   font-weight: bold;">
 			댓글
 		</button>
 		<select name="searchField"
@@ -70,9 +71,6 @@
 			<option value="contents">내용</option>
 		</select>
 		
-		<input type="hidden" name="id" value="${ sessionScope.siteUserInfo.id }" readonly
-			   style="width: 10%; height: 40px; font-size: 12px; padding-left: 20px;
-			   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;"/>
 		<input type="text" name="searchTxt"
 			   style="width: 10%; height: 40px; font-size: 12px; padding-left: 20px;
 			   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;"/>
@@ -90,35 +88,34 @@
 				<th style="width: 10%; height: 40px; padding: 20px">
 					번호
 				</th>
-				<th style="width: 50%; height: 40px; padding: 20px">
-					제목
+				<th style="width: 65%; height: 40px; padding: 20px">
+					내용
 				</th>
-				<th style="width: 20%; height: 40px; padding: 20px">
-					조회수
+				<th style="width: 10%; height: 40px; padding: 20px">
+					좋아요
 				</th>
-				<th style="width: 20%; height: 40px; padding: 20px">
+				<th style="width: 15%; height: 40px; padding: 20px">
 					작성일
 				</th>
 			</tr>
 		</thead>
-
-		<c:forEach items="${ lists }" var="mylist">
+			<c:forEach items="${ lists }" var="mylist">
 			<tr style="border-top: 1px solid #DFDFDF;
 					   border-bottom: 1px solid #DFDFDF; font-size: 14px">
 				<td style="width: 10%; height: 15px; padding: 15px; text-align: center">
 					${ mylist.virtualNum }
 				</td>
-				<td style="width: 50%; height: 15px; padding: 15px; padding-left: 20px">
-					${ mylist.title }
+				<td style="width: 65%; height: 15px; padding: 15px; padding-left: 20px">
+					${ mylist.contents }
 				</td>
-				<td style="width: 20%; height: 15px; padding: 15px; text-align: center">
-					${ mylist.visitCnt }
+				<td style="width: 10%; height: 15px; padding: 15px; text-align: center">
+					${ mylist.recomndCnt }
 				</td>
-				<td style="width: 20%; height: 15px; padding: 15px; text-align: center">
-					${ mylist.postdate }
+				<td style="width: 15%; height: 15px; padding: 15px; text-align: center">
+					${ mylist.writedate }
 				</td>
 			</tr>
-		</c:forEach>
+			</c:forEach>
 		</table>
 	</div>		
 

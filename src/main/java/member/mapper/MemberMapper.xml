@@ -13,12 +13,73 @@
 
 	<!-- 로그인 -->
 	<select id="login" resultType="member.model.MemberVO">
-		SELECT id, pass, name, email, telNum FROM member WHERE id = #{ 0 } AND pass = #{ 1 }
+		SELECT * FROM member WHERE id = #{ 0 } AND pass = #{ 1 }
 	</select>
 	
 	<!-- 회원 정보 수정 -->
 	<update id="memberUpdateAction" parameterType="member.model.MemberVO">
 		UPDATE member SET email = #{ email }, telNum = #{ telNum } where id = #{ id } 
 	</update>
+	
+	<!-- 나의 작성 목록 -->
+	<select id="getTotalCountSearch" resultType="int" parameterType="member.model.ParameterDTO">
+		SELECT COUNT(*) FROM board WHERE id = #{ id }  
+		<if test="searchTxt != null and !searchTxt.equals('')">
+			AND ${ searchField } like '%'||#{ searchTxt }||'%'
+		</if>
+	</select>
+	
+	<select id="listPageSearch" resultType="member.model.MemberVO"
+		parameterType="member.model.ParameterDTO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM (
+				SELECT * FROM board WHERE id = #{ id }
+				<if test="searchTxt != null and !searchTxt.equals('')">
+					AND ${ searchField } LIKE '%'||#{ searchTxt }||'%'
+				</if>
+				ORDER BY idx DESC
+			) Tb
+		)
+		WHERE rNUM <![CDATA[>=]]> #{ start } AND  rNUM <![CDATA[<=]]> #{ end }
+	</select>
+	
+	<!-- 나의 댓글 목록 -->
+	<select id="getCommentTotalCountSearch" resultType="int"
+			parameterType="member.model.ParameterDTO">
+		SELECT COUNT(*) FROM board_rep WHERE id = #{ id }
+		<if test="searchTxt != null and !searchTxt.equals('')">
+			AND ${ searchField } like '%'||#{ searchTxt }||'%'
+		</if>
+	</select>
+	
+	<select id="commentListPageSearch" resultType="member.model.MemberVO"
+		parameterType="member.model.ParameterDTO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM (
+				SELECT * FROM board_rep WHERE id = #{ id }
+				<if test="searchTxt != null and !searchTxt.equals('')">
+					AND ${ searchField } LIKE '%'||#{ searchTxt }||'%'
+				</if>
+				ORDER BY idx DESC
+			) Tb
+		)
+		WHERE rNUM <![CDATA[>=]]> #{ start } AND  rNUM <![CDATA[<=]]> #{ end }
+	</select>
+	
+	<!-- 나의 스크랩 목록 -->
+	<select id="getScrapTotalCountSearch" resultType="int"
+			parameterType="member.model.ParameterDTO">
+		SELECT COUNT(*) FROM scrap WHERE id = #{ id } AND tab = ${ tab }
+		<if test="searchTxt != null and !searchTxt.equals('')">
+			AND ${ searchField } like '%'||#{ searchTxt }||'%'
+		</if>
+	</select>
+	
+	<select id="scrapListPageSearch" resultType="member.model.MemberVO"
+			parameterType="member.model.ParameterDTO">
+		SELECT * FROM board INNER JOIN scrap
+    		ON board.idx = scrap.idx
+    		WHERE scrap.id = #{ id } AND scrap.tab = ${ tab }
+	</select>
 </mapper>
 

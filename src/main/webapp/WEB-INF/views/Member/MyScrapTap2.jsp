@@ -1,15 +1,14 @@
-<%@page import="java.util.Enumeration"%>
-<%@page import="member.model.MemberDAOImpl"%>
-<%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@page import="member.model.ParameterDTO"%>
 <%@page import="member.model.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
+<body class="video-bg-homepage">
 <!--────────────────────────────────── SITE HEADER BEGINS ─────────────────────────────────── -->
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <!--─────────────────────────────────── SITE HEADER ENDS ─────────────────────────────────────-->
 <!--────────────────────────────────── MAIN SECTION BEGINS ───────────────────────────────────-->
-	<main>
+  	<main>
 	<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;">
 		<table style="width: 60%; margin:0.5px">
 			<tr style="border: 1px solid #DFDFDF">
@@ -23,7 +22,7 @@
 				</td>
 				<td style="width: 15%;">
 					<button onclick="location.href='./mylist.do';"
-							style="background-color: #ED6A5A; color: #FFFFFF;
+							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-left: 1px solid #DFDFDF;
 	  							   border-right: 1px solid #DFDFDF;">
@@ -32,7 +31,7 @@
 				</td>
 				<td style="width: 15%;">
 					<button onclick="location.href='./myscrap1.do';"
-							style="background-color: #FFFFFF; color: #ED6A5A;
+							style="background-color: #ED6A5A; color: #FFFFFF;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-right: 1px solid #DFDFDF;">
 						나의 스크랩 목록
@@ -48,60 +47,138 @@
 				</td>
 			</tr>
 		</table>
-	<div>		
 	
-	<div style="margin-left: 4%; margin-top: 3%; margin-right: 4.5%">
-	<form method="get">
-		<button type="button" onclick="location.href='./mylist.do';"
-				style="width: 5%; height: 40px; font-size: 14px; font-weight: bold;
-					   background-color: #FFFFFF; color: #10212F; border: none;">
-			리뷰 게시판
-		</button>
-		<button type="button" onclick="location.href='./mycommentlist.do';"
-				style="width: 5%; height: 40px; font-size: 14px; margin-right: 28%;
-					   background-color: #FFFFFF; color: #10212F; border: none ">
-			댓글
-		</button>
-		<select name="searchField"
-				style="width:4%; height: 40px; font-size: 12px; padding: 0px;
-			   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;
-			   		  text-align: center">
-			<option value="title">제목</option>
-			<option value="contents">내용</option>
-		</select>
+	
+	<div style="width: 100%; margin-Top:3%;">
+		<table style="width: 60%; font-size: 14px; padding: 10px; text-align: center">
+			<tr>
+				<td>
+				<button type="button" onClick="location.href='./myscrap1.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAP 1
+				</button>
+				<%
+					ParameterDTO parameterDTO = new ParameterDTO();
+					parameterDTO.setTab(2);
+					int tab = parameterDTO.getTab();
+					int level = parameterDTO.getLev();
+				
+					if (level > 5)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap2.do';"
+						style="width: 9%; height: 40px; background-color: #ED6A5A;
+							   color: #FFFFFF; text-align: center">
+						TAB 2
+				</button>
+				<%
+					}
+					if (level > 10)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap3.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAB 3
+				</button>
+				<%
+					}
+					if (level > 15)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap4.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAB 4
+				</button>
+				<%
+					}
+					if (level > 20)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap5.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAB 5
+				</button>
+					<%
+					}
+					if (level > 25)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap6.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAB 6
+				</button>
+					<%
+					}
+					if (level > 30)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap7.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAB 7
+				</button>
+					<%
+					}
+					if (level > 35)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap8.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAB 8
+				</button>
+					<%
+					}
+					if (level > 40)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap9.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAB 9
+				</button>
+				<%
+					}
+					if (level > 45)
+					{
+				%>
+				<button type="button" onClick="location.href='./myscrap10.do';"
+						style="width: 9%; height: 40px; background-color: #10212F;
+							   color: #FFFFFF; text-align: center">
+						TAB 10
+				</button>
+				<%
+					}
+				%>
+				</td>
+			</tr>
+		</table>
 		
-		<input type="hidden" name="id" value="${ sessionScope.siteUserInfo.id }" readonly
-			   style="width: 10%; height: 40px; font-size: 12px; padding-left: 20px;
-			   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;"/>
-		<input type="text" name="searchTxt"
-			   style="width: 10%; height: 40px; font-size: 12px; padding-left: 20px;
-			   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;"/>
-		<input type="submit" value="검색"
-			   style="width: 3%; height: 40px; font-size: 12px; padding: 0px;
-			   		  background-color: #10212F; color: #FFFFFF; border-radius: 5px"/>
-	</form>
-	</div>
-
 	<div style="width: 90%; margin-Top:2%; margin-left: 2%; padding-left: 20px;">
 		<table style="width: 60%; margin-top:20px; margin-bottom: 0px">
-		<thead>
 			<tr style="text-align: center; border-top: 1px solid #DFDFDF;
 					   border-bottom: 1px solid #DFDFDF; font-size: 14px">
-				<th style="width: 10%; height: 40px; padding: 20px">
+				<th style="width: 5%; height: 40px; padding: 20px">
 					번호
 				</th>
 				<th style="width: 50%; height: 40px; padding: 20px">
 					제목
 				</th>
-				<th style="width: 20%; height: 40px; padding: 20px">
+				<th style="width: 10%; height: 40px; padding: 20px">
+					작성자
+				</th>
+				<th style="width: 15%; height: 40px; padding: 20px">
 					조회수
 				</th>
 				<th style="width: 20%; height: 40px; padding: 20px">
 					작성일
 				</th>
 			</tr>
-		</thead>
-
 		<c:forEach items="${ lists }" var="mylist">
 			<tr style="border-top: 1px solid #DFDFDF;
 					   border-bottom: 1px solid #DFDFDF; font-size: 14px">
@@ -109,28 +186,24 @@
 					${ mylist.virtualNum }
 				</td>
 				<td style="width: 50%; height: 15px; padding: 15px; padding-left: 20px">
-					${ mylist.title }
+					<a href="./reviewView.do?idx=${ mylist.idx }"
+					   style="color: #000000; text-decoration: none;">
+						${ mylist.title }
+					</a>
 				</td>
-				<td style="width: 20%; height: 15px; padding: 15px; text-align: center">
+				<td style="width: 10%; height: 15px; padding: 15px; text-align: center">
+					${ mylist.name }
+				</td>
+				<td style="width: 10%; height: 15px; padding: 15px; text-align: center">
 					${ mylist.visitCnt }
 				</td>
 				<td style="width: 20%; height: 15px; padding: 15px; text-align: center">
 					${ mylist.postdate }
 				</td>
 			</tr>
-		</c:forEach>
+		</c:forEach>				
 		</table>
-	</div>		
-
-	<div style="width: 90%; padding-left: 20px">
-		<table style="width: 65%; height: 200px;">
-			<tr>
-				<td style="width: 100%; text-align: center">
-					${ pagingImg }
-				</td>
-			</tr>
-		</table>
-	</div>
+	</div>	
 	</div>
 	</div>
 <!--──────────────────────────────────── MAIN SECTION END ────────────────────────────────────-->

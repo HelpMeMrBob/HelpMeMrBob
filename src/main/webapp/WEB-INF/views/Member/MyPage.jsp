@@ -1,3 +1,4 @@
+<%@page import="member.model.ParameterDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
@@ -18,32 +19,93 @@
 		<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;">
 			<table style="width: 60%; margin:0.5px">
 				<tr style="border: 1px solid #DFDFDF">
-					<td style="width: 20%;">
-						<button style="background-color: #ED6A5A; color: #FFFFFF;
-									   width: 100%; height: 100px; font-size: 24px;
+					<td style="width: 15%;">
+						<button onclick="location.href='./mypage.do';"
+								style="background-color: #ED6A5A; color: #FFFFFF;
+									   width: 100%; height: 80px; font-size: 18px;
 		  							   ">
 							나의 정보 보기
 						</button>
 					</td>
-					<td style="width: 20%;">
+					<td style="width: 15%;">
 						<button onclick="location.href='./mylist.do';"
 								style="background-color: #FFFFFF; color: #ED6A5A;
-									   width: 100%; height: 100px; font-size: 24px;
+									   width: 100%; height: 80px; font-size: 18px;
 		  							   border-left: 1px solid #DFDFDF;
 		  							   border-right: 1px solid #DFDFDF;">
 							나의 작성 목록
 						</button>
 					</td>
-					<td style="width: 20%;">
+					<td style="width: 15%;">
+						<button onclick="location.href='./myscrap1.do';"
+								style="background-color: #FFFFFF; color: #ED6A5A;
+									   width: 100%; height: 80px; font-size: 18px;
+		  							   border-right: 1px solid #DFDFDF;">
+							나의 스크랩 목록
+						</button>
+					</td>
+					<td style="width: 15%;">
 						<button onclick="location.href='./memberUpdate.do';"
 								style="background-color: #FFFFFF; color: #ED6A5A;
-									   width: 100%; height: 100px; font-size: 24px;
+									   width: 100%; height: 80px; font-size: 18px;
 		  							   ">
 							회원 정보 수정
 						</button>
 					</td>
 				</tr>
 			</table>
+			
+		<div style="width: 100%; margin-Top:1%;">
+			<table style="width: 60%; color: #000000; font-size: 14px;
+						border: none; padding: 10px; ">
+				<%
+					ParameterDTO parameterDTO = new ParameterDTO();
+					
+					int level = parameterDTO.getLev();
+					int experience = parameterDTO.getExp();
+				%>
+				<tr style="text-align: center">
+					<td colspan="2" style="width: 20%; padding: 10px; text-algin: center">
+						<input type="text" id="id" name="id"
+							style="width: 100px; height: 100px; text-align: center; border: none;
+								   background-color: #10212F; color: #FFFFFF; font-size: 30px;
+								   border-radius: 50px; font-weight: bold"
+							value="Lv. ${ sessionScope.siteUserInfo.lev }" readonly />
+					</td>
+				</tr>
+				<tr style="text-align: center">
+					<td colspan="2" style="width: 50%; padding: 10px;">
+						<input type="text" value="EXP ${ sessionScope.siteUserInfo.exp } / 1000"
+							   style="border: none; text-align: center;" readonly/>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 50%; padding: 20px; padding-bottom: 0px">
+						<input style="padding-left: 50px; background-color: #ED6A5A; border: none;
+									  width: 100%; height: 50px;
+									  color: #FFFFFF; font-size: 16px; font-weight: bold"
+									  value="보유 스티커"></input>
+					</td>
+					<td style="width: 50%; padding: 20px; padding-bottom: 0px">
+						<input style="padding-left: 50px; background-color: #ED6A5A; border: none;
+									  width: 100%; height: 50px;
+									  color: #FFFFFF; font-size: 16px; font-weight: bold"
+									  value="나의 취향 분석"></input>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 50%; padding: 20px; padding-top: 5px">
+						<input style="width: 100%; height: 350px;
+							   border: 1px solid #DFDFDF"></input>
+					</td>
+					<td style="width: 50%; padding: 20px; padding-top: 5px">
+						<input style="width: 100%; height: 350px;
+							   border: 1px solid #DFDFDF"></input>
+					</td>
+				</tr>
+			</table>
+		</div>
+			
 		</div>
     </main><!-- main ends -->
     <jsp:include page="/WEB-INF/views/include/search.jsp" />
