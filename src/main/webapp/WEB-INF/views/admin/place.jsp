@@ -25,20 +25,19 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">투표 관리</h1>
+                        <h1 class="mt-4">식당 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">VS투표를 관리합니다.</li>
+                            <li class="breadcrumb-item active">식당 정보를 관리합니다.</li>
                         </ol>
 							<div class="row">
-							<form id="vsFrm" name="vsFrm"> 
+							<form action="./delete.do?';" name="repFrm">
 							
 							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-dark" id="write" 
-								onclick="location.href='vsWrite.do';">등록</button>
+							<button type="submit" class="btn btn-dark" id="write" >등록</button>
 							
-							<button type="button" class="btn btn-dark" id="edit" >수정</button>
+							<button type="submit" class="btn btn-dark" id="edit" >수정</button>
 							
-							<button type="button" class="btn btn-dark" id="delete" >삭제</button>
+							<button type="submit" class="btn btn-dark" id="delete" >삭제</button>
 							</div>
 														
 							<table class="table table-bordered" id="repTb">

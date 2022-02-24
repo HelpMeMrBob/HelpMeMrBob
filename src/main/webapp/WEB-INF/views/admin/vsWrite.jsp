@@ -27,10 +27,11 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">투표 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">VS투표를 관리합니다.</li>
+                            <li class="breadcrumb-item active">VS투표를 등록합니다.</li>
                         </ol>
 							<div class="row">
-							<form id="vsFrm" name="vsFrm"> 
+							<form id="vsFrm" name="vsFrm" method="post" 
+							action="uploadAction.do" enctype="multipart/form-data"> 
 							
 							<div class="col-lg-12 text-lg-end mb-1">
 							<button type="button" class="btn btn-dark" id="write" 
@@ -57,9 +58,7 @@
 									<th>번호</th>
 									<th>주제</th>
 								</tr>
-								
-								<!-- 반복 시작 -->
-								<c:forEach items="${lists }" var="row" varStatus="loop">	
+									
 								<tr>
 									<td>
 									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
@@ -67,8 +66,7 @@
 									<td>${row.topic }</td>
 									<td>${row.id }</td>
 								</tr>
-								</c:forEach>
-								<!-- 반복 끝 -->
+								
 							</table>
 							
 							</form>

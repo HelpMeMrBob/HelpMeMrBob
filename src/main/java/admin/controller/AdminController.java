@@ -148,4 +148,40 @@ public class AdminController {
 		
 		return "admin/vsTalk";
 	}
+	
+	//투표 등록 진입
+	@RequestMapping("/admin/vsWrite.do")
+	public String vsWrite(Model model, HttpServletRequest req) {
+	
+		
+		return "admin/vsWrite";
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//룰렛 관리 진입
+	@RequestMapping("/admin/roullet.do")
+	public String roullet(Model model, HttpServletRequest req) {
+	
+		
+		return "admin/roullet";
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//월드컵 관리 진입
+	@RequestMapping("/admin/worldCup.do")
+	public String worldCup(Model model, HttpServletRequest req) {
+	
+		
+		return "admin/worldCup";
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//식당 정보 관리 진입
+	@RequestMapping("/admin/place.do")
+	public String placeList(Model model, HttpServletRequest req) {
+	
+		
+		return "admin/place";
+	}
+	
+	
 }

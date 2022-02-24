@@ -44,7 +44,7 @@
                                     <a class="nav-link" href="<%= request.getContextPath() %>/admin/worldCup.do">월드컵 관리</a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="index.jsp">
+                            <a class="nav-link" href="<%= request.getContextPath() %>/admin/place.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-signpost-2"></i></div>
                                 식당 정보
                             </a>
