@@ -433,9 +433,9 @@ insert into restaurant(idx, food, place, address, lati, longi, plcNum, menu, pri
 
 
 --회원테이블 더미
-insert into member(id, name, pass, email, telNum, point, lev, exp, favMenu, item, rest, grade) values
-    ('test1', '테스트1', '1111', 'test1@naver.com', '010-1111-1111', 100, 5, 400, '떡볶이', '소유템', '활성화', '회원');
-insert into member(id, name, pass, email, telNum, point, lev, exp, favMenu, item, rest, grade) values
-    ('test2', '테스트2', '2222', 'test1@naver.com', '010-2222-2222', 100, 5, 400, '라면', '소유템', '활성화', '회원');
-insert into member(id, name, pass, email, telNum, point, lev, exp, favMenu, item, rest, grade) values
-    ('test3', '테스트3', '3333', 'test1@naver.com', '010-3333-3333', 100, 5, 400, '족발', '소유템', '활성화', '회원');
+insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, rest, grade) values
+    ('test1', '테스트1', '1111', 'test1@naver.com', '010-1111-1111', 5, 400, '떡볶이', '소유템', '활성화', '회원');
+insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, rest, grade) values
+    ('test2', '테스트2', '2222', 'test1@naver.com', '010-2222-2222', 5, 400, '라면', '소유템', '활성화', '회원');
+insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, rest, grade) values
+    ('test3', '테스트3', '3333', 'test1@naver.com', '010-3333-3333', 5, 400, '족발', '소유템', '활성화', '회원');
