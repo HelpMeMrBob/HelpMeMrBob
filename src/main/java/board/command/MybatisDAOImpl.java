@@ -36,7 +36,8 @@ public interface MybatisDAOImpl {
 	 @Param 어노테이션을 통해 파라미터를 전달하면 Mapper에서는 별칭을 통해
 	 인파라미터 처리를 할 수 있다.
 	 */
-	public int write(@Param("_name") String name,
+	public int write(@Param("_idx") String idx,
+			@Param("_name") String name,
 			@Param("_contents") String contents,
 			@Param("_id") String id);
 	//기존 게시물의 내용을 읽어오기 위한 메서드

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.command.LikeDAOImpl">
+
+	<select id="count" resultType="int">
+	    select count(*) from doLike 
+	    where lno=1 and id=#{id} and idx=#{idx}
+  	</select>
+  
+	<insert id="create">
+    INSERT INTO doLike(lno, id, idx) 
+    VALUES (1, #{id}, #{idx})
+  </insert>
+
+  <delete id="delete">
+    DELETE FROM doLike WHERE id=#{id} AND idx=#{idx}
+  </delete>
+  
+  <select id="LikeCnt" resultType="int">
+	    select count(*) from doLike 
+	    where lno=1 and idx=#{idx}
+  	</select>
+
+  
+</mapper>

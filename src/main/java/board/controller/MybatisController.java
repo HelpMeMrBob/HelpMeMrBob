@@ -137,18 +137,20 @@ public class MybatisController {
 			//만약 세션이 끊어졌다면 로그인페이지로 이동한다.
 			return "redirect:login.do";
 		}
-		//insert문을 실행시 입력에 성공한 행의 갯수가 정수로 반환된다.
-				int result= sqlSession.getMapper(MybatisDAOImpl.class).write(
-						req.getParameter("name"),
-						req.getParameter("contents"),
-						((MemberVO)session.getAttribute("siteUserInfo")).getId());
-				System.out.println("입력한 결과"+result);
-				
-				model.addAttribute("req",req);
-				model.addAttribute("BoardReplyVO",boardReplyVO);
-				
-				model.addAttribute("idx",req.getParameter("idx"));
-				model.addAttribute("nowPage",req.getParameter("nowPage"));
+		model.addAttribute("req",req);
+		model.addAttribute("BoardReplyVO",boardReplyVO);
+		
+		model.addAttribute("idx",req.getParameter("idx"));
+		model.addAttribute("nowPage",req.getParameter("nowPage"));
+		
+		String idx = req.getParameter("idx");
+		System.out.println(idx);
+		
+		//insert문을 실행시 입력에 성공한 행의 갯수가 정수로 반환된다 얘 머임.
+		  int result= sqlSession.getMapper(MybatisDAOImpl.class).write(idx,
+		  req.getParameter("name"), req.getParameter("contents"),
+		  ((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		  System.out.println("입력한 결과"+result);
 				
 				return "redirect:reviewView.do";
 			}

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import board.model.BoardDTO;
 import board.model.JDBCTemplateDAO;
+import board.model.LikeVO;
 
 
 public class ViewCommand implements BbsCommandImpl{
@@ -30,5 +31,7 @@ public class ViewCommand implements BbsCommandImpl{
 		dto.setContents(dto.getContents().replace("\r\n", "<br/>"));
 		model.addAttribute("viewRow",dto);
 		model.addAttribute("nowPage",nowPage);
+		
+		
 	}
 }

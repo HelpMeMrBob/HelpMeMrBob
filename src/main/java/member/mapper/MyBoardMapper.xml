@@ -1,75 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
-	해당 xml파일이 mapper역할을 하기 위해 반드시 필요한 Doctype이다.
-	공식문서 URL: https://mybatis.org/mybatis-3/configuration.html
- -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--  
-	Mapper의 namespace속성
-	:해당 매퍼파일을 호출하기 위해 정의한 인터페이스의
-	패키지를 포함한 풀 경로를 기술한다. 해당 인터페이스는
-	컨트롤러와 Mapper(DAO) 사이에서 중재자 역할을 하는
-	서비스 객체로 사용된다.
-id: 
-	실제 호출되는 함수명과 동일한 이름으로 기술한다.
-	컨트롤러에서는 해당 mapper를 호출하기 위해 interface에 정의된
-	추상메서드를 호출한다.
-resultType: 
-	쿼리 실행후 반환되는 값의 타입을 명시한다. 이때는 패키지명을
-	포함한 풀 경로를 기술해야 한다.
-parameterType: 
-	쿼리문에서 사용할 파라미터를 저장한 DTO 혹은 VO객체의 타입을
-	명시한다. 패키지명을 포함한 풀 경로를 기술해야 한다.
-	단, 컬렉션의 경우 list, map과 같이 풀경로를 생략할 수 있다.
--->
-
-<!--
-파라미터 사용법
-
-형식1] 가령 함수명(인수1, 인수2)와 같은 메서드를 사용했다면
-	파라미터의 순서대로 param1, param2와 같이 사용한다.
-
-형식2] 인덱스를 사용하는 방법으로 {0},{1}과 같이 사용한다.
-
-형식3] @Param어노테이션을 사용하는 방법
-	@Param(_변수명) String 변수명 => Mapper에서는 _변수명으로 사용한다.
-
-형식4]  DTO와 같은 객체를 사용하는 방법
-	멤버변수에 접근시 멤버변수와 동일한 이름을 사용한다. 이때 getter()를
-	통해 해당 값에 접근하게 된다.
-
-형식5]컬렉션(List, Map)을 사용하는 방법
--->
-<!--  
-각 엘리먼트별 반환값
-select
-	:select한 결과 레코드를 반환한다. count(*)의 경우 int형의 반환값을 가지고
-	일반적인 경우는 DTO객체를 List컬렉션에 저장한 후 반환한다.
-insert
-	:입력성공시 1, 실패시 0을 반환한다. 만약 insert가 여러번 되더라도
-	성공시에는 1을 반환한다.
-update/delete
-	:수정, 삭제에 성공한 행의 갯수를 반환한다. 조건에 따라 여러개의 레코드가
-	한꺼번에 적용될 수 있으므로 0, 1이 아닌 더 큰 값이 반환될 수 있다.
+	댓글입니담
 -->
 <mapper namespace="board.command.MybatisDAOImpl">
 
-	<!-- ###방명록 1차 버전에서 사용 ### -->
 	<!-- 게시물의 갯수를 카운트한 후 정수타입으로 반환한다. -->
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) from board_rep
 	</select>
 	
-	<!-- 목록에 출력할 게시물을 select한 후 결과는 ArrayList<MyBoardDTO>
-	타입으로 반환한다. Mybatis는 레코드 인출을 위한 select계열의 쿼리문을 
-	실행할 경우 무조건 ArrayList<T>으로 결과를 반환한다. -->
-	<!-- 인터페이스에 정의된 listPage(int s, int e) 메서드 호출시 전달된 파라미터
-	s, e는 아래와 같이 param1, param2로 전달되어 사용된다. 즉, 인파라미터 설정시
-	별도의 메서드가 존재하지 않는다. -->
 	<select id="listPage" resultType="board.model.BoardReplyVO">
 		SELECT * FROM(
 			SELECT Tb.*, rownum rNum FROM(
@@ -84,8 +28,8 @@ update/delete
 	일련번호는 기존과 동일하게 시퀀스를 통해 입력한다.
 	-->
 	<insert id="write">
-		insert into board_rep (idx, id, name, contents) values 
-    (board_rep_seq.nextval, #{_id},#{_name},#{_contents})
+		insert into board_rep (idx, rno, id, name, contents) values 
+    (#{_idx}, board_rep_seq.nextval, #{_id},#{_name},#{_contents})
 	</insert>
 	<!--  
 	파라미터는 DTO객체에 저장한 후 Mapper로 전달하므로 parameterType 속성에
@@ -93,11 +37,12 @@ update/delete
 	Mapper에서도 동일하게 접근할 수 있다. 즉, getter()를 사용한다.
 	조회된 결과는 MyBoardDTO객체에 저장한 후 반환한다.
 	-->
-	<!-- <select id="view" resultType="board.model.BoardReplyVO"
+	<!-- 댓글 수정할때 필요한 창입니다. -->
+	<select id="view" resultType="board.model.BoardReplyVO"
 		parameterType="board.model.ParameterDTO">
 		SELECT * FROM board_rep WHERE idx=#{board_idx}
 			AND id=#{user_id}
-	</select> -->
+	</select>
 	<!-- 
 	수정처리. 전송된 폼값은 커맨드 객체를 통해 한꺼번에 전달받으므로 
 	각 멤버변수의 getter()를 통해 인파라미터를 처리할 수 있다.
@@ -116,82 +61,4 @@ update/delete
 		DELETE FROM board_rep WHERE idx=#{param1} AND id=#{param2}
 	</delete>
 	
-	<!--  
-	1차 버전에서 사용했던 <select>를 그대로 복사한 후 if문을 추가하여 
-	조건부 쿼리문을 작성한다. 또한 컨트롤ㄹ러가 전달한 파라미터가 DTO객체에
-	저장되어 있으므로, parameterType을 추가해야 한다.
-	-->
-	
-	<!-- ###방명록 2차 버전에서 사용 ### -->
-	<select id="getTotalCountSearch" resultType="int"
-	parameterType="board.model.ParameterDTO">
-		SELECT COUNT(*) FROM board_rep
-		<!-- 검색어가 null이 아니면서 빈값이 아닐때만 동적으로 where절을 추가한다. -->
-		<!-- 
-		$: 양쪽으로 '(싱글쿼테이션)을 붙이지 않는다. 
-		#: 양쪽에 '을 붙인다.
-		-->
-		<if test="searchTxt!=null and !searchTxt.equals('')">
-			WHERE ${searchField} like '%'||#{searchTxt}||'%'
-		</if>
-	</select>
-	
-	<select id="listPageSearch" resultType="board.model.BoardReplyVO"
-		parameterType="board.model.ParameterDTO">
-		SELECT * FROM(
-			SELECT Tb.*, rownum rNum FROM(
-				SELECT * FROM board_rep 
-				<if test="searchTxt!=null and !searchTxt.equals('')">
-					WHERE ${searchField} like '%'||#{searchTxt}||'%'
-				</if>
-				ORDER BY idx DESC
-		)Tb
-	)
-	WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}	
-	</select>
-	<!--  
-	CDATA: Unparsed Character Data. 파싱되지 않는 문자데이터
-	 Mapper에서는 꺾쇄로 시작되는 모든 문자열을 엘리먼트로 판단하기
-	 때문에 쿼리문 사이에 비교연산자를 사용할때는 반드시 위와같이 처리해야함
-	-->
-	<!--  
-	Map컬렉션을 사용하는 경우 parameterType에는 "java.util.Map" 혹은 "map"
-	둘 다 사용할 수 있다. 패키지명을 포함한 풀 경로를 써야하지만 컬렉션의 경우
-	JDK에서 기본적으로 제공되는 클래스이므로 패키지명은 생략가능
-	-->
-	<select id="hashMapUse" resultType="board.model.BoardReplyVO"
-		parameterType="java.util.Map">
-		SELECT * FROM board_rep
-		WHERE id=#{key_id} or name=#{key_name} or contents=#{key_contents}
-		ORDER BY idx DESC
-	</select>
-	
-	<!--  
-	ArrayList도	parameterType에 java.util.ArrayList 혹은 list로 기술 가능함.
-		collection : List컬렉션을 사용하므로 list로 파라미터명을 사용한다.(규칙)
-		item: 반복시 원소를 꺼내서 임시로 저장하는 변수명
-		index: 인덱스
-		open: 동적쿼리문의 시작 부분
-		close: 동적쿼리문의 종료 부분 
-		separator: 각 항목의 구분자(or, and)
-	-->
-	<select id="arrayListUse" resultType="board.model.BoardReplyVO"
-		parameterType="java.util.ArrayList">
-		SELECT * FROM board_rep
-		WHERE 
-		<foreach collection="list" item="item" index="index"
-			open="(" close=")" separator="or">
-		name=#{item}
-		</foreach>
-		ORDER BY idx DESC
-	</select>
-	<!--  
-	가령 컨트롤러에서 아래와 같이 전송했다면 foreach 태그내에서 생성된
-	쿼리문은 이와같이 된다.
-	List에 저장된 값
-		arrayList.add("고스톱");
-		arrayList.add("낙자쌤");
-	생성된 쿼리문
-		(name='고스톱' or name='낙자쌤')
-	-->
 </mapper>
