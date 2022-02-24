@@ -69,7 +69,11 @@ public class BbsController {
 	
 	//글쓰기 페이지로 진입하기 위한 매핑처리
 	@RequestMapping("/reviewWrite.do")
-	public String reviewWrite() {
+	public String reviewWrite(HttpSession session) {
+		if(session.getAttribute("siteUserInfo")==null) {
+			//만약 세션이 끊어졌다면 로그인페이지로 이동한다.
+			return "redirect:login.do";
+		}  
 		return "main/contact2";
 	}
 	//전송방식이 post이므로 value, method까지 같이 기술해서 매핑

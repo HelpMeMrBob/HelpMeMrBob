@@ -6,11 +6,6 @@
   <body class="video-bg-homepage">
 <script type="text/javascript">
 	function checkValidate(f){
-		if(f.id.value==""){
-			alert("아이디를 입력하세요");
-			f.id.focus();
-			return false;
-		}
 		if(f.tag.value==""){
 			alert("태그를 입력하세요");
 			f.tag.focus();
@@ -49,7 +44,7 @@
           <div class="banner__content">
 			
             <div class="section-heading">
-              <span class="section-intro">Jesus is Lord</span>
+              <span class="section-intro">${sessionScope.siteUserInfo.id}</span>
               <h1>Contact</h1>
             </div><!-- .section-heading ends -->
 			
@@ -74,15 +69,11 @@
           <form name="writeFrm" method="post" 
           action="./writeAction.do" class="form contact__form"
           onsubmit="return checkValidate(this);">
-			
+			<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" />
             <div class="row">
 				
               <div class="flex-md-6">
 				
-                <div class="form__group">
-                  <label for="fname" class="form__label">아이디 <span class="color-danger">*</span></label>
-                  <input type="text" id="fname" class="form__input" name="id" placeholder="아이디를 입력하세여">
-                </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
 				
