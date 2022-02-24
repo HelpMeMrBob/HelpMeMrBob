@@ -26,23 +26,17 @@ create sequence food_seq
 --식당테이블
 drop table restaurant;
 create table restaurant(
-    idx varchar2(30) NOT NULL,
-    food varchar2(50), --음식 키워드
-    place varchar2(80), --식당명
-    address varchar2(80), --식당의 주소
-    plcNum varchar2(30), --식당의 전화번호
-    menu varchar2(50), --식당 메뉴
-    price varchar2(50), --메뉴 가격
-    operTime varchar2(50), --운영 시각
+    idx varchar2(20) NOT NULL,
+    food varchar2(200), --음식 키워드
+    place varchar2(100), --식당명
+    address varchar2(200), --식당의 주소
+    plcNum varchar2(50), --식당의 전화번호
+    menu varchar2(2000), --식당 메뉴(|로 연결했음:꺼낼때 반드시 |로 split)
+    price varchar2(500), --메뉴 가격(|로 연결했음:꺼낼때 반드시 |로 split)
+    operTime varchar2(200), --운영 시각
     primary KEY (idx));
---식당테이블 시퀀스
-create sequence restaurant_seq
-    increment by 1
-    start with 1
-    minvalue 1
-    nomaxvalue 
-    nocycle
-    nocache;
+    
+--식당테이블 시퀀스 ; 시퀀스는 필요없어서 삭제했습니다. 카카오맵 고유번호에서 따옵니다.
     
 --회원테이블
 drop table member;
