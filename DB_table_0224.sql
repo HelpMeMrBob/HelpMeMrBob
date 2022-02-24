@@ -1,20 +1,20 @@
 /*
-final°èÁ¤
+finalê³„ì •
 */
 create user final identified by 1234;
 grant connect, resource to final;
 
---À½½ÄÅ×ÀÌºí(·ê·¿, ¿ùµåÄÅ)
+--ìŒì‹í…Œì´ë¸”(ë£°ë ›, ì›”ë“œì»µ)
 drop table food;
 create table food( 
     idx varchar2(30) NOT NULL,
-    food varchar2(50), --À½½Ä ÀÌ¸§
-    image varchar2(80), --ÀÌ¹ÌÁö
-    recomndCnt number default 0, --¿ùµåÄÅ¿¡¼­ ÃÖÁ¾ ¼±ÅÃ ¹ŞÀº ¼ö
-    Lgroup varchar2(30), --´ëºĞ·ù
-    Mgroup varchar2(30), --ÁßºĞ·ù
+    food varchar2(50), --ìŒì‹ ì´ë¦„
+    image varchar2(80), --ì´ë¯¸ì§€
+    recomndCnt number default 0, --ì›”ë“œì»µì—ì„œ ìµœì¢… ì„ íƒ ë°›ì€ ìˆ˜
+    Lgroup varchar2(30), --ëŒ€ë¶„ë¥˜
+    Mgroup varchar2(30), --ì¤‘ë¶„ë¥˜
     primary KEY (idx));
---foodÅ×ÀÌºí ½ÃÄö½º
+--foodí…Œì´ë¸” ì‹œí€€ìŠ¤
 create sequence food_seq
     increment by 1
     start with 1
@@ -23,61 +23,69 @@ create sequence food_seq
     nocycle
     nocache;    
     
---½Ä´çÅ×ÀÌºí
+--ì‹ë‹¹í…Œì´ë¸”
 drop table restaurant;
 create table restaurant(
     idx varchar2(30) NOT NULL,
-    food varchar2(50), --À½½Ä Å°¿öµå
-    place varchar2(80), --½Ä´ç¸í
-    address varchar2(80), --½Ä´çÀÇ ÁÖ¼Ò
-    plcNum varchar2(30), --½Ä´çÀÇ ÀüÈ­¹øÈ£
-    menu varchar2(50), --½Ä´ç ¸Ş´º
-    price varchar2(50), --¸Ş´º °¡°İ
-    operTime varchar2(50), --¿î¿µ ½Ã°¢
+    food varchar2(50), --ìŒì‹ í‚¤ì›Œë“œ
+    place varchar2(80), --ì‹ë‹¹ëª…
+    address varchar2(80), --ì‹ë‹¹ì˜ ì£¼ì†Œ
+    plcNum varchar2(30), --ì‹ë‹¹ì˜ ì „í™”ë²ˆí˜¸
+    menu varchar2(50), --ì‹ë‹¹ ë©”ë‰´
+    price varchar2(50), --ë©”ë‰´ ê°€ê²©
+    operTime varchar2(50), --ìš´ì˜ ì‹œê°
     primary KEY (idx));
+--ì‹ë‹¹í…Œì´ë¸” ì‹œí€€ìŠ¤
+create sequence restaurant_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue 
+    nocycle
+    nocache;
     
---È¸¿øÅ×ÀÌºí
+--íšŒì›í…Œì´ë¸”
 drop table member;
 create table member(
-    id varchar2(30) NOT NULL, --¾ÆÀÌµğ
-    name varchar(30), --ÀÌ¸§
-    pass varchar(30), --ºñ¹Ğ¹øÈ£
-    email varchar2(50), --ÀÌ¸ŞÀÏ
-    telNum varchar2(50), --ÀüÈ­¹øÈ£
-    point number, --Æ÷ÀÎÆ®
-    lev number, --·¹º§
-    exp number, --°æÇèÄ¡
-    favMenu varchar2(50), --¼±È£ ¸Ş´º
-    item varchar2(50), --¼ÒÀ¯ÇÑ ¾ÆÀÌÅÛ ¸ñ·Ï
-    rest varchar2(30), --ÈŞ¸é ¹× È°¼ºÈ­ °ü¸®
-    grade varchar2(30), --µî±Ş/È¸¿ø°ú °ü¸®ÀÚ ±¸ºĞ 
+    id varchar2(30) NOT NULL, --ì•„ì´ë””
+    name varchar(30), --ì´ë¦„
+    pass varchar(30), --ë¹„ë°€ë²ˆí˜¸
+    email varchar2(50), --ì´ë©”ì¼
+    telNum varchar2(50), --ì „í™”ë²ˆí˜¸
+    point number, --í¬ì¸íŠ¸
+    lev number, --ë ˆë²¨
+    exp number, --ê²½í—˜ì¹˜
+    favMenu varchar2(50), --ì„ í˜¸ ë©”ë‰´
+    item varchar2(50), --ì†Œìœ í•œ ì•„ì´í…œ ëª©ë¡
+    rest varchar2(30), --íœ´ë©´ ë° í™œì„±í™” ê´€ë¦¬
+    grade varchar2(30), --ë“±ê¸‰/íšŒì›ê³¼ ê´€ë¦¬ì êµ¬ë¶„ 
     primary KEY (id));
     
--- memberÅ×ÀÌºíÀÇ pointÄÃ·³ »èÁ¦(¸¸¾à pointÇÊ¿äÇÏ¸é pointÅ×ÀÌºí°ú joinÇÏ¿© Á¶È¸ÇÒ°Í)
+-- memberí…Œì´ë¸”ì˜ pointì»¬ëŸ¼ ì‚­ì œ(ë§Œì•½ pointí•„ìš”í•˜ë©´ pointí…Œì´ë¸”ê³¼ joiní•˜ì—¬ ì¡°íšŒí• ê²ƒ)
 ALTER TABLE member DROP COLUMN point;
--- pointÅ×ÀÌºíÀÇ id¿Í memberÅ×ÀÌºíÀÇ id ¿Ü·¡Å° ¼³Á¤
+-- pointí…Œì´ë¸”ì˜ idì™€ memberí…Œì´ë¸”ì˜ id ì™¸ë˜í‚¤ ì„¤ì •
 alter table point 
     add foreign key (id) 
         references member(id);
 
---°Ô½ÃÆÇ Å×ÀÌºí
+--ê²Œì‹œíŒ í…Œì´ë¸”
 drop table board;
 create table board(
     idx varchar2(30) NOT NULL,
     id varchar2(30),
-    title varchar(200), --Á¦¸ñ/ÀÎ½ºÅ¸ Çü½ÄÀÌ¸é Á¦¸ñÀÌ ÇÊ¿äÇÑ°¡? (Ä¶¸°´õ ÇÒ°Å¸é?)
-    contents varchar(4000), -- ³»¿ë
-    ofile varchar(80), -- ¿øº»ÆÄÀÏ¸í
-    sfile varchar(80), -- ÀúÀåµÈ
-    tag varchar(50), -- ÅÂ±×
-    postdate date default sysdate, --ÀÛ¼ºÀÏ
-    visitCnt number default 0, --¹æ¹®ÀÚ¼ö/ÀÎ½ºÅ¸ Çü½ÄÀÌ¸é ¹æ¹®ÀÚ¼ö ÇÊ¿äÇÑ°¡? 
-    recomndCnt number default 0, --ÁÁ¾Æ¿ä, ÃßÃµ¼ö 
-    scrapCnt number default 0, --½ºÅ©·¦¼ö
-    pdate date, --Ä¶¸°´õ Àü¿ë ÀÛ¼ºÀÏ
-    cate varchar2(30), --°Ô½ÃÆÇ ºĞ·ù ÄÃ·³ ¸®ºä°Ô½ÃÆÇ:rvw
+    title varchar(200), --ì œëª©/ì¸ìŠ¤íƒ€ í˜•ì‹ì´ë©´ ì œëª©ì´ í•„ìš”í•œê°€? (ìº˜ë¦°ë” í• ê±°ë©´?)
+    contents varchar(4000), -- ë‚´ìš©
+    ofile varchar(80), -- ì›ë³¸íŒŒì¼ëª…
+    sfile varchar(80), -- ì €ì¥ëœ
+    tag varchar(50), -- íƒœê·¸
+    postdate date default sysdate, --ì‘ì„±ì¼
+    visitCnt number default 0, --ë°©ë¬¸ììˆ˜/ì¸ìŠ¤íƒ€ í˜•ì‹ì´ë©´ ë°©ë¬¸ììˆ˜ í•„ìš”í•œê°€? 
+    recomndCnt number default 0, --ì¢‹ì•„ìš”, ì¶”ì²œìˆ˜ 
+    scrapCnt number default 0, --ìŠ¤í¬ë©ìˆ˜
+    pdate date, --ìº˜ë¦°ë” ì „ìš© ì‘ì„±ì¼
+    cate varchar2(30), --ê²Œì‹œíŒ ë¶„ë¥˜ ì»¬ëŸ¼ ë¦¬ë·°ê²Œì‹œíŒ:rvw
     primary KEY (idx));
---º¸µåÅ×ÀÌºí ½ÃÄö½º
+--ë³´ë“œí…Œì´ë¸” ì‹œí€€ìŠ¤
 create sequence board_seq
     increment by 1
     start with 1
@@ -86,19 +94,19 @@ create sequence board_seq
     nocycle
     nocache;
     
---´ñ±Û Å×ÀÌºí
+--ëŒ“ê¸€ í…Œì´ë¸”
 drop table board_rep;
 create table board_rep(
-    rno varchar2(30),--´ñ±Û ¹øÈ£
-    idx varchar2(30) NOT NULL,--°Ô½ÃÆÇÀÇ fk
-    id varchar2(30), --¾ÆÀÌµğ
-    name varchar2(30), --ÀÛ¼ºÀÚ
-    contents varchar(500), --´ñ±Û ³»¿ë
-    writeDate date default sysdate, --ÀÛ¼ºÀÏ
-    recomndCnt number default 0, --ÁÁ¾Æ¿ä, ÃßÃµ¼ö
-    cate varchar2(30)); --°Ô½ÃÆÇ ºĞ·ù ÄÃ·³
+    rno varchar2(30),--ëŒ“ê¸€ ë²ˆí˜¸
+    idx varchar2(30) NOT NULL,--ê²Œì‹œíŒì˜ fk
+    id varchar2(30), --ì•„ì´ë””
+    name varchar2(30), --ì‘ì„±ì
+    contents varchar(500), --ëŒ“ê¸€ ë‚´ìš©
+    writeDate date default sysdate, --ì‘ì„±ì¼
+    recomndCnt number default 0, --ì¢‹ì•„ìš”, ì¶”ì²œìˆ˜
+    cate varchar2(30)); --ê²Œì‹œíŒ ë¶„ë¥˜ ì»¬ëŸ¼
     
---´ñ±Û ½ÃÄö½º
+--ëŒ“ê¸€ ì‹œí€€ìŠ¤
 create sequence board_rep_seq
     increment by 1
     start with 1
@@ -107,60 +115,60 @@ create sequence board_rep_seq
     nocycle
     nocache;
     
---ÁÁ¾Æ¿ä Å×ÀÌºí
+--ì¢‹ì•„ìš” í…Œì´ë¸”
 create table doLike(
-    lno varchar2(30),--ÁÁ¾Æ¿ä ¹øÈ£
-    idx varchar2(30) NOT NULL,--°Ô½ÃÆÇÀÇ fk
+    lno varchar2(30),--ì¢‹ì•„ìš” ë²ˆí˜¸
+    idx varchar2(30) NOT NULL,--ê²Œì‹œíŒì˜ fk
     id varchar2(30));
 
---Åä·ĞÅ×ÀÌºí
+--í† ë¡ í…Œì´ë¸”
 drop table VStalk;
 create table VStalk(
     idx varchar2(30) NOT NULL,
-    topic varchar(200), --ÁÖÁ¦
-    sel1vote varchar2(30), --¼±ÅÃ1¿¡ ´ëÇÑ ÅõÇ¥¼ö
-    sel2vote varchar2(30), --¼±ÅÃ2¿¡ ´ëÇÑ ÅõÇ¥¼ö
-    sel1img varchar2(80), --¼±ÅÃ1¿¡ ´ëÇÑ ÀÌ¹ÌÁö
-    sel2img varchar2(80), --¼±ÅÃ2¿¡ ´ëÇÑ ÀÌ¹ÌÁö
+    topic varchar(200), --ì£¼ì œ
+    sel1vote varchar2(30), --ì„ íƒ1ì— ëŒ€í•œ íˆ¬í‘œìˆ˜
+    sel2vote varchar2(30), --ì„ íƒ2ì— ëŒ€í•œ íˆ¬í‘œìˆ˜
+    sel1img varchar2(80), --ì„ íƒ1ì— ëŒ€í•œ ì´ë¯¸ì§€
+    sel2img varchar2(80), --ì„ íƒ2ì— ëŒ€í•œ ì´ë¯¸ì§€
     primary KEY (idx));
     
---´ñ±ÛÅ×ÀÌºí
+--ëŒ“ê¸€í…Œì´ë¸”
 drop table comnt;
 create table comnt(
     idx varchar2(30) NOT NULL,
-    id varchar2(30), --¾ÆÀÌµğ
-    contents varchar(4000), --´ñ±Û ³»¿ë
-    postdate date default sysdate, --ÀÛ¼ºÀÏ
-    recomndCnt number default 0, --ÁÁ¾Æ¿ä, ÃßÃµ¼ö
-    cate varchar2(30), --°Ô½ÃÆÇ ºĞ·ù ÄÃ·³
+    id varchar2(30), --ì•„ì´ë””
+    contents varchar(4000), --ëŒ“ê¸€ ë‚´ìš©
+    postdate date default sysdate, --ì‘ì„±ì¼
+    recomndCnt number default 0, --ì¢‹ì•„ìš”, ì¶”ì²œìˆ˜
+    cate varchar2(30), --ê²Œì‹œíŒ ë¶„ë¥˜ ì»¬ëŸ¼
     primary KEY (idx));
     
---°¡»ó Æ÷ÀÎÆ® Å×ÀÌºí
+--ê°€ìƒ í¬ì¸íŠ¸ í…Œì´ë¸”
 create table point(
-    id varchar2(30), --¾ÆÀÌµğ
-    point varchar2(30), --´ÜÀ§?
-    standard varchar2(30), --Áö±Ş ±âÁØ?
+    id varchar2(30), --ì•„ì´ë””
+    point varchar2(30), --ë‹¨ìœ„?
+    standard varchar2(30), --ì§€ê¸‰ ê¸°ì¤€?
     primary KEY (id));
     
---QNAÅ×ÀÌºí
+--QNAí…Œì´ë¸”
 create table QnA(
-    name varchar(30), --ÀÌ¸§
-    pass varchar(30), --ºñ¹Ğ¹øÈ£
-    telNum varchar2(50), --ÀüÈ­¹øÈ£
-    contents varchar(4000), -- ³»¿ë
-    email varchar2(50)); --ÀÌ¸ŞÀÏ
+    name varchar(30), --ì´ë¦„
+    pass varchar(30), --ë¹„ë°€ë²ˆí˜¸
+    telNum varchar2(50), --ì „í™”ë²ˆí˜¸
+    contents varchar(4000), -- ë‚´ìš©
+    email varchar2(50)); --ì´ë©”ì¼
     
---¾ÆÀÌÅÛ Å×ÀÌºí
+--ì•„ì´í…œ í…Œì´ë¸”
 create table item(
      idx varchar2(30) NOT NULL,
-     temName varchar(30), --ÅÛ ÀÌ¸§
-     contents varchar(2000), --ÅÛ ¼³¸í
-     price varchar2(50), --ÅÛ °¡°İ
-     ofile varchar2(80), --ÅÛÀÌ¹ÌÁö ¿øº»¸í
-     sfile varchar2(80), --ÅÛÀÌ¹ÌÁö ÀúÀå¸í
+     temName varchar(30), --í…œ ì´ë¦„
+     contents varchar(2000), --í…œ ì„¤ëª…
+     price varchar2(50), --í…œ ê°€ê²©
+     ofile varchar2(80), --í…œì´ë¯¸ì§€ ì›ë³¸ëª…
+     sfile varchar2(80), --í…œì´ë¯¸ì§€ ì €ì¥ëª…
      primary KEY (idx));
      
---- ¾ÆÀÌÅÛÀÇ ½ÃÄö½º »ı¼º
+--- ì•„ì´í…œì˜ ì‹œí€€ìŠ¤ ìƒì„±
 create sequence myitem_seq
     increment by 1
     start with 1
@@ -169,53 +177,72 @@ create sequence myitem_seq
     nocycle
     nocache;     
      
--- ³»°¡ °¡Áø haveItem Å×ÀÌºí
+-- ë‚´ê°€ ê°€ì§„ haveItem í…Œì´ë¸”
 drop table haveItem;
 create table haveItem(
-     id varchar2 (30) NOT NULL, -- ±¸¸ÅÇÏ´Â È¸¿øÀÇ °èÁ¤
-     temOname varchar(100) --ÅÛ ¿À¸®Áö³Î ÀÌ¸§
+     id varchar2 (30) NOT NULL, -- êµ¬ë§¤í•˜ëŠ” íšŒì›ì˜ ê³„ì •
+     temOname varchar(100) --í…œ ì˜¤ë¦¬ì§€ë„ ì´ë¦„
      );  
--- haveItemÅ×ÀÌºí¿¡ id¶ó´Â°É Ãß°¡ ÈÄ, ±âÁ¸ÀÇ memberÅ×ÀÌºíÀÇ id¿Í ¿Ü·¡Å°°É±â.
+-- haveItemí…Œì´ë¸”ì— idë¼ëŠ”ê±¸ ì¶”ê°€ í›„, ê¸°ì¡´ì˜ memberí…Œì´ë¸”ì˜ idì™€ ì™¸ë˜í‚¤ê±¸ê¸°.
 alter table haveItem
     add foreign key (id) 
         references member(id);
--- haveItemÅ×ÀÌºíÀÇ temOname°ú, ±âÁ¸ÀÇ adminItemÅ×ÀÌºíÀÇ temOnameÀ» ¿Ü·¡Å°°É±â        
+-- haveItemí…Œì´ë¸”ì˜ temOnameê³¼, ê¸°ì¡´ì˜ adminItemí…Œì´ë¸”ì˜ temOnameì„ ì™¸ë˜í‚¤ê±¸ê¸°        
 alter table haveItem
     add foreign key (temOname) 
         references adminItem(temOname);        
      
--- admin°èÁ¤À¸·Î µî·ÏµÈ adminItem Å×ÀÌºí
+-- adminê³„ì •ìœ¼ë¡œ ë“±ë¡ëœ adminItem í…Œì´ë¸”
 drop table adminItem;
 create table adminItem(
-     id varchar2 (30), -- admin °èÁ¤À¸·Î¸¸ µî·Ï °¡´ÉÇÏ°Ô ¼³Á¤.
-     idx varchar2(30) NOT NULL, -- ¾ÆÀÌÅÛ °íÀ¯ÀÇ ¹øÈ£
-     temOname varchar(100), --ÅÛ ¿À¸®Áö³Î ÀÌ¸§
-     temSname varchar(100), --ÅÛ ÀúÀå ÀÌ¸§
-     contents varchar(2000), --ÅÛ ¼³¸í
-     price varchar2(50), --ÅÛ °¡°İ
-     image varchar2(80), --ÅÛ ÀÌ¹ÌÁö
-     primary KEY (temOname), -- ¾ÆÀÌÅÛ ÀÌ¸§À¸·Î Áßº¹ & null°ª ºÒ°¡.
-     UNIQUE (idx)); -- ¾ÆÀÌÅÛ °íÀ¯ÀÇ ¹øÈ£·Î Áßº¹ºÒ°¡.     
+     id varchar2 (30), -- admin ê³„ì •ìœ¼ë¡œë§Œ ë“±ë¡ ê°€ëŠ¥í•˜ê²Œ ì„¤ì •.
+     idx varchar2(30) NOT NULL, -- ì•„ì´í…œ ê³ ìœ ì˜ ë²ˆí˜¸
+     temOname varchar(100), --í…œ ì˜¤ë¦¬ì§€ë„ ì´ë¦„
+     temSname varchar(100), --í…œ ì €ì¥ ì´ë¦„
+     contents varchar(2000), --í…œ ì„¤ëª…
+     price varchar2(50), --í…œ ê°€ê²©
+     image varchar2(80), --í…œ ì´ë¯¸ì§€
+     primary KEY (temOname), -- ì•„ì´í…œ ì´ë¦„ìœ¼ë¡œ ì¤‘ë³µ & nullê°’ ë¶ˆê°€.
+     UNIQUE (idx)); -- ì•„ì´í…œ ê³ ìœ ì˜ ë²ˆí˜¸ë¡œ ì¤‘ë³µë¶ˆê°€.     
     
---°áÁ¦ °ü·Ã Å×ÀÌºí
+--ê²°ì œ ê´€ë ¨ í…Œì´ë¸”
 create table pay(
     idx varchar2(30) NOT NULL,
-    code varchar2(50), --°¡¸ÍÁ¡ ÄÚµå
-    orderNum varchar2(50), --°¡¸ÍÁ¡ ÁÖ¹®¹øÈ£
-    id varchar2(80), --°¡¸ÍÁ¡ È¸¿ø ¾ÆÀÌµğ
-    goods varchar(30), --»óÇ°¸í
-    goodsCnt number, --»óÇ° ¼ö·®
-    tPrice varchar2(50), --»óÇ° ÃÑ¾×
-    taxFree varchar2(50), --ºñ°ú¼¼
-    sucUrl varchar2(100), --°áÁ¦ ¼º°ø½Ã ¸®´ÙÀÌ·ºÆ® URL
-    failUrl varchar2(100), --°áÁ¦ ½ÇÆĞ½Ã ¸®´ÙÀÌ·ºÆ® URL
-    cancleUrl varchar2(100), --°áÁ¦ Ãë¼Ò½Ã ¸®´ÙÀÌ·ºÆ® URL 
+    code varchar2(50), --ê°€ë§¹ì  ì½”ë“œ
+    orderNum varchar2(50), --ê°€ë§¹ì  ì£¼ë¬¸ë²ˆí˜¸
+    id varchar2(80), --ê°€ë§¹ì  íšŒì› ì•„ì´ë””
+    goods varchar(30), --ìƒí’ˆëª…
+    goodsCnt number, --ìƒí’ˆ ìˆ˜ëŸ‰
+    tPrice varchar2(50), --ìƒí’ˆ ì´ì•¡
+    taxFree varchar2(50), --ë¹„ê³¼ì„¸
+    sucUrl varchar2(100), --ê²°ì œ ì„±ê³µì‹œ ë¦¬ë‹¤ì´ë ‰íŠ¸ URL
+    failUrl varchar2(100), --ê²°ì œ ì‹¤íŒ¨ì‹œ ë¦¬ë‹¤ì´ë ‰íŠ¸ URL
+    cancleUrl varchar2(100), --ê²°ì œ ì·¨ì†Œì‹œ ë¦¬ë‹¤ì´ë ‰íŠ¸ URL 
     primary KEY (idx));
     
---½ºÅ©·¦Å×ÀÌºí
+--ìŠ¤í¬ë©í…Œì´ë¸”
 create table scrap(
-    idx varchar2(30), --º¸µå³Ñ¹ö
-    scrapNum varchar2(30), --½ºÅ©·¦¹øÈ£
-    sdate date default sysdate, --½ºÅ©·¦³¯Â¥
-    cate varchar2(30) --°Ô½ÃÆÇ ºĞ·ù ÄÃ·³
+    idx varchar2(30), --ë³´ë“œë„˜ë²„
+    scrapNum varchar2(30), --ìŠ¤í¬ë©ë²ˆí˜¸
+    sdate date default sysdate, --ìŠ¤í¬ë©ë‚ ì§œ
+    cate varchar2(30) --ê²Œì‹œíŒ ë¶„ë¥˜ ì»¬ëŸ¼
 );
+
+--ì¦ê²¨ì°¾ê¸° í…Œì´ë¸”
+drop table favorite;
+create table favorite(
+    idx varchar2(30), --ì¦ê²¨ì°¾ê¸° ì¸ë±ìŠ¤
+    id varchar2(30), --ì‚¬ìš©ì ì•„ì´ë””
+    place varchar2(80), --ì‹ë‹¹ ì´ë¦„
+    address varchar2(80), --ì‹ë‹¹ ì£¼ì†Œ
+    memo varchar2(500), --ì¦ê²¨ì°¾ê¸°í•œ ì‹ë‹¹ì— ëŒ€í•œ ë©”ëª¨
+    primary key(address)
+);
+--ì¦ê²¨ì°¾ê¸° ì‹œí€€ìŠ¤
+create sequence favo_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue 
+    nocycle
+    nocache;

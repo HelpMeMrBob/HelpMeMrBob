@@ -1,441 +1,492 @@
 /*
-´õ¹Ìµ¥ÀÌÅÍ ÀÔ·Â
+ë”ë¯¸ë°ì´í„° ì…ë ¥
 */
 commit;
 
---foodÅ×ÀÌºí ´õ¹Ì (recomndCnt ,Mgroup Á¦¿Ü)
---noodle(ÃÑ 26°³ / idx 1~26)
+--foodí…Œì´ë¸” ë”ë¯¸ (recomndCnt ,Mgroup ì œì™¸)
+--noodle(ì´ 26ê°œ / idx 1~26)
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¶ó¸é','noodle1','noodle');
+    (food_seq.nextval,'ë¼ë©´','noodle1','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹°³Ã¸é','noodle2','noodle');
+    (food_seq.nextval,'ë¬¼ëƒ‰ë©´','noodle2','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ä®±¹¼ö','noodle3','noodle');
+    (food_seq.nextval,'ì¹¼êµ­ìˆ˜','noodle3','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÆÄ½ºÅ¸','noodle4','noodle');
+    (food_seq.nextval,'íŒŒìŠ¤íƒ€','noodle4','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Â¥Àå¸é','noodle5','noodle');
+    (food_seq.nextval,'ì§œì¥ë©´','noodle5','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Â«»Í','noodle6','noodle');
+    (food_seq.nextval,'ì§¬ë½•','noodle6','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÀÜÄ¡±¹¼ö','noodle7','noodle');
+    (food_seq.nextval,'ì”ì¹˜êµ­ìˆ˜','noodle7','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¶ó¸à','noodle8','noodle');
+    (food_seq.nextval,'ë¼ë©˜','noodle8','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿ìµ¿','noodle9','noodle');
+    (food_seq.nextval,'ìš°ë™','noodle9','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸·±¹¼ö','noodle10','noodle');
+    (food_seq.nextval,'ë§‰êµ­ìˆ˜','noodle10','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'½Ò±¹¼ö','noodle11','noodle');
+    (food_seq.nextval,'ìŒ€êµ­ìˆ˜','noodle11','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÂÌ¸é','noodle12','noodle');
+    (food_seq.nextval,'ì«„ë©´','noodle12','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ºñºö³Ã¸é','noodle13','noodle');
+    (food_seq.nextval,'ë¹„ë¹”ëƒ‰ë©´','noodle13','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ºñºö±¹¼ö','noodle14','noodle');
+    (food_seq.nextval,'ë¹„ë¹”êµ­ìˆ˜','noodle14','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿­¹«±¹¼ö','noodle15','noodle');
+    (food_seq.nextval,'ì—´ë¬´êµ­ìˆ˜','noodle15','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Á¦ÁÖ °í±â±¹¼ö','noodle16','noodle');
+    (food_seq.nextval,'ì œì£¼ ê³ ê¸°êµ­ìˆ˜','noodle16','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸Ş¹Ğ±¹¼ö','noodle17','noodle');
+    (food_seq.nextval,'ë©”ë°€êµ­ìˆ˜','noodle17','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Äá±¹¼ö','noodle18','noodle');
+    (food_seq.nextval,'ì½©êµ­ìˆ˜','noodle18','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÃÊ°è±¹¼ö','noodle19','noodle');
+    (food_seq.nextval,'ì´ˆê³„êµ­ìˆ˜','noodle19','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÆÌÅ¸ÀÌ','noodle20','noodle');
+    (food_seq.nextval,'íŒŸíƒ€ì´','noodle20','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾ßÅ°¼Ò¹Ù','noodle21','noodle');
+    (food_seq.nextval,'ì•¼í‚¤ì†Œë°”','noodle21','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÅºÅº¸à','noodle22','noodle');
+    (food_seq.nextval,'íƒ„íƒ„ë©˜','noodle22','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾Èµ¿±¹½Ã','noodle23','noodle');
+    (food_seq.nextval,'ì•ˆë™êµ­ì‹œ','noodle23','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿ï¸é','noodle24','noodle');
+    (food_seq.nextval,'ìš¸ë©´','noodle24','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'±â½º¸é','noodle25','noodle');
+    (food_seq.nextval,'ê¸°ìŠ¤ë©´','noodle25','noodle');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'³Ã¸ğ¹Ğ','noodle26','noodle');
+    (food_seq.nextval,'ëƒ‰ëª¨ë°€','noodle26','noodle');
     
---rice(ÃÑ 35°³ / idx 27~61)
+--rice(ì´ 35ê°œ / idx 27~61)
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'±èÄ¡ººÀ½¹ä','rice1','rice');
+    (food_seq.nextval,'ê¹€ì¹˜ë³¶ìŒë°¥','rice1','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°£Àå°è¶õ¹ä','rice2','rice');
+    (food_seq.nextval,'ê°„ì¥ê³„ë€ë°¥','rice2','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÈÆÁ¦¿¬¾î µ¤¹ä','rice3','rice');
+    (food_seq.nextval,'í›ˆì œì—°ì–´ ë®ë°¥','rice3','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'³ª¹°ºñºö¹ä','rice4','rice');
+    (food_seq.nextval,'ë‚˜ë¬¼ë¹„ë¹”ë°¥','rice4','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ä¡Å²¸¶¿ä µ¤¹ä','rice5','rice');
+    (food_seq.nextval,'ì¹˜í‚¨ë§ˆìš” ë®ë°¥','rice5','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ä¡Å²µ¥¸®¾ß³¢ µ¤¹ä','rice6','rice');
+    (food_seq.nextval,'ì¹˜í‚¨ë°ë¦¬ì•¼ë¼ ë®ë°¥','rice6','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿ì³ª±âµ¿(Àå¾î µ¤¹ä)','rice7','rice');
+    (food_seq.nextval,'ìš°ë‚˜ê¸°ë™(ì¥ì–´ ë®ë°¥)','rice7','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'±è¹ä','rice8','rice');
+    (food_seq.nextval,'ê¹€ë°¥','rice8','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿ì··½Ó¹ä','rice9','rice');
+    (food_seq.nextval,'ìš°ë ìŒˆë°¥','rice9','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ä«·¹','rice10','rice');
+    (food_seq.nextval,'ì¹´ë ˆ','rice10','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'È¸µ¤¹ä','rice11','rice');
+    (food_seq.nextval,'íšŒë®ë°¥','rice11','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸¶ÆÄµÎºÎ µ¤¹ä','rice12','rice');
+    (food_seq.nextval,'ë§ˆíŒŒë‘ë¶€ ë®ë°¥','rice12','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°¡Ã÷µ¿(µ·±î½º µ¤¹ä)','rice13','rice');
+    (food_seq.nextval,'ê°€ì¸ ë™(ëˆê¹ŒìŠ¤ ë®ë°¥)','rice13','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÂüÄ¡¸¶¿ä³×Áî µ¤¹ä','rice14','rice');
+    (food_seq.nextval,'ì°¸ì¹˜ë§ˆìš”ë„¤ì¦ˆ ë®ë°¥','rice14','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾Ë¹ä','rice15','rice');
+    (food_seq.nextval,'ì•Œë°¥','rice15','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÅÙµ¿(Æ¢±è µ¤¹ä)','rice16','rice');
+    (food_seq.nextval,'í…ë™(íŠ€ê¹€ ë®ë°¥)','rice16','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÇÊ¶óÇÁ','rice17','rice');
+    (food_seq.nextval,'í•„ë¼í”„','rice17','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Àüº¹Á×','rice18','rice');
+    (food_seq.nextval,'ì „ë³µì£½','rice18','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'±Ôµ¿(¼Ò°í±â µ¤¹ä)','rice19','rice');
+    (food_seq.nextval,'ê·œë™(ì†Œê³ ê¸° ë®ë°¥)','rice19','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ãæ¹«±è¹ä','rice20','rice');
+    (food_seq.nextval,'ì¶©ë¬´ê¹€ë°¥','rice20','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿À¾ßÄÚµ¿(´ß°í±â °è¶õ µ¤¹ä)','rice21','rice');
+    (food_seq.nextval,'ì˜¤ì•¼ì½”ë™(ë‹­ê³ ê¸° ê³„ë€ ë®ë°¥)','rice21','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿À¹Ç¶óÀÌ½º','rice22','rice');
+    (food_seq.nextval,'ì˜¤ë¯€ë¼ì´ìŠ¤','rice22','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ºü¿¡¾ß','rice23','rice');
+    (food_seq.nextval,'ë¹ ì—ì•¼','rice23','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Áß½ÄººÀ½¹ä','rice24','rice');
+    (food_seq.nextval,'ì¤‘ì‹ë³¶ìŒë°¥','rice24','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'²¿¸·ºñºö¹ä','rice25','rice');
+    (food_seq.nextval,'ê¼¬ë§‰ë¹„ë¹”ë°¥','rice25','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Äá³ª¹°¹ä','rice26','rice');
+    (food_seq.nextval,'ì½©ë‚˜ë¬¼ë°¥','rice26','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÀâÃ¤¹ä','rice27','rice');
+    (food_seq.nextval,'ì¡ì±„ë°¥','rice27','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿ÀÂ¡¾îµ¤¹ä','rice28','rice');
+    (food_seq.nextval,'ì˜¤ì§•ì–´ë®ë°¥','rice28','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°íÃßÀâÃ¤¹ä','rice29','rice');
+    (food_seq.nextval,'ê³ ì¶”ì¡ì±„ë°¥','rice29','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸®Á¶¶Ç','rice30','rice');
+    (food_seq.nextval,'ë¦¬ì¡°ë˜','rice30','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿ÀÂ÷ÁîÄÉ','rice31','rice');
+    (food_seq.nextval,'ì˜¤ì°¨ì¦ˆì¼€','rice31','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ä«ÀÌ¼¾µ¿(ÇØ»ê¹° µ¤¹ä)','rice32','rice');
+    (food_seq.nextval,'ì¹´ì´ì„¼ë™(í•´ì‚°ë¬¼ ë®ë°¥)','rice32','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Á¦À°µ¤¹ä','rice33','rice');
+    (food_seq.nextval,'ì œìœ¡ë®ë°¥','rice33','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹¬¹ä','rice34','rice');
+    (food_seq.nextval,'ë¬µë°¥','rice34','rice');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'±¼¹ä','rice35','rice');
+    (food_seq.nextval,'êµ´ë°¥','rice35','rice');
     
---soup(ÃÑ 38°³ / idx 62~99)
+--soup(ì´ 38ê°œ / idx 62~99)
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'±èÄ¡Âî°³','soup1','soup');
+    (food_seq.nextval,'ê¹€ì¹˜ì°Œê°œ','soup1','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°¨ÀÚÅÁ','soup2','soup');
+    (food_seq.nextval,'ê°ìíƒ•','soup2','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'»şºê»şºê','soup3','soup');
+    (food_seq.nextval,'ìƒ¤ë¸Œìƒ¤ë¸Œ','soup3','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µÈÀåÂî°³','soup4','soup');
+    (food_seq.nextval,'ëœì¥ì°Œê°œ','soup4','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ºÎ´ëÂî°³','soup5','soup');
+    (food_seq.nextval,'ë¶€ëŒ€ì°Œê°œ','soup5','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'»ÀÇØÀå±¹','soup6','soup');
+    (food_seq.nextval,'ë¼ˆí•´ì¥êµ­','soup6','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µÅÁö±¹¹ä','soup7','soup');
+    (food_seq.nextval,'ë¼ì§€êµ­ë°¥','soup7','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼ø´ë±¹¹ä','soup8','soup');
+    (food_seq.nextval,'ìˆœëŒ€êµ­ë°¥','soup8','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼öÀ°±¹¹ä','soup9','soup');
+    (food_seq.nextval,'ìˆ˜ìœ¡êµ­ë°¥','soup9','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°¥ºñÅÁ','soup10','soup');
+    (food_seq.nextval,'ê°ˆë¹„íƒ•','soup10','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'À°°³Àå','soup11','soup');
+    (food_seq.nextval,'ìœ¡ê°œì¥','soup11','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹Ì¿ª±¹','soup12','soup');
+    (food_seq.nextval,'ë¯¸ì—­êµ­','soup12','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼øµÎºÎÂî°³','soup13','soup');
+    (food_seq.nextval,'ìˆœë‘ë¶€ì°Œê°œ','soup13','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼³··ÅÁ','soup14','soup');
+    (food_seq.nextval,'ì„¤ë íƒ•','soup14','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÈÌ±Å','soup15','soup');
+    (food_seq.nextval,'í› ê¶ˆ','soup15','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¶±±¹','soup16','soup');
+    (food_seq.nextval,'ë–¡êµ­','soup16','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼Ò¸Ó¸®±¹¹ä','soup17','soup');
+    (food_seq.nextval,'ì†Œë¨¸ë¦¬êµ­ë°¥','soup17','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Äá³ª¹° ÇØÀå±¹','soup18','soup');
+    (food_seq.nextval,'ì½©ë‚˜ë¬¼ í•´ì¥êµ­','soup18','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼öÁ¦ºñ','soup19','soup');
+    (food_seq.nextval,'ìˆ˜ì œë¹„','soup19','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°õÅÁ','soup20','soup');
+    (food_seq.nextval,'ê³°íƒ•','soup20','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ã»±¹Àå','soup21','soup');
+    (food_seq.nextval,'ì²­êµ­ì¥','soup21','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸Å¿îÅÁ','soup22','soup');
+    (food_seq.nextval,'ë§¤ìš´íƒ•','soup22','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'½ºÅ°¾ß³¢','soup23','soup');
+    (food_seq.nextval,'ìŠ¤í‚¤ì•¼ë¼','soup23','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µµ°¡´ÏÅÁ','soup24','soup');
+    (food_seq.nextval,'ë„ê°€ë‹ˆíƒ•','soup24','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸¸µÎÀü°ñ','soup25','soup');
+    (food_seq.nextval,'ë§Œë‘ì „ê³¨','soup25','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹ö¼¸Àü°ñ','soup26','soup');
+    (food_seq.nextval,'ë²„ì„¯ì „ê³¨','soup26','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼±Áö ÇØÀå±¹','soup27','soup');
+    (food_seq.nextval,'ì„ ì§€ í•´ì¥êµ­','soup27','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'´ë±¸ ³»ÀåÅÁ','soup28','soup');
+    (food_seq.nextval,'ëŒ€êµ¬ ë‚´ì¥íƒ•','soup28','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'½Ã·¡±â±¹','soup29','soup');
+    (food_seq.nextval,'ì‹œë˜ê¸°êµ­','soup29','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ãß¾îÅÁ','soup30','soup');
+    (food_seq.nextval,'ì¶”ì–´íƒ•','soup30','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾îÁ×','soup31','soup');
+    (food_seq.nextval,'ì–´ì£½','soup31','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Œc¾ç²á','soup32','soup');
+    (food_seq.nextval,'ë˜ ì–‘ê¿','soup32','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸Å»ıÀÌ ±¼±¹','soup33','soup');
+    (food_seq.nextval,'ë§¤ìƒì´ êµ´êµ­','soup33','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µÎºÎÀü°ñ','soup34','soup');
+    (food_seq.nextval,'ë‘ë¶€ì „ê³¨','soup34','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹ö¼¸µé±úÅÁ','soup35','soup');
+    (food_seq.nextval,'ë²„ì„¯ë“¤ê¹¨íƒ•','soup35','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'´ßÇÑ¸¶¸®','soup36','soup');
+    (food_seq.nextval,'ë‹­í•œë§ˆë¦¬','soup36','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸¶¶óÅÁ','soup37','soup');
+    (food_seq.nextval,'ë§ˆë¼íƒ•','soup37','soup');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÇØ¹°´©·îÁöÅÁ','soup38','soup');
+    (food_seq.nextval,'í•´ë¬¼ëˆ„ë£½ì§€íƒ•','soup38','soup');
     
---meat(ÃÑ 43°³ / idx 100~142)
+--meat(ì´ 43ê°œ / idx 100~142)
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'»ï°ã»ì','meat1','meat');
+    (food_seq.nextval,'ì‚¼ê²¹ì‚´','meat1','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'½ºÅ×ÀÌÅ©','meat2','meat');
+    (food_seq.nextval,'ìŠ¤í…Œì´í¬','meat2','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿À°ã»ì','meat3','meat');
+    (food_seq.nextval,'ì˜¤ê²¹ì‚´','meat3','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µÅÁö°¥ºñ','meat4','meat');
+    (food_seq.nextval,'ë¼ì§€ê°ˆë¹„','meat4','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ä¡Å²','meat5','meat');
+    (food_seq.nextval,'ì¹˜í‚¨','meat5','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'À°È¸','meat6','meat');
+    (food_seq.nextval,'ìœ¡íšŒ','meat6','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°öÃ¢','meat7','meat');
+    (food_seq.nextval,'ê³±ì°½','meat7','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸·Ã¢','meat8','meat');
+    (food_seq.nextval,'ë§‰ì°½','meat8','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µî°¥ºñ','meat9','meat');
+    (food_seq.nextval,'ë“±ê°ˆë¹„','meat9','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼Ò°¥ºñ','meat10','meat');
+    (food_seq.nextval,'ì†Œê°ˆë¹„','meat10','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼Ò°¥ºñÂò','meat11','meat');
+    (food_seq.nextval,'ì†Œê°ˆë¹„ì°œ','meat11','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'º¸½Ó','meat12','meat');
+    (food_seq.nextval,'ë³´ìŒˆ','meat12','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹Ùº£Å¥ Æø¸³','meat13','meat');
+    (food_seq.nextval,'ë°”ë² í í­ë¦½','meat13','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Ç×Á¤»ì','meat14','meat');
+    (food_seq.nextval,'í•­ì •ì‚´','meat14','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'´ß¹ß','meat15','meat');
+    (food_seq.nextval,'ë‹­ë°œ','meat15','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'´ß°¥ºñ','meat16','meat');
+    (food_seq.nextval,'ë‹­ê°ˆë¹„','meat16','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'´ß°­Á¤','meat17','meat');
+    (food_seq.nextval,'ë‹­ê°•ì •','meat17','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Â÷µ¹¹ÚÀÌ','meat18','meat');
+    (food_seq.nextval,'ì°¨ëŒë°•ì´','meat18','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾ç°¥ºñ','meat19','meat');
+    (food_seq.nextval,'ì–‘ê°ˆë¹„','meat19','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°¥¸Å±â»ì','meat20','meat');
+    (food_seq.nextval,'ê°ˆë§¤ê¸°ì‚´','meat20','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Á¦À°ººÀ½','meat21','meat');
+    (food_seq.nextval,'ì œìœ¡ë³¶ìŒ','meat21','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'´ßµµ¸®ÅÁ','meat22','meat');
+    (food_seq.nextval,'ë‹­ë„ë¦¬íƒ•','meat22','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Á·¹ß','meat23','meat');
+    (food_seq.nextval,'ì¡±ë°œ','meat23','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¼Ò°í±â Å¸´Ù³¢','meat24','meat');
+    (food_seq.nextval,'ì†Œê³ ê¸° íƒ€ë‹¤ë¼','meat24','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Âò´ß','meat25','meat');
+    (food_seq.nextval,'ì°œë‹­','meat25','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾ç²¿Ä¡','meat26','meat');
+    (food_seq.nextval,'ì–‘ê¼¬ì¹˜','meat26','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'·Î½ºÆ® ºñÇÁ','meat27','meat');
+    (food_seq.nextval,'ë¡œìŠ¤íŠ¸ ë¹„í”„','meat27','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µÅÁö°¥ºñÂò','meat28','meat');
+    (food_seq.nextval,'ë¼ì§€ê°ˆë¹„ì°œ','meat28','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ºÒÁ·¹ß','meat29','meat');
+    (food_seq.nextval,'ë¶ˆì¡±ë°œ','meat29','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹öÆÈ·ÎÀ®','meat30','meat');
+    (food_seq.nextval,'ë²„íŒ”ë¡œìœ™','meat30','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹é¼÷','meat31','meat');
+    (food_seq.nextval,'ë°±ìˆ™','meat31','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°¡ºê¸®»ì','meat32','meat');
+    (food_seq.nextval,'ê°€ë¸Œë¦¬ì‚´','meat32','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'»ï°èÅÁ','meat33','meat');
+    (food_seq.nextval,'ì‚¼ê³„íƒ•','meat33','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿À¸®ÁÖ¹°·°','meat34','meat');
+    (food_seq.nextval,'ì˜¤ë¦¬ì£¼ë¬¼ëŸ­','meat34','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¶±°¥ºñ','meat35','meat');
+    (food_seq.nextval,'ë–¡ê°ˆë¹„','meat35','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ºÒ°í±â','meat36','meat');
+    (food_seq.nextval,'ë¶ˆê³ ê¸°','meat36','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÇÔ¹Ú½ºÅ×ÀÌÅ©','meat37','meat');
+    (food_seq.nextval,'í•¨ë°•ìŠ¤í…Œì´í¬','meat37','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÈÆÁ¦¿À¸®','meat38','meat');
+    (food_seq.nextval,'í›ˆì œì˜¤ë¦¬','meat38','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿Àµ¹»À','meat39','meat');
+    (food_seq.nextval,'ì˜¤ëŒë¼ˆ','meat39','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µ¿ÆÄÀ°','meat40','meat');
+    (food_seq.nextval,'ë™íŒŒìœ¡','meat40','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'º£ÀÌÂ¡´ö','meat41','meat');
+    (food_seq.nextval,'ë² ì´ì§•ë•','meat41','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿À¸®·Î½º','meat42','meat');
+    (food_seq.nextval,'ì˜¤ë¦¬ë¡œìŠ¤','meat42','meat');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µÅÁö²®µ¥±â','meat43','meat');
+    (food_seq.nextval,'ë¼ì§€ê»ë°ê¸°','meat43','meat');
     
---seafood(ÃÑ 30°³ / idx 143~172)
+--seafood(ì´ 30ê°œ / idx 143~172)
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÃÊ¹ä','seafood1','seafood');
+    (food_seq.nextval,'ì´ˆë°¥','seafood1','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸ğµëÈ¸','seafood2','seafood');
+    (food_seq.nextval,'ëª¨ë“¬íšŒ','seafood2','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'´ë°ÔÂò','seafood3','seafood');
+    (food_seq.nextval,'ëŒ€ê²Œì°œ','seafood3','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Å·Å©·¦ Âò','seafood4','seafood');
+    (food_seq.nextval,'í‚¹í¬ë© ì°œ','seafood4','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°£Àå°ÔÀå','seafood5','seafood');
+    (food_seq.nextval,'ê°„ì¥ê²Œì¥','seafood5','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¶ø½ºÅÍ ¹öÅÍ±¸ÀÌ','seafood6','seafood');
+    (food_seq.nextval,'ëìŠ¤í„° ë²„í„°êµ¬ì´','seafood6','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾ç³ä°ÔÀå','seafood7','seafood');
+    (food_seq.nextval,'ì–‘ë…ê²Œì¥','seafood7','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Àå¾î±¸ÀÌ','seafood8','seafood');
+    (food_seq.nextval,'ì¥ì–´êµ¬ì´','seafood8','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Á¶°³±¸ÀÌ','seafood9','seafood');
+    (food_seq.nextval,'ì¡°ê°œêµ¬ì´','seafood9','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'»ê³«Áö','seafood10','seafood');
+    (food_seq.nextval,'ì‚°ë‚™ì§€','seafood10','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÇØ¹°Âò','seafood11','seafood');
+    (food_seq.nextval,'í•´ë¬¼ì°œ','seafood11','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'²É°ÔÂò','seafood12','seafood');
+    (food_seq.nextval,'ê½ƒê²Œì°œ','seafood12','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹°È¸','seafood13','seafood');
+    (food_seq.nextval,'ë¬¼íšŒ','seafood13','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾Æ±¸Âò','seafood14','seafood');
+    (food_seq.nextval,'ì•„êµ¬ì°œ','seafood14','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÂŞ²Ù¹ÌººÀ½','seafood15','seafood');
+    (food_seq.nextval,'ì­ˆê¾¸ë¯¸ë³¶ìŒ','seafood15','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'³¬ÁöººÀ½','seafood16','seafood');
+    (food_seq.nextval,'ë‚šì§€ë³¶ìŒ','seafood16','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿¬¾î ½ºÅ×ÀÌÅ©','seafood17','seafood');
+    (food_seq.nextval,'ì—°ì–´ ìŠ¤í…Œì´í¬','seafood17','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÇØ½ÅÅÁ','seafood18','seafood');
+    (food_seq.nextval,'í•´ì‹ íƒ•','seafood18','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'²ÄÀå¾î±¸ÀÌ','seafood19','seafood');
+    (food_seq.nextval,'ê¼¼ì¥ì–´êµ¬ì´','seafood19','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°¥Ä¡Á¶¸²','seafood20','seafood');
+    (food_seq.nextval,'ê°ˆì¹˜ì¡°ë¦¼','seafood20','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿¬Æ÷ÅÁ','seafood21','seafood');
+    (food_seq.nextval,'ì—°í¬íƒ•','seafood21','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°¥Ä¡±¸ÀÌ','seafood22','seafood');
+    (food_seq.nextval,'ê°ˆì¹˜êµ¬ì´','seafood22','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°íµî¾îÁ¶¸²','seafood23','seafood');
+    (food_seq.nextval,'ê³ ë“±ì–´ì¡°ë¦¼','seafood23','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¹®¾î¼÷È¸','seafood24','seafood');
+    (food_seq.nextval,'ë¬¸ì–´ìˆ™íšŒ','seafood24','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'±¼ºñ','seafood25','seafood');
+    (food_seq.nextval,'êµ´ë¹„','seafood25','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÂüÄ¡ Å¸´Ù³¢','seafood26','seafood');
+    (food_seq.nextval,'ì°¸ì¹˜ íƒ€ë‹¤ë¼','seafood26','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'°¨¹Ù½º','seafood27','seafood');
+    (food_seq.nextval,'ê°ë°”ìŠ¤','seafood27','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÄÚ´Ù¸®Âò','seafood28','seafood');
+    (food_seq.nextval,'ì½”ë‹¤ë¦¬ì°œ','seafood28','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'È«¾î»ïÇÕ','seafood29','seafood');
+    (food_seq.nextval,'í™ì–´ì‚¼í•©','seafood29','seafood');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¾çÀåÇÇ','seafood30','seafood');
+    (food_seq.nextval,'ì–‘ì¥í”¼','seafood30','seafood');
     
---etc(ÃÑ 19°³ / idx 173~191)
+--etc(ì´ 19ê°œ / idx 173~191)
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¶±Æ¢¼ø','etc1','etc');
+    (food_seq.nextval,'ë–¡íŠ€ìˆœ','etc1','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÇÜ¹ö°Å','etc2','etc');
+    (food_seq.nextval,'í–„ë²„ê±°','etc2','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÇÇÀÚ','etc3','etc');
+    (food_seq.nextval,'í”¼ì','etc3','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÅÁ¼öÀ°','etc4','etc');
+    (food_seq.nextval,'íƒ•ìˆ˜ìœ¡','etc4','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'µ·±î½º','etc5','etc');
+    (food_seq.nextval,'ëˆê¹ŒìŠ¤','etc5','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¶±ººÀÌ','etc6','etc');
+    (food_seq.nextval,'ë–¡ë³¶ì´','etc6','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¸¸µÎ','etc7','etc');
+    (food_seq.nextval,'ë§Œë‘','etc7','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Åä½ºÆ®','etc8','etc');
+    (food_seq.nextval,'í† ìŠ¤íŠ¸','etc8','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'²ã¹Ù·Î¿ì','etc9','etc');
+    (food_seq.nextval,'ê¿”ë°”ë¡œìš°','etc9','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'»÷µåÀ§Ä¡','etc10','etc');
+    (food_seq.nextval,'ìƒŒë“œìœ„ì¹˜','etc10','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'±ñÇ³±â','etc11','etc');
+    (food_seq.nextval,'ê¹í’ê¸°','etc11','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¿ÀÄÚ³ë¹Ì¾ß³¢','etc12','etc');
+    (food_seq.nextval,'ì˜¤ì½”ë…¸ë¯¸ì•¼ë¼','etc12','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÄÉ¹ä','etc13','etc');
+    (food_seq.nextval,'ì¼€ë°¥','etc13','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'Å¸ÄÚ','etc14','etc');
+    (food_seq.nextval,'íƒ€ì½”','etc14','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ºĞÂ¥','etc15','etc');
+    (food_seq.nextval,'ë¶„ì§œ','etc15','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'À¯»ê½½','etc16','etc');
+    (food_seq.nextval,'ìœ ì‚°ìŠ¬','etc16','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'ÇÇ½¬¾ØÄ¨½º','etc17','etc');
+    (food_seq.nextval,'í”¼ì‰¬ì•¤ì¹©ìŠ¤','etc17','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'¶óÁ¶±â','etc18','etc');
+    (food_seq.nextval,'ë¼ì¡°ê¸°','etc18','etc');
 insert into food(idx,food,image,Lgroup) values 
-    (food_seq.nextval,'À¯¸°±â','etc19','etc');
+    (food_seq.nextval,'ìœ ë¦°ê¸°','etc19','etc');
 
 
---boardÅ×ÀÌºí ´õ¹Ì
+--boardí…Œì´ë¸” ë”ë¯¸
 insert into board(idx,id,title,contents,postdate,tag,cate) values 
-    (board_seq.nextval,'test','½ºÇÁ¸µ°Ô½ÃÆÇ Ã¹¹øÂ°ÀÔ´Ï´Ù.','³»¿ëÀÔ´Ï´Ù',sysdate,'#ÅÂ±×1','rvw');
+    (board_seq.nextval,'test','ìŠ¤í”„ë§ê²Œì‹œíŒ ì²«ë²ˆì§¸ì…ë‹ˆë‹¤.','ë‚´ìš©ì…ë‹ˆë‹¤',sysdate,'#íƒœê·¸1','rvw');
 insert into board(idx,id,title,contents,postdate,tag,cate)values 
-    (board_seq.nextval,'test','½ºÇÁ¸µ°Ô½ÃÆÇ µÎ¹øÂ°ÀÔ´Ï´Ù.','³»¿ëÀÔ´Ï´Ù',sysdate,'#ÅÂ±×2','rvw');
+    (board_seq.nextval,'test','ìŠ¤í”„ë§ê²Œì‹œíŒ ë‘ë²ˆì§¸ì…ë‹ˆë‹¤.','ë‚´ìš©ì…ë‹ˆë‹¤',sysdate,'#íƒœê·¸2','rvw');
 insert into board(idx,id,title,contents,postdate,tag,cate)values 
-    (board_seq.nextval,'test','½ºÇÁ¸µ°Ô½ÃÆÇ ¼¼¹øÂ°ÀÔ´Ï´Ù.','³»¿ëÀÔ´Ï´Ù',sysdate,'#ÅÂ±×3','rvw');
+    (board_seq.nextval,'test','ìŠ¤í”„ë§ê²Œì‹œíŒ ì„¸ë²ˆì§¸ì…ë‹ˆë‹¤.','ë‚´ìš©ì…ë‹ˆë‹¤',sysdate,'#íƒœê·¸3','rvw');
 insert into board(idx,id,title,contents,postdate,tag,cate)values 
-    (board_seq.nextval,'test2','½ºÇÁ¸µ°Ô½ÃÆÇ ³×¹øÂ°ÀÔ´Ï´Ù.','³»¿ëÀÔ´Ï´Ù',sysdate,'#ÅÂ±×4','rvw');
+    (board_seq.nextval,'test2','ìŠ¤í”„ë§ê²Œì‹œíŒ ë„¤ë²ˆì§¸ì…ë‹ˆë‹¤.','ë‚´ìš©ì…ë‹ˆë‹¤',sysdate,'#íƒœê·¸4','rvw');
 insert into board(idx,id,title,contents,postdate,tag,cate)values 
-    (board_seq.nextval,'test2','½ºÇÁ¸µ°Ô½ÃÆÇ ´Ù¼¸¹øÂ°ÀÔ´Ï´Ù.','³»¿ëÀÔ´Ï´Ù',sysdate,'#ÅÂ±×5','rvw');
+    (board_seq.nextval,'test2','ìŠ¤í”„ë§ê²Œì‹œíŒ ë‹¤ì„¯ë²ˆì§¸ì…ë‹ˆë‹¤.','ë‚´ìš©ì…ë‹ˆë‹¤',sysdate,'#íƒœê·¸5','rvw');
 
 
---´ñ±Û ´õ¹Ì
+--ëŒ“ê¸€ ë”ë¯¸
 insert into board_rep(rno,idx,id,name,contents,writeDate,recomndCnt,cate)values 
-    (board_rep_seq.nextval,6,'test1','Å×½ºÆ®1','´ñ±Û³»¿ëÀÔ´Ï´Ù.',sysdate,1,'rvw');
+    (board_rep_seq.nextval,6,'test1','í…ŒìŠ¤íŠ¸1','ëŒ“ê¸€ë‚´ìš©ì…ë‹ˆë‹¤.',sysdate,1,'rvw');
 insert into board_rep(rno,idx,id,name,contents,writeDate,recomndCnt,cate)values 
-    (board_rep_seq.nextval,6,'test1','Å×½ºÆ®1','´ñ±ÛÀ» ³Ö¾îºÃ¾î¿ä',sysdate,1,'rvw');
+    (board_rep_seq.nextval,6,'test1','í…ŒìŠ¤íŠ¸1','ëŒ“ê¸€ì„ ë„£ì–´ë´¤ì–´ìš”',sysdate,1,'rvw');
 insert into board_rep(rno,idx,id,name,contents,writeDate,recomndCnt,cate)values 
-    (board_rep_seq.nextval,6,'test1','Å×½ºÆ®1','~~´ñ±Û~~',sysdate,1,'rvw');
+    (board_rep_seq.nextval,6,'test1','í…ŒìŠ¤íŠ¸1','~~ëŒ“ê¸€~~',sysdate,1,'rvw');
 insert into board_rep(rno,idx,id,name,contents,writeDate,recomndCnt,cate)values 
-    (board_rep_seq.nextval,6,'test1','Å×½ºÆ®1','Å×½ºÆ®´ñ±Û.',sysdate,1,'rvw');
+    (board_rep_seq.nextval,6,'test1','í…ŒìŠ¤íŠ¸1','í…ŒìŠ¤íŠ¸ëŒ“ê¸€.',sysdate,1,'rvw');
 insert into board_rep(rno,idx,id,name,contents,writeDate,recomndCnt,cate)values 
-    (board_rep_seq.nextval,6,'test1','Å×½ºÆ®1','Á¹¸®Áö¾Ê¾Æ',sysdate,1,'rvw');
+    (board_rep_seq.nextval,6,'test1','í…ŒìŠ¤íŠ¸1','ì¡¸ë¦¬ì§€ì•Šì•„',sysdate,1,'rvw');
     
     
---restaurantÅ×ÀÌºí ´õ¹Ì
-insert into restaurant(idx, food, place, address, lati, longi, plcNum, menu, price, operTime)
-    values('1', '#±èÄ¡Âî°³,#±èÄ¡,#Âî°³', 'µÅÁöÇÑ¸¶¸®', '¼­¿ïÆ¯º°½Ã ±İÃµ±¸ °¡»ê·Î3±æ 81',
-        '37.47868297981449', '126.87866945602173', '010-1234-5678', '±èÄ¡Âî°³,±èÄ¡Âò,±èÄ¡Â¥±ÛÀÌ',
-            '8000, 7000, 6000', '08:00~21:00');    
+--restaurantí…Œì´ë¸” ë”ë¯¸ ë°ì´í„°
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ê¹€ì¹˜ì°Œê°œ,ê¹€ì¹˜,ì°Œê°œ,ê¹€ì¹˜ì°Œê°œ ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ê¹€ì¹˜ì°Œê°œ,ê°€ì‚°ë™ ê¹€ì¹˜ì°Œê°œ,ê¸ˆì²œêµ¬ ê¹€ì¹˜ì°Œê°œ',
+            'ë¼ì§€í•œë§ˆë¦¬', 'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ê°€ì‚°ë¡œ3ê¸¸ 81', 
+            '010-1234-5678', 'ê¹€ì¹˜ì°Œê°œ,ê¹€ì¹˜ì°œ,ê¹€ì¹˜ì§œê¸€ì´',
+            '8000,7000,6000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ëœì¥ì°Œê°œ,ëœì¥,ì°Œê°œ,ëœì¥ì°Œê°œ ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ëœì¥ì°Œê°œ,ê°€ì‚°ë™ ëœì¥ì°Œê°œ,ê¸ˆì²œêµ¬ ëœì¥ì°Œê°œ', 
+            'ì°Œê°œë§›ì§‘', 'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ê°€ì‚°ë™ 426-5', 
+            '010-1234-5678', 'ëœì¥ì°Œê°œ,ëœì¥êµ­,ëœì¥ì•„ë¬´ê°œ',
+            '8000,7000,6000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ì´ˆë°¥,ìš°ë™,ìŠ¤ì‹œ,ì´ˆë°¥ ë§›ì§‘,ìŠ¤ì‹œ ë§›ì§‘,ìš°ë™ ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ì´ˆë°¥,ë…ì‚°ë™ ìŠ¤ì‹œ,ë…ì‚°ë™ ìš°ë™,ê°€ì‚°ë™ ì´ˆë°¥,ê°€ì‚°ë™ ìŠ¤ì‹œ,ê°€ì‚°ë™ ìš°ë™,ê¸ˆì²œêµ¬ ì´ˆë°¥,ê¸ˆì²œêµ¬ ìŠ¤ì‹œ,ê¸ˆì²œêµ¬ ìš°ë™',
+            'ìŠ¤ì‹œìŠ¤ì‹œë§ˆìŠ¤ì‹œ', 'ì„œìš¸íŠ¹ë³„ì‹œ ê´€ì•…êµ¬ ë´‰ì²œë¡œ 563', 
+            '010-1234-5678', 'ì´ˆë°¥,ìš°ë™',
+            '8000,7000,6000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ë¼ë©´,ë§›ì§‘,ë¼ë©´ ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ë¼ë©´,ê°€ì‚°ë™ ë¼ë©´,ê¸ˆì²œêµ¬ ë¼ë©´',
+            'ì¸ìƒë¼ë©´', 'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ë…ì‚°1ë™ 151-7', 
+            '010-1234-5678', 'ë¼ë©´',
+            '3000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ë°±ë°˜,ë§›ì§‘,ë°±ë°˜ ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘, ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ë°±ë°˜,ê°€ì‚°ë™ ë°±ë°˜,ê¸ˆì²œêµ¬ ë°±ë°˜',
+            'ë°±ë°˜ì§‘', 'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ë…ì‚°ë¡œ36ë‚˜ê¸¸ 21', 
+            '010-1234-5678', 'ë°±ë°˜',
+            '6000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ê²Œì¥,ê°„ì¥ê²Œì¥,ì–‘ë…ê²Œì¥,ë§›ì§‘,ê²Œì¥ ë§›ì§‘,ê°„ì¥ê²Œì¥ ë§›ì§‘,ì–‘ë…ê²Œì¥ ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ê°„ì¥ê²Œì¥,ê°€ì‚°ë™ ê°„ì¥ê²Œì¥,ê¸ˆì²œêµ¬ ê°„ì¥ê²Œì¥,ë…ì‚°ë™ ì–‘ë…ê²Œì¥,ê°€ì‚°ë™ ì–‘ë…ê²Œì¥,ê¸ˆì²œêµ¬ ì–‘ë…ê²Œì¥',
+            'ë‹ˆë“¤ì´ ê²Œë§›ì„ ì•Œì•„?', 
+            'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ë…ì‚°1ë™ 147-2', 
+            '010-1234-5678', 'ì–‘ë…ê²Œì¥,ê°„ì¥ê²Œì¥',
+            '15000,16000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'í–„ë²„ê±°,ë§›ì§‘,í–„ë²„ê±° ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ í–„ë²„ê±°,ê°€ì‚°ë™ í–„ë²„ê±°,ê¸ˆì²œêµ¬ í–„ë²„ê±°',
+            'ì§‘ê²Œë¦¬ì•„', 
+            'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ë…ì‚°1ë™ ì‹œí¥ëŒ€ë¡œ115ê¸¸ 48', 
+            '010-1234-5678', 'í–„ë²„ê±°,ìˆ˜ì œë²„ê±°,ë°¥ë²„ê±°',
+            '8000,10000,2000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ìŒ€êµ­ìˆ˜,ë§›ì§‘,ìŒ€êµ­ìˆ˜ ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ìŒ€êµ­ìˆ˜,ê°€ì‚°ë™ ìŒ€êµ­ìˆ˜,ê¸ˆì²œêµ¬ ìŒ€êµ­ìˆ˜', 
+            'í•œëšë°°ê¸°', 
+            'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ë…ì‚°ë™ 1002-5', 
+            '010-1234-5678', 'ìŒ€êµ­ìˆ˜',
+            '8000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ì§œì¥ë©´,ì§¬ë½•,ë§›ì§‘,ì§œì¥ë©´ ë§›ì§‘,ì§¬ë½• ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ì§œì¥ë©´,ë…ì‚°ë™ ì§¬ë½•,ê°€ì‚°ë™ ì§œì¥ë©´,ê°€ì‚°ë™ ì§¬ë½•,ê¸ˆì²œêµ¬ ì§œì¥ë©´,ê¸ˆì²œêµ¬ ì§¬ë½•',
+            'ì¤‘êµ­ìŒì‹ ë§›ìˆë‹¹', 
+            'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ë…ì‚°3ë™ 897-1', 
+            '010-1234-5678', 'ì§œì¥ë©´,ì§¬ë½•',
+            '4000, 6000', '08:00~21:00');
+insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
+    values(restaurant_seq.NEXTVAL, 'ì”ì¹˜êµ­ìˆ˜,ë¹„ë¹”êµ­ìˆ˜,ë§›ì§‘,ì”ì¹˜êµ­ìˆ˜ ë§›ì§‘,ë¹„ë¹”êµ­ìˆ˜ ë§›ì§‘,ë…ì‚°ë™ ë§›ì§‘,ê°€ì‚°ë™ ë§›ì§‘,ê¸ˆì²œêµ¬ ë§›ì§‘,ë…ì‚°ë™ ì”ì¹˜êµ­ìˆ˜,ë…ì‚°ë™ ë¹„ë¹”êµ­ìˆ˜,ê°€ì‚°ë™ ì”ì¹˜êµ­ìˆ˜,ê°€ì‚°ë™ ë¹„ë¹”êµ­ìˆ˜,ê¸ˆì²œêµ¬ ì”ì¹˜êµ­ìˆ˜,ê¸ˆì²œêµ¬ ë¹„ë¹”êµ­ìˆ˜',
+            'ì”ì¹˜ì§‘',
+            'ì„œìš¸íŠ¹ë³„ì‹œ ê¸ˆì²œêµ¬ ê°€ì‚°ë™ 772', 
+            '010-1234-5678', 'ì”ì¹˜êµ­ìˆ˜,ë¹„ë¹”êµ­ìˆ˜',
+            '5000,7000', '08:00~21:00');
 
 
---È¸¿øÅ×ÀÌºí ´õ¹Ì
+--íšŒì›í…Œì´ë¸” ë”ë¯¸
 insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, rest, grade) values
-    ('test1', 'Å×½ºÆ®1', '1111', 'test1@naver.com', '010-1111-1111', 5, 400, '¶±ººÀÌ', '¼ÒÀ¯ÅÛ', 'È°¼ºÈ­', 'È¸¿ø');
+    ('test1', 'í…ŒìŠ¤íŠ¸1', '1111', 'test1@naver.com', '010-1111-1111', 5, 400, 'ë–¡ë³¶ì´', 'ì†Œìœ í…œ', 'í™œì„±í™”', 'íšŒì›');
 insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, rest, grade) values
-    ('test2', 'Å×½ºÆ®2', '2222', 'test1@naver.com', '010-2222-2222', 5, 400, '¶ó¸é', '¼ÒÀ¯ÅÛ', 'È°¼ºÈ­', 'È¸¿ø');
+    ('test2', 'í…ŒìŠ¤íŠ¸2', '2222', 'test1@naver.com', '010-2222-2222', 5, 400, 'ë¼ë©´', 'ì†Œìœ í…œ', 'í™œì„±í™”', 'íšŒì›');
 insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, rest, grade) values
-    ('test3', 'Å×½ºÆ®3', '3333', 'test1@naver.com', '010-3333-3333', 5, 400, 'Á·¹ß', '¼ÒÀ¯ÅÛ', 'È°¼ºÈ­', 'È¸¿ø');
+    ('test3', 'í…ŒìŠ¤íŠ¸3', '3333', 'test1@naver.com', '010-3333-3333', 5, 400, 'ì¡±ë°œ', 'ì†Œìœ í…œ', 'í™œì„±í™”', 'íšŒì›');

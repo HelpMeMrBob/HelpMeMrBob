@@ -34,12 +34,7 @@ public class InfomationController {
 	public String infomation(Model model, HttpSession session) {
 		
 		if(session.getAttribute("siteUserInfo") != null) {
-			model.addAttribute("loginCheck", "Login");
-			
 			return "redirect:favoriteList.do";
-		}
-		else{
-			model.addAttribute("loginCheck", "noLogin");
 		}
 		
 		return "main/infomation";
@@ -49,10 +44,7 @@ public class InfomationController {
 	@RequestMapping("/restaurant.do")
 	public String restaurant(Model model, HttpServletRequest req, HttpSession session) {
 		
-		if(session.getAttribute("siteUserInfo") == null) {
-			model.addAttribute("loginCheck", "noLogin");
-		}
-		else{
+		if(session.getAttribute("siteUserInfo") != null) {
 			model.addAttribute("loginCheck", "Login");
 			//DB에서 즐겨찾기 리스트목록 가져오기
 			MemberVO vo = (MemberVO)session.getAttribute("siteUserInfo");
@@ -74,11 +66,7 @@ public class InfomationController {
 	public String favorite(Model model, HttpServletRequest req, HttpSession session, FavoriteDTO favoriteDTO) {
 		
 		if (session.getAttribute("siteUserInfo") == null) {
-			model.addAttribute("loginCheck", "noLogin");
 			return "redirect:login.do";
-		}
-		else {
-			model.addAttribute("loginCheck", "Login");
 		}
 		
 		try {
@@ -98,11 +86,7 @@ public class InfomationController {
 	public String favoriteList(Model model, HttpSession session) {
 		
 		if (session.getAttribute("siteUserInfo") == null) {
-			model.addAttribute("loginCheck", "noLogin");
 			return "redirect:login.do";
-		}
-		else {
-			model.addAttribute("loginCheck", "Login");
 		}
 		
 		MemberVO vo = (MemberVO)session.getAttribute("siteUserInfo");
@@ -119,11 +103,7 @@ public class InfomationController {
 	public String favoriteModify(Model model, HttpSession session, HttpServletRequest req) {
 		
 		if (session.getAttribute("siteUserInfo") == null) {
-			model.addAttribute("loginCheck", "noLogin");
 			return "redirect:login.do";
-		}
-		else {
-			model.addAttribute("loginCheck", "Login");
 		}
 		
 		sqlSession2.getMapper(InfomationDAOInter.class).favoriteModify(
@@ -138,11 +118,7 @@ public class InfomationController {
 	public String favoriteDelete(Model model, HttpSession session, HttpServletRequest req) {
 		
 		if (session.getAttribute("siteUserInfo") == null) {
-			model.addAttribute("loginCheck", "noLogin");
 			return "redirect:login.do";
-		}
-		else {
-			model.addAttribute("loginCheck", "Login");
 		}
 		
 		sqlSession2.getMapper(InfomationDAOInter.class).favoriteDelete(req.getParameter("idx"));
