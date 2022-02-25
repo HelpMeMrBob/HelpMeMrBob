@@ -8,7 +8,7 @@ import lombok.Data;
 public class BoardReplyVO {
 	
 	private int rno; 		//댓글번호	
-	private int idx;		//글번호 -FK	
+	private String idx;		//글번호 -FK	
 	private String id;		//아이디
 	private String name;	//이름
 	private String contents;	//내용	

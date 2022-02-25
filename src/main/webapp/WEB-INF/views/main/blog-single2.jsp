@@ -111,18 +111,42 @@ function writeValidate(f)
 				<p>${viewRow.id}</p>
                 <p>${viewRow.postdate }</p>
 				<p>${viewRow.visitCnt }</p>
-				<p><img src="resources/upload/${viewRow.userfile1}" /></p>
-				<p><img src="resources/upload/${viewRow.userfile2}" /></p>
-				<p><img src="resources/upload/${viewRow.userfile3}" /></p>
-				<p><img src="resources/upload/${viewRow.userfile4}" /></p>
-				<p><img src="resources/upload/${viewRow.userfile5}" /></p>
+				<p>${idx}</p>
 				
-				<c:forEach items="${viewRow }" var="row"  varStatus="loop">
-					<p><img src="resources/upload/${viewRow.userfile1}" /></p>
-				</c:forEach>
+				<c:if test="${not empty viewRow.userfile1}">
+				<p><img src="resources/upload/${viewRow.userfile1}" /></p>
+				</c:if>
+				<c:if test="${not empty viewRow.userfile2}">
+				<p><img src="resources/upload/${viewRow.userfile2}" /></p>
+				</c:if>
+				<c:if test="${not empty viewRow.userfile3}">
+				<p><img src="resources/upload/${viewRow.userfile3}" /></p>
+				</c:if>
+				<c:if test="${not empty viewRow.userfile4}">
+				<p><img src="resources/upload/${viewRow.userfile4}" /></p>
+				</c:if>
+				<c:if test="${not empty viewRow.userfile5}">
+				<p><img src="resources/upload/${viewRow.userfile5}" /></p>
+				</c:if>
 				
 				<h3>${lno}</h3>
-<!-- ////////좋아요버튼/////// -->
+<!-- ////////좋아요한 게시글/////// -->
+<c:if test="${not empty lno}">
+<form name="writeFrm" method="post" 
+          action="./like.do" class="form contact__form"
+          onsubmit="return checkValidate(this);">
+ <input type="hidden" name="idx" value="${viewRow.idx }" />
+<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+<div class="single-page__share pad-b-sm-2">
+  <div class="display-flex align-items-center"><div class="social">
+  <!-- ${row.id } -->
+	<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♥</button>
+   </div></div><!-- .display-flex ends -->
+</div><!-- .single-page__share ends -->
+</form>
+</c:if>
+<!-- //////////좋아요안한 게시글////////// -->
+<c:if test="${empty lno}">
 <form name="writeFrm" method="post" 
           action="./like.do" class="form contact__form"
           onsubmit="return checkValidate(this);">
@@ -135,6 +159,7 @@ function writeValidate(f)
    </div></div><!-- .display-flex ends -->
 </div><!-- .single-page__share ends -->
 </form>
+</c:if>
 <!-- ////////좋아요버튼/////// -->
             </div><!-- .flex-* ends -->
 

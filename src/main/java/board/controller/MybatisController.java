@@ -53,12 +53,17 @@ public class MybatisController {
 		int start=(nowPage-1)*pageSize+1;
 		int end=nowPage*pageSize;
 		
+		model.addAttribute("idx",req.getParameter("idx"));
+		String idx = req.getParameter("idx");
+		
+		
+		
 		/*
 		 서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨
 		 전달된 파라미터는 #{param1}과 같이 순서대로 사용한다.
 		 */
 		ArrayList<BoardReplyVO> lists=
-				sqlSession.getMapper(MybatisDAOImpl.class).listPage(start, end);
+				sqlSession.getMapper(MybatisDAOImpl.class).listPage(start, end, idx);
 		String pagingImg=
 				PagingUtil.pagingImg(totalRecordCount,pageSize, blockPage, nowPage,
 						req.getContextPath()+"/mybatis/list.do?");
@@ -70,6 +75,8 @@ public class MybatisController {
 			dto.setContents(temp);
 		}
 		model.addAttribute("lists",lists);
+		
+		System.out.println("댓글의 idx를 받아오는걸까요?"+idx);
 		
 		return "main/blog-single2";
 	}
@@ -155,7 +162,7 @@ public class MybatisController {
 				return "redirect:reviewView.do";
 			}
 	//수정페이지 진입하기
-	@RequestMapping("/mybatis/modify.do")
+	@RequestMapping("/modify.do")
 	public String modify(Model model, HttpServletRequest req,
 			HttpSession session) {
 		//수정페이지 진입시에도 로그인 확인해야함

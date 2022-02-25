@@ -14,10 +14,11 @@
 		SELECT COUNT(*) from board_rep
 	</select>
 	
+	<!-- idx값으로 빼와야합니다. -->
 	<select id="listPage" resultType="board.model.BoardReplyVO">
 		SELECT * FROM(
 			SELECT Tb.*, rownum rNum FROM(
-				SELECT * FROM board_rep ORDER BY idx DESC
+				SELECT * FROM board_rep where idx=#{param3} ORDER BY rno DESC
 		)Tb
 	)
 	WHERE rNum BETWEEN #{param1} AND #{param2}	

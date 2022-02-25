@@ -123,12 +123,14 @@ public class BbsController {
 				int start=(nowPage-1)*pageSize+1;
 				int end=nowPage*pageSize;
 				
+				model.addAttribute("idx",req.getParameter("idx"));
+				String idx = req.getParameter("idx");
 				/*
 				 서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨
 				 전달된 파라미터는 #{param1}과 같이 순서대로 사용한다.
 				 */
 				ArrayList<BoardReplyVO> lists=
-						sqlSession.getMapper(MybatisDAOImpl.class).listPage(start, end);
+						sqlSession.getMapper(MybatisDAOImpl.class).listPage(start, end, idx);
 				String pagingImg=
 						PagingUtil.pagingImg(totalRecordCount,pageSize, blockPage, nowPage,
 								req.getContextPath()+"/reviewView.do?");
@@ -142,10 +144,13 @@ public class BbsController {
 				model.addAttribute("lists",lists);
 				//댓글불러오기끝
 		
-		return "main/blog-single2";
-	}
-	
-	//패스워드 검색페이지 진입
+				System.out.println(start+"="+end+"="+idx);
+				System.out.println(lists.size());
+				
+				return "main/blog-single2";
+		}
+		
+		//패스워드 검색페이지 진입
 		@RequestMapping("/reviewId.do")
 		public String password(Model model, HttpServletRequest req) {
 			//일련번호는 컨트롤러에세 파라미터를 받은 후 Model에 저장하여 View로 전달함

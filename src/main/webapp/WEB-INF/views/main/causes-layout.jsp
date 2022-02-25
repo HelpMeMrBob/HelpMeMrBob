@@ -93,8 +93,9 @@
 
                 <div class="card__header no-overlay">
 
-                  <img src="./resources/images/causes-3.jpg" alt="" class="card__image">
+                  <!-- <img src="./resources/images/causes-3.jpg" alt="" class="card__image"> -->
 
+				<img src="./resources/upload/${row.userfile1}" alt="" class="card__image">
                 </div><!-- .card__header ends -->
 
                 <div class="card__body">

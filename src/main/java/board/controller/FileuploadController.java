@@ -143,11 +143,26 @@ public class FileuploadController {
 			
 			dto.setTitle(title);
 			dto.setContents(contents);
-			if(resultList.get(0)!=null) dto.setUserfile1(resultList.get(0));
-			if(resultList.get(1)!=null) dto.setUserfile2(resultList.get(1));
-			//if(resultList.get(2)!=null) dto.setUserfile3(resultList.get(2));
-			//if(resultList.get(3)!=null) dto.setUserfile4(resultList.get(3));
-			//if(resultList.get(4)!=null) dto.setUserfile5(resultList.get(4));
+//			if(resultList.get(0)!=null) dto.setUserfile1(resultList.get(0));
+//			if(resultList.get(1)!=null) dto.setUserfile2(resultList.get(1));
+//			if(resultList.get(2)!=null) dto.setUserfile3(resultList.get(2));
+//			if(resultList.get(3)!=null) dto.setUserfile4(resultList.get(3));
+//			if(resultList.get(4)!=null) dto.setUserfile5(resultList.get(4));
+			
+			
+			int exist = 1;
+			for(String obj : resultList) {
+				//dto.setUserfile1(resultList.get(0));
+				
+				if(exist==1) dto.setUserfile1(obj);
+				else if(exist==2) dto.setUserfile2(obj);
+				else if(exist==3) dto.setUserfile3(obj);
+				else if(exist==4) dto.setUserfile4(obj);
+				else if(exist==5) dto.setUserfile5(obj);
+				
+				exist++;
+			}
+			
 			
 			dao.reviewWrite(dto);	
 		}		 

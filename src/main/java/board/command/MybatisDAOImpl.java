@@ -23,7 +23,7 @@ public interface MybatisDAOImpl {
 	게시물수 카운트와 목록에 출력할 게시물 가져오기
 	 */
 	public int getTotalCount();//파라미터 없음
-	public ArrayList<BoardReplyVO> listPage(int s, int e);//파라미터 2개 있음
+	public ArrayList<BoardReplyVO> listPage(int s, int e, String idx);//파라미터 2개 있음
 	
 	/*
 	 방명록 2차 버전에서 사용할 메서드
