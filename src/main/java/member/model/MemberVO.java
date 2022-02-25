@@ -10,7 +10,6 @@ public class MemberVO
     private String pass;
     private String email;
     private String telNum;
-    private int point;
     private int lev;
     private int exp;
     private String favMenu;
@@ -33,19 +32,16 @@ public class MemberVO
 	private String cate;
 	private int virtualNum;
 	
-	//	검색어 처리를 위한 멤버변수
-	private String searchField;	//	검색할 필드명
-	private String searchTxt;	//	검색어
-	
-	//	select 구간을 위한 멤버변수
-	private int start;			//	select 시작
-	private int end;			//	select 끝
+	//	페이징 처리
+	private String searchField;
+	private String searchTxt;
+	private int start;
+	private int end;
 	
 	//	댓글 테이블
 	private String rno;
 	private java.sql.Date writedate;
-	
-	
+		
 	//	스크랩 테이블
 	private int scrapNum;
 	private java.sql.Date sdate;
@@ -60,4 +56,7 @@ public class MemberVO
 	private String tab8Name;
 	private String tab9Name;
 	private String tab10Name;
+	
+	//	스티커 테이블
+	private String temOname;
 }

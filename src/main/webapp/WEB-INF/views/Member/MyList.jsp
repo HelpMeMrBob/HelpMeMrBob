@@ -1,7 +1,3 @@
-<%@page import="java.util.Enumeration"%>
-<%@page import="member.model.MemberDAOImpl"%>
-<%@page import="org.apache.ibatis.session.SqlSession"%>
-<%@page import="member.model.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
@@ -16,8 +12,7 @@
 				<td style="width: 15%;">
 					<button onclick="location.href='./mypage.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
-								   width: 100%; height: 80px; font-size: 18px;
-	  							   ">
+								   width: 100%; height: 80px; font-size: 18px;">
 						나의 정보 보기
 					</button>
 				</td>

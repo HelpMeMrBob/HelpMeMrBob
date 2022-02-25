@@ -151,17 +151,17 @@
 							<td>
 								<button onclick="location.href='./mypage.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
-										       width: 150px; height: 70px; font-size: 16px;
+										       width: 100px; height: 50px; font-size: 12px;
 										       border: none; border-right: 5px solid #0F202E">
-									<strong>마이페이지</strong>
+									마이페이지
 								</button>
 							</td>
 							<td>
 								<button onclick="location.href='./logout.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
-											   width: 150px ; height: 70px; font-size: 16px;
+											   width: 100px ; height: 50px; font-size: 12px;
 											   border: none; border-left: 3px solid #0f202e">
-									<strong>로그아웃</strong>
+									로그아웃
 								</button>
 							</td>
 						</tr>
@@ -173,17 +173,17 @@
 							<td>
 								<button onclick="location.href='./login.do';"
 										  style="background-color: #ED6A5A; color: #F5F5F5;
-												 width: 150px; height: 70px; font-size: 16px;
+												 width: 100px; height: 50px; font-size: 12px;
 												 border: none; border-right: 3px solid #0a151f">
-									<strong>로그인</strong>
+									로그인
 								</button>
 							</td>
 							<td>
 								<button onclick="location.href='./memberRegister.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
-											   width: 150px; height: 70px; font-size: 16px;
+											   width: 100px; height: 50px; font-size: 12px;
 											   border: none; border-left: 3px solid #0a151f">
-									<strong>회원가입</strong>
+									회원가입
 								</button>
 							</td>
 						</tr>
