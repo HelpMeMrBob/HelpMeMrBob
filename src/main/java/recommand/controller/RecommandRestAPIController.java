@@ -1,6 +1,8 @@
 package recommand.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,15 +22,23 @@ public class RecommandRestAPIController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping("/worldcupList.do")
+	@RequestMapping("/resources/worldcup_react_build8/index.html")
 	@ResponseBody
-	public ArrayList<RecommandDTO> worldcupList(HttpServletRequest req) {
+	public Map<String, String> worldcupList(RecommandParameterDTO recommandParameterDTO) {
 		
-		RecommandParameterDTO recommandParameterDTO = new RecommandParameterDTO();
+		ArrayList<RecommandDTO> record = sqlSession.getMapper(RecommandDAO.class)
+				.listData(recommandParameterDTO);
 		
-		ArrayList<RecommandDTO> lists =
-				sqlSession.getMapper(RecommandDAO.class).listData(recommandParameterDTO);
+		Map<String, String> map = new HashMap<String, String>();
+		for(RecommandDTO dto : record) {
+			map.put("idx", dto.getIdx());
+			map.put("food", dto.getFood());
+			map.put("image", dto.getImage());
+			map.put("recomndCnt", dto.getRecomndCnt());
+			map.put("Lgroup", dto.getLgroup());
+			map.put("Mgroup", dto.getMgroup());
+		}
 		
-		return lists;
+		return map;
 	}
 }
