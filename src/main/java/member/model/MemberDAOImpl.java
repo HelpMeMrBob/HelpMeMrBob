@@ -9,6 +9,8 @@ public interface MemberDAOImpl
 	public MemberVO memberUpdate(MemberVO vo);
 	public int memberUpdateAction(MemberVO vo);
 	
+	public ArrayList<MemberVO> mySticker(ParameterDTO parameterDTO);
+	
 	public int getTotalCountSearch(ParameterDTO parameterDTO);
 	public ArrayList<MemberVO> listPageSearch(ParameterDTO parameterDTO);
 	

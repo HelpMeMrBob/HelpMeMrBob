@@ -21,6 +21,12 @@
 		UPDATE member SET email = #{ email }, telNum = #{ telNum } where id = #{ id } 
 	</update>
 	
+	<!-- 나의 스티커 목록 -->
+	<select id="mySticker" resultType="member.model.MemberVO"
+			parameterType="member.model.ParameterDTO">
+		SELECT * FROM haveItem WHERE id = #{ id }
+	</select>
+	
 	<!-- 나의 작성 목록 -->
 	<select id="getTotalCountSearch" resultType="int" parameterType="member.model.ParameterDTO">
 		SELECT COUNT(*) FROM board WHERE id = #{ id }  
@@ -30,7 +36,7 @@
 	</select>
 	
 	<select id="listPageSearch" resultType="member.model.MemberVO"
-		parameterType="member.model.ParameterDTO">
+			parameterType="member.model.ParameterDTO">
 		SELECT * FROM (
 			SELECT Tb.*, rownum rNum FROM (
 				SELECT * FROM board WHERE id = #{ id }

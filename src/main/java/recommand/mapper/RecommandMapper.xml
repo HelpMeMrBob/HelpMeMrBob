@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recommand.model.RecommandDAO">
+	<!-- 메뉴 가져오기 -->
+	<select id="listData" resultType="recommand.model.RecommandDTO"
+			parameterType="recommand.model.RecommandParameterDTO">
+		SELECT food, image, recomndCnt FROM food;
+	</select>
+</mapper>
+
+<!--
+	namespace에는 서비스객체 역할을 하는 interface의 풀경로를 기술한다.
+	
+	호출된 메서드명(id속성) : getTotalCount
+	반환타입(resultType속성) : int. 즉, 정수타입으로 반환
+	파라미터타입(parameterType속성) : ParameterDTO객체를 통해 모든 파라미터를 전달받는다.
+ -->

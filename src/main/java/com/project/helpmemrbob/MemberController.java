@@ -1,5 +1,5 @@
 package com.project.helpmemrbob;
-	
+
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;	
@@ -45,7 +45,7 @@ public class MemberController
 		MemberVO vo = sqlSession.getMapper(MemberDAOImpl.class)
 				  .login(req.getParameter("id"), req.getParameter("pass"));
 	
-	ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView();
 	
 	if (vo == null)
 	{
@@ -85,6 +85,7 @@ public class MemberController
 		return mv;
 	}
 	
+	
 	//	마이 페이지 페이지 이동
 	@RequestMapping("/mypage.do")
 	public String myPage(Model model, HttpServletRequest req, HttpSession session)
@@ -93,7 +94,19 @@ public class MemberController
 		{
 			return "redirect:login.do";
 		}
-				
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		ArrayList<MemberVO> stickers
+		= sqlSession.getMapper(MemberDAOImpl.class).mySticker(parameterDTO);
+		
+		System.out.println(stickers.size());
+		System.out.println(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		System.out.println(parameterDTO.getId());
+		
+		model.addAttribute("stickers", stickers);
+
 		return "Member/MyPage";
 	}
 	
@@ -249,7 +262,6 @@ public class MemberController
 	{
 		return "Member/MemberRegister";
 	}
-
 	
 /*───────────────────────────────────────────────────────────────────────────────────────────────
 	나의 스크랩 목록 (Tab 1 - Tab 10)
