@@ -263,6 +263,16 @@ public class MemberController
 		return "Member/MemberRegister";
 	}
 	
+	//회원가입 액션페이지
+	@RequestMapping("/registerAction.do")
+	public String registerAction (HttpServletRequest req,Model model, MemberVO vo)
+	{	
+		sqlSession.getMapper(MemberDAOImpl.class).registerAction(vo);
+		System.out.println("회원 가입 완료");
+		
+		return "redirect:/";
+	}
+	
 /*───────────────────────────────────────────────────────────────────────────────────────────────
 	나의 스크랩 목록 (Tab 1 - Tab 10)
 ───────────────────────────────────────────────────────────────────────────────────────────────*/

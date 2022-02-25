@@ -19,4 +19,6 @@ public interface MemberDAOImpl
 	
 	public int getScrapTotalCountSearch(ParameterDTO parameterDTO);
 	public ArrayList<MemberVO> scrapListPageSearch(ParameterDTO parameterDTO);
+	
+	public int registerAction(MemberVO vo);
 }
