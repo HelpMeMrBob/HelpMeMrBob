@@ -43,6 +43,7 @@ public class LikeController {
 			
 			int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx);
 			
+			session.setAttribute("lno", LikeCount);
 			System.out.println("=====LikeCount는==="+LikeCount);
 			
 			if(LikeCount==0) {
@@ -65,6 +66,7 @@ public class LikeController {
 				model.addAttribute("idx",req.getParameter("idx"));
 				model.addAttribute("id",req.getParameter("id"));
 			}
+			
 			
 			return "redirect:reviewView.do";
 		  

@@ -74,7 +74,7 @@ public class BbsController {
 			//만약 세션이 끊어졌다면 로그인페이지로 이동한다.
 			return "redirect:login.do";
 		}  
-		return "main/contact2";
+		return "main/contact4";
 	}
 	//전송방식이 post이므로 value, method까지 같이 기술해서 매핑
 	@RequestMapping(value="/writeAction.do",

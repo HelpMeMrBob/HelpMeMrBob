@@ -111,11 +111,17 @@ function writeValidate(f)
 				<p>${viewRow.id}</p>
                 <p>${viewRow.postdate }</p>
 				<p>${viewRow.visitCnt }</p>
+				<p><img src="resources/upload/${viewRow.userfile1}" /></p>
+				<p><img src="resources/upload/${viewRow.userfile2}" /></p>
+				<p><img src="resources/upload/${viewRow.userfile3}" /></p>
+				<p><img src="resources/upload/${viewRow.userfile4}" /></p>
+				<p><img src="resources/upload/${viewRow.userfile5}" /></p>
 				
-				<h3>${lno.lno}</h3>
-				<h3>${idx}</h3>
-				<h3>${id}</h3>
+				<c:forEach items="${viewRow }" var="row"  varStatus="loop">
+					<p><img src="resources/upload/${viewRow.userfile1}" /></p>
+				</c:forEach>
 				
+				<h3>${lno}</h3>
 <!-- ////////좋아요버튼/////// -->
 <form name="writeFrm" method="post" 
           action="./like.do" class="form contact__form"

@@ -52,7 +52,36 @@ public class JDBCTemplateDAO {
 					new BeanPropertyRowMapper<BoardDTO>(
 							BoardDTO.class));
 	}
-	//글쓰기처리1
+	//파일올리는 글쓰기
+		public void reviewWrite(final BoardDTO boardDTO) {
+			template.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException{
+					
+					String sql="INSERT INTO board ("
+						+" idx, id, tag, title, contents,cate,"
+						+ " userfile1, userfile2, userfile3, userfile4, userfile5)"
+						+" VALUES ("
+						+" board_seq.NEXTVAL,?,?,?,?,'rwv',"
+						+ "?,?,?,?,?"
+						+" )";
+					PreparedStatement psmt=
+							con.prepareStatement(sql);
+					psmt.setString(1, boardDTO.getId());
+					psmt.setString(2, boardDTO.getTag());
+					psmt.setString(3, boardDTO.getTitle());
+					psmt.setString(4, boardDTO.getContents());
+					psmt.setString(5, boardDTO.getUserfile1());
+					psmt.setString(6, boardDTO.getUserfile2());
+					psmt.setString(7, boardDTO.getUserfile3());
+					psmt.setString(8, boardDTO.getUserfile4());
+					psmt.setString(9, boardDTO.getUserfile5());
+
+					return psmt;
+				}
+			});
+		}
+		//글만 쓰는 글쓰기
 		public void write(final BoardDTO boardDTO) {
 			template.update(new PreparedStatementCreator() {
 				@Override
