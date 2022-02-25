@@ -58,154 +58,82 @@ public class kakaoPayContoller {
 		System.out.println("충전금액: "+amount);
 		return "payResult/chargeProcess";
 	}
-	//home.jsp에서 연습할때 사용한 컨트롤러 매핑
-			@RequestMapping("kakaopay")
-			@ResponseBody
-			public String kakaopay() {			
-					try {
-						String amount = "7000";
-						//요청 주소
-						URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
-						//URL connection을 만들기 위한 강제 형변환
-						HttpURLConnection connection = (HttpURLConnection) address.openConnection(); 
-						//서버연결을 위한 POST방식으로 요청
-						connection.setRequestMethod("POST");
-						//Authorization이라는 특성에 직접 받은 KaKaoAK admin넣기
-						connection.setRequestProperty("Authorization", "KakaoAK 8d0ba42fb4ca1001d7004e52945fc844");
-						//ContentType 정의
-						connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-						//연결을 통해 서버에 전달할것이 있다면 true.
-						connection.setDoOutput(true);
-						//String amount = "10000";
-						String parameter = "cid=TC0ONETIME" // 가맹점 코드
-								+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
-								+ "&partner_user_id=partner_user_id" // 가맹점 회원 id
-								+ "&item_name=rice" // 상품명
-								+ "&quantity=1" // 상품 수량
-								+ "&total_amount="+amount// 총 금액
-								+ "&vat_amount=200" // 부가세
-								+ "&tax_free_amount=0" // 상품 비과세 금액
-								+ "&approval_url=http://localhost:8081/helpmemrbob/resultSuccess.do" // 결제 성공 시
-								+ "&fail_url=http://localhost:8081/helpmemrbob/resultFailure.do" // 결제 실패 시
-								+ "&cancel_url=http://localhost:8081/helpmemrbob/resultCancel.do";
+	//oriKaKao.jsp에서 사용한 컨트롤러
+	@RequestMapping("kakaopay2")
+	@ResponseBody
+	public String kakaopay2(HttpSession session) {
+		boolean flag = false;
+		PointDAO pdao = new PointDAO();
+		PointDTO pdto = new PointDTO();
+		//테스트용. 후에는 sessioned Id로 교체해야함
+		pdto.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		try {
+			//요청 주소
+			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
+		//URL connection을 만들기 위한 강제 형변환
+		HttpURLConnection connection = (HttpURLConnection) address.openConnection(); 
+		//서버연결을 위한 POST방식으로 요청
+		connection.setRequestMethod("POST");
+		//Authorization이라는 특성에 직접 받은 KaKaoAK admin넣기
+		connection.setRequestProperty("Authorization", "KakaoAK 8d0ba42fb4ca1001d7004e52945fc844");
+		//ContentType 정의
+		connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		//연결을 통해 서버에 전달할것이 있다면 true.
+		connection.setDoOutput(true);
 						
-						//서버에 전달하기 위한
-						OutputStream out = connection.getOutputStream();
-						//데이터를 주는데, 서버에 전달한 out을 매개변수로 데이터를 준다.
-						DataOutputStream data =new DataOutputStream(out);
-						//파라미터를 형변환 해준다.
-						data.writeBytes(parameter);
-						//data주는 것을 그만 사용하겠다는 뜻 & 자동으로 flush해서 비워짐.
-						data.close();			
+			String parameter = "cid=TC0ONETIME" // 가맹점 코드
+					+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
+					+ "&partner_user_id=partner_user_id" // 가맹점 회원 id
+					+ "&item_name=rice" // 상품명
+					+ "&quantity=1" // 상품 수량
+					+ "&total_amount="+amount // 총 금액
+					+ "&vat_amount=200" // 부가세
+					+ "&tax_free_amount=0" // 상품 비과세 금액
+					+ "&approval_url=http://localhost:8081/helpmemrbob/resultSuccess.do" // 결제 성공 시
+					+ "&fail_url=http://localhost:8081/helpmemrbob/resultFailure.do" // 결제 실패 시
+					+ "&cancel_url=http://localhost:8081/helpmemrbob/resultCancel.do";
 						
-						//실제로 통신함. 결과를 받아낸다.
-						int  result = connection.getResponseCode();
-						//받는애(in). 성공했다면 결과 값으로 200을 받음.
-						InputStream in;
-						if(result ==200) {
-							in = connection.getInputStream();
-							System.out.println("ajax 통신성공");
-						}
-						else {
-							//에러를 받는다.
-							in = connection.getErrorStream();
-							System.out.println("ajax 통신실패");
-						}
-						System.out.println("result값은 "+result);
-						//inRead(받는걸 읽는애)로 in(받는애)를 parameter로 받음 
-						InputStreamReader inRead = new InputStreamReader(in); 
-						//inRead를 형변환 해준다.
-						BufferedReader change = new BufferedReader(inRead);
-						System.out.println(parameter);
-						return change.readLine();
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					return "";
-				}
+				//서버에 전달하기 위한
+			OutputStream out = connection.getOutputStream();
+			//데이터를 주는데, 서버에 전달한 out을 매개변수로 데이터를 준다.
+			DataOutputStream data =new DataOutputStream(out);
+			//파라미터를 형변환 해준다.
+			data.writeBytes(parameter);
+			//data주는 것을 그만 사용하겠다는 뜻 & 자동으로 flush해서 비워짐.
+			data.close();			
 				
-				//oriKaKao.jsp에서 사용한 컨트롤러
-				@RequestMapping("kakaopay2")
-				@ResponseBody
-				public String kakaopay2(HttpSession session) {
-					boolean flag = false;
-					PointDAO pdao = new PointDAO();
-					PointDTO pdto = new PointDTO();
-					//테스트용. 후에는 sessioned Id로 교체해야함
-					pdto.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
-					try {
-						//요청 주소
-						URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
-						//URL connection을 만들기 위한 강제 형변환
-						HttpURLConnection connection = (HttpURLConnection) address.openConnection(); 
-						//서버연결을 위한 POST방식으로 요청
-						connection.setRequestMethod("POST");
-						//Authorization이라는 특성에 직접 받은 KaKaoAK admin넣기
-						connection.setRequestProperty("Authorization", "KakaoAK 8d0ba42fb4ca1001d7004e52945fc844");
-						//ContentType 정의
-						connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-						//연결을 통해 서버에 전달할것이 있다면 true.
-						connection.setDoOutput(true);
-						
-						String parameter = "cid=TC0ONETIME" // 가맹점 코드
-								+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
-								+ "&partner_user_id=partner_user_id" // 가맹점 회원 id
-								+ "&item_name=rice" // 상품명
-								+ "&quantity=1" // 상품 수량
-								+ "&total_amount="+amount // 총 금액
-								+ "&vat_amount=200" // 부가세
-								+ "&tax_free_amount=0" // 상품 비과세 금액
-								+ "&approval_url=http://localhost:8081/helpmemrbob/resultSuccess.do" // 결제 성공 시
-								+ "&fail_url=http://localhost:8081/helpmemrbob/resultFailure.do" // 결제 실패 시
-								+ "&cancel_url=http://localhost:8081/helpmemrbob/resultCancel.do";
-						
-						//서버에 전달하기 위한
-						OutputStream out = connection.getOutputStream();
-						//데이터를 주는데, 서버에 전달한 out을 매개변수로 데이터를 준다.
-						DataOutputStream data =new DataOutputStream(out);
-						//파라미터를 형변환 해준다.
-						data.writeBytes(parameter);
-						//data주는 것을 그만 사용하겠다는 뜻 & 자동으로 flush해서 비워짐.
-						data.close();			
-						
-						//실제로 통신함. 결과를 받아낸다.
-						int  result = connection.getResponseCode();
-						//받는애(in). 성공했다면 결과 값으로 200을 받음.
-						InputStream in;
-						if(result ==200) {
-							in = connection.getInputStream();
-							System.out.println("ajax 통신성공");
-						}
-						else {
-							//에러를 받는다.
-							in = connection.getErrorStream();
-							System.out.println("ajax 통신실패");
-						}
-						System.out.println("result값은 "+result);
-						//inRead(받는걸 읽는애)로 in(받는애)를 parameter로 받음 
-						InputStreamReader inRead = new InputStreamReader(in); 
-						//inRead를 형변환 해준다.
-						BufferedReader change = new BufferedReader(inRead);
-						System.out.println(parameter);
-						flag = true;
-						if(flag == true) {
-							pdao.buyPonts(pdto, amount);
-						}
-						return change.readLine();
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+			//실제로 통신함. 결과를 받아낸다.
+			int  result = connection.getResponseCode();
+			//받는애(in). 성공했다면 결과 값으로 200을 받음.
+			InputStream in;
+			if(result ==200) {
+			in = connection.getInputStream();
+			System.out.println("ajax 통신성공");
+			}
+			else {
+				//에러를 받는다.
+				in = connection.getErrorStream();
+				System.out.println("ajax 통신실패");
+			}
+			System.out.println("result값은 "+result);
+			//inRead(받는걸 읽는애)로 in(받는애)를 parameter로 받음 
+			InputStreamReader inRead = new InputStreamReader(in); 
+			//inRead를 형변환 해준다.
+			BufferedReader change = new BufferedReader(inRead);
+			System.out.println(parameter);
+			flag = true;
+			if(flag == true) {
+				pdao.buyPonts(pdto, amount);
+			}
+			return change.readLine();
+			} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 					}
-					
-					return "";
-				}
-	
+				
+			return "";
+			}
 }
