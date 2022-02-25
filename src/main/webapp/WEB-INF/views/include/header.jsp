@@ -135,14 +135,6 @@
           <!-- .header__list ends -->
         </ul><!-- .header__navitems ends -->
 
-        <!-- Contains Search button and donation button -->
-        <div class="header__extra desktop-version">
-          <div class="search"> 
-            <div class="search-icon">
-              <button class="modal-button" data-modal-target="site-search"><i class="ri-search-line"></i></button>
-            </div>
-          </div>
-
 	      <div class="cta hide-on-sm show-on-lg" style="">
 			<c:choose>
 				<c:when test="${ not empty sessionScope.siteUserInfo }">

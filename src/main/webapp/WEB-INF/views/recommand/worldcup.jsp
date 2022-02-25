@@ -118,9 +118,9 @@
                 </div><!-- .card__body ends -->
 
                 <div class="card__footer">
-
+					<!-- http://localhost:8081/helpmemrbob/resources/worldcup_react_build8/index.html -->
                   <div class="card__cta">
-                    <a href="ministries-single.html" class="button button--primary button--fill">64강 바로가기</a>
+                    <a href="./resources/worldcup_react_build8/index.html?round=64" class="button button--primary button--fill">64강 바로가기</a>
                   </div><!-- .card__cta ends -->
 
                   <div class="card__share text-right-sm">
