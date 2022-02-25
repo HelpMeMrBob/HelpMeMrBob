@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import item.ItemDAO;
+import member.model.MemberVO;
 import point.PointDAO;
 import point.PointDTO;
 
@@ -131,12 +132,12 @@ public class kakaoPayContoller {
 				//oriKaKao.jsp에서 사용한 컨트롤러
 				@RequestMapping("kakaopay2")
 				@ResponseBody
-				public String kakaopay2() {
+				public String kakaopay2(HttpSession session) {
 					boolean flag = false;
 					PointDAO pdao = new PointDAO();
 					PointDTO pdto = new PointDTO();
 					//테스트용. 후에는 sessioned Id로 교체해야함
-					pdto.setId("ptest");
+					pdto.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
 					try {
 						//요청 주소
 						URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
