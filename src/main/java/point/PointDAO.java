@@ -104,8 +104,13 @@ public class PointDAO {
 	public void addPoint(String tname,final PointDTO pdto) {
 		//포인트의 획득 경로에 따라 얻는 달라짐.
 		int pt = 0;
+		String sql;
 		
-		if(tname.equals("review")) {
+		if(tname.equals("register")) {
+			pt = 0;
+			
+		}
+		else if(tname.equals("review")) {
 			pt = 1000;
 		}else if(tname.equals("popularComments")) {
 			pt = 2000;
@@ -113,7 +118,7 @@ public class PointDAO {
 			pt = 5000;
 		}
 		
-		String sql = " UPDATE point SET point = point + "+ pt
+		 sql = " UPDATE point SET point = point + "+ pt
 					
 				+ " WHERE id=?";
 		
