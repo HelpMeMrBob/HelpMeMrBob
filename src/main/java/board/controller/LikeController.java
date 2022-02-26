@@ -40,8 +40,9 @@ public class LikeController {
 			
 			String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
 			String idx = req.getParameter("idx");
+			String lno = req.getParameter("lno");
 			
-			int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx);
+			int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx,lno);
 			
 			session.setAttribute("lno", LikeCount);
 			System.out.println("=====LikeCount는==="+LikeCount);
@@ -60,6 +61,50 @@ public class LikeController {
 			if(LikeCount==1) {
 				//삭제처리를 위해 delete() 호출
 				sqlSession.getMapper(LikeDAOImpl.class).delete(
+				((MemberVO)session.getAttribute("siteUserInfo")).getId(),
+				req.getParameter("idx"));
+				
+				model.addAttribute("idx",req.getParameter("idx"));
+				model.addAttribute("id",req.getParameter("id"));
+			}
+			
+			
+			return "redirect:reviewView.do";
+		  
+	}
+	  
+	  @RequestMapping(value="/scrap.do", method=RequestMethod.POST)
+	  public String scrap_create(Model model, HttpServletRequest req, HttpSession session){
+	    //System.out.println("--> like() created");
+		//로그인확인
+			if(session.getAttribute("siteUserInfo")==null) {
+				//만약 세션이 끊어졌다면 로그인페이지로 이동한다.
+				return "redirect:login.do";
+			}  
+			
+			String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
+			String idx = req.getParameter("idx");
+			String scrapNo = req.getParameter("scrapNo");
+			
+			int ScrapCount=sqlSession.getMapper(LikeDAOImpl.class).scrap_count(id, idx,scrapNo);
+			
+			session.setAttribute("scrapNo", ScrapCount);
+			System.out.println("=====ScrapCount는==="+ScrapCount);
+			
+			if(ScrapCount==0) {
+				//insert문을 실행시 입력에 성공한 행의 갯수가 정수로 반환된다 얘 머임
+				int result= sqlSession.getMapper(LikeDAOImpl.class).scrap_create(
+				req.getParameter("scrapNo"),req.getParameter("idx"),
+				((MemberVO)session.getAttribute("siteUserInfo")).getId());
+				System.out.println("입력한 결과"+result);
+				
+				model.addAttribute("scrapNo",req.getParameter("scrapNo"));
+				model.addAttribute("idx",req.getParameter("idx"));
+				model.addAttribute("id",req.getParameter("id"));
+			}
+			if(ScrapCount==1) {
+				//삭제처리를 위해 delete() 호출
+				sqlSession.getMapper(LikeDAOImpl.class).scrap_delete(
 				((MemberVO)session.getAttribute("siteUserInfo")).getId(),
 				req.getParameter("idx"));
 				

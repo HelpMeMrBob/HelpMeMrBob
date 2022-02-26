@@ -16,13 +16,29 @@
   </insert>
 
   <delete id="delete">
-    DELETE FROM doLike WHERE id=#{id} AND idx=#{idx}
+    DELETE FROM doLike WHERE id=#{id} AND idx=#{idx} AND lno=1
   </delete>
   
   <select id="LikeCnt" resultType="int">
 	    select count(*) from doLike 
 	    where lno=1 and idx=#{idx}
   	</select>
+  	
+  	<!-- /////////////여기서부터 스크랩///////////// -->
+  	
+  	<select id="scrap_count" resultType="int">
+	    select count(*) from doLike 
+	    where scrapNo=1 and id=#{id} and idx=#{idx}
+  	</select>
+  
+	<insert id="scrap_create">
+    INSERT INTO doLike(scrapNo, id, idx) 
+    VALUES (1, #{id}, #{idx})
+  </insert>
+
+  <delete id="scrap_delete">
+    DELETE FROM doLike WHERE id=#{id} AND idx=#{idx} AND scrapNo=1
+  </delete>
 
   
 </mapper>

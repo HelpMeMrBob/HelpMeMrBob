@@ -8,7 +8,7 @@
 <script>
 function deleteRow(idx){
 	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete.do?idx="+idx;
+		location.href="Replydelete.do?idx="+idx;
 	}
 }
 function writeValidate(f)
@@ -130,8 +130,9 @@ function writeValidate(f)
 				</c:if>
 				
 				<h3>${lno}</h3>
+				<h3>${scrapNo}</h3>
 <!-- ////////좋아요한 게시글/////// -->
-<c:if test="${not empty lno}">
+<c:if test="${lno eq 1 and idx eq idx and id eq id}">
 <form name="writeFrm" method="post" 
           action="./like.do" class="form contact__form"
           onsubmit="return checkValidate(this);">
@@ -146,7 +147,7 @@ function writeValidate(f)
 </form>
 </c:if>
 <!-- //////////좋아요안한 게시글////////// -->
-<c:if test="${empty lno}">
+<c:if test="${lno eq null or lno eq 0 and idx eq idx and id eq id}">
 <form name="writeFrm" method="post" 
           action="./like.do" class="form contact__form"
           onsubmit="return checkValidate(this);">
@@ -161,6 +162,20 @@ function writeValidate(f)
 </form>
 </c:if>
 <!-- ////////좋아요버튼/////// -->
+
+<!-- //////////스크랩버튼////////// -->
+<form name="writeFrm" method="post" 
+          action="./scrap.do" class="form contact__form"
+          onsubmit="return checkValidate(this);">
+ <input type="hidden" name="idx" value="${viewRow.idx }" />
+<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+<div class="single-page__share pad-b-sm-2">
+  <div class="display-flex align-items-center"><div class="social">
+	<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">☆</button>
+   </div></div><!-- .display-flex ends -->
+</div><!-- .single-page__share ends -->
+</form>
+<!-- ////////스크랩버튼/////// -->
             </div><!-- .flex-* ends -->
 
           </div><!-- .row ends -->
