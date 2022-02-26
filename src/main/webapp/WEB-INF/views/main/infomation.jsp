@@ -89,7 +89,7 @@ function vali() {
 
 function deleteRow(idx) {
 	if (confirm("정말로 삭제하시겠습니까?")) {
-		location.href="favoriteDelete.do?idx="+idx;
+		location.href="./favoriteDelete.do?idx="+idx;
 	}
 }
 
@@ -124,6 +124,10 @@ function modifyRow(idx, place, address) {
 
 function cancel() {
 	location.href="./favoriteList.do";
+}
+
+function detailView(place) {
+	location.href="./detailView.do?place=" + place;
 }
 </script>
 
@@ -227,13 +231,28 @@ function cancel() {
 							<div style="font-size:16px;text-align:center;">검색어를 입력해주세요!</div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${ keyword }" var="row">
+							<c:forEach items="${ keyword }" var="row" varStatus="loop">
 								<ul style="font-size: 15px;">
-									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
+									<li>이름 : <a href="./detailView.do?place=${ row.place }">${ row.place }</a></li>
 									<li>주소 : ${ row.address }</li>
-									<li>전화번호 : ${ row.plcNum }</li>
-									<li>메뉴 : ${ row.menu }</li>
-									<li>영업시간 : ${ row.operTime }</li>
+									<c:if test="${ row.plcNum != 'null' }"><li>전화번호 : ${ row.plcNum }</li></c:if>
+									<c:if test="${ row.plcNum == 'null' }"><li style="color:red;">전화번호 : 정보제공없음</li></c:if>
+									<c:if test="${ row.menu != 'null' }"><li align="center">--------- 메뉴 ---------</li></c:if>
+									<c:if test="${ row.menu != 'null' }">
+										<c:forEach items='${ row.menu.split("@") }' var="menu" varStatus="status">
+										<c:set var="price" value='${ row.price.split("@") }' />
+											<li align="center">
+												${ menu } &nbsp;
+												<c:if test="${ price[status.index] != 'null' and not empty price[status.index] }"> 
+													<span>${ price[status.index] }원</span>
+												</c:if>
+											</li>
+										</c:forEach>
+									</c:if>
+									<c:if test="${ row.menu == 'null' }"><li style="color:red;">메뉴 : 정보제공없음</li></c:if>
+									<li align="center">-------------------------</li>
+									<c:if test="${ row.operTime != 'null' }"><li>영업시간 : ${ row.operTime }</li></c:if>
+									<c:if test="${ row.operTime == 'null' }"><li style="color:red;">영업시간 : 정보제공없음</li></c:if>
 									<button id="locationCheck" type="button" class="button button-block-sm button--primary button--fill" 
 										onclick="marker('${row.address}', '${ row.place }');">위치보기</button>
 								</ul>
@@ -278,7 +297,7 @@ function cancel() {
 						<c:otherwise>
 							<c:forEach items="${ favoriteList }" var="row">
 								<ul style="font-size: 15px;">
-									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
+									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }', '${ row.idx }');">${ row.place }</a></li>
 									<li>주소 : ${ row.address }</li>
 									<li>메모 : ${ row.memo }</li>
 									<button id="locationCheck" type="button" class="button button-sm button--primary button--fill" 
@@ -329,7 +348,7 @@ function cancel() {
 	<!-- SEARCH -->
     <jsp:include page="/WEB-INF/views/include/search.jsp" />
 	
-	<!-- FOOTER -->
+	<!-- JQUERY -->
 	<jsp:include page="/WEB-INF/views/include/jquery.jsp" />
 </body>
 
@@ -372,7 +391,7 @@ function cancel() {
 		   	  	// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 				var iwContent =	'<div style="padding:5px;font-size:14px;">이름 : '+ place +'</div>' +
 								'<div style="padding:5px;font-size:14px;width:350px;">주소 : '+ address +'</div>' + 
-								'<div style="padding:5px;font-size:14px;"><a href="#">상세보기</a></div>' +
+								'<div style="padding:5px;font-size:14px;"><a href="#" onclick="detailView('+'\''+place+'\''+');">상세보기</a></div>' +
 						<c:choose>
 					   	  	<c:when test="${ not empty siteUserInfo }">
 				   	 			'<div style="padding:5px;"><button type="button" id="submit2" onclick="favorite(1,'+'\''+place+'\''+','+'\''+address+'\''+');">즐겨찾기 등록</button></div>';
@@ -468,12 +487,7 @@ function cancel() {
    	function geo_tracking(){
    	    if (geo_use) {
    	    	
-   	    	if (userLatitude == null || userLongitude == null) {
-   	   			userLatitude = geo_lat;
-   	   			userLongitude = geo_lng;
-   	   		}
-   	    	
-   	        map.panTo(new kakao.maps.LatLng(userLatitude, userLongitude));
+   	        map.panTo(new kakao.maps.LatLng(geo_lat, geo_lng));
    	        
 			var geocoder = new kakao.maps.services.Geocoder();
 			

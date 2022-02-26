@@ -20,6 +20,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import item.ItemDAO;
 import item.ItemDTO;
+import member.model.MemberVO;
 import point.JdbcTemplateConst;
 import point.PointDAO;
 import point.PointDTO;
@@ -80,7 +82,7 @@ public class EmoticonController {
 		
 	//
 		@RequestMapping("/buyProcess.do")
-		public String realBuyProcess(HttpServletRequest request,  Model model) {
+		public String realBuyProcess(HttpServletRequest request,  Model model, HttpSession session) {
 			String sticker = request.getParameter("sticker");
 			PointDAO pdao = new PointDAO();
 			PointDTO pdto = new PointDTO();
@@ -88,7 +90,7 @@ public class EmoticonController {
 			ItemDTO idto = new ItemDTO();
 			ItemDAO idao = new ItemDAO();
 			//원래 sessionId를 넣어야할 자리에 임으로 ptest를 넣어줌
-			pdto.setId("ptest");
+			pdto.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
 			
 			pdto.setSticker(sticker);
 			idto.setTemOname(sticker);

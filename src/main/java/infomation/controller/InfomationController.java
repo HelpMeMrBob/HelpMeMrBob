@@ -125,4 +125,17 @@ public class InfomationController {
 		
 		return "redirect:favoriteList.do";
 	}
+	
+	//상세보기 매핑
+	@RequestMapping("/detailView.do")
+	public String detailView(Model model, HttpServletRequest req) {
+		
+		String place = req.getParameter("place");
+		ArrayList<InfomationDTO> detailView = 
+				sqlSession2.getMapper(InfomationDAOInter.class).detailView(place);
+		
+		model.addAttribute("detailView", detailView);
+		
+		return "main/detailView";
+	}
 }

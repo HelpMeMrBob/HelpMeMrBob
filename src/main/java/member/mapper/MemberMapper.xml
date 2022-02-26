@@ -6,7 +6,7 @@
 
 <mapper namespace="member.model.MemberDAOImpl">
 	<!-- 회원 가입 (favMenu 추가 예정) -->
-	<insert id="memberRegister">
+	<insert id="registerAction" parameterType="member.model.MemberVO">
 		INSERT INTO member (id, name, pass, email, telNum)
 			VALUES ( #{ id }, #{ name }, #{ pass }, #{ email }, #{ telNum } )
 	</insert>
