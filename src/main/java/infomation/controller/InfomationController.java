@@ -55,6 +55,12 @@ public class InfomationController {
 		
 		//DB에서 검색어에 맞는 결과 리스트 가져오기
 		String search = req.getParameter("search");
+		String selectMenu = req.getParameter("menu");
+		
+		if (selectMenu != null) {
+			search = selectMenu;
+		}
+		
 		ArrayList<InfomationDTO> keyword = sqlSession2.getMapper(InfomationDAOInter.class).keyword(search);
 		model.addAttribute("keyword", keyword);
 		
