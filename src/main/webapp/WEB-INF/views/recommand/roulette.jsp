@@ -3,6 +3,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 
+<style>
+	#display {
+		border: 6px solid #ed6a5a; 
+		width: 311px; 
+		height: 100px;
+		text-align: center;
+		font-size: 3rem;
+		color: #ed6a5a; 
+		font-weight: bold;
+	}
+	#start {
+		border: 4px solid #ed6a5a; 
+		width: 100px;
+		height: 50px;
+		text-align: center;
+		font-size: 2rem; 
+		color: white; 
+		font-weight: bold;
+		background-color: #ed6a5a
+	}
+	#goInfo {
+		all: unset;
+		border: 4px solid #ed6a5a; 
+		width: 200px; 
+		height: 50px; 
+		text-align: center;
+		font-size: 2rem; 
+		color: white; 
+		font-weight: bold; 
+		background-color: #ed6a5a;
+	}
+</style>
+
   <body>
 
 
@@ -19,32 +52,22 @@
 
     <main>
 		<div class="mar-t-md-2" align="center">
+			<form action="./restaurant.do">
+				<div>
+					<input type="text" align="center" name="menu" id="display" value="" readonly>
+				</div>
+				<div>
+					<button type="button" id="start" href="#" onClick="resetWheel(); return false;">
+						뽑기
+					</button>
+					<button type="submit" id="goInfo">
+						근처 식당보기
+					</button>
+				</div>
+			</form>
+			
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr>
-                    <td>
-                        <div class="power_controls">
-                            <br />
-                            <br />
-                            <table class="power" cellpadding="10" cellspacing="0">
-                                <tr>
-                                    <th align="center">Power</th>
-                                </tr>
-                                <tr>
-                                    <td width="78" align="center" id="pw3" onClick="powerSelected(3);">High</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" id="pw2" onClick="powerSelected(2);">Med</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" id="pw1" onClick="powerSelected(1);">Low</td>
-                                </tr>
-                            </table>
-                            <br />
-                            <img id="spin_button" src="./resources/recommand/spin_off.png" alt="Spin" onClick="startSpin();" />
-                            <br /><br />
-                            &nbsp;&nbsp;<a href="#" onClick="resetWheel(); return false;">Play Again</a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reset)
-                        </div>
-                    </td>
                     <td width="438" height="582" class="the_wheel" align="center" valign="center">
                         <canvas id="canvas" width="434" height="434">
                             <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
@@ -61,21 +84,22 @@
                 'textFontSize' : 28,    // Set font size as desired.
                 'segments'     :        // Define segments including colour and text.
                 [
-                   {'fillStyle' : '#eae56f', 'text' : 'Prize 1'},
-                   {'fillStyle' : '#89f26e', 'text' : 'Prize 2'},
-                   {'fillStyle' : '#7de6ef', 'text' : 'Prize 3'},
-                   {'fillStyle' : '#e7706f', 'text' : 'Prize 4'},
-                   {'fillStyle' : '#eae56f', 'text' : 'Prize 5'},
-                   {'fillStyle' : '#89f26e', 'text' : 'Prize 6'},
-                   {'fillStyle' : '#7de6ef', 'text' : 'Prize 7'},
-                   {'fillStyle' : '#e7706f', 'text' : 'Prize 8'}
+                   
+               		{'fillStyle' : '#ed6a5a', 'text' : '곱창'},
+	                {'fillStyle' : '#ed6a5a', 'text' : '샌드위치'},
+	                {'fillStyle' : '#ed6a5a', 'text' : '탕수육'},
+	                {'fillStyle' : '#ed6a5a', 'text' : '닭강정'},
+	                {'fillStyle' : '#ed6a5a', 'text' : '잔치국수'},
+	                {'fillStyle' : '#ed6a5a', 'text' : '물냉면'},
+	                {'fillStyle' : '#ed6a5a', 'text' : '닭발'},
+	                {'fillStyle' : '#ed6a5a', 'text' : '뼈해장국'}
                 ],
                 'animation' :           // Specify the animation to use.
                 {
                     'type'     : 'spinToStop',
                     'duration' : 5,     // Duration in seconds.
                     'spins'    : 8,     // Number of complete spins.
-                    'callbackFinished' : alertPrize
+                    'callbackFinished' : showDisplay
                 }
             });
 
@@ -124,20 +148,6 @@
             {
                 // Ensure that spinning can't be clicked again while already running.
                 if (wheelSpinning == false) {
-                    // Based on the power level selected adjust the number of spins for the wheel, the more times is has
-                    // to rotate with the duration of the animation the quicker the wheel spins.
-                    if (wheelPower == 1) {
-                        theWheel.animation.spins = 3;
-                    } else if (wheelPower == 2) {
-                        theWheel.animation.spins = 8;
-                    } else if (wheelPower == 3) {
-                        theWheel.animation.spins = 15;
-                    }
-
-                    // Disable the spin button so can't click again while wheel is spinning.
-                    document.getElementById('spin_button').src       = "./resources/recommand/spin_off.png";
-                    document.getElementById('spin_button').className = "";
-
                     // Begin the spin animation by calling startAnimation on the wheel object.
                     theWheel.startAnimation();
 
@@ -156,22 +166,19 @@
                 theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                 theWheel.draw();                // Call draw to render changes to the wheel.
 
-                document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
+                /* document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
                 document.getElementById('pw2').className = "";
-                document.getElementById('pw3').className = "";
+                document.getElementById('pw3').className = ""; */
 
                 wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+                
+                startSpin();
             }
 
-            // -------------------------------------------------------
-            // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters
-            // note the indicated segment is passed in as a parmeter as 99% of the time you will want to know this to inform the user of their prize.
-            // -------------------------------------------------------
-            function alertPrize(indicatedSegment)
-            {
-                // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
-                alert("You have won " + indicatedSegment.text);
-            }
+	        // 결과를 display에 띄운다.
+	        function showDisplay(indicatedSegment) {
+	            document.getElementById("display").value = indicatedSegment.text;
+	        }
         </script>
 
     </main><!-- main ends -->
