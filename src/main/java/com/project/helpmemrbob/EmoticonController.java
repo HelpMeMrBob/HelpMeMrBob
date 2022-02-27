@@ -81,7 +81,8 @@ public class EmoticonController {
 		}
 		
 		//이모티콘 디스플레이 페이지
-				@RequestMapping("/shop.do")
+				@RequestMapping("/shop.do") 
+				//들린다충돌의소리
 				public String shop2(HttpServletRequest req, Model model) {
 					//물리적경로 얻어오기
 					String path = req.getSession().getServletContext().getRealPath("/resources/upload");
