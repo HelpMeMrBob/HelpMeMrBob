@@ -22,7 +22,7 @@
 	
 	<!-- 룰렛 -->
 	<link rel="stylesheet" href="${path}/resources/recommand/main.css" type="text/css" />
-    <script type="text/javascript" src="../../Winwheel.js"></script>
+    <script type="text/javascript" src="${path}/resources/recommand/Winwheel.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 </head>
 
