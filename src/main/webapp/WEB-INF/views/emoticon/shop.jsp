@@ -63,18 +63,30 @@
 						<br/><br/><br/>
 						<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 						<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
-							<table class="table table-bordered" style="width:360px;">
+							<table class="table table-bordered" >
 								<tr>
-									<c:forEach items="${fileMap }" var="file" varStatus="vs">
-									<c:if test="${vs.index%3==0}"></tr><tr></c:if>
-										<td>		
-											&nbsp;&nbsp;
-											<img src="./resources/upload/${file.key}" style="width:110px; height:110px; align:center;">
-											<br/><br/><label for="${file.key }" style="algin:center;"> ${file.key }</label>
-											<br/><br/>
-											<input type="radio" id="iceflake" name="sticker" value="${file.key }"style="algin:center;">
-										</td>
-									</c:forEach>	
+								<c:forEach items="${fileMap }" var="file" varStatus="vs">
+								<c:if test="${vs.index%3==0}"></tr>
+								<tr>
+								 <td>		
+										&nbsp;&nbsp;
+										<img src="./resources/upload/${file.key}" style="width:110px; height:110px; align:center;">
+										<br/><br/><label for="${file.key }" style="algin:center;"> ${file.key }</label>
+										<br/><br/>
+										<input type="radio" id="iceflake" name="sticker" value="${file.key }"style="algin:center;">
+								 </td>
+								</c:if>
+								<c:if test="${vs.index%3!=0}">
+								 <td>		
+										&nbsp;&nbsp;
+										<img src="./resources/upload/${file.key}" style="width:110px; height:110px; align:center;">
+										<br/><br/><label for="${file.key }" style="algin:center;"> ${file.key }</label>
+										<br/><br/>
+										<input type="radio" id="iceflake" name="sticker" value="${file.key }"style="algin:center;">
+								 </td>
+								</c:if>
+								   
+								</c:forEach>
 								</tr>
 							</table>
 							<button type="submit" class="btn btn-danger" >구매하기</button>
