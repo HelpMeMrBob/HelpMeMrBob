@@ -297,7 +297,7 @@ function detailView(place) {
 						<c:otherwise>
 							<c:forEach items="${ favoriteList }" var="row">
 								<ul style="font-size: 15px;">
-									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }', '${ row.idx }');">${ row.place }</a></li>
+									<li>이름 : <a href="./detailView.do?place=${ row.place }">${ row.place }</a></li>
 									<li>주소 : ${ row.address }</li>
 									<li>메모 : ${ row.memo }</li>
 									<button id="locationCheck" type="button" class="button button-sm button--primary button--fill" 

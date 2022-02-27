@@ -19,5 +19,10 @@
     <!-- Place Custom Favicon here -->
     <link rel="shortcut icon" href="${path}/resources/include_img/bob_favicon.ico" type="image/png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- 룰렛 -->
+	<link rel="stylesheet" href="${path}/resources/recommand/main.css" type="text/css" />
+    <script type="text/javascript" src="${path}/resources/recommand/Winwheel.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 </head>
 
