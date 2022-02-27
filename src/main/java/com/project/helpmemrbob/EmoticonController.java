@@ -99,7 +99,7 @@ public class EmoticonController {
 						fileMap.put(f.getName(), (int)Math.ceil(f.length()/1024.0));
 						
 						if(idao.getAdminItem(f.getName())!=null) {
-							fileMap2.put("title",idao.getAdminItem(f.getName()));
+							System.out.println("title: "+idao.getAdminItem(f.getName()));
 						}
 					}
 					model.addAttribute("fileMap", fileMap);		
