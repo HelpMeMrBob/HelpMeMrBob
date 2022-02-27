@@ -12,6 +12,7 @@
 		font-size: 2rem;
 		color: #ed6a5a; 
 		font-weight: bold;
+		margin-bottom: 5px;
 	}
 	#start {
 		border: 4px solid #ed6a5a; 
@@ -51,11 +52,21 @@
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 
     <main>
+	    <script>
+		function resultValidate(f) {
+			if (f.display.value == "")
+			{
+				alert("메뉴가 결정되어야 볼 수 있습니다.");
+				f.numOfMenu.focus();
+				return false;
+			}
+		}
+		</script>
 		<div class="mar-t-md-2" align="center">
-			<form action="./restaurant.do">
-				
+			<form action="./restaurant.do" onsubmit="return resultValidate(this);">
 				<div>
-					<input type="text" name="menu" id="display" value="" readonly>
+					<input type="text" name="display" id="display" placeholder="메뉴 개수를 선택해 주세요." 
+						value="" readonly>
 				</div>
 				<table>
 					<tr>
@@ -70,7 +81,7 @@
 				   			</select>
 			   			</td>
 						<td>
-							<button type="button" id="start" href="#" onClick="resetWheel(); return false;">
+							<button type="button" name="start" id="start" href="#" onClick="resetWheel(); return false;">
 								뽑기
 							</button>
 						</td>
@@ -100,7 +111,7 @@
                     'textFontSize' : 15,    // Set font size as desired.
                     'segments'     :        // Define segments including colour and text.
                     [
-                       
+                       	
                    		{'fillStyle' : '#ed6a5a', 'text' : '곱창'},
     	                {'fillStyle' : '#ed6a5a', 'text' : '샌드위치'},
     	                {'fillStyle' : '#ed6a5a', 'text' : '탕수육'},
@@ -108,7 +119,10 @@
     	                {'fillStyle' : '#ed6a5a', 'text' : '잔치국수'},
     	                {'fillStyle' : '#ed6a5a', 'text' : '오야코동(닭고기 계란 덮밥)'},
     	                {'fillStyle' : '#ed6a5a', 'text' : '닭발'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '뼈해장국'}
+    	                {'fillStyle' : '#ed6a5a', 'text' : '뼈해장국'},
+    	                {'fillStyle' : '#ed6a5a', 'text' : '김치볶음밥'},
+    	                {'fillStyle' : '#ed6a5a', 'text' : '피자'},
+    	          
                     ],
                     'animation' :           // Specify the animation to use.
                     {
