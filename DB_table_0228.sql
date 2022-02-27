@@ -14,14 +14,16 @@ create table food(
     Lgroup varchar2(30), --대분류
     Mgroup varchar2(30), --중분류
     primary KEY (idx));
+    
 --food테이블 시퀀스
+drop sequence food_seq;
 create sequence food_seq
     increment by 1
     start with 1
     minvalue 1
     nomaxvalue 
     nocycle
-    nocache;    
+    nocache;     
     
 --식당테이블
 drop table restaurant;
@@ -36,8 +38,6 @@ create table restaurant(
     operTime varchar2(200), --운영 시각
     primary KEY (idx));
     
---식당테이블 시퀀스 ; 시퀀스는 필요없어서 삭제했습니다. 카카오맵 고유번호에서 따옵니다.
-    
 --회원테이블
 drop table member;
 create table member(
@@ -46,17 +46,16 @@ create table member(
     pass varchar(30), --비밀번호
     email varchar2(50), --이메일
     telNum varchar2(50), --전화번호
-    point number, --포인트
     lev number, --레벨
     exp number, --경험치
     favMenu varchar2(50), --선호 메뉴
     item varchar2(50), --소유한 아이템 목록
-    rest varchar2(30), --휴면 및 활성화 관리
     grade varchar2(30), --등급/회원과 관리자 구분 
     primary KEY (id));
-    
+-- member테이블의 rest컬럼 삭제 (grade컬럼 이용해 휴면 관리를 하기로 해서 필요 없어졌음)
+--ALTER TABLE member DROP COLUMN rest;  
 -- member테이블의 point컬럼 삭제(만약 point필요하면 point테이블과 join하여 조회할것)
-ALTER TABLE member DROP COLUMN point;
+--ALTER TABLE member DROP COLUMN point;
 -- point테이블의 id와 member테이블의 id 외래키 설정
 alter table point 
     add foreign key (id) 
@@ -69,8 +68,11 @@ create table board(
     id varchar2(30),
     title varchar(200), --제목/인스타 형식이면 제목이 필요한가? (캘린더 할거면?)
     contents varchar(4000), -- 내용
-    ofile varchar(80), -- 원본파일명
-    sfile varchar(80), -- 저장된
+    userfile1 VARCHAR(80),
+    userfile2 VARCHAR(80),
+    userfile3 VARCHAR(80),
+    userfile4 VARCHAR(80),
+    userfile5 VARCHAR(80),
     tag varchar(50), -- 태그
     postdate date default sysdate, --작성일
     visitCnt number default 0, --방문자수/인스타 형식이면 방문자수 필요한가? 
@@ -79,7 +81,9 @@ create table board(
     pdate date, --캘린더 전용 작성일
     cate varchar2(30), --게시판 분류 컬럼 리뷰게시판:rvw
     primary KEY (idx));
+    
 --보드테이블 시퀀스
+drop sequence board_seq;
 create sequence board_seq
     increment by 1
     start with 1
@@ -87,7 +91,15 @@ create sequence board_seq
     nomaxvalue 
     nocycle
     nocache;
-    
+--게시판 테이블 수정
+--ALTER TABLE board add userfile1 VARCHAR(80);--게시판에 사진파일컬럼5개추가
+--ALTER TABLE board add userfile2 VARCHAR(80);
+--ALTER TABLE board add userfile3 VARCHAR(80);
+--ALTER TABLE board add userfile4 VARCHAR(80);
+--ALTER TABLE board add userfile5 VARCHAR(80);
+--ALTER TABLE board DROP COLUMN ofile; --필요 없어졌음 삭제  
+--ALTER TABLE board DROP COLUMN sfile; --필요 없어졌음 삭제 
+
 --댓글 테이블
 drop table board_rep;
 create table board_rep(
@@ -98,9 +110,9 @@ create table board_rep(
     contents varchar(500), --댓글 내용
     writeDate date default sysdate, --작성일
     recomndCnt number default 0, --좋아요, 추천수
-    cate varchar2(30)); --게시판 분류 컬럼
-    
+    cate varchar2(30)); --게시판 분류 컬럼  
 --댓글 시퀀스
+drop sequence board_rep_seq;
 create sequence board_rep_seq
     increment by 1
     start with 1
@@ -110,18 +122,22 @@ create sequence board_rep_seq
     nocache;
     
 --좋아요 테이블
+drop table doLike;
 create table doLike(
     lno varchar2(30),--좋아요 번호
     idx varchar2(30) NOT NULL,--게시판의 fk
+    scrapNo varchar2(30), --스크랩기능
     id varchar2(30));
+--좋아요테이블에 스크랩기능추가    
+--ALTER TABLE doLike add scrapNo varchar2(30);
 
 --토론테이블
 drop table VStalk;
 create table VStalk(
     idx varchar2(30) NOT NULL,
     topic varchar(200), --주제
-    sel1vote varchar2(30), --선택1에 대한 투표수
-    sel2vote varchar2(30), --선택2에 대한 투표수
+    sel1vote number default 0, --선택1에 대한 투표수
+    sel2vote number default 0, --선택2에 대한 투표수
     sel1img varchar2(80), --선택1에 대한 이미지
     sel2img varchar2(80), --선택2에 대한 이미지
     primary KEY (idx));
@@ -163,6 +179,7 @@ create table item(
      primary KEY (idx));
      
 --- 아이템의 시퀀스 생성
+drop sequence myitem_seq;
 create sequence myitem_seq
     increment by 1
     start with 1
@@ -200,6 +217,7 @@ create table adminItem(
      UNIQUE (idx)); -- 아이템 고유의 번호로 중복불가.     
     
 --결제 관련 테이블
+drop table pay;
 create table pay(
     idx varchar2(30) NOT NULL,
     code varchar2(50), --가맹점 코드
@@ -215,6 +233,7 @@ create table pay(
     primary KEY (idx));
     
 --스크랩테이블
+drop table scrap;
 create table scrap(
     idx varchar2(30), --보드넘버
     scrapNum varchar2(30), --스크랩번호
@@ -232,11 +251,3 @@ create table favorite(
     memo varchar2(500), --즐겨찾기한 식당에 대한 메모
     primary key(address)
 );
---즐겨찾기 시퀀스
-create sequence favo_seq
-    increment by 1
-    start with 1
-    minvalue 1
-    nomaxvalue 
-    nocycle
-    nocache;

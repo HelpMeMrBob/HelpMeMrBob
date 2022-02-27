@@ -18,13 +18,7 @@
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 
     <main>
-		
-		<div align="center">
-            <h1>Winwheel.js example wheel - basic code wheel</h1>
-            <p>Here is an example of a basic code drawn wheel which spins to a stop with the prize won alerted to the user.</p>
-            <br />
-            <p>Choose a power setting then press the Spin button. You will be alerted to the prize won when the spinning stops.</p>
-            <br />
+		<div class="mar-t-md-2" align="center">
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     <td>
