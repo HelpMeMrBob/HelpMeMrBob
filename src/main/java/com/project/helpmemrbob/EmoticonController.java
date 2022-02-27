@@ -199,6 +199,9 @@ public class EmoticonController {
 				//한글깨짐방지 처리 후 전송된 파일명을 가져온다. 
 				String originalName = new String(mfile.getOriginalFilename().getBytes(),"UTF-8");
 				idto.setTemOname(originalName);
+				idto.setContents(title);
+				System.out.println("upload시점 이름 저장명: "+ idto.getContents());
+				System.out.println("upload시점 오리지널 저장명: "+ idto.getTemOname());
 				//서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다. 
 				if("".equals(originalName)) continue;
 				
@@ -208,8 +211,9 @@ public class EmoticonController {
 				//UUID를 통해 생성된 문자열과 확장자를 결합해서 파일명을 완성한다. 
 				String saveFileName = getUuid() + ext;
 				idto.setTemSname(saveFileName);
+				System.out.println("upload시점 변환 저장명: "+ idto.getTemSname());
 				//물리적경로에 새롭게 생성된 파일명으로 파일 저장
-				mfile.transferTo(new File(path + File.separator + originalName));
+				mfile.transferTo(new File(path + File.separator + saveFileName));
 				
 				//폼값과 파일명을 저장할 Map컬렉션 생성
 				Map<String, String> fileMap = new HashMap<String, String>();	
@@ -236,6 +240,7 @@ public class EmoticonController {
 		public String uploadList(HttpServletRequest req, Model model){
 			//물리적경로 얻어오기
 			String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+			System.out.println("물리적경로: "+path);
 			//경로를 기반으로 파일객체 생성
 			File file = new File(path);
 			//파일의 목록을 배열 형태로 얻어옴

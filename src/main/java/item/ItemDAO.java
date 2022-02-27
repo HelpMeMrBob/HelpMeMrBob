@@ -64,11 +64,16 @@ public class ItemDAO {
 
 					@Override
 					public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-						String sql= " INSERT INTO adminItem (id,idx ,temOname) "
-								+ " VALUES ('admin', myitem_seq.nextval ,?)";
+						String sql= " INSERT INTO adminItem (id,idx ,temOname,temSname,contents) "
+								+ " VALUES ('admin', myitem_seq.nextval ,?,?,?)";
 						PreparedStatement psmt = con.prepareStatement(sql);
 						psmt.setString(1, idto.getTemOname());
+						System.out.println("admin시점 오리지널 저장명: "+ idto.getContents());
+						psmt.setString(2, idto.getTemSname());
+						System.out.println("admin시점 변환 저장명: "+ idto.getTemSname());
+						psmt.setString(3, idto.getContents());
 						
+						System.out.println("admin확인용 코드2");
 						return psmt;
 					}
 					
