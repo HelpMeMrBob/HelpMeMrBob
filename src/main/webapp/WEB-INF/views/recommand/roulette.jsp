@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 
 <style>
-	#display {
+	#menu {
 		border: 6px solid #ed6a5a; 
 		width: 400px; 
 		height: 50px;
@@ -54,7 +54,7 @@
     <main>
 	    <script>
 		function resultValidate(f) {
-			if (f.display.value == "")
+			if (f.menu.value == "")
 			{
 				alert("메뉴가 결정되어야 볼 수 있습니다.");
 				f.numOfMenu.focus();
@@ -65,7 +65,7 @@
 		<div class="mar-t-md-2" align="center">
 			<form action="./restaurant.do" onsubmit="return resultValidate(this);">
 				<div>
-					<input type="text" name="display" id="display" placeholder="메뉴 개수를 선택해 주세요." 
+					<input type="text" name="menu" id="menu" placeholder="메뉴 개수를 선택해 주세요." 
 						value="" readonly>
 				</div>
 				<table>
@@ -221,7 +221,7 @@
 
         // 결과를 display에 띄운다.
         function showDisplay(indicatedSegment) {
-            document.getElementById("display").value = indicatedSegment.text;
+            document.getElementById("menu").value = indicatedSegment.text;
         }
         </script>
 
