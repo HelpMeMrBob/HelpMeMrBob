@@ -3,10 +3,13 @@ package item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import point.JdbcTemplateConst;
 
@@ -83,8 +86,21 @@ public class ItemDAO {
 			}
 			
 		}
-		
-		//아이템 관리자 페이지에서 이미지 등록
+		public String getAdminItem(String sName) {
+			
+			String sql="";
+			String result="";
+			List<ItemDTO> iList = new ArrayList<ItemDTO>();
+			try {
+				sql = "SELECT CONTENTS FROM adminItem where temSname like'"+sName+"'";
+				result= template.queryForObject(sql, String.class);
+			}catch(Exception e) {
+				System.out.println("getAdminItem중 오류");
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
 		
 
 	
