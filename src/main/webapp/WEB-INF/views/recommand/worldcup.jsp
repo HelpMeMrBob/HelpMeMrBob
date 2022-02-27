@@ -48,7 +48,7 @@
 
                 <div class="wc_card__header">
 
-                  <img src="./resources/worldcup_img/worldcup.png" alt="" class="card__image">
+                  <img src="./resources/recommand/worldcup.png" alt="" class="card__image">
 
 
                 </div><!-- .card__header ends -->
@@ -77,7 +77,7 @@
 
                 <div class="wc_card__header">
 
-                  <img src="./resources/worldcup_img/worldcup.png" alt="" class="card__image">
+                  <img src="./resources/recommand/worldcup.png" alt="" class="card__image">
 
 
                 </div><!-- .card__header ends -->
