@@ -1,12 +1,14 @@
 package com.project.helpmemrbob;
 
-import java.sql.Connection;
+import java.sql.Connection;	
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;	
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspWriter;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +90,7 @@ public class MemberController
 	public ModelAndView logout(HttpSession session)
 	{
 		session.invalidate();
+		
 		ModelAndView mv = new ModelAndView("redirect:/");
 		return mv;
 	}
@@ -105,14 +108,18 @@ public class MemberController
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
 		
+		ArrayList<MemberVO> point
+		= sqlSession.getMapper(MemberDAOImpl.class).myPoint(parameterDTO);
+		
 		ArrayList<MemberVO> stickers
 		= sqlSession.getMapper(MemberDAOImpl.class).mySticker(parameterDTO);
 		
-		System.out.println(stickers.size());
-		System.out.println(((MemberVO)session.getAttribute("siteUserInfo")).getId());
-		System.out.println(parameterDTO.getId());
+		ArrayList<MemberVO> preference
+		= sqlSession.getMapper(MemberDAOImpl.class).myPreference(parameterDTO);
 		
 		model.addAttribute("stickers", stickers);
+		model.addAttribute("preference", preference);
+		model.addAttribute("point", point);
 
 		return "Member/MyPage";
 	}
@@ -244,13 +251,23 @@ public class MemberController
 		{
 			return "redirect:login.do";
 		}
-				
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+
+		ArrayList<MemberVO> preference
+		= sqlSession.getMapper(MemberDAOImpl.class).myPreference(parameterDTO);
+		
+		model.addAttribute("preference", preference);
+		
+		
+		
 		return "Member/MemberUpdate";
 	}
 	
 	//	회원 정보 수정 처리
 	@RequestMapping("/memberUpdateAction.do")
-	public String memberUpdateAction(HttpSession session, MemberVO vo)
+	public String memberUpdateAction(Model model, HttpSession session, MemberVO vo)
 	{	
 		if (session.getAttribute("siteUserInfo") == null)
 		{
@@ -258,9 +275,12 @@ public class MemberController
 		}
 		
 		sqlSession.getMapper(MemberDAOImpl.class).memberUpdateAction(vo);
+		sqlSession.getMapper(MemberDAOImpl.class).myPreferenceUpdate(vo);
+
 		System.out.println("회원 정보 수정 완료");
+		session.invalidate();
 		
-		return "Member/MyPage";
+		return "redirect:login.do";
 	}
 	
 	//회원가입 페이지 이동

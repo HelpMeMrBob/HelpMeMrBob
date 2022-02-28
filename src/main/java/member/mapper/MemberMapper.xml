@@ -21,10 +21,34 @@
 		UPDATE member SET email = #{ email }, telNum = #{ telNum } where id = #{ id } 
 	</update>
 	
+	<!-- 대분류 취향 -->
+	<select id="myPreference" resultType="member.model.MemberVO"
+			parameterType="member.model.ParameterDTO">
+		SELECT * FROM preference WHERE id = #{ id }
+	</select>
+	
+	<!-- 회원 정보 수정 (대분류 수정) -->
+	<update id="myPreferenceUpdate" parameterType="member.model.MemberVO">
+		UPDATE preference SET
+			prenoodle = ${ prenoodle },
+			prerice = ${ prerice },
+			presoup = ${ presoup },
+			premeat = ${ premeat },
+			preseafood = ${ preseafood },
+			preetc = ${ preetc }
+		WHERE id = #{ id }	
+	</update>
+	
 	<!-- 나의 스티커 목록 -->
 	<select id="mySticker" resultType="member.model.MemberVO"
 			parameterType="member.model.ParameterDTO">
 		SELECT * FROM haveItem WHERE id = #{ id }
+	</select>
+	
+	<!-- 나의 포인트 -->
+	<select id="myPoint" resultType="member.model.MemberVO"
+			parameterType="member.model.ParameterDTO">
+		SELECT * FROM point WHERE id = #{ id }
 	</select>
 	
 	<!-- 나의 작성 목록 -->

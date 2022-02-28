@@ -59,4 +59,15 @@ public class MemberVO
 	
 	//	스티커 테이블
 	private String temOname;
+	
+	//	대분류
+	private int prenoodle;
+	private int prerice;
+	private int presoup;
+	private int premeat;
+	private int preseafood;
+	private int preetc;
+	
+	//	포인트
+	private String point;
 }

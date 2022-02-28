@@ -5,6 +5,7 @@
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 
 <script type="text/javascript">
+//사이드바를 접었다 펼쳤다 하는 함수
 function toggle(flag) {
 	var sidebar = document.getElementById("sidebar");
 	var button = document.getElementById("open");
@@ -29,6 +30,7 @@ function toggle(flag) {
 	}
 }
 
+//사이드바의 지도와 즐겨찾기 중 뭘 보여줄지 결정하는 함수
 function sidebarChange(flag) {
 	var bob_mapArea = document.getElementById("bob_mapArea");
 	var favoriteArea = document.getElementById("favoriteArea");
@@ -50,6 +52,8 @@ function sidebarChange(flag) {
 	}
 }
 
+
+//즐겨찾기 등록 버튼을 눌렀을때 실행되는 함수
 function favorite(flag, place, address) {
 	var bob_mapArea = document.getElementById("bob_mapArea");
 	var modify = document.getElementById("modify");
@@ -75,6 +79,7 @@ function favorite(flag, place, address) {
 	}
 }
 
+//검색어 처리하는 함수
 function vali() {
 	var form = document.searchFrm;
 	
@@ -88,12 +93,14 @@ function vali() {
 	form.submit();
 }
 
+//즐겨찾기 항목을 삭제하는 함수
 function deleteRow(idx) {
 	if (confirm("정말로 삭제하시겠습니까?")) {
 		location.href="./favoriteDelete.do?idx="+idx;
 	}
 }
 
+//즐겨찾기 항목을 수정하는 함수
 function modifyRow(idx, place, address, memo) {
 	var bob_mapArea = document.getElementById("bob_mapArea");
 	var favoriteList = document.getElementById("favoriteList");
@@ -123,10 +130,12 @@ function modifyRow(idx, place, address, memo) {
 	modify.innerHTML = form;
 }
 
+//즐겨찾기 등록이나 수정에서 취소버튼을 눌렀을때 실행되는 함수
 function cancel() {
 	sidebarChange('favo');
 }
 
+//상세보기 버튼을 눌렀을때 실행되는 함수
 function detailView(place) {
 	location.href="./detailView.do?place=" + place;
 }
@@ -330,7 +339,7 @@ function detailView(place) {
    			</div>
    			<!-- 즐겨찾기 영역 E -->
    			
-   			
+   			<!-- 즐겨찾기에 대한 메모를 작성하는 영역 -->
    			<div id="favoriteMemo" style="text-align:center;display:none;">
    				<hr />
    				<form action="./favorite.do" name="favoFrm" method="post">
