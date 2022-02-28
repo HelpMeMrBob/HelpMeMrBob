@@ -63,22 +63,23 @@
 						<br/><br/><br/>
 						<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 						<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
-							<table class="table table-bordered" >
-								<tr>
-								<c:forEach items="${fileMap}" var="file" varStatus="vs">
-								
-								<c:if test="${vs.index%3==0}"></tr></c:if>
-									 <td>		
-											&nbsp;&nbsp;
-											<img src="./resources/upload/${file.key}" style="width:110px; height:110px; align:center;">
-											<br/><br/><label for="${file.key}" style="algin:center;">아이템 ${vs.index+1}</label>
-											<br/><br/>
-											<input type="radio" id="iceflake" name="sticker" value="${file.key}"style="algin:center;">
-									 </td>   
-									
-								</c:forEach>
-								</tr>
-							</table>
+							<table border="1" style="width:720px; margin-bottom:50px;" >
+		                        <tr>
+		                        <c:forEach items="${fileMap}" var="file" varStatus="vs">
+		                        <c:if test="${vs.index%3==0}"></tr><tr></c:if>
+		                            <td>
+		                               <div style="margin:10px;">   
+		                                 &nbsp;&nbsp;
+		                                 <img src="./resources/upload/${file.key}" style="width:140px; height:140px; align:center;">
+		                                 <br/><br/><label for="${file.key}" style="algin:center;">아이템 ${vs.index+1}&nbsp;&nbsp;</label>
+		                                 
+		                                 <input type="radio" id="iceflake" name="sticker" value="${file.key}"style="algin:center;">
+		                              </div>      
+		                            </td>  
+		                        
+		                        </c:forEach>
+		                        </tr> 
+                     		</table>
 							<button type="submit" class="btn btn-danger" >구매하기</button>
 						</form>
 					</div>
