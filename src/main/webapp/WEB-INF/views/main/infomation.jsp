@@ -276,8 +276,6 @@ function detailView(place) {
    			</div>
    			<!-- 밥 지도 영역 E -->
    			
-   			
-   			
    			<!-- 즐겨찾기 영역 S -->
    			<div id="favoriteArea" style="display: none;">
 	   			<!-- 타이틀 -->

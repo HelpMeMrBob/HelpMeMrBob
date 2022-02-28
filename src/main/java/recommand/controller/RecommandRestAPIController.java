@@ -26,8 +26,8 @@ public class RecommandRestAPIController {
 		
 		ArrayList<RecommandDTO> record = sqlSession3.getMapper(RecommandDAO.class)
 				.listData(recommandDTO);
-		int[] num = new int[64];
 		ArrayList<RecommandDTO> result = new ArrayList<RecommandDTO>();
+		int[] num = new int[64];
 		
 		// 중복되지 않는 64개의 난수 생성(좋은 코드는 아님..)
 		while(true) {
