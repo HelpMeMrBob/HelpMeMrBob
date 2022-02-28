@@ -70,7 +70,7 @@
 		                            <td>
 		                               <div style="margin:10px;">   
 		                                 &nbsp;&nbsp;
-		                                 <img src="./resources/upload/${file.key}" style="width:140px; height:140px; align:center;">
+		                                 <img src="./resources/upload2/${file.key}" style="width:140px; height:140px; align:center;">
 		                                 <br/><br/><label for="${file.key}" style="algin:center;">아이템 ${vs.index+1}&nbsp;&nbsp;</label>
 		                                 
 		                                 <input type="radio" id="iceflake" name="sticker" value="${file.key}"style="algin:center;">

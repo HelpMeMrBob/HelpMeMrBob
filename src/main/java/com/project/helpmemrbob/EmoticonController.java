@@ -61,7 +61,7 @@ public class EmoticonController {
 	}
 	//이모티콘 디스플레이 페이지
 		@RequestMapping("/shop2.do")
-		public String shop(HttpServletRequest req, Model model) {
+		public String shop2(HttpServletRequest req, Model model) {
 			//물리적경로 얻어오기
 			String path = req.getSession().getServletContext().getRealPath("/resources/upload");
 			//경로를 기반으로 파일객체 생성
@@ -83,9 +83,9 @@ public class EmoticonController {
 		//이모티콘 디스플레이 페이지
 				@RequestMapping("/shop.do") 
 				//들린다충돌의소리
-				public String shop2(HttpServletRequest req, Model model) {
+				public String shop(HttpServletRequest req, Model model) {
 					//물리적경로 얻어오기
-					String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+					String path = req.getSession().getServletContext().getRealPath("/resources/upload2");
 					ItemDAO idao = new ItemDAO();
 					//경로를 기반으로 파일객체 생성
 					File file = new File(path);
@@ -184,7 +184,7 @@ public class EmoticonController {
 			
 		//request내장객체를 통해 서버의 물리적 경로 얻어옴
 		String path = req.getSession().getServletContext()
-				.getRealPath("/resources/upload");
+				.getRealPath("/resources/upload2");
 			//upload디렉토리는 정적파일을 저장하기 위한 resources하위에 생성한다.
 			
 			//response내장객체를 통해 MIME타입을 설정한다. 
@@ -208,7 +208,7 @@ public class EmoticonController {
 		ItemDAO idao = new ItemDAO();
 		
 		//물리적경로 얻어오기
-		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+		String path = req.getSession().getServletContext().getRealPath("/resources/upload2");
 		MultipartFile mfile = null;
 		//파일정보를 저장한 Map컬렉션을 2개이상 저장하기 위한 용도의 List컬렉션
 		List<Object> resultList = new ArrayList<Object>();			
@@ -266,7 +266,7 @@ public class EmoticonController {
 		@RequestMapping("/uploadList.do")
 		public String uploadList(HttpServletRequest req, Model model){
 			//물리적경로 얻어오기
-			String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+			String path = req.getSession().getServletContext().getRealPath("/resources/upload2");
 			System.out.println("물리적경로: "+path);
 			//경로를 기반으로 파일객체 생성
 			File file = new File(path);
