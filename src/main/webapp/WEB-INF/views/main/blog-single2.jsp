@@ -299,23 +299,16 @@ function writeValidate(f)
 	<input type="hidden" name="nowPage" value="${param.nowPage }" />
 	<button class="button--primary button--fill" type="submit" name="submit">삭제하기</button>
 	</form>
-	<button class="button--primary button--fill" type="submit" 
-          onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
-	수정하기원본</button>
-	<!-- /////////수정하기 해적판/////////// -->
-	<form name="writeFrm" method="post" class="form contact__form" action="./deleteAction.do">
-	<input type="hidden" name="idx" value="${viewRow.idx}" />
-	<input type="hidden" name="id" value="${viewRow.id}" />
-	<input type="hidden" name="nowPage" value="${param.nowPage }" />
-	<button class="button--primary button--fill" type="submit" name="submit">삭제하기</button>
-	</form>
-	</c:if>
 	<form name="writeFrm" method="post" class="form contact__form" action="./reviewEdit.do">
 	<input type="hidden" name="idx" value="${viewRow.idx}" />
 	<input type="hidden" name="id" value="${viewRow.id}" />
 	<input type="hidden" name="nowPage" value="${param.nowPage }" />
 	<button class="button--primary button--fill" type="submit" name="submit">수정하기</button>
 	</form>
+	</c:if>
+	
+	
+	
 	</div><!-- .flex-* ends -->
 
         </div><!-- .container ends -->

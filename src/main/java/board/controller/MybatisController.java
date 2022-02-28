@@ -1,7 +1,5 @@
 package board.controller;
 
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

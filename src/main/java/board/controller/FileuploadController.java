@@ -176,8 +176,11 @@ public class FileuploadController {
 	}
 	
 	
-	@RequestMapping("reviewEditAction.do")
+	
+	
+	
 	//파일업로드를 위한 객체를 매개변수로 선언한다. 
+	@RequestMapping(method=RequestMethod.POST, value="/reviewEditAction.do")
 	public String reviewEditAction(Model model, MultipartHttpServletRequest req) {
 		
 		JDBCTemplateDAO dao=new JDBCTemplateDAO();
@@ -203,8 +206,26 @@ public class FileuploadController {
 				//한글깨짐방지 처리 후 전송된 파일명을 가져온다. 
 				String originalName = new String(mfile.getOriginalFilename().getBytes(),"UTF-8");
 				
-				//서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다. 
-				if("".equals(originalName)) continue;
+				
+				
+				
+					String editFile1=req.getParameter("editFile1");
+					String editFile2=req.getParameter("editFile2");
+					String editFile3=req.getParameter("editFile3");
+					String editFile4=req.getParameter("editFile4");
+					String editFile5=req.getParameter("editFile5");//에러x
+					
+					
+					if(editFile1!=null)dto.setUserfile1(editFile1);
+					if(editFile2!=null)dto.setUserfile2(editFile2);
+					if(editFile3!=null)dto.setUserfile3(editFile3);
+					if(editFile4!=null)dto.setUserfile4(editFile4);
+					if(editFile5!=null)dto.setUserfile5(editFile5);
+					
+					//서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다. 
+					if("".equals(originalName)) continue;
+				
+				
 				
 				//파일명에서 확장자를 따낸다. 
 				String ext = originalName.substring(originalName.lastIndexOf('.'));
@@ -218,7 +239,8 @@ public class FileuploadController {
 				//폼값과 파일명을 저장할 Map컬렉션 생성
 				Map<String, String> fileMap = new HashMap<String, String>();	
 				
-				resultList.add(saveFileName);			
+				resultList.add(saveFileName);
+				
 			}
 			
 			//나머지 폼값 받기
@@ -226,15 +248,26 @@ public class FileuploadController {
 			String contents = req.getParameter("contents");
 			String tag = req.getParameter("tag");
 			String id=req.getParameter("id");
-			String idx=req.getParameter("idx");
+			model.addAttribute("idx", req.getParameter("idx"));
+			String idx_1 = req.getParameter("idx");
+			int idx=Integer.parseInt(idx_1);
 			
-			System.out.println("///////reviewEditAction-오지도 않음///////////"+id);
+			
+			
+			
 			//폼값받아넣기
 			dto.setTitle(title);
 			dto.setContents(contents);
 			dto.setTag(tag);
 			dto.setId(id);
-			dto.setId(idx);
+			dto.setIdx(idx);
+			
+			System.out.println("dto: "+dto.getTitle());
+			System.out.println("dto: "+dto.getId());
+			System.out.println("dto: "+dto.getContents());
+			System.out.println("idx: "+dto.getIdx());
+			System.out.println("dto: "+dto.getTag());
+			//System.out.println("dto의 idx: "+idx);
 			
 			int exist = 1;
 			for(String obj : resultList) {
