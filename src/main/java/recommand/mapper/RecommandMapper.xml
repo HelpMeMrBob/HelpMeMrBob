@@ -6,10 +6,31 @@
 
 <mapper namespace="recommand.model.RecommandDAO">
 	<!-- 메뉴 가져오기 -->
-	<select id="listData" resultType="recommand.model.RecommandDTO"
-			parameterType="recommand.model.RecommandDTO">
-		SELECT idx, food, image, recomndCnt FROM food
+	<select id="listData" resultType="recommand.model.RecommandDTO">
+		<![CDATA[
+			SELECT food, image, recomndCnt
+				from (
+			    	select rownum rn,food, image, recomndCnt
+			    		from food order by DBMS_random.random
+				) where rn < 65
+		]]>
 	</select>
+	<!-- 예시 코드
+	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[
+    select
+    	bno, title, content, writer, regdate, updatedate
+    from
+       	(
+        select /*+INDEX_DESC(tbl_board pk_board) */
+        	rownum rn, bno, title, content, writer, regdate, updatedate
+        from
+        	tbl_board
+        where rownum <= 20
+        )
+     where rn > 10
+     ]]>
+   </select> -->
 </mapper>
 
 <!--
