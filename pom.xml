@@ -13,6 +13,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -209,8 +210,17 @@
 			<version>1.2.2</version>
 		</dependency>
 		
+		
 	</dependencies>
     <build>
+    	<resources>
+   		<resource>
+      	<directory>src/main/java</directory>
+      	<includes>
+         <include>**/*.xml</include>
+      	</includes>
+   		</resource>
+		</resources>
         <plugins>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -247,5 +257,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        
     </build>
 </project>

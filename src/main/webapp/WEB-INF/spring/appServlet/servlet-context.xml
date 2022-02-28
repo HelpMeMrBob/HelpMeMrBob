@@ -67,7 +67,18 @@
         <beans:constructor-arg index="0" ref="sqlSessionFactory3" />
     </beans:bean>
     
-   
+    <beans:bean id="sqlSessionFactory4" 
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"/>
+	</beans:bean>
+	<beans:bean id="sqlSession4" 
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg index="0" ref="sqlSessionFactory4" />
+	</beans:bean>
+    
+
+
    
     <!-- 파일 업로드를 위한 빈 생성 -->
 	<beans:bean id="multipartResolver" 
