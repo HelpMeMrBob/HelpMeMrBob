@@ -21,6 +21,11 @@
 			f.contents.focus();
 			return false;
 		}
+		/* if(f.userfile1.value==""){
+			alert("썸네일 이미지를 첨부하세요");
+			f.userfile1.focus();
+			return false;
+		} */
 	}
 </script>
 	
@@ -70,30 +75,34 @@
           action="./writeAction.do" class="form contact__form"
           onsubmit="return checkValidate(this);"> -->	
           <form name="writeFrm" method="post" 
-          action="reviewUploadAction.do" class="form contact__form"
+          action="reviewEditAction.do" class="form contact__form"
           onsubmit="return checkValidate(this);"
-          enctype="multipart/form-data">
-          	<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" />
+          enctype="multipart/form-data">	
+			<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" />
+			<input type="hidden" name="idx" value="${viewRow.idx }" />
+			<input type="hidden" name="nowPage" value="${param.nowPage }" />
+			<input type="hidden" name="pass" value="${viewRow.id }" />
             <div class="row">
 				
-              
+              <div class="flex-md-6">
+				
+				
+              </div><!-- .flex-* ends -->
 				
               <div class="flex-md-12 mar-b-md-2">
 				
                 <div class="form__group">
                   <label for="subject" class="form__label">제목 <span class="color-danger">*</span></label>
-                  <input type="text" id="subject" class="form__input" name="title" placeholder="제목을 입력하세여">
+                  <input type="text" id="subject" class="form__input" name="title" value="${viewRow.title }">
                 </div><!-- .form__group ends -->
-                
-                </div>
 				
+              </div><!-- .flex-* ends -->
 				
               <div class="flex-md-12 mar-b-md-2">
 				
                 <div class="form__group">
                   <label for="message-2" class="form__label">내용 <span class="color-danger">*</span></label>
-                  <textarea name="contents" id="message-2" class="form__textarea form__input"
-                    placeholder="내용을 입력하세여"></textarea>
+                  <textarea name="contents" id="message-2" class="form__textarea form__input">${viewRow.contents }</textarea>
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
@@ -102,16 +111,16 @@
 				
                 <div class="form__group">
                   <label for="subject" class="form__label">태그 <span class="color-danger">*</span></label>
-                  <input type="text" id="subject" class="form__input" name="tag" placeholder="태그를 입력하세여">
+                  <input type="text" id="subject" class="form__input" name="tag" value="${viewRow.tag}">
                 </div><!-- .form__group ends -->
-                
-                </div>
+				
+              </div><!-- .flex-* ends -->
               
               <div class="flex-md-12 mar-b-md-2">
 				
                 <div class="form__group">
-                  <label for="subject" class="form__label">첨부파일1 <span class="color-danger">*</span></label>
-                  <input type="file" id="subject" class="form__input" name="userfile1" placeholder="사진을 올려주세요">
+                  <label for="subject" class="form__label">첨부파일1(썸네일이미지) <span class="color-danger">*</span></label>
+                  <input type="file" id="subject" class="form__input" name="userfile1" value="${viewRow.userfile1}">
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
@@ -120,7 +129,7 @@
 				
                 <div class="form__group">
                   <label for="subject" class="form__label">첨부파일2 <span class="color-danger">*</span></label>
-                  <input type="file" id="subject" class="form__input" name="userfile2" placeholder="사진을 올려주세요">
+                  <input type="file" id="subject" class="form__input" name="userfile2" value="${viewRow.userfile2}">
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
@@ -129,7 +138,7 @@
 				
                 <div class="form__group">
                   <label for="subject" class="form__label">첨부파일3 <span class="color-danger">*</span></label>
-                  <input type="file" id="subject" class="form__input" name="userfile3" placeholder="사진을 올려주세요">
+                  <input type="file" id="subject" class="form__input" name="userfile3" value="${viewRow.userfile3}">
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
@@ -138,7 +147,7 @@
 				
                 <div class="form__group">
                   <label for="subject" class="form__label">첨부파일4 <span class="color-danger">*</span></label>
-                  <input type="file" id="subject" class="form__input" name="userfile4" placeholder="사진을 올려주세요">
+                  <input type="file" id="subject" class="form__input" name="userfile4" value="${viewRow.userfile4}">
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
@@ -146,8 +155,8 @@
                 <div class="flex-md-12 mar-b-md-2">
 				
                 <div class="form__group">
-                  <label for="subject" class="form__label">첨부파일5 <span class="color-danger">*</span></label>
-                  <input type="file" id="subject" class="form__input" name="userfile5" placeholder="사진을 올려주세요">
+                  <label for="subject" class="form__label">첨부파일5뻐큐 <span class="color-danger">*</span></label>
+                  <input type="file" id="subject" class="form__input" name="userfile5" value="${viewRow.userfile5}">
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
@@ -155,6 +164,7 @@
               <div class="flex-md-12">
 				
                 <button class="button--primary button--fill" type="submit" name="submit">작성완료</button>
+                <button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>
 				
               </div><!-- .flex-* ends -->
 				

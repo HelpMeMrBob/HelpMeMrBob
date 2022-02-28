@@ -27,7 +27,7 @@ public class WriteActionCommand implements BbsCommandImpl{
 		JDBCTemplateDAO dao=new JDBCTemplateDAO();
 		//int affected=dao.write(springBbsDTO);
 		//System.out.println("입력된 결과:"+affected);
-		dao.write(boardDTO);
+		//dao.write(boardDTO);
 		//dao.close();
 	}
 }

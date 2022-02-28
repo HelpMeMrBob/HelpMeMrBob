@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import board.util.PagingUtil;
+import util.PagingUtil;
 import member.model.MemberDAOImpl;
 import member.model.MemberVO;
 import member.model.ParameterDTO;

@@ -1,15 +1,19 @@
 package util;
 
-public class PagingUtil {
+//////댓글용(idx포함)
+public class ReplyPagingUtil {
 	
-	public static String pagingImg(
+	public static String ReplypagingImg(
 		int totalRecordCount,
 		int pageSize,
 		int blockPage,
 		int nowPage,
-		String page) {
+		String page,
+		String idx) {
+		//idx추가
 		
 		String pagingStr = "";
+		
 		
 		//1.전체페이지 구하기
 		int totalPage = 
@@ -28,12 +32,14 @@ public class PagingUtil {
 			//첫번째 페이지 블럭에서는 출력되지 않음
 			//두번째 페이지 블럭부터 출력됨.
 			pagingStr += "<li class='page-item'><a class='page-link'"
-				+ " href='"+page+"nowPage=1'>"
+					/* + " href='"+page+"nowPage=1'>" */
+				+ " href='"+page+"nowPage=1&idx="+idx+"'>"
 				+ "<i class='bi bi-skip-backward-fill'></i></a>";
 			pagingStr += "&nbsp;";
 			pagingStr += "<li class='page-item'><a class='page-link'"
 				+ " href='"+page+"nowPage="+
-								(intTemp-blockPage)+"'>"
+					/* (intTemp-blockPage)+"'>" */
+					(intTemp-blockPage)+"&idx="+idx+"'>"
 				+ "<i class='bi bi-skip-start-fill'></i></a>";
 		}
 		
@@ -47,12 +53,12 @@ public class PagingUtil {
 		while(blockCount<=blockPage && intTemp<=totalPage)
 		{
 			if(intTemp==nowPage) {
-				//pagingStr += "&nbsp;"+intTemp+"&nbsp;";
+				//pagingStr += "&nbsp;"+intTemp+"&nbsp;";   
 				pagingStr += "<li class='page-item active'><a class='page-link' href='#'>"+intTemp+"</a></li>";
 			}
-			else {
+			else { 
 				pagingStr += "<li class='page-item'><a class='page-link' href='"+page
-					+"nowPage="+intTemp+"'>"+
+					+"nowPage="+intTemp+"&idx="+idx+"'>"+
 					intTemp+"</a></li>";
 			}
 			
@@ -63,11 +69,11 @@ public class PagingUtil {
 		//5.다음페이지블럭 & 마지막페이지 바로가기
 		if(intTemp <= totalPage) {
 			pagingStr += "<li class='page-item'><a class='page-link' href='"+page+"nowPage="+
-											intTemp+"'>"
+											intTemp+"&idx="+idx+"'>"
 				+ "<i class='bi bi-skip-end-fill'></i></a></li>";
 			pagingStr += "&nbsp;";
 			pagingStr += "<li class='page-item'><a class='page-link' href='"+page+"nowPage="+
-											totalPage+"'>"
+											totalPage+"&idx="+idx+"'>"
 				+ "<i class='bi bi-skip-forward-fill'></i></a></li>";
 		}	
 		

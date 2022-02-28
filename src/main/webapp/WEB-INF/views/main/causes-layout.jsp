@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 
   <body>
 
@@ -65,7 +65,6 @@
 
 
       </div><!-- .inner-pages-header ends -->
-      <!-- INNER PAGES HEADER ENDS -->
       
       
       
@@ -73,18 +72,17 @@
       
 
 <!-- /////////////////////여기가 리스트////////////////////// -->
-
       <!-- ALL RESULTS SECTION STARTS -->
       	<section class="all-results all-results--causes">
 
         <div class="container">
 
           <div class="row">
-			
+			<c:forEach begin="1" end="1" step="1" var="i">
 			<c:forEach items="${listRows }" var="row"  varStatus="loop">
-				
-				${(row.idx!=0 && (row.idx % 3==0))?"</div><div class='row'>":"" }
-
+			<%-- ${(row.idx!=0 && (row.idx % 3==0))?"</div><div class='row'>":"" } --%>
+            ${(i!=0 && (i % 3==0))?"</div><div class='row'>":"" }
+            
             <div class="col-4">
 			
 			<a href="./reviewView.do?idx=${row.idx}&nowPage=${nowPage}">
@@ -100,7 +98,7 @@
 
                 <div class="card__body">
 
-                  <h3 class="cause__tile mar-b-sm-2">${row.title}</h3>
+                  <h3 class="cause__tile mar-b-sm-2">${row.title} </h3>
 
                   <div class="progress">
 
@@ -135,7 +133,7 @@
 			</a>
 			
             </div><!-- .flex-* ends -->
-          
+          </c:forEach>
       </c:forEach>
       
       </div><!-- .row ends -->
@@ -149,7 +147,8 @@
 
         <div class="container">
 
-          <div class="pagination">
+			<!-- 예쁜페이징...난못해ㅎㅎㅎ -->
+          <!-- <div class="pagination">
             <button
               class="pagination__arrow arrow-left transparent button--primary button--outline button share-button"><i
                 class="ri-arrow-left-s-line"></i></button>
@@ -163,7 +162,12 @@
             <button
               class="pagination__arrow arrow-right transparent button--primary button--outline button share-button"><i
                 class="ri-arrow-right-s-line"></i></button>
-          </div><!-- .pagination ends -->
+          </div>.pagination ends -->
+          
+           	
+			<ul class="pagination justify-content-center">
+				${pagingImg }
+			</ul>
 
 			<!-- #####버튼들##### -->
 			<div class="flex-md-12">

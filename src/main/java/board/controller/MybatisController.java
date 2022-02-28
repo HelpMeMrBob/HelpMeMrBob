@@ -19,7 +19,7 @@ import board.model.BoardReplyVO;
 import board.model.MybatisMemberImpl;
 import board.model.ParameterDTO;
 import member.model.MemberVO;
-import util.PagingUtil;
+import util.ReplyPagingUtil;
 
 @Controller
 public class MybatisController {
@@ -103,7 +103,7 @@ public class MybatisController {
 	}
 
 	// 삭제처리
-	@RequestMapping("/mybatis/delete.do")
+	@RequestMapping("/Replydelete.do")
 	public String delete(HttpServletRequest req, HttpSession session) {
 		// 로그인 확인 요거 시큐리티가 알아서 해준대 대단하징?
 		if (session.getAttribute("siteUserInfo") == null) {
@@ -112,6 +112,7 @@ public class MybatisController {
 		// 삭제처리를 위해 delete() 호출
 		sqlSession.getMapper(MybatisDAOImpl.class).delete(req.getParameter("idx"),
 				((MemberVO) session.getAttribute("siteUserInfo")).getId());
-		return "redirect:list.do";
+		String idx = req.getParameter("idx");
+		return "redirect:reviewView.do?idx=" + idx;
 	}
 }

@@ -8,7 +8,7 @@
 <script>
 function deleteRow(idx){
 	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete.do?idx="+idx;
+		location.href="Replydelete.do?idx="+idx;
 	}
 }
 function writeValidate(f)
@@ -130,8 +130,9 @@ function writeValidate(f)
 				</c:if>
 				
 				<h3>${lno}</h3>
+				<h3>${scrapNo}</h3>
 <!-- ////////좋아요한 게시글/////// -->
-<c:if test="${not empty lno}">
+<c:if test="${lno eq 1 and idx eq idx and id eq id}">
 <form name="writeFrm" method="post" 
           action="./like.do" class="form contact__form"
           onsubmit="return checkValidate(this);">
@@ -146,7 +147,7 @@ function writeValidate(f)
 </form>
 </c:if>
 <!-- //////////좋아요안한 게시글////////// -->
-<c:if test="${empty lno}">
+<c:if test="${lno eq null or lno eq 0 and idx eq idx and id eq id}">
 <form name="writeFrm" method="post" 
           action="./like.do" class="form contact__form"
           onsubmit="return checkValidate(this);">
@@ -161,6 +162,20 @@ function writeValidate(f)
 </form>
 </c:if>
 <!-- ////////좋아요버튼/////// -->
+
+<!-- //////////스크랩버튼////////// -->
+<form name="writeFrm" method="post" 
+          action="./scrap.do" class="form contact__form"
+          onsubmit="return checkValidate(this);">
+ <input type="hidden" name="idx" value="${viewRow.idx }" />
+<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+<div class="single-page__share pad-b-sm-2">
+  <div class="display-flex align-items-center"><div class="social">
+	<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">☆</button>
+   </div></div><!-- .display-flex ends -->
+</div><!-- .single-page__share ends -->
+</form>
+<!-- ////////스크랩버튼/////// -->
             </div><!-- .flex-* ends -->
 
           </div><!-- .row ends -->
@@ -262,46 +277,51 @@ function writeValidate(f)
             </div><!-- .row ends -->
 
           </form><!-- .form ends -->
-          <div class="single-page__navigation background-off-white mar-t-sm-4 mar-t-md-0 pad-t-sm-2 pad-b-sm-2">
-
-          <div class="container">
-
-            <div class="display-flex justify-content-between align-items-center">
-
-              <div class="previous display-flex align-items-center">
-                <span class="arrow"><a href="" class="button button--outline button--primary share-button"><i
-                      class="ri-arrow-left-s-line"></i></a></span>
-                <span>Previous post</span>
-              </div><!-- .previous ends -->
-
-              <div class="next display-flex align-items-center">
-                <span>Next post</span>
-                <span class="arrow"><a href="" class="button button--outline button--primary share-button"><i
-                      class="ri-arrow-right-s-line"></i></a></span>
-              </div><!-- .next ends -->
-
-            </div><!-- .display-flex ends -->
-
-          </div><!-- .container ends -->
-
-        </div><!-- .single-page__navigation ends -->
+          
 	
     <!-- SCROLL BACK TO TOP BEGINS -->
     <div class="scroll-to-top"><i class="ri-arrow-up-line"></i></div>
     <!-- SCROLL BACK TO TOP ENDS -->
           <!-- #####버튼들##### -->
-        <div class="flex-md-12">
-            <button class="button--primary button--fill" type="submit" 
-            onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
-			수정하기</button>
-			<button class="button--primary button--fill" type="submit" 
-			onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
-			삭제하기</button>
-       		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>
-       </div><!-- .flex-* ends -->
+    <div class="flex-md-12">
+	<%-- <button class="button--primary button--fill" type="submit" 
+          onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
+	수정하기원본</button>
+	<button class="button--primary button--fill" type="submit" 
+	onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
+	삭제하기원본</button>
+     		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>--%>
+    <c:if test="${sessionScope.siteUserInfo.id eq viewRow.id}">
+    <!-- //////삭제하기///// -->
+    <form name="writeFrm" method="post" class="form contact__form" action="./deleteAction.do">
+	<input type="hidden" name="idx" value="${viewRow.idx}" />
+	<input type="hidden" name="id" value="${viewRow.id}" />
+	<input type="hidden" name="nowPage" value="${param.nowPage }" />
+	<button class="button--primary button--fill" type="submit" name="submit">삭제하기</button>
+	</form>
+	<button class="button--primary button--fill" type="submit" 
+          onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
+	수정하기원본</button>
+	<!-- /////////수정하기 해적판/////////// -->
+	<form name="writeFrm" method="post" class="form contact__form" action="./deleteAction.do">
+	<input type="hidden" name="idx" value="${viewRow.idx}" />
+	<input type="hidden" name="id" value="${viewRow.id}" />
+	<input type="hidden" name="nowPage" value="${param.nowPage }" />
+	<button class="button--primary button--fill" type="submit" name="submit">삭제하기</button>
+	</form>
+	</c:if>
+	<form name="writeFrm" method="post" class="form contact__form" action="./reviewEdit.do">
+	<input type="hidden" name="idx" value="${viewRow.idx}" />
+	<input type="hidden" name="id" value="${viewRow.id}" />
+	<input type="hidden" name="nowPage" value="${param.nowPage }" />
+	<button class="button--primary button--fill" type="submit" name="submit">수정하기</button>
+	</form>
+	</div><!-- .flex-* ends -->
 
         </div><!-- .container ends -->
-
+        
+        
+	
       </section><!-- .contact ends -->
 
 	<!-- =================== 댓글창e ============================= -->

@@ -81,28 +81,7 @@ public class JDBCTemplateDAO {
 				}
 			});
 		}
-		//글만 쓰는 글쓰기
-		public void write(final BoardDTO boardDTO) {
-			template.update(new PreparedStatementCreator() {
-				@Override
-				public PreparedStatement createPreparedStatement(Connection con) throws SQLException{
-					
-					String sql="INSERT INTO board ("
-						+" idx, id, tag, title, contents)"
-						+" VALUES ("
-						+" board_seq.NEXTVAL,?,?,?,?"
-						+" )";
-					PreparedStatement psmt=
-							con.prepareStatement(sql);
-					psmt.setString(1, boardDTO.getId());
-					psmt.setString(2, boardDTO.getTag());
-					psmt.setString(3, boardDTO.getTitle());
-					psmt.setString(4, boardDTO.getContents());
-
-					return psmt;
-				}
-			});
-		}
+		
 		
 		//게시물 조회수 증가
 		public void updateVisitCnt(final String idx)
@@ -197,6 +176,33 @@ public class JDBCTemplateDAO {
 				}
 			});
 		}
+		
+		//수정처리 final 지우면 에러남
+		public void reviewEditAction(final BoardDTO dto) {
+			String sql="UPDATE board "
+					+" SET id=?, tag=?, title=?, contents=? "
+					+ "userfile1=?, userfile2=?, userfile3=?, userfile4=?, userfile5=? "
+					+" WHERE idx=?";
+			
+			template.update(sql, new PreparedStatementSetter() {
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+
+					ps.setString(1, dto.getId());
+					ps.setString(2, dto.getTag());
+					ps.setString(3, dto.getTitle());
+					ps.setString(4, dto.getContents());
+					ps.setString(5, dto.getUserfile1());
+					ps.setString(6, dto.getUserfile2());
+					ps.setString(7, dto.getUserfile3());
+					ps.setString(8, dto.getUserfile4());
+					ps.setString(9, dto.getUserfile5());
+					ps.setInt(10, dto.getIdx());
+				}
+			});
+		}
+		
+		
 		public void delete(final String idx, final String id) {
 			String sql="DELETE FROM board "
 				+" WHERE idx=? AND id=?";

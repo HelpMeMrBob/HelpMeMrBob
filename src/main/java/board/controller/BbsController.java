@@ -25,7 +25,7 @@ import board.model.BoardDTO;
 import board.model.BoardReplyVO;
 import board.model.JDBCTemplateDAO;
 import board.model.JdbcTemplateConst;
-import util.PagingUtil;
+import util.ReplyPagingUtil;
 
 @Controller
 public class BbsController {
@@ -131,9 +131,13 @@ public class BbsController {
 				 */
 				ArrayList<BoardReplyVO> lists=
 						sqlSession.getMapper(MybatisDAOImpl.class).listPage(start, end, idx);
+				/*
+				 * String pagingImg= PagingUtil.pagingImg(totalRecordCount,pageSize, blockPage,
+				 * nowPage, req.getContextPath()+"/reviewView.do?");
+				 */
 				String pagingImg=
-						PagingUtil.pagingImg(totalRecordCount,pageSize, blockPage, nowPage,
-								req.getContextPath()+"/reviewView.do?");
+						ReplyPagingUtil.ReplypagingImg(totalRecordCount,pageSize, blockPage, nowPage,
+								req.getContextPath()+"/reviewView.do?",idx);
 				model.addAttribute("pagingImg",pagingImg);
 				
 				for(BoardReplyVO dto: lists)
@@ -193,7 +197,7 @@ public class BbsController {
 				command=new EditCommand();
 				command.execute(model);
 				
-				modePage="main/contact3";
+				modePage="main/contact6";
 			}
 			else if(mode.equals("delete")) {
 				model.addAttribute("req",req);
@@ -207,8 +211,15 @@ public class BbsController {
 			
 			
 			return modePage;
+		}
+		//글쓰기 페이지로 진입하기 위한 매핑처리
+		@RequestMapping("/reviewEdit.do")
+		public String reviewEdit(Model model, HttpServletRequest req) {
 			
-
+			model.addAttribute("req",req);
+			command=new EditCommand();
+			command.execute(model);
+			return "main/contact6";
 		}
 		//수정처리
 		  @RequestMapping("/editAction.do") public String
@@ -230,7 +241,48 @@ public class BbsController {
 		  
 		  return "redirect:reviewView.do"; 
 		 
-		
+	}
+		  
+		  //여기가 에러
+		  @RequestMapping("/reviewEditAction2.do") public String
+			reviewEditAction2(HttpServletRequest req, Model model, BoardDTO boardDTO) {
+			  /*
+			   request내장객체와 수정페이지에서 전송한 모든 폼값을 저장한 DTO객체를 
+			   Model에 저장한 후 서비스 객체로 전달한다.
+			   */
+			  model.addAttribute("req",req);
+			  model.addAttribute("boardDTO",boardDTO); command=new
+			  EditActionCommand(); command.execute(model);
+			  /*
+			   수정처리가 완료되면 상세페이지로 이동하게 되는데 이때 idx와 같은
+			   파라미터가 필요하다. Model객체에 저장한 후 redirect하면 자동으로
+			   쿼리스트링 형태로 만들어준다.
+			   */
+			  model.addAttribute("idx",req.getParameter("idx"));
+			  model.addAttribute("nowPage",req.getParameter("nowPage"));
+			  
+			  return "redirect:reviewView.do"; 
+			 
+		}
+		  
+		  
+		  
+		  
+		//삭제
+		  @RequestMapping("/deleteAction.do") public String
+		  deleteAction(HttpServletRequest req, Model model, BoardDTO boardDTO) {
+		  /*
+		   request내장객체와 수정페이지에서 전송한 모든 폼값을 저장한 DTO객체를 
+		   Model에 저장한 후 서비스 객체로 전달한다.
+		   */
+			model.addAttribute("req",req);
+			command=new DeleteActionCommand();
+			command.execute(model);
+			
+			model.addAttribute("idx",req.getParameter("idx"));
+			model.addAttribute("nowPage", req.getParameter("nowPage"));
+		 
+		  return "redirect:reviewList.do"; 
 	}
 	
-}
+}				

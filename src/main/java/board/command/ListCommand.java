@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 
 import board.model.BoardDTO;
 import board.model.JDBCTemplateDAO;
-import board.util.EnvFileReader;
-import board.util.PagingUtil;
+import util.EnvFileReader;
+import util.PagingUtil;
 
 
 public class ListCommand implements BbsCommandImpl{
