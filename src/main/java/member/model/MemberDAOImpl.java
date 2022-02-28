@@ -8,8 +8,11 @@ public interface MemberDAOImpl
 	public MemberVO myPage(String id);
 	public MemberVO memberUpdate(MemberVO vo);
 	public int memberUpdateAction(MemberVO vo);
+	public int myPreferenceUpdate(MemberVO vo);
 	
 	public ArrayList<MemberVO> mySticker(ParameterDTO parameterDTO);
+	public ArrayList<MemberVO> myPreference(ParameterDTO parameterDTO);
+	public ArrayList<MemberVO> myPoint(ParameterDTO parameterDTO);
 	
 	public int getTotalCountSearch(ParameterDTO parameterDTO);
 	public ArrayList<MemberVO> listPageSearch(ParameterDTO parameterDTO);

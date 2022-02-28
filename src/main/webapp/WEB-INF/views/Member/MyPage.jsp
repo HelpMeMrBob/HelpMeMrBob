@@ -1,6 +1,9 @@
 <%@page import="member.model.ParameterDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 <!--────────────────────────────────── SITE HEADER BEGINS ─────────────────────────────────── -->
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -65,8 +68,16 @@
 			</tr>
 			<tr style="text-align: center">
 				<td colspan="2" style="width: 50%; padding: 10px;">
-					<input type="text" value="EXP ${ sessionScope.siteUserInfo.exp } / 1000"
-						   style="border: none; text-align: center;" readonly/>
+					<label style="padding: 15px; border: none; text-align: center;
+						   		  border-bottom: 1px solid #10212F; color: #10212F;">
+						   		  EXP  ${ sessionScope.siteUserInfo.exp }
+					</label>
+					<c:forEach items="${ point }" var="point">
+					<label style="padding: 15px; border: none; text-align: center;
+						   		  border-bottom: 1px solid #10212F; color: #10212F;">
+						POINT  ${ point.point }
+					</label>
+					</c:forEach>
 				</td>
 			</tr>
 			<tr>
@@ -96,12 +107,53 @@
 				</td>
 				<td style="width: 50%; padding: 20px; padding-top: 5px;
 						   border: 1px solid #DFDFDF; vertical-align: top;">
-					밥파.. 한국인은 밥파
+					<canvas id="myChart" width="100%" height="1000px"
+							style="margin: 10px"></canvas>
 				</td>
 			</tr>
 		</table>
+		<c:forEach items="${ preference }" var="preference">
+			<input type="hidden" id="noodle" value="${ preference.prenoodle }"/>
+			<input type="hidden" id="rice" value="${ preference.prerice }"/>
+			<input type="hidden" id="soup" value="${ preference.presoup }"/>
+			<input type="hidden" id="meat" value="${ preference.premeat }"/>
+			<input type="hidden" id="seafood" value="${ preference.preseafood }"/>
+			<input type="hidden" id="etc" value="${ preference.preetc }"/>
+		</c:forEach>
+		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 	</div>
 	</div>
+<script type="text/javascript">
+	const labels = ['면', '밥', '국·탕', '분식·튀김·패스트푸드', '해산물', '고기'];
+	
+	const data = {
+	  labels: labels,
+	  datasets: [{
+	    label: '나의 음식 선호도',
+	    backgroundColor: 'RGB(237, 106, 90, 0.8)',
+	    borderColor: '#DFDFDF',
+	    data: [
+	    	document.getElementById('noodle').value,
+	    	document.getElementById('rice').value,
+	    	document.getElementById('soup').value,
+	    	document.getElementById('etc').value,
+	    	document.getElementById('seafood').value,
+	    	document.getElementById('meat').value],
+	  }]
+	};
+
+	const config = {
+	  type: 'radar',
+	  data: data,
+	};
+</script>
+
+<script>
+	const myChart = new Chart(
+	  document.getElementById('myChart'),
+	  config
+	);
+</script>
 <!--──────────────────────────────────── MAIN SECTION END ────────────────────────────────────-->
  	</main>
 <jsp:include page="/WEB-INF/views/include/search.jsp" />
