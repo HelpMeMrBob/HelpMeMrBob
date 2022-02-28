@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="mybatis.IAndroidDAO">
+	<select id="memberLogin" resultType="mybatis.MemberVO"
+		parameterType="mybatis.MemberVO">
+		SELECT * FROM member WHERE id=#{id} and pass=#{pass}
+	</select>
+</mapper>
