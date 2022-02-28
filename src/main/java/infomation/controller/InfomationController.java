@@ -55,6 +55,12 @@ public class InfomationController {
 		
 		//DB에서 검색어에 맞는 결과 리스트 가져오기
 		String search = req.getParameter("search");
+		String selectMenu = req.getParameter("menu");
+		
+		if (selectMenu != null) {
+			search = selectMenu;
+		}
+		
 		ArrayList<InfomationDTO> keyword = sqlSession2.getMapper(InfomationDAOInter.class).keyword(search);
 		model.addAttribute("keyword", keyword);
 		
@@ -124,5 +130,18 @@ public class InfomationController {
 		sqlSession2.getMapper(InfomationDAOInter.class).favoriteDelete(req.getParameter("idx"));
 		
 		return "redirect:favoriteList.do";
+	}
+	
+	//상세보기 매핑
+	@RequestMapping("/detailView.do")
+	public String detailView(Model model, HttpServletRequest req) {
+		
+		String place = req.getParameter("place");
+		ArrayList<InfomationDTO> detailView = 
+				sqlSession2.getMapper(InfomationDAOInter.class).detailView(place);
+		
+		model.addAttribute("detailView", detailView);
+		
+		return "main/detailView";
 	}
 }

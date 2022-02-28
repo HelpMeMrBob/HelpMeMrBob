@@ -7,7 +7,7 @@
 <mapper namespace="infomation.model.InfomationDAOInter">
 	<!-- DB에서 키워드에 맞는 데이터 꺼내오기 -->
 	<select id="keyword" resultType="infomation.model.InfomationDTO">
-		SELECT * FROM restaurant WHERE food LIKE '%'||#{param1}||'%'
+		SELECT * FROM restaurant WHERE menu LIKE '%'||#{param1}||'%'
 	</select>
 	
 	<!-- 즐겨찾기 추가하기 -->
@@ -30,5 +30,9 @@
 	<update id="favoriteModify" parameterType="infomation.model.FavoriteDTO">
 		UPDATE favorite SET memo=#{param1} where idx=#{param2}
 	</update>
+	
+	<select id="detailView" resultType="infomation.model.InfomationDTO">
+		SELECT * FROM restaurant WHERE place=#{param1} 
+	</select>
 </mapper>
 	

@@ -3,10 +3,13 @@ package item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import point.JdbcTemplateConst;
 
@@ -64,11 +67,16 @@ public class ItemDAO {
 
 					@Override
 					public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-						String sql= " INSERT INTO adminItem (id,idx ,temOname) "
-								+ " VALUES ('admin', myitem_seq.nextval ,?)";
+						String sql= " INSERT INTO adminItem (id,idx ,temOname,temSname,contents) "
+								+ " VALUES ('admin', myitem_seq.nextval ,?,?,?)";
 						PreparedStatement psmt = con.prepareStatement(sql);
 						psmt.setString(1, idto.getTemOname());
+						System.out.println("admin시점 오리지널 저장명: "+ idto.getContents());
+						psmt.setString(2, idto.getTemSname());
+						System.out.println("admin시점 변환 저장명: "+ idto.getTemSname());
+						psmt.setString(3, idto.getContents());
 						
+						System.out.println("admin확인용 코드2");
 						return psmt;
 					}
 					
@@ -78,8 +86,21 @@ public class ItemDAO {
 			}
 			
 		}
-		
-		//아이템 관리자 페이지에서 이미지 등록
+		public String getAdminItem(String sName) {
+			
+			String sql="";
+			String result="";
+			List<ItemDTO> iList = new ArrayList<ItemDTO>();
+			try {
+				sql = "SELECT CONTENTS FROM adminItem where temSname like'"+sName+"'";
+				result= template.queryForObject(sql, String.class);
+			}catch(Exception e) {
+				System.out.println("getAdminItem중 오류");
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
 		
 
 	

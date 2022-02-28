@@ -46,22 +46,10 @@
 
               <div class="card ministry">
 
-                <div class="card__header">
+                <div class="wc_card__header">
 
-                  <img src="./resources/images/ministry-children.jpg" alt="" class="card__image">
+                  <img src="./resources/recommand/worldcup.png" alt="" class="card__image">
 
-                  <div class="card__details">
-
-                    <div class="ministry__details">
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-group-line"></i></span>
-                        <span class="text color-off-white">15 children</span>
-                      </div><!-- .icon-text ends -->
-
-                    </div><!-- .ministry__details ends -->
-
-                  </div><!-- .card__details ends -->
 
                 </div><!-- .card__header ends -->
 
@@ -74,59 +62,8 @@
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="ministries-single.html" class="button button--primary button--fill">32강 바로가기</a>
+                    <a href="./resources/worldcup_react_build8/index.html" class="button button--primary button--fill">바로가기</a>
                   </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
-
-                </div><!-- .card__footer ends -->
-
-              </div><!-- .card ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-4">
-
-              <div class="card ministry">
-
-                <div class="card__header">
-
-                  <img src="./resources/images/ministry-homeless-outreach.jpg" alt="" class="card__image">
-
-                  <div class="card__details">
-
-                    <div class="ministry__details">
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-group-line"></i></span>
-                        <span class="text color-off-white">35 brothers &amp; sisters</span>
-                      </div><!-- .icon-text ends -->
-
-                    </div><!-- .ministry__details ends -->
-
-                  </div><!-- .card__details ends -->
-
-                </div><!-- .card__header ends -->
-
-                <div class="card__body">
-
-                  <h3 class="ministry__tile mar-b-sm-2">64강</h3>
-
-                </div><!-- .card__body ends -->
-
-                <div class="card__footer">
-					<!-- http://localhost:8081/helpmemrbob/resources/worldcup_react_build8/index.html -->
-                  <div class="card__cta">
-                    <a href="./resources/worldcup_react_build8/index.html?round=64" class="button button--primary button--fill">64강 바로가기</a>
-                  </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
 
                 </div><!-- .card__footer ends -->
 
@@ -138,22 +75,10 @@
 
               <div class="card ministry">
 
-                <div class="card__header">
+                <div class="wc_card__header">
 
-                  <img src="./resources/images/ministry-men-choir.jpg" alt="" class="card__image">
+                  <img src="./resources/recommand/worldcup.png" alt="" class="card__image">
 
-                  <div class="card__details">
-
-                    <div class="ministry__details">
-
-                      <div class="icon-text">
-                        <span class="icon"><i class="ri-group-line"></i></span>
-                        <span class="text color-off-white">15 brothers</span>
-                      </div><!-- .icon-text ends -->
-
-                    </div><!-- .ministry__details ends -->
-
-                  </div><!-- .card__details ends -->
 
                 </div><!-- .card__header ends -->
 
@@ -166,13 +91,8 @@
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="ministries-single.html" class="button button--primary button--fill">랭킹 바로가기</a>
+                    <a href="./resources/worldcup_react_build8/index.html" class="button button--primary button--fill">바로가기</a>
                   </div><!-- .card__cta ends -->
-
-                  <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
-                  </div><!-- .card__share ends -->
 
                 </div><!-- .card__footer ends -->
 

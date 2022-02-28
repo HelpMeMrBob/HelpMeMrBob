@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var = "path" value = "${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 
 <script type="text/javascript">
@@ -89,11 +90,11 @@ function vali() {
 
 function deleteRow(idx) {
 	if (confirm("정말로 삭제하시겠습니까?")) {
-		location.href="favoriteDelete.do?idx="+idx;
+		location.href="./favoriteDelete.do?idx="+idx;
 	}
 }
 
-function modifyRow(idx, place, address) {
+function modifyRow(idx, place, address, memo) {
 	var bob_mapArea = document.getElementById("bob_mapArea");
 	var favoriteList = document.getElementById("favoriteList");
 	var modify = document.getElementById("modify");
@@ -111,7 +112,7 @@ function modifyRow(idx, place, address) {
 		form += 	'<div style="padding:5px;font-size:14px;">이름 : '+ place +'</div>';
 		form +=		'<div style="padding:5px;font-size:14px;">주소 : '+ address +'</div>';
 		form +=		'<textarea name="memo" id="memo" cols="40" rows="5" placeholder="수정할 내용을 작성해주세요!(최대 50자)"' +
-						'style="margin-left:10px;"></textarea>';
+						'style="margin-left:10px;">'+ memo +'</textarea>';
 		form +=		'<button type="submit" id="submit1" style="text-align:center;margin-left:10px;">확인</button>';
 		form +=		'<button type="button" id="submit1" style="text-align:center;margin-left:10px;"' +
 						'onclick="cancel();">취소</button>';
@@ -123,7 +124,11 @@ function modifyRow(idx, place, address) {
 }
 
 function cancel() {
-	location.href="./favoriteList.do";
+	sidebarChange('favo');
+}
+
+function detailView(place) {
+	location.href="./detailView.do?place=" + place;
 }
 </script>
 
@@ -198,7 +203,17 @@ function cancel() {
 				   		<div>
 					   		<form onsubmit="return vali();" name="searchFrm">
 					   			<span style="font-size: 16px;">검색 : </span>
-								<input type="text" id="keyword" name="search" style="width: 150px;" />
+					   			<c:if test="${ not empty param }" var="userSearch">
+						   			<c:if test="${ not empty param.menu }">
+										<input type="text" id="keyword" name="search" style="width: 150px;" value="${ param.menu }" />
+									</c:if>
+						   			<c:if test="${ not empty param.search }">
+										<input type="text" id="keyword" name="search" style="width: 150px;" value="${ param.search }" />
+									</c:if>
+								</c:if>
+								<c:if test="${ not userSearch or param.string eq 'error' }">
+									<input type="text" id="keyword" name="search" style="width: 150px;" />
+								</c:if>
 								<button type="submit" id="submit1">확인</button>
 					   		</form>
 				   		</div>
@@ -214,8 +229,9 @@ function cancel() {
 		   				<option value="500">500M</option>
 		   				<option value="1000">1KM</option>
 		   			</select><br />
-		   			<span style="margin-top:20px;font-size:14px;">내 위치가 이상하신가요?</span><br />
-		   			<input type="text" name="userLocation" id="userLocation" size="25" value="" />
+		   			<span style="margin-top:20px;font-size:14px;">내 위치가 이상하신가요?</span>
+		   			<input type="button" class="btn btn-primary" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br /><br />
+		   			<input type="text" id="userLocation" name="userLocation" placeholder="도로명주소 직접 입력하기" size="25" value="" />
 		   			<button type="button" id="submit1" onclick="myLocation();">확인</button>
 		   		</div>
 		   		
@@ -224,16 +240,31 @@ function cancel() {
 		   			<hr />
 		   			<c:choose>
 						<c:when test="${ empty keyword }">
-							<div style="font-size:16px;text-align:center;">검색어를 입력해주세요!</div>
+							<div style="font-size:16px;text-align:center;">해당 검색어에 대한 식당이 없습니다<br />힝ㅠㅠ</div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${ keyword }" var="row">
+							<c:forEach items="${ keyword }" var="row" varStatus="loop">
 								<ul style="font-size: 15px;">
-									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
+									<li>이름 : <a href="./detailView.do?place=${ row.place }">${ row.place }</a></li>
 									<li>주소 : ${ row.address }</li>
-									<li>전화번호 : ${ row.plcNum }</li>
-									<li>메뉴 : ${ row.menu }</li>
-									<li>영업시간 : ${ row.operTime }</li>
+									<c:if test="${ row.plcNum != 'null' }"><li>전화번호 : ${ row.plcNum }</li></c:if>
+									<c:if test="${ row.plcNum == 'null' }"><li style="color:red;">전화번호 : 정보제공없음</li></c:if>
+									<c:if test="${ row.menu != 'null' }"><li align="center">--------- 메뉴 ---------</li></c:if>
+									<c:if test="${ row.menu != 'null' }">
+										<c:forEach items='${ row.menu.split("@") }' var="menu" varStatus="status">
+										<c:set var="price" value='${ row.price.split("@") }' />
+											<li align="center">
+												${ menu } &nbsp;
+												<c:if test="${ price[status.index] != 'null' and not empty price[status.index] }"> 
+													<span>${ price[status.index] }원</span>
+												</c:if>
+											</li>
+										</c:forEach>
+									</c:if>
+									<c:if test="${ row.menu == 'null' }"><li style="color:red;">메뉴 : 정보제공없음</li></c:if>
+									<li align="center">-------------------------</li>
+									<c:if test="${ row.operTime != 'null' }"><li>영업시간 : ${ row.operTime }</li></c:if>
+									<c:if test="${ row.operTime == 'null' }"><li style="color:red;">영업시간 : 정보제공없음</li></c:if>
 									<button id="locationCheck" type="button" class="button button-block-sm button--primary button--fill" 
 										onclick="marker('${row.address}', '${ row.place }');">위치보기</button>
 								</ul>
@@ -245,8 +276,6 @@ function cancel() {
    			</div>
    			<!-- 밥 지도 영역 E -->
    			
-   			
-   			
    			<!-- 즐겨찾기 영역 S -->
    			<div id="favoriteArea" style="display: none;">
 	   			<!-- 타이틀 -->
@@ -257,12 +286,16 @@ function cancel() {
 		   		<!-- 내 위치 버튼 -->
 		   		<div id="favorite" class="m-3" align="center">
 		   			<button type="button" class="btn btn-primary" onclick="geo_tracking();">내 위치</button>
-		   			<select name="radius" id="radius"  onchange="rad(this.value);">
+		   			<select name="radius" id="radius" onchange="rad(this.value);">
 		   				<option value="0">--선택--</option>
 		   				<option value="300">300M</option>
 		   				<option value="500">500M</option>
 		   				<option value="1000">1KM</option>
-		   			</select>
+		   			</select><br />
+		   			<span style="margin-top:20px;font-size:14px;">내 위치가 이상하신가요?</span>
+		   			<input type="button" class="btn btn-primary" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br /><br />
+		   			<input type="text" id="userLocation" name="userLocation" placeholder="도로명주소 직접 입력하기" size="25" value="" />
+		   			<button type="button" id="submit1" onclick="myLocation();">확인</button>
 		   		</div>
 		   		
 		   		<!-- 즐겨찾기 목록 -->
@@ -278,13 +311,13 @@ function cancel() {
 						<c:otherwise>
 							<c:forEach items="${ favoriteList }" var="row">
 								<ul style="font-size: 15px;">
-									<li>이름 : <a href="#" onclick="marker('${row.address}', '${ row.place }');">${ row.place }</a></li>
+									<li>이름 : <a href="./detailView.do?place=${ row.place }">${ row.place }</a></li>
 									<li>주소 : ${ row.address }</li>
 									<li>메모 : ${ row.memo }</li>
 									<button id="locationCheck" type="button" class="button button-sm button--primary button--fill" 
 										onclick="marker('${row.address}', '${ row.place }');">위치보기</button>
 									<button id="favoriteModify" type="submit" class="button button-sm button--primary button--fill"
-										onclick="modifyRow('${row.idx}', '${ row.place }', '${ row.address }');">수정하기</button>
+										onclick="modifyRow('${row.idx}', '${ row.place }', '${ row.address }', '${ row.memo }');">수정하기</button>
 									<button id="favoriteDelete" type="submit" class="button button-sm button--primary button--fill"
 										onclick="javascript:deleteRow('${row.idx}');">삭제하기</button>
 								</ul>
@@ -329,11 +362,13 @@ function cancel() {
 	<!-- SEARCH -->
     <jsp:include page="/WEB-INF/views/include/search.jsp" />
 	
-	<!-- FOOTER -->
+	<!-- JQUERY -->
 	<jsp:include page="/WEB-INF/views/include/jquery.jsp" />
 </body>
 
 
+<!-- 다음 주소 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 카카오 지도 API -->
 <!-- services 라이브러리 불러오기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1c4c2a88f75c42cd25f8a7382dc6c49&libraries=services"></script>
@@ -372,7 +407,7 @@ function cancel() {
 		   	  	// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 				var iwContent =	'<div style="padding:5px;font-size:14px;">이름 : '+ place +'</div>' +
 								'<div style="padding:5px;font-size:14px;width:350px;">주소 : '+ address +'</div>' + 
-								'<div style="padding:5px;font-size:14px;"><a href="#">상세보기</a></div>' +
+								'<div style="padding:5px;font-size:14px;"><a href="#" onclick="detailView('+'\''+place+'\''+');">상세보기</a></div>' +
 						<c:choose>
 					   	  	<c:when test="${ not empty siteUserInfo }">
 				   	 			'<div style="padding:5px;"><button type="button" id="submit2" onclick="favorite(1,'+'\''+place+'\''+','+'\''+address+'\''+');">즐겨찾기 등록</button></div>';
@@ -386,6 +421,20 @@ function cancel() {
 				    
 				if (place === '내 위치') {
 					iwContent = '<div style="padding:5px;font-size:14px;">내 위치</div>';
+					var imageSrc = '${path}/resources/include_img/bob_marker.png', // 마커이미지의 주소입니다    
+				    imageSize = new kakao.maps.Size(84, 89), // 마커이미지의 크기입니다
+				    imageOption = {offset: new kakao.maps.Point(41, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+				      
+					// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+					var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+					    
+					// 마커를 생성합니다
+					var marker = new kakao.maps.Marker({
+						map: map,
+		   	            position: coords,
+					    image: markerImage, // 마커이미지 설정 
+		   	         	clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+					});
 				}
 				
 				// 인포윈도우를 생성합니다
@@ -416,13 +465,6 @@ function cancel() {
 		marker('${row.address}', '${ row.place }');
 	</c:forEach>
    	
-   	/* setInterval함수 */
-   	var timer;
-   	function reGeo() {
-   		timer = window.setInterval("geo_check()", 3000);
-   	}
-   	reGeo();
-   	
    	var geo_use = null; //geo의 사용가능 여부
    	var geo_lat = null; // 위도
    	var geo_lng = null; // 경도
@@ -451,6 +493,8 @@ function cancel() {
    	    geo_use = true;
    	    geo_lat = position.coords.latitude;
    	    geo_lng = position.coords.longitude;
+   	    
+   	    geo_tracking();
    	}
 	
    	// error발생 시 에러의 종류를 알려주는 함수.
@@ -468,12 +512,7 @@ function cancel() {
    	function geo_tracking(){
    	    if (geo_use) {
    	    	
-   	    	if (userLatitude == null || userLongitude == null) {
-   	   			userLatitude = geo_lat;
-   	   			userLongitude = geo_lng;
-   	   		}
-   	    	
-   	        map.panTo(new kakao.maps.LatLng(userLatitude, userLongitude));
+   	        map.panTo(new kakao.maps.LatLng(geo_lat, geo_lng));
    	        
 			var geocoder = new kakao.maps.services.Geocoder();
 			
@@ -495,6 +534,7 @@ function cancel() {
    	    }
    	    
    	}
+   	
    	
    	//사용자로부터 정확한 위치 얻어오기
    	function myLocation() {
@@ -518,14 +558,21 @@ function cancel() {
 	   	     	console.log(userLatitude);
 	   	     	console.log(userLongitude);
 	   	     	
-				
-	   	        // 결과값으로 받은 위치를 마커로 표시합니다
-	   	        var marker = new kakao.maps.Marker({
-	   	            map: map,
+	   	     	var imageSrc = '${path}/resources/include_img/bob_marker.png', // 마커이미지의 주소입니다    
+			    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+			    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			      
+				// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+				    
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					map: map,
 	   	            position: coords,
+				    image: markerImage, // 마커이미지 설정 
 	   	         	clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-	   	        });
-	   	        
+				});
+				
 		   	  	// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 				var iwContent = '<div style="padding:5px;font-size:14px;">내 위치</div>';
 				var iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
@@ -590,5 +637,71 @@ function cancel() {
    	    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
    	    map.relayout();
    	}
+   	
+   	function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+				
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+				
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("userLocation").value = roadAddr;
+                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                } 
+                else {
+                    document.getElementById("sample4_extraAddress").value = '';
+                }
+				
+                var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } 
+                else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } 
+                else {
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
 </script>
 </html>
+
+
+
+<!-- 필요하지만 보이지 않는 히든 박스 -->
+<input type="hidden" id="sample4_postcode" placeholder="우편번호">
+<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
+<span id="guide" style="color:#999;display:none"></span>
+<input type="hidden" id="sample4_detailAddress" placeholder="상세주소">
+<input type="hidden" id="sample4_extraAddress" placeholder="참고항목">

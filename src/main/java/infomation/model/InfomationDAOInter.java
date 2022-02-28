@@ -11,4 +11,5 @@ public interface InfomationDAOInter {
 	public ArrayList<FavoriteDTO> favoriteList(String id);
 	public int favoriteModify(String memo, String idx);
 	public int favoriteDelete(String idx);
+	public ArrayList<InfomationDTO> detailView(String place);
 }

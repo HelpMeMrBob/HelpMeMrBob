@@ -7,8 +7,8 @@
 <mapper namespace="recommand.model.RecommandDAO">
 	<!-- 메뉴 가져오기 -->
 	<select id="listData" resultType="recommand.model.RecommandDTO"
-			parameterType="recommand.model.RecommandParameterDTO">
-		SELECT food, image, recomndCnt FROM food;
+			parameterType="recommand.model.RecommandDTO">
+		SELECT idx, food, image, recomndCnt FROM food
 	</select>
 </mapper>
 

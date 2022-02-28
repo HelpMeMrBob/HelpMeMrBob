@@ -78,18 +78,21 @@ img {
 			            	<div class="text-block mar-b-sm-4">
 							<!-- See _typography.scss for styling -->
 							<blockquote class="blockquote text-center-sm">
-							  <h3 class="mar-b-sm-2 italic bold">토너먼트</h3>
-							  <h5 class="bold">토너먼트에 대한 설명을 블라블라</h5>
+							  <h3 class="mar-b-sm-2 italic bold">음식 월드컵</h3>
+							  <h5 class="bold">
+							  	토너먼트 형식으로 음식을 선택하여,<br>
+							  	제일 좋아하는 음식이 무엇인지 알아보세요.
+							  </h5>
 							</blockquote><!-- .blockquote ends -->
 			                </div><!-- .text-block ends -->
-			                <button onclick="location.href='../recommand/roulette.do';"
+			                <button onclick="location.href='./worldcup.do';"
 									style="background-color: #ED6A5A; color: #F5F5F5;
 									width: 150px; height: 50px; font-size: 16px; border: none;">
 								<strong>바로가기</strong>
 							</button>
 			            </div><!-- .flex-* ends -->
 			            <div class="flex-md-5">
-			                <img src="./resources/main_img/roulette.png" style="width: 500px;">
+			                <img src="./resources/main_img/worldcup.png" style="width: 500px;">
 			            </div><!-- .flex-* ends -->
 			        </div>
 		        </div>

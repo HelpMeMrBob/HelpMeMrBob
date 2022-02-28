@@ -1,5 +1,8 @@
 package com.project.helpmemrbob;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;	
@@ -7,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +21,8 @@ import util.PagingUtil;
 import member.model.MemberDAOImpl;
 import member.model.MemberVO;
 import member.model.ParameterDTO;
+import point.PointDAO;
+import point.PointDTO;
 
 
 @Controller
@@ -261,6 +268,54 @@ public class MemberController
 	public String memberJoin (Model model)
 	{
 		return "Member/MemberRegister";
+	}
+	@Autowired
+	JdbcTemplate template;
+	//회원가입 액션페이지
+	@RequestMapping("/registerAction.do")
+	public String registerAction (HttpServletRequest req,Model model, MemberVO vo)
+	{	
+		PointDAO pdao = new PointDAO(); 
+		final PointDTO pdto = new PointDTO();
+	
+		String id = req.getParameter("id");
+		pdto.setId(id);
+		
+		
+		sqlSession.getMapper(MemberDAOImpl.class).registerAction(vo);
+		System.out.println("회원가입페이지에서 넘어온 아이디: "+id);
+		
+		try {
+			template.update( new PreparedStatementCreator() {
+				int resultSet = 0;
+				
+				//이자체가 오류를 던진걸 catch하지는 못하는건가??
+				//만약 이게 안된다면 home에서 session.id가 있을때만 pdao.buySticker()를 호출하게함.
+				
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) 
+						throws SQLException {
+				String sql = " INSERT INTO point (id, point )"
+						+" VALUES (?,0)";
+				PreparedStatement psmt =
+						con.prepareStatement(sql);
+				psmt.setString(1, pdto.getId());
+				
+				
+				System.out.println(sql);
+				return psmt;
+				}
+				
+			});	
+			System.out.println("회원가입 포인트 0으로 설정완료.");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("회원가입 포인트 기본설정 중 오류 발생.");
+		}
+		System.out.println("회원 가입 완료");
+		
+		return "redirect:/";
 	}
 	
 /*───────────────────────────────────────────────────────────────────────────────────────────────

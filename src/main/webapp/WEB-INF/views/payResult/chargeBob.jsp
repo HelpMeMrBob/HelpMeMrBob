@@ -56,34 +56,33 @@ var isValidate = function(frm){
 	
       <!-- STAFFS SINGLE SECTION STARTS -->
       <section class="staffs-single default-section-spacing">
-      <div class="staffs-single__content">
+      <div class="staffs-single__content" style="margin: 0 auto;">
           <div class="container">
             <div class="row">
-              <div class="flex-lg-7">
+              <div class="flex-lg-6" style="margin-top:120px;">
 						<h2>밥알 충전하기</h2>
 						<br/><br/><br/>
 						<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 						<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
-							<table class="table table-bordered" style="width:500px; height:200px;">
+							<table class="table table-bordered" style="width:520px; margin-bottom:100px;">
 								<tr>
 									<td>
-										1000원
-										<br/>
-										<input type="radio" id="1000" name="money" value="1000">		
+										<img src="./resources/img/1rice.png" style="width: 150px;height:100px;"alt="" />	
+									</td>
+									<td>										
+										<img src="./resources/img/3rice.png" style="width: 150px;height:100px;"alt="" />
 									</td>
 									<td>
-										3000원
-										<br/>
-										<input type="radio" id="3000" name="money" value="3000">
-									</td>
-									<td>
-										5000원
-										<br/>
-										<input type="radio" id="5000" name="money" value="5000">
+										<img src="./resources/img/5rice.png" style="width: 150px;height:100px;"alt="" />	
 									</td>
 								</tr>
+								<tr>
+									<td style="height:35px; text-align:center">1000원 <input type="radio" id="1000" name="money" value="1000">	</td>
+									<td style="height:35px;text-align:center">3000원 <input type="radio" id="3000" name="money" value="3000"></td>
+									<td style="height:35px;text-align:center">5000원 <input type="radio" id="5000" name="money" value="5000"></td>
+								</tr>
 							</table>
-						<button id="apibtn" type="submit" class="btn btn-danger" >충전하기</button>
+						<button id="apibtn" type="submit" class="btn btn-danger" style="width:250px; height:35px; margin-left:270px">충전하기</button>
 					</form>
 					</div>
 				</div>

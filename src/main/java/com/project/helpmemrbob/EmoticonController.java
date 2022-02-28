@@ -20,6 +20,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import item.ItemDAO;
 import item.ItemDTO;
+import member.model.MemberVO;
 import point.JdbcTemplateConst;
 import point.PointDAO;
 import point.PointDTO;
@@ -58,8 +60,8 @@ public class EmoticonController {
 		return "emoticon/display";
 	}
 	//이모티콘 디스플레이 페이지
-		@RequestMapping("/shop.do")
-		public String shop(HttpServletRequest req, Model model) {
+		@RequestMapping("/shop2.do")
+		public String shop2(HttpServletRequest req, Model model) {
 			//물리적경로 얻어오기
 			String path = req.getSession().getServletContext().getRealPath("/resources/upload");
 			//경로를 기반으로 파일객체 생성
@@ -67,20 +69,47 @@ public class EmoticonController {
 			//파일의 목록을 배열 형태로 얻어옴
 			File[] fileArray = file.listFiles();
 			//View로 전달할 파일목록 저장을 위해 Map컬렉션 생성
-			Map<String, Integer> fileMap = new HashMap<String, Integer>();		
+			Map<String, Integer> fileMap = new HashMap<String, Integer>();
+			Map<String, String> fileMap2 = new HashMap<String, String>();
 			for(File f : fileArray){
 				//key와 value로 파일명과 파일용량을 저장한다. 
 				fileMap.put(f.getName(), (int)Math.ceil(f.length()/1024.0));
 			}
-			
 			model.addAttribute("fileMap", fileMap);		
+			
 			return "emoticon/shop";
 		}
 		
+		//이모티콘 디스플레이 페이지
+				@RequestMapping("/shop.do") 
+				//들린다충돌의소리
+				public String shop(HttpServletRequest req, Model model) {
+					//물리적경로 얻어오기
+					String path = req.getSession().getServletContext().getRealPath("/resources/upload2");
+					ItemDAO idao = new ItemDAO();
+					//경로를 기반으로 파일객체 생성
+					File file = new File(path);
+					//파일의 목록을 배열 형태로 얻어옴
+					File[] fileArray = file.listFiles();
+					//View로 전달할 파일목록 저장을 위해 Map컬렉션 생성
+					Map<String, Integer> fileMap = new HashMap<String, Integer>();
+					Map<String, String> fileMap2 = new HashMap<String, String>();
+					for(File f : fileArray){
+						//key와 value로 파일명과 파일용량을 저장한다. 
+						fileMap.put(f.getName(), (int)Math.ceil(f.length()/1024.0));
+						
+						if(idao.getAdminItem(f.getName())!=null) {
+							System.out.println("title: "+idao.getAdminItem(f.getName()));
+						}
+					}
+					model.addAttribute("fileMap", fileMap);		
+					model.addAttribute("fileMap2", fileMap2);	
+					return "emoticon/shop";
+				}
 		
-	//
+		
 		@RequestMapping("/buyProcess.do")
-		public String realBuyProcess(HttpServletRequest request,  Model model) {
+		public String realBuyProcess(HttpServletRequest request,  Model model, HttpSession session) {
 			String sticker = request.getParameter("sticker");
 			PointDAO pdao = new PointDAO();
 			PointDTO pdto = new PointDTO();
@@ -88,7 +117,7 @@ public class EmoticonController {
 			ItemDTO idto = new ItemDTO();
 			ItemDAO idao = new ItemDAO();
 			//원래 sessionId를 넣어야할 자리에 임으로 ptest를 넣어줌
-			pdto.setId("ptest");
+			pdto.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
 			
 			pdto.setSticker(sticker);
 			idto.setTemOname(sticker);
@@ -155,7 +184,7 @@ public class EmoticonController {
 			
 		//request내장객체를 통해 서버의 물리적 경로 얻어옴
 		String path = req.getSession().getServletContext()
-				.getRealPath("/resources/upload");
+				.getRealPath("/resources/upload2");
 			//upload디렉토리는 정적파일을 저장하기 위한 resources하위에 생성한다.
 			
 			//response내장객체를 통해 MIME타입을 설정한다. 
@@ -179,7 +208,7 @@ public class EmoticonController {
 		ItemDAO idao = new ItemDAO();
 		
 		//물리적경로 얻어오기
-		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+		String path = req.getSession().getServletContext().getRealPath("/resources/upload2");
 		MultipartFile mfile = null;
 		//파일정보를 저장한 Map컬렉션을 2개이상 저장하기 위한 용도의 List컬렉션
 		List<Object> resultList = new ArrayList<Object>();			
@@ -197,6 +226,9 @@ public class EmoticonController {
 				//한글깨짐방지 처리 후 전송된 파일명을 가져온다. 
 				String originalName = new String(mfile.getOriginalFilename().getBytes(),"UTF-8");
 				idto.setTemOname(originalName);
+				idto.setContents(title);
+				System.out.println("upload시점 이름 저장명: "+ idto.getContents());
+				System.out.println("upload시점 오리지널 저장명: "+ idto.getTemOname());
 				//서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다. 
 				if("".equals(originalName)) continue;
 				
@@ -206,8 +238,9 @@ public class EmoticonController {
 				//UUID를 통해 생성된 문자열과 확장자를 결합해서 파일명을 완성한다. 
 				String saveFileName = getUuid() + ext;
 				idto.setTemSname(saveFileName);
+				System.out.println("upload시점 변환 저장명: "+ idto.getTemSname());
 				//물리적경로에 새롭게 생성된 파일명으로 파일 저장
-				mfile.transferTo(new File(path + File.separator + originalName));
+				mfile.transferTo(new File(path + File.separator + saveFileName));
 				
 				//폼값과 파일명을 저장할 Map컬렉션 생성
 				Map<String, String> fileMap = new HashMap<String, String>();	
@@ -233,7 +266,8 @@ public class EmoticonController {
 		@RequestMapping("/uploadList.do")
 		public String uploadList(HttpServletRequest req, Model model){
 			//물리적경로 얻어오기
-			String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+			String path = req.getSession().getServletContext().getRealPath("/resources/upload2");
+			System.out.println("물리적경로: "+path);
 			//경로를 기반으로 파일객체 생성
 			File file = new File(path);
 			//파일의 목록을 배열 형태로 얻어옴

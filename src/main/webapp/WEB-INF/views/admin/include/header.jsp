@@ -70,7 +70,7 @@
                             </a> --%>
                             
                             <div class="sb-sidenav-menu-heading">상점</div>
-                            <a class="nav-link" href="index.jsp">
+                            <a class="nav-link" href="/helpmemrbob/uploadForm.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-shop"></i></div>
                                 아이템 관리
                             </a>
