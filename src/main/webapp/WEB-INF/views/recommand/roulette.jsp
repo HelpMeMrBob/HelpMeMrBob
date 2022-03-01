@@ -6,23 +6,27 @@
 <style>
 	#menu {
 		border: 6px solid #ed6a5a; 
+		width: 400px;
 		height: 50px;
 		text-align: center;
 		font-size: 2rem;
 		color: #ed6a5a; 
 		font-weight: bold;
-		margin-bottom: 5px;
-		cursor:default
+		cursor:default;
+		margin-bottom: 10px;
 	}
-	#play, #changeMenu, #UnchangeMenu {
+	#changeMenu, #UnchangeMenu {
 		border: 2px solid #ed6a5a; 
 		width: 150px;
 		height: 40px;
 		text-align: center;
-		font-size: 1.5rem; 
+		font-size: 1.2rem; 
 		color: white; 
 		font-weight: bold;
 		background-color: #ed6a5a;
+		margin-bottom: 10px;
+		border-radius: 10px;
+		display: none;
 	}
 	#goInfo {
 		border: 2px solid white;
@@ -30,23 +34,36 @@
 		width: 200px; 
 		height: 40px; 
 		text-align: center;
-		font-size: 1.5rem; 
+		font-size: 1.2rem; 
 		color: white;
 		font-weight: bold; 
 		background-color: #0a151f;
 		cursor: pointer;
+		margin-bottom: 10px;
+		border-radius: 10px;
+	}
+	#numOfMenu, #addOption {
+		display: inline-block;
+		width: auto;
+		height: 40px;
+		font-size: 1.2rem; 
+		cursor: pointer;
+		margin-bottom: 10px;
+		margin-right: 5px;
 	}
 </style>
 <body>
 	<!-- =================== SITE HEADER BEGINS ============================= -->
 	
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header2.jsp" />
 	
 	<!-- =================== SITE HEADER ENDS ============================= -->
 	
 	<!-- =================== MAIN SECTION BEGINS ============================= -->
 	<main>
+	<!-- "visibility:hidden" 처리해서 필요없음
 		<script>
+		// 메뉴 결정되지 않았는데 식당보기 누를때
 		function resultValidate(f) {
 			if (f.menu.value == "")
 			{
@@ -56,13 +73,60 @@
 			}
 		}
 		</script>
+	 -->
 		<!-- 랜덤 룰렛 STARTS -->
     	<section class="ministries text-center-sm default-section-spacing">
         	<div class="ministries__content">
 			    <div class="container">
 				    <div class="row">
 			            <div class="flex-md-5"><!-- 룰렛 -->
-			                <table cellpadding="0" cellspacing="0" border="0">
+			            	<form action="./restaurant.do" onsubmit="return resultValidate(this);">
+				            	<div>
+				            		<input type="text" name="menu" id="menu" placeholder="메뉴 개수를 선택해 주세요." 
+										value="" readonly>
+									<button type="submit" id="goInfo" style="visibility: hidden;">근처 식당보기</button>
+				            	</div>
+				            			<a>
+											<select class="form-select" name="numOfMenu" id="numOfMenu"
+												onchange="setCount(this.value);" style="background-color: #eaada6;">
+								   				<option value="0">메뉴 개수 선택</option>
+								   				<option value="10">10개</option>
+								   				<option value="15">15개</option>
+								   				<option value="20">20개</option>
+								   				<option value="30">30개</option>
+								   			</select>
+								   			<select class="form-select" name="addOption" id="addOption"
+												onchange="setOption(this.value);">
+								   				<option value="0">추가 옵션 선택</option>
+								   				<option value="0">&nbsp;&nbsp;&nbsp;&nbsp;---------- 탭 ----------</option>
+								   				<option value="1">탭1</option>
+								   				<option value="2">탭2</option>
+								   				<option value="3">탭3</option>
+								   				<option value="4">탭4</option>
+								   				<option value="5">탭5</option>
+								   				<option value="6">탭6</option>
+								   				<option value="7">탭7</option>
+								   				<option value="8">탭8</option>
+								   				<option value="9">탭9</option>
+								   				<option value="10">탭10</option>
+								   				<option value="0">&nbsp;&nbsp;&nbsp;----- 선호도 반영 -----</option>
+								   				<option value="100">맛있는 음식</option>
+								   			</select>
+							   			</a>
+							   			<div>
+								   			<button type="button" name="changeMenu" id="changeMenu" href="#"
+												onClick="resetMenu(); return false;">
+												메뉴 바꾸고 뽑기
+											</button>
+											<button type="button" name="UnchangeMenu" id="UnchangeMenu" href="#"
+												onClick="playWheel(); return false;">
+												메뉴 그대로 뽑기
+											</button>
+										</div>
+							</form>
+			            </div><!-- .flex-* ends -->
+			            <div class="flex-md-2"><!-- 디스플레이 -->
+							<table cellpadding="0" cellspacing="0" border="0">
 						        <tr>
 						            <td width="438" height="582" class="the_wheel" align="center" valign="center">
 						                <canvas id="canvas" width="434" height="434">
@@ -71,40 +135,6 @@
 						           </td>
 						       </tr>
 						   	</table>
-			            </div><!-- .flex-* ends -->
-			            <div class="flex-md-6"><!-- 디스플레이 -->
-			            	<form action="./restaurant.do" onsubmit="return resultValidate(this);">
-								<div>
-									<input type="text" name="menu" id="menu" placeholder="메뉴 개수를 선택해 주세요." 
-										value="" readonly>
-									<button type="submit" id="goInfo" style="display: none;">근처 식당보기</button>
-								</div>
-								<table>
-									<tr>
-										<td>
-											<select class="form-select" name="numOfMenu" id="numOfMenu"
-												onchange="setCount(this.value);" style="cursor: pointer;">
-								   				<option value="0">--메뉴 개수 선택--</option>
-								   				<option value="10">10개</option>
-								   				<option value="15">15개</option>
-								   				<option value="20">20개</option>
-								   				<option value="30">30개</option>
-								   				<option value="40">나만의 선호목록</option>
-								   			</select>
-							  			</td>
-										<td>
-											<button type="button" name="changeMenu" id="changeMenu" href="#"
-												onClick="resetMenu(); return false;" style="display: none;">
-												메뉴 바꾸고 뽑기
-											</button>
-											<button type="button" name="UnchangeMenu" id="UnchangeMenu" href="#"
-												onClick="playWheel(); return false;" style="display: none;">
-												메뉴 그대로 뽑기
-											</button>
-										</td>
-									</tr>
-								</table>
-							</form>
 			            </div><!-- .flex-* ends -->
 			        </div>
 		        </div>
@@ -124,7 +154,7 @@
 	    let wheelPower    = 0;
 	    let wheelSpinning = false;
 	    
-	    // 룰렛 객체생성
+	    /* 룰렛 객체생성 */
     	function showRoulette() {
     		// Create new wheel object specifying the parameters at creation time.
             theWheel = new Winwheel({
@@ -147,19 +177,29 @@
                 }
             });
     	}
-    	// 사용자가 선택한 메뉴개수 저장 & 룰렛 객체 생성 함수 호출
+	    
+    	/* 사용자가 선택한 메뉴개수 저장 & 룰렛 객체 생성 함수 호출 */
     	function setCount(flag) {
+    		// 사용자 실수 방지용 새로고침
+    		if(flag==0) {
+    			location.reload();
+    		}
 			menuCount = flag;
+			document.getElementById("numOfMenu").style="background-color: white;";
+			
+			// 룰렛과 버튼 보여주기
 			showRoulette();
 			document.getElementById("changeMenu").style.display = "inline";
 	    	document.getElementById("UnchangeMenu").style.display = "inline";
     	}
-	    // 메뉴개수 카운트
+    	
+	    /* 메뉴개수 카운트 */
     	function numOfMenu(cnt) {
     		menuCount  = cnt;
     		console.log(menuCount);
     	}
-    	// 룰렛 회전
+	    
+    	/* 룰렛 회전 */
 	    function startSpin() {
 	        // Ensure that spinning can't be clicked again while already running.
 	        if (wheelSpinning == false) {
@@ -171,7 +211,8 @@
 	            wheelSpinning = true;
 	        }
 	    }
-	    // 룰렛 돌리기
+    	
+	    /* 룰렛 돌리기 */
 	    function playWheel() {
 	        theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
 	        theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
@@ -185,18 +226,20 @@
 	        
 	        startSpin();
 	    }
-	    // 룰렛 메뉴변경
+	    
+	    /* 룰렛 메뉴변경 */
 	    function resetMenu() {
 	    	// 다른 메뉴를 가져오기 위해 새로고침
 	    	location.reload();
 	    }
-	    // 룰렛 결과를 display에 띄운다.
+	    
+	    /* 룰렛 결과를 display에 띄운다. */
 	    function showDisplay(indicatedSegment) {
 	        document.getElementById("menu").value = indicatedSegment.text;
-//	    	document.getElementById("play").style.display = "none";
-	    	document.getElementById("goInfo").style.display = "inline";
+	    	document.getElementById("goInfo").style.visibility = "visible";
 	    }
-	    // 룰렛 회전 강도 설정
+	    
+	    /* 룰렛 회전 강도 설정 */
 	    /*
 	    function powerSelected(powerLevel) {
 	        // Ensure that power can't be changed while wheel is spinning.
