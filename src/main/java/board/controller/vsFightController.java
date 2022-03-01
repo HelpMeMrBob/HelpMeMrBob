@@ -101,6 +101,8 @@ public class vsFightController {
 			// 만약 세션이 끊어졌다면 로그인페이지로 이동한다.
 			return "redirect:login.do";
 		}
+		
+		
 		model.addAttribute("req", req);
 		model.addAttribute("vsFight1VO", vsFight1VO);
 

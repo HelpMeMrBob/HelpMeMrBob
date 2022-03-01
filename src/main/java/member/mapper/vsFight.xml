@@ -18,7 +18,7 @@
 	<select id="listPage" resultType="board.model.vsFight1VO">
 		SELECT * FROM(
 			SELECT Tb.*, rownum rNum FROM(
-				SELECT * FROM fight1 ORDER BY rno DESC
+				SELECT * FROM fight1 ORDER BY rownum DESC
 		)Tb
 	)
 	WHERE rNum BETWEEN #{param1} AND #{param2}	
