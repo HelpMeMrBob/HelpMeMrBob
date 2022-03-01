@@ -7,34 +7,30 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import admin.model.AdVSTalkDAO;
 
-import admin.model.AdBoardDAO;
-
-//board delete 
+//vs delete 
 @Service
-public class DeleteActionCommand implements AdminCommandImpl{
+public class DeleteVSTalkCommand implements AdminCommandImpl{
 	
 	@Autowired
-	AdBoardDAO dao;
-	public DeleteActionCommand() {
-		System.out.println("DeleteActionCommand 빈 자동 생성 됨");
+	AdVSTalkDAO dao;
+	public DeleteVSTalkCommand() {
+		System.out.println("DeleteVSTalkCommand 빈 자동 생성 됨");
 	}
 	
 	@Override
 	public void execute(Model model) {
-		System.out.println("DeleteActionCommand -> execute() 호출");
+		System.out.println("DeleteVSTalkCommand -> execute() 호출");
 		
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = 
 				(HttpServletRequest)paramMap.get("req");
 		
-		String[] idx= req.getParameterValues("idx");
-		System.out.println(idx[0]);	
-		
-		for(int i=0; i<idx.length; i++) {
-			
-			dao.delete(idx[i]);
-		}
+		String idx= req.getParameter("idx");
+		System.out.println(idx);	
+					
+			dao.delete(idx);
 
 	}
 }
