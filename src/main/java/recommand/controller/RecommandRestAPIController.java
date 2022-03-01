@@ -21,7 +21,7 @@ import recommand.model.RecommandDTO;
 @Controller
 public class RecommandRestAPIController {
 	
-	// 리액트에서 사용할 랜덤한 메뉴 64개만 가져와서 DTO에 저장
+	// 월드컵(리액트)에서 사용할 랜덤한 메뉴를 rounds개수만큼 가져와서 DTO에 저장
 	@Autowired
 	private SqlSession sqlSession3;
 	
@@ -45,19 +45,10 @@ public class RecommandRestAPIController {
 	@RequestMapping("/roulette.do")
 	public String roulette(Model model, RecommandDTO recommandDTO) {
 		
+		// 순서가 뒤죽박죽 랜덤하게 섞여서 정렬된 전체 메뉴 가져옴
 		ArrayList<RecommandDTO> allData = sqlSession3.getMapper(RecommandDAO.class)
 				.allData(recommandDTO);
 		model.addAttribute("allData", allData);
-//		
-//		// allData의 개수만큼의 난수를 담을 배열
-//		int[] randomArr = new int [allData.size()];
-//		// 난수 생성 함수 호출
-//		randomCreate(randomArr);
-//		for(int i=0; i<randomArr.length; i++) {
-//			System.out.println("randomArr[i] : "+ randomArr[i]);
-//			System.out.println();
-//		}
-//		
 		
 		System.out.println("allData 개수 : "+ allData.size());
 		
@@ -70,7 +61,7 @@ public class RecommandRestAPIController {
 		return "recommand/worldcup";
 	}
 	
-	// 난수생성
+	// 보류 - 난수생성
 	public void randomCreate(int[] arrParam) {
 		
 		//난수생성을 위한 씨드설정

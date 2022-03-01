@@ -7,7 +7,11 @@
 <mapper namespace="recommand.model.RecommandDAO">
 	<!-- 전체 메뉴 가져오기 -->
 	<select id="allData" resultType="recommand.model.RecommandDTO">
-		SELECT * FROM food
+		SELECT idx, food, image, recomndCnt
+			from (
+		    	select rownum rn, idx, food, image, recomndCnt
+		    		from food order by DBMS_random.random
+			)
 	</select>
 	
 	<!-- 월드컵에 필요한 메뉴 가져오기 -->
