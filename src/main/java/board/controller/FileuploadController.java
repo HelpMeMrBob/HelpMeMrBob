@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import board.command.BbsCommandImpl;
+import board.command.EditActionCommand;
 import board.model.BoardDTO;
 import board.model.JDBCTemplateDAO;
 
@@ -94,7 +96,7 @@ public class FileuploadController {
 			//업로드폼의 file속성의 필드를 가져온다.(여기서는 2개임)
 			Iterator itr = req.getFileNames();
 			
-			int index=0;
+			//int index=0;
 			//갯수만큼 반복
 			while(itr.hasNext()) {
 				//전송된 파일명을 읽어온다. 
@@ -141,13 +143,11 @@ public class FileuploadController {
 			String tag = req.getParameter("tag");
 			String id=req.getParameter("id");
 			
+			//폼값받아넣기
 			dto.setTitle(title);
 			dto.setContents(contents);
-//			if(resultList.get(0)!=null) dto.setUserfile1(resultList.get(0));
-//			if(resultList.get(1)!=null) dto.setUserfile2(resultList.get(1));
-//			if(resultList.get(2)!=null) dto.setUserfile3(resultList.get(2));
-//			if(resultList.get(3)!=null) dto.setUserfile4(resultList.get(3));
-//			if(resultList.get(4)!=null) dto.setUserfile5(resultList.get(4));
+			dto.setTag(tag);
+			dto.setId(id);
 			
 			
 			int exist = 1;
@@ -174,74 +174,126 @@ public class FileuploadController {
 		model.addAttribute("resultList", resultList);	
 		return "redirect:reviewList.do?nowPage=1";
 	}
- 
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//파일업로드를 위한 객체를 매개변수로 선언한다. 
+	@RequestMapping(method=RequestMethod.POST, value="/reviewEditAction.do")
+	public String reviewEditAction(Model model, MultipartHttpServletRequest req) {
+		
+		JDBCTemplateDAO dao=new JDBCTemplateDAO();
+		BoardDTO dto = new BoardDTO();
 		
 		
-	//파일목록보기
-	@RequestMapping("/fileUpload/uploadList.do")
-	public String uploadList(HttpServletRequest req, Model model){
 		//물리적경로 얻어오기
 		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
-		//경로를 기반으로 파일객체 생성
-		File file = new File(path);
-		//파일의 목록을 배열 형태로 얻어옴
-		File[] fileArray = file.listFiles();
-		//View로 전달할 파일목록 저장을 위해 Map컬렉션 생성
-		Map<String, Integer> fileMap = new HashMap<String, Integer>();		
-		for(File f : fileArray){
-			//key와 value로 파일명과 파일용량을 저장한다. 
-			fileMap.put(f.getName(), (int)Math.ceil(f.length()/1024.0));
+		MultipartFile mfile = null;
+		//파일정보를 저장한 Map컬렉션을 2개이상 저장하기 위한 용도의 List컬렉션
+		List<String> resultList = new ArrayList<String>();	
+		try {
+					
+			//업로드폼의 file속성의 필드를 가져온다.(여기서는 2개임)
+			Iterator itr = req.getFileNames();
+			
+			//int index=0;
+			//갯수만큼 반복
+			while(itr.hasNext()) {
+				//전송된 파일명을 읽어온다. 
+				mfile = req.getFile(itr.next().toString());
+				
+				//한글깨짐방지 처리 후 전송된 파일명을 가져온다. 
+				String originalName = new String(mfile.getOriginalFilename().getBytes(),"UTF-8");
+				
+				
+				
+				
+					String editFile1=req.getParameter("editFile1");
+					String editFile2=req.getParameter("editFile2");
+					String editFile3=req.getParameter("editFile3");
+					String editFile4=req.getParameter("editFile4");
+					String editFile5=req.getParameter("editFile5");//에러x
+					
+					
+					if(editFile1!=null)dto.setUserfile1(editFile1);
+					if(editFile2!=null)dto.setUserfile2(editFile2);
+					if(editFile3!=null)dto.setUserfile3(editFile3);
+					if(editFile4!=null)dto.setUserfile4(editFile4);
+					if(editFile5!=null)dto.setUserfile5(editFile5);
+					
+					//서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다. 
+					if("".equals(originalName)) continue;
+				
+				
+				
+				//파일명에서 확장자를 따낸다. 
+				String ext = originalName.substring(originalName.lastIndexOf('.'));
+				
+				//UUID를 통해 생성된 문자열과 확장자를 결합해서 파일명을 완성한다. 
+				String saveFileName = getUuid() + ext;
+				
+				//물리적경로에 새롭게 생성된 파일명으로 파일 저장
+				mfile.transferTo(new File(path + File.separator + saveFileName));
+				
+				//폼값과 파일명을 저장할 Map컬렉션 생성
+				Map<String, String> fileMap = new HashMap<String, String>();	
+				
+				resultList.add(saveFileName);
+				
+			}
+			
+			//나머지 폼값 받기
+			String title = req.getParameter("title");
+			String contents = req.getParameter("contents");
+			String tag = req.getParameter("tag");
+			String id=req.getParameter("id");
+			model.addAttribute("idx", req.getParameter("idx"));
+			String idx_1 = req.getParameter("idx");
+			int idx=Integer.parseInt(idx_1);
+			
+			
+			
+			
+			//폼값받아넣기
+			dto.setTitle(title);
+			dto.setContents(contents);
+			dto.setTag(tag);
+			dto.setId(id);
+			dto.setIdx(idx);
+			
+			System.out.println("dto: "+dto.getTitle());
+			System.out.println("dto: "+dto.getId());
+			System.out.println("dto: "+dto.getContents());
+			System.out.println("idx: "+dto.getIdx());
+			System.out.println("dto: "+dto.getTag());
+			//System.out.println("dto의 idx: "+idx);
+			
+			int exist = 1;
+			for(String obj : resultList) {
+				//dto.setUserfile1(resultList.get(0));
+				
+				if(exist==1) dto.setUserfile1(obj);
+				else if(exist==2) dto.setUserfile2(obj);
+				else if(exist==3) dto.setUserfile3(obj);
+				else if(exist==4) dto.setUserfile4(obj);
+				else if(exist==5) dto.setUserfile5(obj);
+				
+				exist++;
+			}
+			dao.reviewEditAction(dto);	
+		}		 
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 		
-		model.addAttribute("fileMap", fileMap);				
-		return "06FileUpload/uploadList";
-	}
 		
+		
+		model.addAttribute("resultList", resultList);	
+		//return "redirect:reviewList.do?nowPage=1";
+		return "redirect:reviewView.do"; 
+	}
 	
-	//파일 다운로드 처리
-	@RequestMapping("/fileUpload/download.do")
-	public ModelAndView download(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		/*
-		파일리스트에서 다운로드 링크는
-		download.do?fileName=${file.key }&oriFileName=임시파일명
-		와 같이 걸려있다. 
-		 */
-		//저장된 파일명
-		String fileName = req.getParameter("fileName");
-		//원본 파일명
-		String oriFileName = req.getParameter("oriFileName");
-		//물리적 경로
-		String saveDirectory = req.getSession().getServletContext()
-				.getRealPath("/resources/upload");
-		//경로와 파일명을 통해 파일객체 생성
-		File downloadFile = new File(saveDirectory+"/"+fileName);
-		//해당 경로에 파일이 있는지 확인
-		if(!downloadFile.canRead()) {
-			throw new Exception("파일을 찾을 수 없습니다");
-		}		
-		
-		//다운로드를 위한 View와 Model 처리
-		ModelAndView mv = new ModelAndView();
-		//다운로드 할 View명
-		mv.setViewName("fileDownloadView");
-		//저장된 파일의 전체 경로명
-		mv.addObject("downloadFile", downloadFile);
-		//원본 파일명
-		mv.addObject("oriFileName", oriFileName); 
-		return mv;		
-	}
+	
+ 
 }

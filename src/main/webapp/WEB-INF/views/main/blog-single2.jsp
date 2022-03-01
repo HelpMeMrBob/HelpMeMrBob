@@ -277,46 +277,44 @@ function writeValidate(f)
             </div><!-- .row ends -->
 
           </form><!-- .form ends -->
-          <div class="single-page__navigation background-off-white mar-t-sm-4 mar-t-md-0 pad-t-sm-2 pad-b-sm-2">
-
-          <div class="container">
-
-            <div class="display-flex justify-content-between align-items-center">
-
-              <div class="previous display-flex align-items-center">
-                <span class="arrow"><a href="" class="button button--outline button--primary share-button"><i
-                      class="ri-arrow-left-s-line"></i></a></span>
-                <span>Previous post</span>
-              </div><!-- .previous ends -->
-
-              <div class="next display-flex align-items-center">
-                <span>Next post</span>
-                <span class="arrow"><a href="" class="button button--outline button--primary share-button"><i
-                      class="ri-arrow-right-s-line"></i></a></span>
-              </div><!-- .next ends -->
-
-            </div><!-- .display-flex ends -->
-
-          </div><!-- .container ends -->
-
-        </div><!-- .single-page__navigation ends -->
+          
 	
     <!-- SCROLL BACK TO TOP BEGINS -->
     <div class="scroll-to-top"><i class="ri-arrow-up-line"></i></div>
     <!-- SCROLL BACK TO TOP ENDS -->
           <!-- #####버튼들##### -->
-        <div class="flex-md-12">
-            <button class="button--primary button--fill" type="submit" 
-            onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
-			수정하기</button>
-			<button class="button--primary button--fill" type="submit" 
-			onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
-			삭제하기</button>
-       		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>
-       </div><!-- .flex-* ends -->
+    <div class="flex-md-12">
+	<%-- <button class="button--primary button--fill" type="submit" 
+          onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
+	수정하기원본</button>
+	<button class="button--primary button--fill" type="submit" 
+	onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
+	삭제하기원본</button>
+     		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>--%>
+    <c:if test="${sessionScope.siteUserInfo.id eq viewRow.id}">
+    <!-- //////삭제하기///// -->
+    <form name="writeFrm" method="post" class="form contact__form" action="./deleteAction.do">
+	<input type="hidden" name="idx" value="${viewRow.idx}" />
+	<input type="hidden" name="id" value="${viewRow.id}" />
+	<input type="hidden" name="nowPage" value="${param.nowPage }" />
+	<button class="button--primary button--fill" type="submit" name="submit">삭제하기</button>
+	</form>
+	<form name="writeFrm" method="post" class="form contact__form" action="./reviewEdit.do">
+	<input type="hidden" name="idx" value="${viewRow.idx}" />
+	<input type="hidden" name="id" value="${viewRow.id}" />
+	<input type="hidden" name="nowPage" value="${param.nowPage }" />
+	<button class="button--primary button--fill" type="submit" name="submit">수정하기</button>
+	</form>
+	</c:if>
+	
+	
+	
+	</div><!-- .flex-* ends -->
 
         </div><!-- .container ends -->
-
+        
+        
+	
       </section><!-- .contact ends -->
 
 	<!-- =================== 댓글창e ============================= -->

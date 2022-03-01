@@ -72,14 +72,11 @@
           <form name="writeFrm" method="post" 
           action="reviewUploadAction.do" class="form contact__form"
           onsubmit="return checkValidate(this);"
-          enctype="multipart/form-data">	
-			<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" />
+          enctype="multipart/form-data">
+          	<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" />
             <div class="row">
 				
-              <div class="flex-md-6">
-				
-				
-              </div><!-- .flex-* ends -->
+              
 				
               <div class="flex-md-12 mar-b-md-2">
 				
@@ -87,8 +84,9 @@
                   <label for="subject" class="form__label">제목 <span class="color-danger">*</span></label>
                   <input type="text" id="subject" class="form__input" name="title" placeholder="제목을 입력하세여">
                 </div><!-- .form__group ends -->
+                
+                </div>
 				
-              </div><!-- .flex-* ends -->
 				
               <div class="flex-md-12 mar-b-md-2">
 				
@@ -106,8 +104,8 @@
                   <label for="subject" class="form__label">태그 <span class="color-danger">*</span></label>
                   <input type="text" id="subject" class="form__input" name="tag" placeholder="태그를 입력하세여">
                 </div><!-- .form__group ends -->
-				
-              </div><!-- .flex-* ends -->
+                
+                </div>
               
               <div class="flex-md-12 mar-b-md-2">
 				

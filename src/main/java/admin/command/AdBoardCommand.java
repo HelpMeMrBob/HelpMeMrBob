@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 
 import admin.model.AdBoardDAO;
 import admin.model.AdBoardDTO;
-import admin.model.AdMemberDAO;
-import admin.model.AdMemberDTO;
 import util.EnvFileReader;
 import util.PagingUtil;
 

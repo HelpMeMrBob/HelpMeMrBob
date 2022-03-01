@@ -21,6 +21,8 @@ public class EditActionCommand implements BbsCommandImpl{
 		
 		JDBCTemplateDAO dao=new JDBCTemplateDAO();
 		//DTO객체를 DAO로 전달함
-		dao.edit(boardDTO);
+		//dao.edit(boardDTO);
+		dao.reviewEditAction(boardDTO);
+		
 	}
 }

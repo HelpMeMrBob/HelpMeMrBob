@@ -1,7 +1,5 @@
 package board.controller;
 
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +17,7 @@ import board.model.BoardReplyVO;
 import board.model.MybatisMemberImpl;
 import board.model.ParameterDTO;
 import member.model.MemberVO;
-import util.PagingUtil;
+import util.ReplyPagingUtil;
 
 @Controller
 public class MybatisController {

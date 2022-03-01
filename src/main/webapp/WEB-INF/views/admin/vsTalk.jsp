@@ -33,29 +33,23 @@
 							<form id="vsFrm" name="vsFrm"> 
 							
 							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-dark" id="write" 
+							<button type="button" class="btn btn-success" id="write" 
 								onclick="location.href='vsWrite.do';">등록</button>
-							
-							<button type="button" class="btn btn-dark" id="edit" >수정</button>
-							
-							<button type="button" class="btn btn-dark" id="delete" >삭제</button>
+							<!-- <button type="button" class="btn btn-success" id="edit" >수정</button> -->
+							<!-- <button type="button" class="btn btn-dark" id="delete" >삭제</button>  -->
 							</div>
 														
 							<table class="table table-bordered" id="repTb">
 								
 								 <colgroup>
 								 	<col width=5%>
-						            <col width=5%>
 						            <col width=*>
-						            <col width=7%>
-						            <col width=7%>
+						            <col width=6%>
+						            <col width=6%>
 						            
 						        </colgroup>
 							
 								<tr class="table-success">
-									<th>
-									<input type="checkbox" id="allCheck" name="allCheck" />
-									</th>
 									<th>번호</th>
 									<th>주제</th>
 									<th>1:투표수</th>
@@ -65,18 +59,15 @@
 								<!-- 반복 시작 -->
 								<c:forEach items="${lists }" var="row" varStatus="loop">	
 								<tr>
+									<td>${row.virtualNum }</td>
 									<td>
-									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
+									<a href="./vsView.do?idx=${row.idx}&nowPage=${nowPage }">${row.topic}</a>
 									</td>
-									<td>${row.idx }</td>
-									<td>${row.topic }</td>
-									<td>${row.sel1vote }</td>								
-									<td>${row.sel2vote }</td>								
+									<td></td>								
 								</tr>
 								</c:forEach>
 								<!-- 반복 끝 -->
-							</table>
-							
+							</table>							
 							</form>
 							</div>
 							
