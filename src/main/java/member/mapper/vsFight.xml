@@ -61,6 +61,11 @@
 	-->
 	<delete id="delete">
 		DELETE FROM fight1 WHERE rno=#{param1} AND id=#{param2}
+	
 	</delete>
+	<!-- where idx=${idx} -->
+	<select id="adList" resultType="admin.model.AdVSTalkDTO">
+		SELECT * FROM VStalk 
+	</select>
 	
 </mapper>

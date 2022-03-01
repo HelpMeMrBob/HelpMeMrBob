@@ -73,13 +73,6 @@ function writeValidate(f)
               <h1>Being a Christian in today's society</h1>
             </div><!-- .section-heading ends -->
 
-            <div class="breadcrumb justify-content-center">
-              <div class="breadcrumb__home--link"><a href="index.html">Home</a></div>
-              <span>/</span>
-              <div class="breadcrumb__home--link"><a href="blog-layout.html">Blog</a></div>
-              <span>/</span>
-              <div class="breadcrumb__current--page-link">Being a Christian in today's society</div>
-            </div><!-- .breadcrumb ends -->
 
           </div><!-- .banner__content ends -->
 
@@ -102,16 +95,14 @@ function writeValidate(f)
                 <!-- See _singles.scss for styling -->
 
                 <div class="text-block mar-b-sm-4">
-                	<!-- 제목 -->
-                  <h2 class="mar-b-sm-2">${viewRow.title }</h2>
+                  <h2>제목: ${viewRow.title }</h2>
+                  <p>
                   
-                  <!-- 내용 -->
-                  <p>${viewRow.contents }</p>
+                  
+                  </p>
+                  <h5 class="mar-b-sm-2">내용: ${viewRow.contents}</h5>
                 </div><!-- .text-block ends -->
-				<p>${viewRow.id}</p>
-                <p>${viewRow.postdate }</p>
-				<p>${viewRow.visitCnt }</p>
-				<p>${idx}</p>
+				<%-- <p>${idx}</p> --%>
 				
 				<c:if test="${not empty viewRow.userfile1}">
 				<p><img src="resources/upload/${viewRow.userfile1}" /></p>
@@ -129,53 +120,104 @@ function writeValidate(f)
 				<p><img src="resources/upload/${viewRow.userfile5}" /></p>
 				</c:if>
 				
-				<h3>${lno}</h3>
-				<h3>${scrapNo}</h3>
-<!-- ////////좋아요한 게시글/////// -->
-<c:if test="${lno eq 1 and idx eq idx and id eq id}">
-<form name="writeFrm" method="post" 
-          action="./like.do" class="form contact__form"
-          onsubmit="return checkValidate(this);">
- <input type="hidden" name="idx" value="${viewRow.idx }" />
-<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-<div class="single-page__share pad-b-sm-2">
-  <div class="display-flex align-items-center"><div class="social">
-  <!-- ${row.id } -->
-	<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♥</button>
-   </div></div><!-- .display-flex ends -->
-</div><!-- .single-page__share ends -->
-</form>
-</c:if>
-<!-- //////////좋아요안한 게시글////////// -->
-<c:if test="${lno eq null or lno eq 0 and idx eq idx and id eq id}">
-<form name="writeFrm" method="post" 
-          action="./like.do" class="form contact__form"
-          onsubmit="return checkValidate(this);">
- <input type="hidden" name="idx" value="${viewRow.idx }" />
-<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-<div class="single-page__share pad-b-sm-2">
-  <div class="display-flex align-items-center"><div class="social">
-  <!-- ${row.id } -->
-	<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♡</button>
-   </div></div><!-- .display-flex ends -->
-</div><!-- .single-page__share ends -->
-</form>
-</c:if>
-<!-- ////////좋아요버튼/////// -->
+				<%-- <h3>${lno}</h3>
+				<h3>${scrapNo}</h3> --%>
+				
+				<div class="sidebar">
 
-<!-- //////////스크랩버튼////////// -->
-<form name="writeFrm" method="post" 
-          action="./scrap.do" class="form contact__form"
-          onsubmit="return checkValidate(this);">
- <input type="hidden" name="idx" value="${viewRow.idx }" />
-<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-<div class="single-page__share pad-b-sm-2">
-  <div class="display-flex align-items-center"><div class="social">
-	<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">☆</button>
-   </div></div><!-- .display-flex ends -->
-</div><!-- .single-page__share ends -->
-</form>
-<!-- ////////스크랩버튼/////// -->
+                <div class="sidebar__widget text-center-sm mar-b-sm-2">
+
+				<div class="sidebar__widget mar-b-sm-2">
+
+                  <h6 class="widget__title">작성정보</h6>
+
+                  <div class="icon-text">
+                    <span class="icon"><i class="ri-calendar-line"></i></span>
+                    <span class="text bold">${viewRow.postdate }</span>
+                  </div>
+
+                  <div class="icon-text">
+                    <span class="icon"><i class="ri-eye-line"></i></span>
+                    <span class="text bold">${viewRow.visitCnt }</span>
+                  </div>
+
+                  <div class="icon-text">
+                    <span class="icon">작성자:</span>
+                    <span class="text bold">${viewRow.id}</span>
+                  </div>
+
+                  <div class="icon-text mar-b-sm-2">
+                    <span class="icon">
+                    <!-- ////////좋아요한 게시글/////// -->
+					<c:if test="${lno eq 0 and idx eq idx and id eq id}">
+					<form name="writeFrm" method="post" 
+					          action="./like.do" class="form contact__form"
+					          onsubmit="return checkValidate(this);">
+					 <input type="hidden" name="idx" value="${viewRow.idx }" />
+					<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+					<div class="single-page__share pad-b-sm-2">
+					  <div class="display-flex align-items-center"><div class="social">
+					  <!-- ${row.id } -->
+						<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♥</button>
+					   </div></div><!-- .display-flex ends -->
+					</div><!-- .single-page__share ends -->
+					</form>
+					</c:if>
+					<!-- //////////좋아요안한 게시글////////// -->
+					<c:if test="${lno eq null or lno eq 1 and idx eq idx and id eq id}">
+					<form name="writeFrm" method="post" 
+					          action="./like.do" class="form contact__form"
+					          onsubmit="return checkValidate(this);">
+					 <input type="hidden" name="idx" value="${viewRow.idx }" />
+					<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+					<div class="single-page__share pad-b-sm-2">
+					  <div class="display-flex align-items-center"><div class="social">
+					  <!-- ${row.id } -->
+						<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♡</button>
+					   </div></div><!-- .display-flex ends -->
+					</div><!-- .single-page__share ends -->
+					</form>
+					</c:if>
+					<!-- ////////좋아요버튼/////// -->
+                    <!-- //////////스크랩버튼////////// -->
+					<!-- //////////스크랩한 게시글////////// -->
+					<c:if test="${scrapNo eq 0 and idx eq idx and id eq id}">
+					<form name="writeFrm" method="post" 
+					          action="./scrap.do" class="form contact__form"
+					          onsubmit="return checkValidate(this);">
+					 <input type="hidden" name="idx" value="${viewRow.idx }" />
+					<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+					<div class="single-page__share pad-b-sm-2">
+					  <div class="display-flex align-items-center"><div class="social">
+						<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">★</button>
+					   </div></div><!-- .display-flex ends -->
+					</div><!-- .single-page__share ends -->
+					</form>
+					</c:if>
+					<!-- //////////스크랩안한 게시글////////// -->
+					<c:if test="${scrapNo eq null or scrapNo eq 1 and idx eq idx and id eq id}">
+					<form name="writeFrm" method="post" 
+					          action="./scrap.do" class="form contact__form"
+					          onsubmit="return checkValidate(this);">
+					 <input type="hidden" name="idx" value="${viewRow.idx }" />
+					<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+					<div class="single-page__share pad-b-sm-2">
+					  <div class="display-flex align-items-center"><div class="social">
+						<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">☆</button>
+					   </div></div><!-- .display-flex ends -->
+					</div><!-- .single-page__share ends -->
+					</form>
+					</c:if>
+					<!-- ////////스크랩버튼/////// -->
+                    
+                    </span>
+                    <span class="text bold">
+                    
+					</span>
+                  </div>
+                </div><!-- .sidebar__widget ends -->
+		</div>
+		</div>
             </div><!-- .flex-* ends -->
 
           </div><!-- .row ends -->
@@ -254,7 +296,7 @@ function writeValidate(f)
 				
                 <div class="form__group">
                   <label for="fname" class="form__label">작성자 <span class="color-danger">*</span></label>
-                  <input type="text" id="fname" class="form__input" name="name" value="${sessionScope.siteUserInfo.name }">
+                  <input type="text" id="fname" class="form__input" name="name" readonly value="${sessionScope.siteUserInfo.name }">
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
