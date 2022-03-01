@@ -4,7 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -85,6 +94,92 @@ public class MemberController
 	*/
 }
 	
+	
+	
+	//	아이디·비밀번호 찾기 페이지 이동
+	@RequestMapping("/findIdPassword.do")
+	public String findIdPasswordPage()
+	{
+		return "Member/FindIdPassword";
+	}
+	
+	//	아이디 찾기
+	@RequestMapping("/findId.do")
+	public ModelAndView findIdAction(HttpServletRequest req, HttpSession session)
+	{
+		MemberVO vo = sqlSession.getMapper(MemberDAOImpl.class)
+				  .findId(req.getParameter("name"), req.getParameter("email"));
+	
+		ModelAndView mv = new ModelAndView();
+		session.setAttribute("findId", vo);
+		
+		mv.setViewName("Member/FindResult");
+		
+		return mv;
+	}
+	
+	
+	//	비밀번호 찾기
+	@RequestMapping("/findPassword.do")
+	public ModelAndView findPasswordAction(HttpServletRequest req, HttpSession session)
+	{
+		MemberVO vo = sqlSession.getMapper(MemberDAOImpl.class)
+				.findPassword(req.getParameter("id"), req.getParameter("email"));
+		
+		ModelAndView mv = new ModelAndView();
+		session.setAttribute("findPassword", vo);
+	
+		String host = "smtp.naver.com";
+		final String username = "junh0y";
+		final String password = "yyjh0323!";
+		int port = 465;
+		
+		String to = vo.getEmail();
+		String subject = "[Help me, Mr.Bob!] 비밀번호 찾기 메일 발송";
+		String content = vo.getName() +"님의 비밀번호는"+ vo.getPass() +"입니다.";
+		
+		Properties props = System.getProperties();
+		
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", port);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.ssl.enable", "true");
+		props.put("mail.smtp.ssl.trust", host);
+		
+		Session sessionM = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			String userName = username;
+			String passWord = password;
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(userName, passWord);
+			}
+		});
+
+		sessionM.setDebug(true);
+		
+		Message mimeMessage = new MimeMessage(sessionM);
+		try
+		{
+			mimeMessage.setFrom(new InternetAddress("junh0y@naver.com"));
+			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			mimeMessage.setSubject(subject);
+			mimeMessage.setText(content);
+			Transport.send(mimeMessage);
+		}
+		catch (AddressException e)
+		{
+			e.printStackTrace();
+		}
+		catch (MessagingException e)
+		{
+			e.printStackTrace();
+		}
+		
+		mv.setViewName("Member/FindResult");
+		
+		return mv;
+	}
+	
+		
 	//	로그아웃 처리
 	@RequestMapping("/logout.do")
 	public ModelAndView logout(HttpSession session)
@@ -93,6 +188,73 @@ public class MemberController
 		
 		ModelAndView mv = new ModelAndView("redirect:/");
 		return mv;
+	}
+
+	
+	//	고객센터 페이지 이동
+	@RequestMapping("/customerService.do")
+	public String customerService()
+	{		
+		return "Member/CustomerService";
+	}
+	
+	//	고객센터 이메일 전송
+	@RequestMapping("/customerServiceSend.do")
+	public String customerServiceSend(HttpServletRequest req)
+	{
+		String customerName = req.getParameter("name");
+		String customerEmail = req.getParameter("email");
+		String customerContent = req.getParameter("contents");
+	
+		sqlSession.getMapper(MemberDAOImpl.class)
+			.customerServiceSave(customerName, customerEmail, customerContent);
+		
+		String host = "smtp.naver.com";
+		final String username = "junh0y";
+		final String password = "yyjh0323!";
+		int port = 465;
+		
+		String to = "junh0y@naver.com";
+		String subject = "[고객문의] "+ customerName +"님의 문의사항";
+		String content = customerContent;
+		
+		Properties props = System.getProperties();
+		
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", port);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.ssl.enable", "true");
+		props.put("mail.smtp.ssl.trust", host);
+		
+		Session sessionM = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			String userName = username;
+			String passWord = password;
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(userName, passWord);
+			}
+		});
+
+		sessionM.setDebug(true);
+		
+		Message mimeMessage = new MimeMessage(sessionM);
+		try
+		{
+			mimeMessage.setFrom(new InternetAddress(customerEmail));
+			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			mimeMessage.setSubject(subject);
+			mimeMessage.setText(content);
+			Transport.send(mimeMessage);
+		}
+		catch (AddressException e)
+		{
+			e.printStackTrace();
+		}
+		catch (MessagingException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return "Member/CustomerService";
 	}
 	
 	

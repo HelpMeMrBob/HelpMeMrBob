@@ -210,7 +210,18 @@
 			<version>1.2.2</version>
 		</dependency>
 		
-		
+		<!-- 메일 발송 의존 설정 -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+				
 	</dependencies>
     <build>
     	<resources>
