@@ -18,6 +18,8 @@
     </head>
     <style>
     	.row { width: 90% ;}
+    	
+    	#topic{ border: none; }
     </style>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
@@ -39,12 +41,12 @@
 								 	<col width=10%>
 						            <col width=*>
 						            
-						        </colgroup>
+					 	        </colgroup>
 							
 								<tr>
 									<th class="table-primary">주제</th>
 									<td>
-									<input type="text" name="topic"/>
+									<input type="text" name="topic" id="topic" style="width:1000px;"/>
 									</td>
 								</tr>
 								<tr>

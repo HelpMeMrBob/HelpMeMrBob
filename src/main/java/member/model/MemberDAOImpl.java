@@ -2,13 +2,22 @@ package member.model;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface MemberDAOImpl
 {
 	public MemberVO login(String id, String pass);
+	public MemberVO findId(String name, String email);
+	public MemberVO findPassword(String id, String email);
+	
 	public MemberVO myPage(String id);
 	public MemberVO memberUpdate(MemberVO vo);
 	public int memberUpdateAction(MemberVO vo);
 	public int myPreferenceUpdate(MemberVO vo);
+	
+	public void customerServiceSave(@Param("name")String name,
+									@Param("email")String email,
+									@Param("contents")String contents);
 	
 	public ArrayList<MemberVO> mySticker(ParameterDTO parameterDTO);
 	public ArrayList<MemberVO> myPreference(ParameterDTO parameterDTO);

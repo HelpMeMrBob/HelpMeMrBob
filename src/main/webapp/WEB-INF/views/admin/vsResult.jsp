@@ -1,3 +1,4 @@
+<%@page import="admin.model.AdVSTalkDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -27,47 +28,51 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">투표 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">VS투표를 관리합니다.</li>
+                            <li class="breadcrumb-item active">등록한 VS투표입니다.</li>
                         </ol>
 							<div class="row">
-							<form id="vsFrm" name="vsFrm"> 
+							<form id="vsFrm" name="vsFrm" method="post" 
+							action="" enctype="multipart/form-data"> 
 							
-							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-success" id="write" 
-								onclick="location.href='vsWrite.do';">등록</button>
-							<!-- <button type="button" class="btn btn-success" id="edit" >수정</button> -->
-							<!-- <button type="button" class="btn btn-dark" id="delete" >삭제</button>  -->
-							</div>
-														
-							<table class="table table-bordered" id="repTb">
+							<table class="table table-bordered" id="vsTb">
 								
 								 <colgroup>
-								 	<col width=5%>
+								 	<col width=10%>
 						            <col width=*>
-						            <col width=6%>
-						            <col width=6%>
-						            
 						        </colgroup>
-							
-								<tr class="table-success">
-									<th>번호</th>
-									<th>주제</th>
-									<th>1:투표수</th>
-									<th>2:투표수</th>
+						     
+								<tr>
+									<th class="table-primary">주제</th>
+									<td>
+										<%-- ${resultList[0].topic} --%>
+										${viewRow.topic }
+									</td>
 								</tr>
 								
-								<!-- 반복 시작 -->
-								<c:forEach items="${lists }" var="row" varStatus="loop">	
+							 	<%-- <c:forEach items="${resultList }" var="fmap" varStatus="vs">    --%>
 								<tr>
-									<td>${row.virtualNum }</td>
+									<th class="table-primary">아이템 1<%-- ${vs.count } --%></th>
 									<td>
-									<a href="./vsView.do?idx=${row.idx}&nowPage=${nowPage }">${row.topic}</a>
+								 	<img src="../resources/vsUpload/${viewRow.sfile1 }" style="max-width:200px;" />
 									</td>
-									<td></td>								
 								</tr>
-								</c:forEach>
-								<!-- 반복 끝 -->
-							</table>							
+								<%-- </c:forEach> --%>
+								<tr>
+									<th class="table-primary">아이템 2</th>
+									<td>
+								 	<img src="../resources/vsUpload/${viewRow.sfile2 }" style="max-width:200px;" />
+									</td>
+								</tr>
+												
+							</table>
+							<div class="col-lg-6 text-lg-end mb-1">
+							<button type="button" class="btn btn-secondary" 
+								onclick="location.href='./vsEdit.do?idx=${viewRow.idx}&nowPage=${param.nowPage }';">수정</button>
+							<button type="button" class="btn btn-success" 
+								onclick="location.href='./vsTalk.do?nowPage=${param.nowPage}';">목록</button>
+							<button type="button" class="btn btn-dark" 
+								onclick="location.href='./vsDelete.do?idx=${viewRow.idx}&nowPage=${nowPage }';">삭제</button>
+							</div>
 							</form>
 							</div>
 							

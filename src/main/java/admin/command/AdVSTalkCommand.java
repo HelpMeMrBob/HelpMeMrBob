@@ -9,23 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import admin.model.AdMemberDAO;
-import admin.model.AdMemberDTO;
+import admin.model.AdVSTalkDAO;
+import admin.model.AdVSTalkDTO;
 import util.EnvFileReader;
 import util.PagingUtil;
 
 @Service
-public class AdMemberCommand implements AdminCommandImpl{
+public class AdVSTalkCommand implements AdminCommandImpl{
 	
 	@Autowired
-	AdMemberDAO dao;
-	public AdMemberCommand() {
-		System.out.println("AdMemberCommand 빈 자동 생성 됨");
+	AdVSTalkDAO dao;
+	public AdVSTalkCommand() {
+		System.out.println("AdVSTalkCommand 빈 자동 생성 됨");
 	}
 	
 	@Override
 	public void execute(Model model) {
-		System.out.println("AdMemberCommand -> execute() 호출");
+		System.out.println("AdVSTalkCommand -> execute() 호출");
 		
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = 
@@ -57,17 +57,18 @@ public class AdMemberCommand implements AdminCommandImpl{
 		/***페이징 추가 코드 end***/
 		
 		//페이징 적용된 쿼리문을 통한 select(페이징O)
-		ArrayList<AdMemberDTO> lists = dao.memberlist(paramMap);
+		ArrayList<AdVSTalkDTO> lists = dao.vsList(paramMap);
 		
 		//목록에 출력할 게시물의 가상 번호 계산 후 부여하기
 		int virtualNum=0;
-		int countNum=1;
-		for(AdMemberDTO row : lists) {
+		int countNum=0;
+		for(AdVSTalkDTO row : lists) {
 			//전체 게시물의 개수에서 하나씩 차감하며 가상 번호를 부여한다.(페이징x)
 			//virtualNum = totalRecordCount--;
 			
 			/***가상번호 계산 추가 코드 start***/
-			virtualNum = (((nowPage-1) * pageSize) + countNum++);
+			virtualNum=totalRecordCount
+					-(((nowPage-1)*pageSize)+countNum++);
 			/***가상번호 계산 추가 코드 end***/
 			
 			//가상 번호를 setter를 통해 저장
@@ -75,7 +76,7 @@ public class AdMemberCommand implements AdminCommandImpl{
 						
 			String pagingImg = PagingUtil.pagingImg(totalRecordCount,
 					pageSize, blockPage, nowPage,
-					req.getContextPath()+"/admin/member.do?");
+					req.getContextPath()+"/admin/vsTalk.do?");
 			
 			model.addAttribute("pagingImg", pagingImg);
 			model.addAttribute("totalPage", totalPage); //전체 페이지 수 
@@ -85,5 +86,6 @@ public class AdMemberCommand implements AdminCommandImpl{
 			model.addAttribute("lists", lists);
 		
 		}
+		
 	}
 }

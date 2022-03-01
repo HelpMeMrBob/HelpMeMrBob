@@ -3,7 +3,6 @@ package admin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +16,15 @@ import admin.command.AdBlackCommand;
 import admin.command.AdBoardCommand;
 import admin.command.AdMemberCommand;
 import admin.command.AdReplyCommand;
+import admin.command.AdVSEditCommand;
+import admin.command.AdVSTalkCommand;
+import admin.command.AdVSViewCommand;
 import admin.command.AdminCommandImpl;
 import admin.command.DeleteActionCommand;
 import admin.command.DeleteReplyCommand;
+import admin.command.DeleteVSTalkCommand;
 import admin.model.AdMemberDAO;
+import admin.model.AdVSTalkDTO;
 
 @Controller
 public class AdminController {
@@ -45,6 +49,14 @@ public class AdminController {
 	AdReplyCommand adreplyCommand;
 	@Autowired
 	DeleteReplyCommand deleteReplyCommand;
+	@Autowired
+	AdVSTalkCommand advstalkCommand;
+	@Autowired
+	AdVSViewCommand advsViewCommand;
+	@Autowired
+	AdVSEditCommand advsEditCommand;
+	@Autowired
+	DeleteVSTalkCommand deleteVSTalkCommand;
 	
 	
 	//어드민 메인 진입
@@ -141,20 +153,63 @@ public class AdminController {
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//투표 관리 진입
+	
+	//투표 관리 진입 매핑*리스트 출력
 	@RequestMapping("/admin/vsTalk.do")
 	public String vsTalk(Model model, HttpServletRequest req) {
-	
+		
+		model.addAttribute("req", req);
+		
+		command = advstalkCommand;
+		command.execute(model);
 		
 		return "admin/vsTalk";
 	}
 	
-	//투표 등록 진입
+	//투표 등록 폼 진입
 	@RequestMapping("/admin/vsWrite.do")
 	public String vsWrite(Model model, HttpServletRequest req) {
-	
 		
 		return "admin/vsWrite";
+	}
+	
+	//투표 등록 ->FileUploadController에서 매핑 (admin/uploadAction.do)
+	
+	//상세보기
+	@RequestMapping("/admin/vsView.do")
+	public String view(Model model, HttpServletRequest req, AdVSTalkDTO adVSTalkDTO) {
+		
+		model.addAttribute("req", req);
+		model.addAttribute("adVSTalkDTO", adVSTalkDTO);
+		
+		command = advsViewCommand;
+		command.execute(model);
+		
+		return "admin/vsResult";
+	}
+	
+	//투표 수정폼 진입 
+	@RequestMapping("/admin/vsEdit.do")
+	public String edit(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		
+		command = advsEditCommand;
+		command.execute(model);
+		
+		return "admin/vsEdit";
+	}
+	
+	//투표 삭제
+	@RequestMapping("/admin/vsDelete.do")
+	public String delete(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		
+		command = deleteVSTalkCommand;
+		command.execute(model);
+		
+		return "redirect:vsTalk.do";
 	}
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
