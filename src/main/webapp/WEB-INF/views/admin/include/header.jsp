@@ -32,7 +32,7 @@
                             </a>-->
                             
                             
-                            <div class="sb-sidenav-menu-heading">메뉴 및 식당</div>
+                            <%-- <div class="sb-sidenav-menu-heading">메뉴 및 식당</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="bi bi-clipboard-check"></i></div>
                                 메뉴 추천 
@@ -43,7 +43,12 @@
                                     <a class="nav-link" href="<%= request.getContextPath() %>/admin/roullet.do">룰렛 관리</a>
                                     <a class="nav-link" href="<%= request.getContextPath() %>/admin/worldCup.do">월드컵 관리</a>
                                 </nav>
-                            </div>
+                            </div> --%>
+                            <div class="sb-sidenav-menu-heading">메뉴 및 식당</div>
+                            <a class="nav-link" href="<%= request.getContextPath() %>/admin/food.do">
+                                <div class="sb-nav-link-icon"><i class="bi bi-cup-straw"></i></div>
+                                메뉴 관리
+                            </a>
                             <a class="nav-link" href="<%= request.getContextPath() %>/admin/place.do">
                                 <div class="sb-nav-link-icon"><i class="bi bi-signpost-2"></i></div>
                                 식당 정보

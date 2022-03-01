@@ -27,7 +27,7 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">투표 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">VS투표를 관리합니다.</li>
+                            <li class="breadcrumb-item active">새로운 VS투표를 등록합니다.</li>
                         </ol>
 							<div class="row">
 							<form id="vsFrm" name="vsFrm"> 
