@@ -173,7 +173,7 @@ public class AdminController {
 		return "admin/vsWrite";
 	}
 	
-	//투표 등록 ->FileUploadController에서 매핑 (admin/uploadAction.do)
+	//투표 등록 ->VSFileUploadController에서 매핑 (/admin/uploadAction.do)
 	
 	//상세보기
 	@RequestMapping("/admin/vsView.do")
@@ -212,22 +212,16 @@ public class AdminController {
 		return "redirect:vsTalk.do";
 	}
 	
+	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//룰렛 관리 진입
-	@RequestMapping("/admin/roullet.do")
+	//메뉴 관리 진입
+	@RequestMapping("/admin/food.do")
 	public String roullet(Model model, HttpServletRequest req) {
 	
 		
-		return "admin/roullet";
+		return "admin/menu";
 	}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//월드컵 관리 진입
-	@RequestMapping("/admin/worldCup.do")
-	public String worldCup(Model model, HttpServletRequest req) {
-	
-		
-		return "admin/worldCup";
-	}
+
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//식당 정보 관리 진입
