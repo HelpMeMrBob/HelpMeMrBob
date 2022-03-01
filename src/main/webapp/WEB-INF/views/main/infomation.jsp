@@ -179,7 +179,7 @@ function detailView(place) {
 <body class="video-bg-homepage">
 	
 	<!-- HEADER -->  
-    <jsp:include page="/WEB-INF/views/include/header.jsp" />
+    <jsp:include page="/WEB-INF/views/include/header2.jsp" />
 	
     <main>
     
