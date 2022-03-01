@@ -10,6 +10,11 @@
 <!--─────────────────────────────────── SITE HEADER ENDS ─────────────────────────────────────-->
 <!--────────────────────────────────── MAIN SECTION BEGINS ───────────────────────────────────-->
 <script>
+function deleteRow(rno){
+	if(confirm("정말로 삭제하시겠습니까?")){
+		location.href="Fightdelete.do?rno="+rno;
+	}
+}
 function writeValidate(f)
 {
 	if(f.content.value==""){
@@ -35,46 +40,34 @@ function writeValidate(f)
 				int experience = parameterDTO.getExp();
 			%> --%>
 			<tr>
-			<td style="width: 50%; padding: 20px; padding-top: 5px;
-						   border: 1px solid #DFDFDF; vertical-align: top;">
-						   <img src="resources/upload/patbung.jpg" /></td>
-			<td style="width: 50%; padding: 20px; padding-top: 5px;
-						   border: 1px solid #DFDFDF; vertical-align: top;">
-						   <img src="resources/upload/shubung.jpg" /></td>
-			</tr>
-			<tr>
-				<td style="width: 50%; padding-bottom: 0px">
+				<td colspan="2" style="width: 50%; padding-bottom: 0px">
 					<input style="background-color: #ED6A5A; border: 1px solid #ED6A5A;
 								  border-right: 1px solid #DFDFDF; width: 100%; height: 50px;
 								  text-align: center; margin-top: 10px;
 								  color: #FFFFFF; font-size: 16px; font-weight: bold;"
-								  value="팥붕" readonly></input>
+								  value="팥붕VS슈붕" readonly></input>
 				</td>
-				<td style="width: 50%; padding-bottom: 0px">
-					<input style="background-color: #ED6A5A; border: 1px solid #ED6A5A;
-								  border-right: 1px solid #DFDFDF; width: 100%; height: 50px;
-								  text-align: center; margin-top: 10px; 
-								  color: #FFFFFF; font-size: 16px; font-weight: bold;"
-								  value="슈붕" readonly></input>
-						</td>
 					</tr>
-					<tr>
-						<td style="width: 50%; padding: 20px; padding-top: 5px;
+			<tr>
+			<td style="width: 50%; padding: 20px; padding-top: 5px;
 						   border: 1px solid #DFDFDF; vertical-align: top;">
-						   <div class="progress">
-    <div class="progress-bar bg-danger progress-bar-striped" style="width:50%"></div>
-  </div>
+						   <img src="resources/upload/patbung.jpg" />
 						   </td>
-						<td style="width: 50%; padding: 20px; padding-top: 5px;
+			<td style="width: 50%; padding: 20px; padding-top: 5px;
 						   border: 1px solid #DFDFDF; vertical-align: top;">
-						   <div class="progress">
-    <div class="progress-bar bg-danger progress-bar-striped" style="width:60%"></div>
-  </div>
+						   <img src="resources/upload/shubung.jpg" />
 						   </td>
-					</tr>
+			</tr>
+			
+					
 					<tr>
 				<td style="width: 50%; padding: 20px; padding-top: 5px;
 						   border: 1px solid #DFDFDF; vertical-align: top;">
+						   
+						   <div class="progress">
+    <div class="progress-bar bg-danger progress-bar-striped" style="width:${totalFight}%"></div>
+  </div>
+						   
 						   
 						   <c:forEach items="${lists }" var="row">		
 						<div class="border mt-2 mb-2">
@@ -83,6 +76,19 @@ function writeValidate(f)
 									<h4 class="media-heading">작성자:${row.id }</h4>
 									<p>${row.contents }</p>
 								</div>
+								<div class="media-right">
+					<!-- 작성자 본인에게만 수정/삭제 버튼 보임 처리 -->
+					<c:if test="${sessionScope.siteUserInfo.id eq row.id}">
+						<button class="btn btn-primary" 
+						onclick="location.href='fightModify.do?rno=${row.rno}';">
+						수정</button>
+						
+						<!-- 삭제 버튼을 누를 경우 idx값을 JS의 함수로 전달한다. -->
+						<button class="btn btn-danger" 
+						onclick="javascript:deleteRow(${row.rno});">
+						삭제</button>
+					</c:if>
+				</div>
 							</div>
 						</div>
 						</c:forEach>
@@ -99,8 +105,7 @@ function writeValidate(f)
 				</td>
 			</tr>
 			<tr>
-			<td style="width: 50%; padding: 20px; padding-top: 5px;
-						   border: 1px solid #DFDFDF; vertical-align: top;">
+			<td >
 						   
 						   
 			<!-- 댓글 입력form -->
@@ -108,7 +113,7 @@ function writeValidate(f)
 			onsubmit="return writeValidate(this);"
 			action="<c:url value="/FightWrite.do" />" 
 			class="form contact__form">
-			<input type="hidden" name="idx" value="${viewRow.idx }" />
+			<%-- <input type="hidden" name="idx" value="${viewRow.rno }" /> --%>
 			
             <div class="row">
             
@@ -116,7 +121,7 @@ function writeValidate(f)
 				
                 <div class="form__group">
                   <input type="text" id="fname" class="form__input" name="name" placeholder="아이디"
-                  value="${sessionScope.siteUserInfo.name }">
+                  value="${sessionScope.siteUserInfo.name }" readonly>
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
@@ -140,23 +145,10 @@ function writeValidate(f)
 
           </form><!-- .form ends -->
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			</td>
 			
 			
-			
-			
-			
-			<td style="width: 50%; padding: 20px; padding-top: 5px;
-						   border: 1px solid #DFDFDF; vertical-align: top;">
+			<td >
 			댓글을 쓰는 곳</td>
 			</tr>
 			<!-- 푸파페이징  -->

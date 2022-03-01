@@ -67,7 +67,8 @@
               <ul>
 
                 <li class="header__list"><a href="reviewList.do">리뷰 게시판</a></li>
-                <li class="header__list"><a href="sermons-single.html">푸드 캘린더</a></li>
+                <!-- 왜요 뭐요(ㅇ"_ㅇ) -->
+                <!-- <li class="header__list"><a href="sermons-single.html">푸드 캘린더</a></li> -->
                 <li class="header__list"><a href="VSFight.do">음식 토론</a></li>
 
               </ul>

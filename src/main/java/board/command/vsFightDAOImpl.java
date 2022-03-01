@@ -39,7 +39,9 @@ public interface vsFightDAOImpl {
 	public int write(@Param("_contents") String contents,
 			@Param("_id") String id);
 	//기존 게시물의 내용을 읽어오기 위한 메서드
-	public vsFight1VO view(ParameterDTO parameterDTO);
+	//public vsFight1VO view(ParameterDTO parameterDTO);
+	public vsFight1VO view(@Param("rno") String rno,
+			@Param("user_id") String id);
 	//수정처리
 	public int modify(vsFight1VO vsFight1VO);
 	//삭제처리

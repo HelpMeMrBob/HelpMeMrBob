@@ -42,7 +42,7 @@
 	<!-- 댓글 수정할때 필요한 창입니다. -->
 	<select id="view" resultType="board.model.vsFight1VO"
 		parameterType="board.model.ParameterDTO">
-		SELECT * FROM fight1 WHERE rno=#{board_rno}
+		SELECT * FROM fight1 WHERE rno=#{rno}
 			AND id=#{user_id}
 	</select>
 	<!-- 
@@ -53,7 +53,7 @@
 	-->
 	<update id="modify" parameterType="board.model.vsFight1VO">
 		UPDATE fight1
-			SET contents=#{contents}
+			SET id=#{id}, contents=#{contents}
 			WHERE rno=#{rno} AND id=#{id}
 	</update>
 	<!--  

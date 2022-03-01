@@ -37,18 +37,16 @@ public class vsFightController {
 	
 	
 	@RequestMapping("/VSFight.do")
-	public String VSFightList(Model model, HttpServletRequest req) {
+	public String VSFightList(Model model, HttpServletRequest req, HttpSession session ) {
 		//방명록 테이블의 게시물 갯수 카운트
-		/*
-		 컨트롤러에서 Service 객체 역할을 하는 interface에 정의된 추상메서드를
-		 호출한다. 그러면 mapper에 정의된 쿼리문이 실행되는 형식으로 동작한다.
-		 동작방식] 컨트롤러에서 메서드 호출 -> interface의 추상메서드 호출
-		 	-> namespace에 해당 interface를 namespace로 지정된 매퍼 선택
-		 	-> 추상메서드와 동일한 이름의 id속성을 가진 엘리먼트 선택
-		 	-> 쿼리문 실행 및 결과 반환
-		 */
 		int totalRecordCount=sqlSession.getMapper(vsFightDAOImpl.class)
 				.getTotalCount();
+		System.out.println("댓글의 갯수는 몇개일까?"+totalRecordCount);
+		
+		session.setAttribute("totalFight", totalRecordCount);
+		
+		
+		
 		//페이지 처리를 위한 설정값
 		int pageSize=4;//한 페이지당 출력할 게시물의 갯수
 		int blockPage=2;//한 블럭당 출력할 페이지 번호의 갯수
@@ -139,10 +137,11 @@ public class vsFightController {
 		parameterDTO.setUser_id(((MemberVO) session.getAttribute("siteUserInfo")).getId());
 
 		// view() 메서드로 앞에서 저장된 DTO객체를 매개변수로 전달한다.
-		vsFight1VO dto = sqlSession.getMapper(vsFightDAOImpl.class).view(parameterDTO);
+		vsFight1VO dto = sqlSession.getMapper(vsFightDAOImpl.class).view(req.getParameter("rno"), 
+				((MemberVO) session.getAttribute("siteUserInfo")).getId());
 
 		model.addAttribute("dto", dto);
-		return "main/contact5";
+		return "main/contact7";
 	}
 
 	// 수정처리
@@ -174,6 +173,6 @@ public class vsFightController {
 				((MemberVO) session.getAttribute("siteUserInfo")).getId());
 		String rno = req.getParameter("rno");
 		//return "redirect:reviewView.do?rno=" + rno;
-		return "redirect:VSFight.do";
+		return "redirect:VSFight.do?rno="+rno;
 	}
 }
