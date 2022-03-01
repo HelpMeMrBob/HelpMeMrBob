@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import admin.model.AdVSTalkDTO;
 import board.model.vsFight1VO;
 import board.model.ParameterDTO;
 /*
@@ -52,4 +53,7 @@ public interface vsFightDAOImpl {
 	//List컬렉션 사용을 위한 추상메서드
 	public ArrayList<vsFight1VO> arrayListUse(List<String> aList);
 
+	
+	//사진꽂기
+	public ArrayList<AdVSTalkDTO> adList();
 }

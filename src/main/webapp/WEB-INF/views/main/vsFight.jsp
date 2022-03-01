@@ -45,17 +45,18 @@ function writeValidate(f)
 								  border-right: 1px solid #DFDFDF; width: 100%; height: 50px;
 								  text-align: center; margin-top: 10px;
 								  color: #FFFFFF; font-size: 16px; font-weight: bold;"
-								  value="팥붕VS슈붕" readonly></input>
+								  value="${topic}" readonly></input>
 				</td>
 					</tr>
 			<tr>
+			<%-- ${viewRow.sfile1 } 이거 안됨--%>
 			<td style="width: 50%; padding: 20px; padding-top: 5px;
 						   border: 1px solid #DFDFDF; vertical-align: top;">
-						   <img src="resources/upload/patbung.jpg" />
+						   <img src="./resources/vsUpload/${sFile1}" style="max-width:200px;" />
 						   </td>
 			<td style="width: 50%; padding: 20px; padding-top: 5px;
 						   border: 1px solid #DFDFDF; vertical-align: top;">
-						   <img src="resources/upload/shubung.jpg" />
+						   <img src="./resources/vsUpload/${sFile2}" style="max-width:200px;" />
 						   </td>
 			</tr>
 			

@@ -34,6 +34,12 @@
 							<form id="vsFrm" name="vsFrm" method="post" 
 							action="" enctype="multipart/form-data"> 
 							
+<!--  						<div class="col-lg-12 text-lg-end mb-1">
+							<button type="button" class="btn btn-success" id="write" 
+								onclick="location.href='vsFightAction.do';">대표 투표 등록</button>
+							</div>
+							<input type="hidden" name="idx" value="${viewRow.idx }" >-->
+							
 							<table class="table table-bordered" id="vsTb">
 								
 								 <colgroup>

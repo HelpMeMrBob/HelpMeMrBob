@@ -2,6 +2,7 @@ package board.controller;
 
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import admin.command.AdVSViewCommand;
+import admin.command.AdminCommandImpl;
+import admin.model.AdVSTalkDAO;
+import admin.model.AdVSTalkDTO;
 import board.command.vsFightDAOImpl;
 import board.model.ParameterDTO;
 import board.model.vsFight1VO;
@@ -28,6 +33,8 @@ public class vsFightController {
 	 * Mybatis를 사용하기 위해 빈을 자동주입 받는다. servlet-context.xml에서 생성함
 	 */
 	private SqlSession sqlSession;
+	
+	AdminCommandImpl command =null;
 
 	@Autowired
 	public void setSqlSession(SqlSession sqlSession) {
@@ -76,6 +83,32 @@ public class vsFightController {
 						req.getContextPath()+"/VSFight.do?");
 		model.addAttribute("pagingImg",pagingImg);
 		
+		///admin에서 설정한 사진과 주제 갖고오기
+		ArrayList<AdVSTalkDTO> adList=
+				sqlSession.getMapper(vsFightDAOImpl.class).adList();
+		
+		String topic = null;
+		String sFile1 = null;
+		String sFile2 = null;
+		for(AdVSTalkDTO addto: adList)
+		{
+			topic=addto.getTopic();
+			addto.setTopic(topic);
+			
+			sFile1=addto.getSfile1();
+			addto.setSfile1(sFile1);
+			
+			sFile2=addto.getSfile2();
+			addto.setSfile2(sFile2);
+		}
+		
+		model.addAttribute("topic",topic);
+		model.addAttribute("sFile1",sFile1);
+		model.addAttribute("sFile2",sFile2);
+		/*
+		 * System.out.println("토픽값 있나용"+topic); System.out.println("sFile1 있나용"+sFile1);
+		 * System.out.println("sFile2 있나용"+sFile2);
+		 */
 		for(vsFight1VO dto: lists)
 		{
 			String temp=dto.getContents().replace("\r\n", "<br/>");
