@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에는 서비스객체 역할을 하는 interface의 풀경로를 기술한다. -->
+<mapper namespace="mybatis.IBoardDAO">
+ 	
+	<select id="getTotalCount" resultType="int" 
+		parameterType="mybatis.ParameterDTO">
+		
+		SELECT COUNT(*) FROM board		
+		<if test="searchTxt!=null"> 
+			WHERE  
+			<foreach collection="searchTxt" item="str" open="(" close=")" 
+				separator="or">
+				${searchField} like '%'||#{str}||'%'
+			</foreach>		 
+		</if>
+	</select>
+	<!-- 구간에 해당하는 게시물을 추출한다. -->
+	<select id="listPage" resultType="mybatis.BoardDTO" 
+		parameterType="mybatis.ParameterDTO">			
+		SELECT * FROM (
+		    SELECT Tb.*, rownum rNum FROM (
+		        SELECT * FROM board   
+				<if test="searchTxt!=null">
+					WHERE
+					<foreach collection="searchTxt" item="str" open="(" 
+						close=")" separator="or">
+						${searchField} like '%'||#{str}||'%'
+					</foreach> 
+				</if>					
+		        ORDER BY num DESC
+		    ) Tb
+		)
+		WHERE rNum BETWEEN #{start} AND #{end}
+	</select>
+
+	<!-- 게시물 내용보기 -->
+	<select id="view" resultType="mybatis.BoardDTO" 
+		parameterType="mybatis.ParameterDTO">
+		SELECT * FROM board WHERE num=#{num}
+	</select>	
+	
+	<!-- 게시물 작성하기 -->
+	<!-- resultType을 명시하지 않더라도 항상 성공 실패시 1과 0을 반환한다.  -->
+	<insert id="write" parameterType="mybatis.BoardDTO">
+		INSERT INTO board (num, title, content, id, visitcount)
+		VALUES (seq_board_num.NEXTVAL, #{title}, #{content}, #{id}, 0)
+	</insert>	
+	
+</mapper>
+
+
+
