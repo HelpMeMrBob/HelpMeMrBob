@@ -2,6 +2,8 @@ package infomation.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,12 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import infomation.model.FavoriteDTO;
 import infomation.model.InfomationDAOInter;
 import infomation.model.InfomationDTO;
-import member.model.MemberDAOImpl;
 import member.model.MemberVO;
 
 @Controller
@@ -143,5 +144,28 @@ public class InfomationController {
 		model.addAttribute("detailView", detailView);
 		
 		return "main/detailView";
+	}
+	
+	//안드로이드와 연결하기 위한 REST API
+	@RequestMapping("/searchMenuList.do")
+	@ResponseBody
+	public Map<String, Object> menuList(HttpServletRequest req) {
+		
+		//DB에서 검색어에 맞는 결과 리스트 가져오기
+		String search = req.getParameter("search");
+		String selectMenu = req.getParameter("menu");
+		
+		if (selectMenu != null) {
+			search = selectMenu;
+		}
+		
+		ArrayList<InfomationDTO> keyword = sqlSession2.getMapper(InfomationDAOInter.class).keyword(search);
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		System.out.println("안드로이드 연결 시도");
+		
+		result.put("keyword", keyword);
+		
+		return result;
 	}
 }
