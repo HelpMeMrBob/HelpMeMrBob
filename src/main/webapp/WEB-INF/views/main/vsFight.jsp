@@ -73,7 +73,9 @@ function writeValidate(f)
 						   border: 1px solid #DFDFDF; vertical-align: top;">
 						   
 						   <div class="progress">
-    <div class="progress-bar bg-danger progress-bar-striped" style="width:${totalFight1}%"></div>
+<%--     <div class="progress-bar bg-danger progress-bar-striped" style="width:${totalFight1}%"></div>
+ --%>						   
+    <div class="progress-bar bg-danger progress-bar-striped" style="width:${count1}%"></div>
   </div>
 						   
 						   
@@ -111,7 +113,7 @@ function writeValidate(f)
 <!--─────────────────────────────────── 오른쪽댓글받아요 ─────────────────────────────────────-->
 <!--────────────────────────────────── 오른쪽댓글받아요 ───────────────────────────────────-->						   
 						   <div class="progress">
-    <div class="progress-bar bg-danger progress-bar-striped" style="width:${totalFight2}%"></div>
+    <div class="progress-bar bg-danger progress-bar-striped" style="width:${count2}%"></div>
   </div>
 						   
 						   

@@ -50,7 +50,7 @@ public class vsFightController {
 		int totalRecordCount1=sqlSession.getMapper(vsFightDAOImpl.class)
 				.getTotalCount1();
 		
-		session.setAttribute("totalFight1", totalRecordCount1);
+		
 		
 		
 		
@@ -150,9 +150,12 @@ public class vsFightController {
 			dto.setContents(temp);
 		}
 		model.addAttribute("lists",lists);
-
+///////////////////idx해당 댓글 갯수 받자
+		int count1=sqlSession.getMapper(vsFightDAOImpl.class).count(idx);
+		session.setAttribute("count1", count1);
 		
-		
+		int count2=sqlSession.getMapper(vsFightDAOImpl.class).count(idx);
+		session.setAttribute("count2", count2);
 //////오른쪽댓글 리스트//////////////////////////////////////////////////////////////////////		
 		
 		ArrayList<vsFight1VO> lists2=

@@ -90,6 +90,15 @@
 	
 	</delete>
 	
+	<!-- 해당idx에서 댓글갯수받기 -->
+	<select id="count" resultType="int">
+		SELECT COUNT(*) from fight1 where cate='fight1' and idx=#{idx}
+	</select>
+	<select id="count2" resultType="int">
+		SELECT COUNT(*) from fight1 where cate='fight2' and idx=#{idx}
+	</select>
+	
+	
 	<!-- where idx=${idx} 얜 건들지 않을겡-->
 	<select id="adList" resultType="admin.model.AdVSTalkDTO">
 		SELECT * FROM VStalk 

@@ -68,6 +68,9 @@ public interface vsFightDAOImpl {
 	public ArrayList<vsFight1VO> arrayListUse(List<String> aList);
 
 	
+	public int count(int idx);
+	public int count2(int idx);
+	
 	//사진꽂기
 	public ArrayList<AdVSTalkDTO> adList();
 }
