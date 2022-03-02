@@ -4,6 +4,20 @@ public class MemberVO {
 	private String id;
 	private String pass;
 	private String name;
+	private String email;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTelNum() {
+		return telNum;
+	}
+	public void setTelNum(String telNum) {
+		this.telNum = telNum;
+	}
+	private String telNum;
 	private java.sql.Date regidate;
 	//getter/setter생성
 	public String getId() {
