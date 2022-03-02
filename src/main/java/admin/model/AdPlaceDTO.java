@@ -16,4 +16,8 @@ public class AdPlaceDTO {
 
     //가상번호를 위한 멤버변수 추가
   	private int virtualNum;	
+  	
+  	//페이징
+  	//private int nowPage;
+  	
 }

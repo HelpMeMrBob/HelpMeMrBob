@@ -3,6 +3,7 @@ final계정
 */
 create user final identified by 1234;
 grant connect, resource to final;
+commit;
 
 --음식테이블(룰렛, 월드컵)
 drop table food;
@@ -55,12 +56,19 @@ create table restaurant(
     price varchar2(500), --메뉴 가격(|로 연결했음:꺼낼때 반드시 |로 split)
     operTime varchar2(200), --운영 시각
     primary KEY (idx));
+--식당테이블 시퀀스
+create sequence restaurant_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue 
+    nocycle
+    nocache;
     
 --회원테이블
---  멤버 테이블
 drop table member;
 create table member(
-    id varchar2(30) NOT NULL    --  아이디
+    id varchar2(30) NOT NULL,    --  아이디
     name varchar(30),           --  이름
     pass varchar(30),           --  비밀번호
     email varchar2(50),         --  이메일

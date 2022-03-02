@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var = "path" value = "${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +48,7 @@
                         </ol>
 							<div class="row">
 							<form id="plcFrm" name="plcFrm" method="GET" 
-							action="plcAction.do" > 
+							action="plcEditAction.do" > 
 							
 							<table class="table table-bordered" id="vsTb">
 								
@@ -60,47 +61,52 @@
 								<tr>
 									<th class="table-primary">식당명</th>
 									<td>
-									<input type="text" name="place" id="place" style="width:1000px;"/>
+									<input type="text" name="place" id="place" 
+										value="${viewRow.place }" style="width:1000px;"/>
 									</td>
 								</tr>
 								<tr>
 									<th class="table-primary" >주소</th>
 									<td>
-									<input type="text" id="address_kakao" name="address" style="width:1000px;" readonly />
+									<input type="text" id="address_kakao" name="address" 
+										value="${fn:split(viewRow.address, '@')[0]}" style="width:1000px;" readonly />
 									</td>
 								</tr>
 								<tr>
 						            <th class="table-primary">상세 주소</th>
-						            <td><input type="text" name="address_detail" id="address_detail" style="width:1000px;"/></td>
+						            <td><input type="text" name="address_detail" id="address_detail" 
+						            	value="${fn:split(viewRow.address, '@')[1]}" style="width:1000px;"/></td>
 						        </tr>
 								<tr>
 									<th class="table-primary">전화번호</th>
 									<td>
-									<input type="text" name="plcNum" id="plcNum" style="width:1000px;"/>
+									<input type="text" name="plcNum" id="plcNum" 
+										value="${viewRow.plcNum }" style="width:1000px;"/>
 									</td>
 								</tr>
 								<tr>
 									<th class="table-primary">메뉴</th>
 									<td>
-									<textarea name="menu" id="menu" cols="100" rows="3"></textarea>
+									<textarea name="menu" id="menu" cols="100" rows="3">${viewRow.menu}</textarea>
 									</td>
 								</tr>	
 								<tr>
 									<th class="table-primary">가격</th>
 									<td>
-									<textarea name="price" id="price" cols="100" rows="3"></textarea>
+									<textarea name="price" id="price" cols="100" rows="3">${viewRow.price}</textarea>
 									</td>
 								</tr>
 								<tr>
 									<th class="table-primary">운영 시각</th>
 									<td>
-									<input type="text" name="operTime" id="operTime" style="width:1000px;"/>
+									<input type="text" name="operTime" id="operTime" 
+										value="${viewRow.operTime }" style="width:1000px;"/>
 									</td>
 								</tr>				
 								
 							</table>
 							<div class="col-lg-6 text-lg-end mb-1">
-							<button type="submit" class="btn btn-dark" >등록</button>
+							<button type="submit" class="btn btn-dark" >수정</button>
 							</div>
 							</form>
 							</div>

@@ -17,13 +17,17 @@ import admin.command.AdBoardCommand;
 import admin.command.AdFoodCommand;
 import admin.command.AdMemberCommand;
 import admin.command.AdPlaceCommand;
+import admin.command.AdPlcEditcommand;
+import admin.command.AdPlcWriteCommand;
 import admin.command.AdReplyCommand;
 import admin.command.AdVSEditCommand;
 import admin.command.AdVSTalkCommand;
 import admin.command.AdVSViewCommand;
 import admin.command.AdminCommandImpl;
+import admin.command.AdplcEditActionCommand;
 import admin.command.DeleteActionCommand;
 import admin.command.DeleteFoodCommand;
+import admin.command.DeletePlaceCommand;
 import admin.command.DeleteReplyCommand;
 import admin.command.DeleteVSTalkCommand;
 import admin.model.AdMemberDAO;
@@ -66,7 +70,15 @@ public class AdminController {
 	@Autowired
 	DeleteFoodCommand deleteFoodCommand;
 	@Autowired
-	AdPlaceCommand adPlaceCommand;
+	AdPlaceCommand adPlcCommand;
+	@Autowired
+	AdPlcWriteCommand adPlcWriteCommand;
+	@Autowired
+	DeletePlaceCommand deletePlcCommand;
+	@Autowired
+	AdPlcEditcommand adPlcEditCommand;
+	@Autowired
+	AdplcEditActionCommand adplcEditActionCommand;
 	
 	
 	//어드민 메인 진입
@@ -249,6 +261,10 @@ public class AdminController {
 	//식당 정보 관리 진입
 	@RequestMapping(value="/admin/place.do")
 	public String placeList(Model model, HttpServletRequest req) {
+		model.addAttribute("req", req);
+		
+		command = adPlcCommand;
+		command.execute(model);
 		
 		return "admin/place";
 	}
@@ -263,13 +279,51 @@ public class AdminController {
 	//식당 글 등록하기
 	@RequestMapping(value="/admin/plcAction.do")
 	public String plcAction(Model model, HttpServletRequest req, AdPlaceDTO adPlaceDTO) {
+		
 		model.addAttribute("req", req);
 		model.addAttribute("adPlaceDTO", adPlaceDTO);
 		
-		command = adPlaceCommand;
+		command = adPlcWriteCommand;
 		command.execute(model);
 		
 		return "redirect:place.do";
 	}
+	
+	//투표 수정폼 진입 
+	@RequestMapping("/admin/plcEdit.do")
+	public String plcEdit(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		
+		command = adPlcEditCommand;
+		command.execute(model);
+		
+		return "admin/plcEdit";
+	}
+	
+	//수정 처리
+	@RequestMapping("/admin/plcEditAction.do")
+	public String plcEditAction(Model model, HttpServletRequest req, AdPlaceDTO adPlaceDTO) {
+		model.addAttribute("req", req);
+		model.addAttribute("adPlaceDTO", adPlaceDTO);
+		
+		command = adplcEditActionCommand;
+		command.execute(model);
+		
+		return "redirect:place.do";
+	}
+	
+	
+	//식당 관리 글 삭제
+	@RequestMapping("/admin/plcDelete.do")
+	public String plcDelete(Model model, HttpServletRequest req) {	
+		model.addAttribute("req", req);
+		
+		command = deletePlcCommand;
+		command.execute(model);
+		
+		return "redirect:place.do";
+	}
+	
 	
 }

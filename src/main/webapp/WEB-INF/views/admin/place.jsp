@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var = "path" value = "${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +19,13 @@
     </head>
     <style>
     	.row { width: 90% ;}
+    	#searchFrm { border : none ;}
+    	#searchBtn { border : none ; background-color:transparent;}
+    	#searchWord { border: 0; border-bottom: #000000 1px solid; width: 400px; }
     </style>
+    <script type="text/javascript">
+    
+    </script>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -29,48 +36,78 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">식당 정보를 관리합니다.</li>
                         </ol>
+                       		<!-- 검색폼 -->
+                       		<div class="row1">
+                       		<form method="get">
+							<table name="searchFrm" id="searchFrm">
+							<tr>
+								<td>
+									<select name="searchColumn">
+										<option value="place">식당명</option>
+										<option value="menu">음식명</option>
+									</select>
+									<input type="text" name="searchWord" id="searchWord" />
+									<button type="submit" id="searchBtn"><i class="bi bi-search"></i></button>
+								</td>
+							</tr>	
+							</table>	
+							</form>
+							</div>
+							
+							<!-- 내용 출력 부분 -->							
 							<div class="row">
 							<form action="" name="plcFrm">
 							
 							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-dark" id="write" 
+							<button type="button" class="btn btn-primary" id="write" 
 								onclick="location.href='plcWrite.do';">등록</button>
-							
-							<!-- <button type="button" class="btn btn-dark" id="edit" >수정</button>
-							
-							<button type="button" class="btn btn-dark" id="delete" >삭제</button> -->
 							</div>
 														
-							<table class="table table-bordered" id="repTb">
-								
-								 <colgroup>
-								 	<col width=5%>
-						            <col width=5%>
-						            <col width=*>
-						            
-						        </colgroup>
+							<!-- 반복 시작 -->
+
+							<c:forEach items="${lists }" var="row" varStatus="loop">	
 							
-								<tr class="table-success">
-									<th>
-									<input type="checkbox" id="allCheck" name="allCheck" />
-									</th>
-									<th>번호</th>
-									<th>식당 정보 </th>
-								</tr>
+							<table class="table table-bordered" id="infomTb" >
+							<colgroup>
+								<col width=10%/>
+								<col width=40%/>
+								<col width=40%/>
+								<col width=10%/>
+							</colgroup>
 								
-								<!-- 반복 시작 -->
-								<c:forEach items="${lists }" var="row" varStatus="loop">	
+							<tr>
+							
 								<tr>
-									<td>
-									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
+									<td>식당</td>
+									<td colspan="2">${row.place }</td>
+									<td rowspan="5" style="margin: auto; text-align:center;">
+									<button type="button" class="btn btn-secondary btn-sm" 
+										onclick="location.href='./plcEdit.do?idx=${row.idx}';">수정</button>
+									<button type="button" class="btn btn-dark btn-sm" 
+										onclick="location.href='./plcDelete.do?idx=${row.idx}';">삭제</button>
 									</td>
-									<td>${row.idx }</td>
-									<td>${row.place }</td>
 								</tr>
-								</c:forEach>
-								<!-- 반복 끝 -->
+								<tr>
+									<td colspan="1">메뉴 및 가격</td>
+
+									<td>${fn:replace(row.menu, '@', '<br>')}</td>
+									<td>${fn:replace(row.price, '@', '<br>')}</td>
+								</tr>
+								<tr>
+									<td>주소</td>
+									<td colspan="2">${row.address }</td>
+								</tr>
+								<tr>
+									<td>전화번호</td>
+									<td colspan="2">${row.plcNum }</td>
+								</tr>
+								<tr>
+									<td>운영시간</td>
+									<td colspan="2">${row.operTime }</td>
+								</tr>					
 							</table>
-							
+							</c:forEach>
+							<!-- 반복 끝 -->
 							</form>
 							</div>
 							

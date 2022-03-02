@@ -484,12 +484,9 @@ INSERT INTO preference (id, prenoodle, prerice, presoup, premeat, preseafood, pr
     VALUES ('mypage', 1, 2, 3, 4, 5, 6);
     
 --회원테이블 더미
-INSERT INTO MEMBER
-    (id, name, pass, email, telNum, grade)
-    VALUES ('mypage', '마이페이지', '1234', 'junh0y@naver.com', '01091641201', 'member');
-INSERT INTO MEMBER
-    (id, name, pass, email, telNum, grade)
-    VALUES ('test1', '테스트1', '1111', 'test1@naver.com', '01091641201', 'member');
-INSERT INTO MEMBER
-    (id, name, pass, email, telNum, grade)
-    VALUES ('test2', '테스트2', '2222', 'test2@naver.com', '01091641201', 'member');
+INSERT INTO member (id, name, pass, email, telNum, lev, exp, favMenu, item, grade)
+    VALUES ('mypage', '마이페이지', '1234', 'junh0y@naver.com', '01091641201', '1', '100', 'etc', '3', 'member');
+INSERT INTO member (id, name, pass, email, telNum, lev, exp, favMenu, item, grade)
+    VALUES ('test1', '테스트1', '1111', 'test1@naver.com', '01091641201', '1', '100', 'etc', '3', 'member');
+INSERT INTO member (id, name, pass, email, telNum, lev, exp, favMenu, item, grade)
+    VALUES ('test2', '테스트2', '2222', 'test2@naver.com', '01091641201', '1', '100', 'etc', '3', 'member');

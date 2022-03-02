@@ -8,21 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import admin.model.AdFoodDAO;
+import admin.model.AdPlaceDAO;
 
-//food delete 
+//place delete
 @Service
-public class DeleteFoodCommand implements AdminCommandImpl{
+public class DeletePlaceCommand implements AdminCommandImpl{
 	
 	@Autowired
-	AdFoodDAO dao;
-	public DeleteFoodCommand() {
-		System.out.println("DeleteFoodCommand 빈 자동 생성 됨");
+	AdPlaceDAO dao;
+	public DeletePlaceCommand() {
+		System.out.println("DeletePlaceCommand 빈 자동 생성 됨");
 	}
 	
 	@Override
 	public void execute(Model model) {
-		System.out.println("DeleteFoodCommand -> execute() 호출");
+		System.out.println("DeletePlaceCommand -> execute() 호출");
 		
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = 
