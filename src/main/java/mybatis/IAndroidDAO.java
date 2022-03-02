@@ -9,5 +9,7 @@ public interface IAndroidDAO {
 	public MemberVO memberLogin(MemberVO memberVO);
 
 	public int memberRegist(MemberVO memberVO);
+	
+	public int setPoint(MemberVO memberVO);
 }
 

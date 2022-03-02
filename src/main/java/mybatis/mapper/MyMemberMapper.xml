@@ -15,6 +15,11 @@
 		
 		VALUES (#{id},#{name},#{pass},#{email}, #{telNum})
 	</insert>  
+	<insert id="setPoint" parameterType="point.PointDTO">
+		INSERT INTO point (id, point)
+		
+		VALUES (#{id}, #{point})
+	</insert>  
 </mapper>
 
 
