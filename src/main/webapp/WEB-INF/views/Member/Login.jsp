@@ -1,8 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 <!--────────────────────────────────── SITE HEADER BEGINS ────────────────────────────────────-->
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<script type="text/javascript">
+<head>	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+Kakao.init('189181d4e0826e0d5408d39d563ff1b6');
+//	카카오 로그인
+function kakaoLogin()
+{
+    Kakao.Auth.login
+    (
+    	{
+      		success: function (authObj)
+      		{
+        		Kakao.API.request
+        		(
+        			{
+          				url: '/v2/user/me',
+          				success: function (response)
+       					{
+       	  					$.ajax
+       	  					(
+       	  						{
+       	  							url: "kakaologin.do",
+       	  							type: "post",
+       	  							data:
+       	  							{
+       	  								id: response.id,
+       	  								name: response.properties.nickname,
+       	  								email: response.kakao_account.email
+       	  							},
+       	  							success: function (data)
+       	  							{
+       	  						    	location.href="./";
+       	  							}
+       	  						}
+       	  					)
+       					},
+          				fail: function (error)
+          				{
+            				console.log(error)
+          				},
+        			}
+        		)
+      		},
+      		fail: function (error)
+      		{
+        		console.log(error)
+      		},
+    	}
+    )
+
+}
+//	카카오 로그아웃  
+function kakaoLogout()
+{
+    if (Kakao.Auth.getAccessToken())
+    {
+		Kakao.API.request
+		(
+			{
+        		url: '/v1/user/unlink',
+        		success: function (response)
+        		{
+        			console.log(response)
+        		},
+        		fail: function (error)
+        		{
+          			console.log(error)
+        		},
+      		}
+		)
+      	Kakao.Auth.setAccessToken(undefined)
+    }
+}
+</script>
+<script>
 function loginValidate(loginForm)
 {
 	if (loginForm.id.value == "")
@@ -69,9 +147,23 @@ function loginValidate(loginForm)
 				</button>
 			</td>
 		</tr>
+	<c:choose>
+		<c:when test="${ not empty sessionScope.siteUserInfo }">
 		<tr>
 			<td colspan="2">
-				<button type="submit"
+				<button type="button" onclick="kakaoLogout();" 
+					    style="width: 40%; height: 60px; border: 1px solid #FAE100;
+ 		  					   text-align: center; font-size: 16px; margin-bottom: 1%;
+ 		  					   padding: 10px; background-color: #FAE100; color: #3B1E1E">
+					카카오톡 로그아웃
+				</button>
+			</td>
+		</tr>
+		</c:when>
+		<c:otherwise>
+		<tr>
+			<td colspan="2">
+				<button type="button" onclick="kakaoLogin();" 
 					    style="width: 40%; height: 60px; border: 1px solid #FAE100;
  		  					   text-align: center; font-size: 16px; margin-bottom: 1%;
  		  					   padding: 10px; background-color: #FAE100; color: #3B1E1E">
@@ -79,6 +171,8 @@ function loginValidate(loginForm)
 				</button>
 			</td>
 		</tr>
+		</c:otherwise>
+	</c:choose>
 		<tr>
 			<td>
 				<button type="button" onclick="location.href='./memberRegister.do';"
