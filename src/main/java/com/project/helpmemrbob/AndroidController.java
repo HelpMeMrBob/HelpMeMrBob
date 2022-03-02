@@ -17,7 +17,7 @@ import mybatis.MemberVO;
 public class AndroidController {
 	
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSession sqlSession4;
 	
 	@RequestMapping("/android/memberLogin.do")
 	@ResponseBody
@@ -26,7 +26,7 @@ public class AndroidController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 
 		MemberVO memberInfo =
-			sqlSession.getMapper(IAndroidDAO.class).memberLogin(memberVO);
+			sqlSession4.getMapper(IAndroidDAO.class).memberLogin(memberVO);
 		
 		if(memberInfo==null) {
 			//회원정보 불일치로 로그인에 실패한 경우..결과만 0으로 내려준다.
