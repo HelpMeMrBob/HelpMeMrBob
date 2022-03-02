@@ -10,28 +10,48 @@
 <mapper namespace="board.command.vsFightDAOImpl">
 
 	<!-- 게시물의 갯수를 카운트한 후 정수타입으로 반환한다. -->
-	<select id="getTotalCount" resultType="int">
-		SELECT COUNT(*) from fight1
+	<select id="getTotalCount1" resultType="int">
+		SELECT COUNT(*) from fight1 where cate='fight1'
+	</select>
+	<!-- <select id="getTotalCount1" resultType="int">
+		SELECT COUNT(*) from fight1 where cate='fight1'
+	</select> -->
+	
+	<select id="getTotalCount2" resultType="int">
+		SELECT COUNT(*) from fight1 where cate='fight2'
 	</select>
 	
 	<!-- rno값으로 빼와야합니다. -->
-	<select id="listPage" resultType="board.model.vsFight1VO">
+	<select id="listPage1" resultType="board.model.vsFight1VO">
 		SELECT * FROM(
 			SELECT Tb.*, rownum rNum FROM(
 				SELECT * FROM fight1 ORDER BY rownum DESC
 		)Tb
 	)
-	WHERE rNum BETWEEN #{param1} AND #{param2}	
+	WHERE idx=#{param3} and rNum BETWEEN #{param1} AND #{param2} and cate='fight1'	
 	</select>
 	
+	<select id="listPage2" resultType="board.model.vsFight1VO">
+		SELECT * FROM(
+			SELECT Tb.*, rownum rNum FROM(
+				SELECT * FROM fight1 ORDER BY rownum DESC
+		)Tb
+	)
+	WHERE idx=#{param3} and rNum BETWEEN #{param1} AND #{param2} and cate='fight2'	
+	</select>
 	<!--  
 	@Param 어노테이션에서 지정한 별칭을 사용하여 인파라미터를 처리한다.
 	일련번호는 기존과 동일하게 시퀀스를 통해 입력한다.
 	#{_rno}이거 받는거 지웠음
 	-->
-	<insert id="write">
-		insert into fight1 ( rno, id, contents,cate) values 
-    (fight1_seq.nextval, #{_id},#{_contents},'fight1')
+	<insert id="write1">
+		insert into fight1 (idx, rno, id, contents,cate) values 
+    (#{_idx},fight1_seq.nextval, #{_id},#{_contents},'fight1')
+	</insert>
+	
+	<insert id="write2">
+		insert into fight1 (idx, rno, id, contents,cate) values 
+    (#{_idx},fight1_seq.nextval, #{_id},#{_contents},'fight2')
 	</insert>
 	<!--  
 	파라미터는 DTO객체에 저장한 후 Mapper로 전달하므로 parameterType 속성에
@@ -56,14 +76,30 @@
 			SET id=#{id}, contents=#{contents}
 			WHERE rno=#{rno} AND id=#{id}
 	</update>
+	
 	<!--  
 	삭제처리.전달되는 파라미터 순으로 param1, 2형태로 인파라미터 처리함
 	-->
-	<delete id="delete">
-		DELETE FROM fight1 WHERE rno=#{param1} AND id=#{param2}
+	<delete id="delete1">
+		DELETE FROM fight1 WHERE rno=#{param1} AND id=#{param2} and cate='fight1'
 	
 	</delete>
-	<!-- where idx=${idx} -->
+	
+	<delete id="delete2">
+		DELETE FROM fight1 WHERE rno=#{param1} AND id=#{param2} and cate='fight2'
+	
+	</delete>
+	
+	<!-- 해당idx에서 댓글갯수받기 -->
+	<select id="count" resultType="int">
+		SELECT COUNT(*) from fight1 where cate='fight1' and idx=#{idx}
+	</select>
+	<select id="count2" resultType="int">
+		SELECT COUNT(*) from fight1 where cate='fight2' and idx=#{idx}
+	</select>
+	
+	
+	<!-- where idx=${idx} 얜 건들지 않을겡-->
 	<select id="adList" resultType="admin.model.AdVSTalkDTO">
 		SELECT * FROM VStalk 
 	</select>

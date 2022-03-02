@@ -19,12 +19,25 @@ import board.model.ParameterDTO;
 @Service
 public interface vsFightDAOImpl {
 
+	
+
+	///////cate='fight2'/////////
+	public int delete2(String rno, String id);
+	public int getTotalCount2();//파라미터 없음
+	public ArrayList<vsFight1VO> listPage2(int s, int e, int idx);//파라미터 2개 있음
+	public int write2(@Param("_contents") String contents,
+			@Param("_idx") int idx,
+			@Param("_id") String id);
+	
+	
 	/*
 	방명록 1차 버전에서 사용하는 메서드
 	게시물수 카운트와 목록에 출력할 게시물 가져오기
 	 */
-	public int getTotalCount();//파라미터 없음
-	public ArrayList<vsFight1VO> listPage(int s, int e);//파라미터 2개 있음
+	//public int getTotalCount1();//파라미터 없음
+	public int getTotalCount1();//파라미터 없음
+	public ArrayList<vsFight1VO> listPage1(int s, int e, int idx);//파라미터 2개 있음
+	
 	
 	/*
 	 방명록 2차 버전에서 사용할 메서드
@@ -37,7 +50,8 @@ public interface vsFightDAOImpl {
 	 @Param 어노테이션을 통해 파라미터를 전달하면 Mapper에서는 별칭을 통해
 	 인파라미터 처리를 할 수 있다.
 	 */
-	public int write(@Param("_contents") String contents,
+	public int write1(@Param("_contents") String contents,
+			@Param("_idx") int idx,
 			@Param("_id") String id);
 	//기존 게시물의 내용을 읽어오기 위한 메서드
 	//public vsFight1VO view(ParameterDTO parameterDTO);
@@ -46,13 +60,16 @@ public interface vsFightDAOImpl {
 	//수정처리
 	public int modify(vsFight1VO vsFight1VO);
 	//삭제처리
-	public int delete(String rno, String id);
+	public int delete1(String rno, String id);
 	
 	//Map컬렉션 사용을 위한 추상메서드
 	public ArrayList<vsFight1VO> hashMapUse(Map<String, String> hMap);
 	//List컬렉션 사용을 위한 추상메서드
 	public ArrayList<vsFight1VO> arrayListUse(List<String> aList);
 
+	
+	public int count(int idx);
+	public int count2(int idx);
 	
 	//사진꽂기
 	public ArrayList<AdVSTalkDTO> adList();

@@ -23,7 +23,25 @@ create sequence food_seq
     minvalue 1
     nomaxvalue 
     nocycle
-    nocache;     
+    nocache;
+    
+--  대분류 우선순위 테이블 : 테이블 추가입니다! 룰렛 우선순위 반영용 ★★★★★★★★★★★
+drop table preference;
+create table preference(
+    id varchar2(30) NOT NULL,
+    prenoodle number NOT NULL,
+    prerice number NOT NULL,
+    presoup number NOT NULL,
+    premeat number NOT NULL,
+    preseafood number NOT NULL,
+    preetc number NOT NULL
+);
+--  대분류 우선순위 테이블 (외래키) : 테이블 추가입니다! 룰렛 우선순위 반영용 ★★
+alter table preference
+    add foreign key (id) 
+        references member(id);    
+    
+     
     
 --식당테이블
 drop table restaurant;
@@ -39,18 +57,19 @@ create table restaurant(
     primary KEY (idx));
     
 --회원테이블
+--  멤버 테이블
 drop table member;
 create table member(
-    id varchar2(30) NOT NULL, --아이디
-    name varchar(30), --이름
-    pass varchar(30), --비밀번호
-    email varchar2(50), --이메일
-    telNum varchar2(50), --전화번호
-    lev number, --레벨
-    exp number, --경험치
-    favMenu varchar2(50), --선호 메뉴
-    item varchar2(50), --소유한 아이템 목록
-    grade varchar2(30), --등급/회원과 관리자 구분 
+    id varchar2(30) NOT NULL    --  아이디
+    name varchar(30),           --  이름
+    pass varchar(30),           --  비밀번호
+    email varchar2(50),         --  이메일
+    telNum varchar2(50),        --  전화번호
+    lev number,                 --  레벨
+    exp number,                 --  경험치
+    favMenu varchar2(50),       --  선호 메뉴
+    item varchar2(50),          --  소유한 아이템 목록
+    grade varchar2(30),         --  등급/회원과 관리자 구분 
     primary KEY (id));
 -- member테이블의 rest컬럼 삭제 (grade컬럼 이용해 휴면 관리를 하기로 해서 필요 없어졌음)
 --ALTER TABLE member DROP COLUMN rest;  
@@ -162,11 +181,11 @@ create table point(
     
 --QNA테이블
 create table QnA(
-    name varchar(30), --이름
-    pass varchar(30), --비밀번호
-    telNum varchar2(50), --전화번호
-    contents varchar(4000), -- 내용
-    email varchar2(50)); --이메일
+    name varchar(30),       --  이름
+    pass varchar(30),       --  비밀번호 (메일 답장이라 빼도 될 것 같아요) ★★★★★
+    telNum varchar2(50),    --  전화번호 (메일 답장이라 빼도 될 것 같아요) ★★★★★
+    contents varchar(4000), --  내용
+    email varchar2(50));    --  이메일
     
 --아이템 테이블
 create table item(
@@ -235,11 +254,31 @@ create table pay(
 --스크랩테이블
 drop table scrap;
 create table scrap(
-    idx varchar2(30), --보드넘버
-    scrapNum varchar2(30), --스크랩번호
-    sdate date default sysdate, --스크랩날짜
-    cate varchar2(30) --게시판 분류 컬럼
-);
+    idx number NOT NULL,        --  게시글의 인덱스 : number로 바꿨어요 ★★★★★★★★
+    scrapNum NUMBER,            --  스크랩한 게시글의 인덱스
+    sdate date default sysdate, --  스크랩 일자
+    cate varchar2(30),          --  카테고리
+    tab number,                 --  스크랩 탭 넘버(스크랩시 1번 탭으로 저장) ★★★
+    tab1Name VARCHAR2(30) default 'TAB 1',  --  탭명 안바꾸기로 해서
+    tab2Name VARCHAR2(30) default 'TAB 2',  --  굳이 안넣어도 될듯요!
+    tab3Name VARCHAR2(30) default 'TAB 3',
+    tab4Name VARCHAR2(30) default 'TAB 4',
+    tab5Name VARCHAR2(30) default 'TAB 5',
+    tab6Name VARCHAR2(30) default 'TAB 6',
+    tab7Name VARCHAR2(30) default 'TAB 7',
+    tab8Name VARCHAR2(30) default 'TAB 8',
+    tab9Name VARCHAR2(30) default 'TAB 9',
+    tab10Name VARCHAR2(30) default 'TAB 10' --  1 - 10 버릴거임
+);;
+
+--  스크랩 테이블 시퀀스
+create sequence scrap_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue 
+    nocycle
+    nocache;
 
 --즐겨찾기 테이블
 drop table favorite;

@@ -28,8 +28,7 @@ public class AdMemberCommand implements AdminCommandImpl{
 		System.out.println("AdMemberCommand -> execute() 호출");
 		
 		Map<String, Object> paramMap = model.asMap();
-		HttpServletRequest req = 
-				(HttpServletRequest)paramMap.get("req");
+		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 		
 		//전체 게시물의 개수 카운트
 		int totalRecordCount = dao.getTotalCount(paramMap);
@@ -57,7 +56,7 @@ public class AdMemberCommand implements AdminCommandImpl{
 		/***페이징 추가 코드 end***/
 		
 		//페이징 적용된 쿼리문을 통한 select(페이징O)
-		ArrayList<AdMemberDTO> lists = dao.memberlist(paramMap);
+		ArrayList<AdMemberDTO> lists = dao.memberList(paramMap);
 		
 		//목록에 출력할 게시물의 가상 번호 계산 후 부여하기
 		int virtualNum=0;

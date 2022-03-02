@@ -41,7 +41,7 @@ function writeValidate(f)
 			
             <div class="section-heading">
               <span class="section-intro"></span>
-              <h1>Contact</h1>
+              <h1>${dto.idx} ${dto.rno }</h1>
             </div><!-- .section-heading ends -->
 			
             <div class="breadcrumb">
@@ -66,7 +66,7 @@ function writeValidate(f)
           action="<c:url value="./fightModifyAction.do" />" class="form contact__form"
           onsubmit="return writeValidate(this);">
 			<input type="hidden" name="rno" value="${dto.rno }"/>
-			<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}"/>
+			<input type="hidden" name="idx" value="${dto.idx}"/>
 			<div class="row">
 				
 				
@@ -74,7 +74,7 @@ function writeValidate(f)
 				
                 <div class="form__group">
                   <label for="subject" class="form__label">작성자 <span class="color-danger">*</span></label>
-                  <input type="text" id="subject" class="form__input" name="id" value="${sessionScope.siteUserInfo.id}">
+                  <input type="text" id="subject" class="form__input" name="id" value="${sessionScope.siteUserInfo.id}" readonly>
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->

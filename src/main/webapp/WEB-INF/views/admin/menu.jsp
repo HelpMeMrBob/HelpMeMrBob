@@ -15,13 +15,31 @@
         <link href="${ path }/adsources/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <style>
     	.row { width: 90% ;}
     	.div1 { width: 45%;}
-    	#add { border: 0; border-bottom: #000000 1px solid; width: 400px; }
+    	#food { border: 0; border-bottom: #000000 1px solid; width: 400px; }
     	#addbtn { border: 0; background-color:transparent;}
+    	#xbtn { border: 0; background-color:transparent; }
     </style>
+    <script type="text/javascript">
+    
+   	 function deleteValue(value) {
+	   	
+	 	 var url = "foodDelete.do";
+	 	  
+	 	   $.ajax({
+	 	       url: url
+	 	       , type: 'post'
+	 	       , dataType: 'text'
+	 	       , data:  {
+    	    	   idx : value
+    	       }
+	 	   });
+	 	}
+    </script>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -32,10 +50,9 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">룰렛 및 월드컵의 음식 항목들을 관리합니다.</li>
                         </ol>
-							<div class="row">
-							<form action="./delete.do?';" name="repFrm">
 							
 							<div class="div1">
+							<form action="foodAction.do" enctype="multipart/form-data" method="post">
 							<table class="table table-borderless" id="addTb">
 								<colgroup>
 						            <col width=*>
@@ -43,17 +60,32 @@
 						        </colgroup>
 								<tr>
 									<td>
-									&nbsp;&nbsp;&nbsp;
-									<strong>추가할 항목 입력</strong> : <input type="text" name="add" id="add" />	
+									<select name="Lgroup" id="Lgroup">
+										<option value="noodle">noodle</option>
+										<option value="rice">rice</option>
+										<option value="soup">soup</option>
+										<option value="meat">meat</option>
+										<option value="seafood">seafood</option>
+										<option value="etc">etc</option>
+									</select>
+									<strong>추가할 항목 입력</strong> : <input type="text" name="food" id="food" />	
 									</td>
 									<td>
-									<button type="button" id="addbtn"><i class="bi bi-plus-circle-fill"></i></button>
+									<button type="submit" id="addbtn"><i class="bi bi-plus-circle-fill"></i></button>
+									</td>
+								</tr>
+								<tr>
+									<td>
+									<input type="file" id="file" name="file" />
 									</td>
 								</tr>
 							</table>
+							</form>
 							</div>
 							
-							<table class="table table-bordered" id="repTb">
+							<div class="row">
+							<form name="foodFrm" method="POST" >
+							<table class="table table-bordered" id="foodTb">
 								
 								 <colgroup>
 								 	<col width=5%>
@@ -70,16 +102,17 @@
 								<!-- 반복 시작 -->
 								<c:forEach items="${lists }" var="row" varStatus="loop">	
 								<tr>
-									<td>
-									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
+									<td>${row.virtualNum }</td>
+									<td>${row.food }</td>
+									<td align="center">
+									<button type="submit" id="xbtn" onclick="deleteValue(${row.idx });">
+									<i class="bi bi-x-circle"></i>
+									</button>
 									</td>
-									<td>${row.topic }</td>
-									<td>${row.id }</td>
 								</tr>
 								</c:forEach>
 								<!-- 반복 끝 -->
 							</table>
-							
 							</form>
 							</div>
 							

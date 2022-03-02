@@ -17,7 +17,7 @@ import mybatis.MemberVO;
 public class AndroidController {
 	
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSession sqlSession4;
 	
 	@RequestMapping("/android/memberLogin.do")
 	@ResponseBody
@@ -26,7 +26,7 @@ public class AndroidController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 
 		MemberVO memberInfo =
-			sqlSession.getMapper(IAndroidDAO.class).memberLogin(memberVO);
+			sqlSession4.getMapper(IAndroidDAO.class).memberLogin(memberVO);
 		
 		if(memberInfo==null) {
 			//회원정보 불일치로 로그인에 실패한 경우..결과만 0으로 내려준다.
@@ -41,5 +41,31 @@ public class AndroidController {
 		System.out.println("요청들어옴:"+returnMap);
 		return returnMap;
 	}
+	
+	@RequestMapping("/android/memberRegist.do")
+	@ResponseBody
+	public int memberRegist(MemberVO memberVO){
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int isRegist;
+		int memberRegist =
+				sqlSession4.getMapper(IAndroidDAO.class).memberRegist(memberVO);
+		
+		if(memberRegist==0) {
+			//회원정보 불일치로 로그인에 실패한 경우..결과만 0으로 내려준다.
+			returnMap.put("isReist", 0);
+			isRegist = 0;
+		}
+		else {
+			//로그인에 성공하면 결과는 1, 해당 회원의 정보를 객체로 내려준다. 
+			returnMap.put("memberRegist", memberRegist);
+			returnMap.put("isReist", 1);
+			isRegist = 1;
+		}
+		
+		//return isRegist;
+		return isRegist;
+	}
+
 
 }

@@ -18,7 +18,23 @@
     </head>
     <style>
     	.row { width: 90% ;}
+    	
+    	#place, #plcNum, #operTime, #address_kakao, #address_detail, #menu, #price { border: none; }
     </style>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	window.onload = function(){
+	    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+	        //카카오 지도 발생
+	        new daum.Postcode({
+	            oncomplete: function(data) { //선택시 입력값 세팅
+	                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+	                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+	            }
+	        }).open();
+	    });
+	}
+	</script>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -27,50 +43,65 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">식당 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">식당 정보를 관리합니다.</li>
+                            <li class="breadcrumb-item active">새로운 식당 정보를 등록합니다.</li>
                         </ol>
 							<div class="row">
-							<form action="" name="plcFrm">
+							<form id="plcFrm" name="plcFrm" method="GET" 
+							action="plcAction.do" > 
 							
-							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="button" class="btn btn-dark" id="write" 
-								onclick="location.href='plcWrite.do';">등록</button>
-							
-							<!-- <button type="button" class="btn btn-dark" id="edit" >수정</button>
-							
-							<button type="button" class="btn btn-dark" id="delete" >삭제</button> -->
-							</div>
-														
-							<table class="table table-bordered" id="repTb">
+							<table class="table table-bordered" id="vsTb">
 								
 								 <colgroup>
-								 	<col width=5%>
-						            <col width=5%>
+								 	<col width=10%>
 						            <col width=*>
 						            
-						        </colgroup>
+					 	        </colgroup>
 							
-								<tr class="table-success">
-									<th>
-									<input type="checkbox" id="allCheck" name="allCheck" />
-									</th>
-									<th>번호</th>
-									<th>식당 정보 </th>
-								</tr>
-								
-								<!-- 반복 시작 -->
-								<c:forEach items="${lists }" var="row" varStatus="loop">	
 								<tr>
+									<th class="table-primary">식당명</th>
 									<td>
-									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
+									<input type="text" name="place" id="place" style="width:1000px;"/>
 									</td>
-									<td>${row.idx }</td>
-									<td>${row.place }</td>
 								</tr>
-								</c:forEach>
-								<!-- 반복 끝 -->
+								<tr>
+									<th class="table-primary" >주소</th>
+									<td>
+									<input type="text" id="address_kakao" name="address"style="width:1000px;" readonly />
+									</td>
+								</tr>
+								<tr>
+						            <th class="table-primary">상세 주소</th>
+						            <td><input type="text" name="address_detail" id="address_detail" style="width:1000px;"/></td>
+						        </tr>
+								<tr>
+									<th class="table-primary">전화번호</th>
+									<td>
+									<input type="text" name="plcNum" id="plcNum" style="width:1000px;"/>
+									</td>
+								</tr>
+								<tr>
+									<th class="table-primary">메뉴</th>
+									<td>
+									<textarea name="menu" id="menu" cols="100" rows="3"></textarea>
+									</td>
+								</tr>	
+								<tr>
+									<th class="table-primary">가격</th>
+									<td>
+									<textarea name="price" id="price" cols="100" rows="3"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th class="table-primary">운영 시각</th>
+									<td>
+									<input type="text" name="operTime" id="operTime" style="width:1000px;"/>
+									</td>
+								</tr>				
+								
 							</table>
-							
+							<div class="col-lg-6 text-lg-end mb-1">
+							<button type="submit" class="btn btn-dark" >등록</button>
+							</div>
 							</form>
 							</div>
 							
