@@ -479,11 +479,17 @@ insert into restaurant(idx, food, place, address, plcNum, menu, price, operTime)
             '010-1234-5678', '잔치국수,비빔국수',
             '5000,7000', '08:00~21:00');  
 
-
+-- 우선순위 테이블
+INSERT INTO preference (id, prenoodle, prerice, presoup, premeat, preseafood, preetc)
+    VALUES ('mypage', 1, 2, 3, 4, 5, 6);
+    
 --회원테이블 더미
-insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, grade) values
-    ('test1', '테스트1', '1111', 'test1@naver.com', '010-1111-1111', 5, 400, '떡볶이', '소유템', 'member');
-insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, grade) values
-    ('test2', '테스트2', '2222', 'test1@naver.com', '010-2222-2222', 5, 400, '라면', '소유템', 'member');
-insert into member(id, name, pass, email, telNum, lev, exp, favMenu, item, grade) values
-    ('test3', '테스트3', '3333', 'test1@naver.com', '010-3333-3333', 5, 400, '족발', '소유템', 'member');
+INSERT INTO MEMBER
+    (id, name, pass, email, telNum, grade)
+    VALUES ('mypage', '마이페이지', '1234', 'junh0y@naver.com', '01091641201', 'member');
+INSERT INTO MEMBER
+    (id, name, pass, email, telNum, grade)
+    VALUES ('test1', '테스트1', '1111', 'test1@naver.com', '01091641201', 'member');
+INSERT INTO MEMBER
+    (id, name, pass, email, telNum, grade)
+    VALUES ('test2', '테스트2', '2222', 'test2@naver.com', '01091641201', 'member');
