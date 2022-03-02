@@ -77,7 +77,7 @@ public class AndroidController {
 		int isRegist;
 		int setPoint =
 				sqlSession4.getMapper(IAndroidDAO.class).setPoint(memberVO);
-		 System.out.println("안드로이드 포인트 부여 실행 ");
+		 System.out.println("안드로이드 포인트 부여 실행");
 		if(setPoint==0) {
 			//회원정보 불일치로 로그인에 실패한 경우..결과만 0으로 내려준다.
 			returnMap.put("isReist", 0);
