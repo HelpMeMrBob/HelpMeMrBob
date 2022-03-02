@@ -21,6 +21,11 @@
 			f.contents.focus();
 			return false;
 		}
+		 if(f.userfile1.value==""){
+				alert("썸네일 이미지를 첨부하세요");
+				f.userfile1.focus();
+				return false;
+			} 
 	}
 </script>
 	

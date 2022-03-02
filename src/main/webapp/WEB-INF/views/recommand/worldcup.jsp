@@ -62,7 +62,7 @@
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="./resources/worldcup_react_build8/index.html" class="button button--primary button--fill">바로가기</a>
+                    <a href="./worldcupRounds.do?rounds=32" class="button button--primary button--fill">바로가기</a>
                   </div><!-- .card__cta ends -->
 
                 </div><!-- .card__footer ends -->

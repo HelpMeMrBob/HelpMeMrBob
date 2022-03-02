@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,27 +14,54 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import recommand.model.RecParameterDTO;
 import recommand.model.RecommandDAO;
 import recommand.model.RecommandDTO;
 
 @Controller
 public class RecommandRestAPIController {
 	
+	// 월드컵(리액트)에서 사용할 랜덤한 메뉴를 rounds개수만큼 가져와서 DTO에 저장
 	@Autowired
 	private SqlSession sqlSession3;
 	
-	@RequestMapping("/worldcupData.do")
-	@ResponseBody
-	public ArrayList<RecommandDTO> worldcupList(Model model, RecommandDTO recommandDTO) {
+	// 월드컵 라운드 수 매핑
+	@RequestMapping("/worldcupRounds.do")
+	public String worldcup_react_build8(Model model, HttpServletRequest req, RecParameterDTO recParameterDTO) {
 		
-		ArrayList<RecommandDTO> menu64 = sqlSession3.getMapper(RecommandDAO.class)
-				.listData(recommandDTO);
+		int rounds = Integer.parseInt(req.getParameter("rounds"));
+		recParameterDTO.setRounds(rounds);
+		ArrayList<RecommandDTO> menu = sqlSession3.getMapper(RecommandDAO.class)
+				.worldcupData(recParameterDTO);
+		System.out.println("rounds : " + rounds);
+		System.out.println("menu 개수 : "+ menu.size());
+		System.out.println("req.getParameter : "+ req.getParameter("rounds"));
+		System.out.println("RecParameterDTO : "+ recParameterDTO.getRounds());
 		
-		System.out.println("menu64 개수 : "+ menu64.size());
-		
-		return menu64;
+		return "redirect:resources/worldcup_react_build8/index.html?rounds=" + rounds;
 	}
 	
+	// 룰렛 화면 매핑
+	@RequestMapping("/roulette.do")
+	public String roulette(Model model, RecommandDTO recommandDTO) {
+		
+		// 순서가 뒤죽박죽 랜덤하게 섞여서 정렬된 전체 메뉴 가져옴
+		ArrayList<RecommandDTO> allData = sqlSession3.getMapper(RecommandDAO.class)
+				.allData(recommandDTO);
+		model.addAttribute("allData", allData);
+		
+		System.out.println("allData 개수 : "+ allData.size());
+		
+		return "recommand/roulette";
+	}
+	
+	// 월드컵 화면 매핑
+	@RequestMapping("/worldcup.do")
+	public String worldcup(Model model) {
+		return "recommand/worldcup";
+	}
+	
+	// 보류 - 난수생성
 	public void randomCreate(int[] arrParam) {
 		
 		//난수생성을 위한 씨드설정
@@ -49,9 +78,9 @@ public class RecommandRestAPIController {
 		 */
 		while(true) {
 
-			//1.난수10개 생성후 배열담기
+			//1.난수191개 생성후 배열담기
 			for(int i=0 ; i<arrParam.length ; i++) {
-				arrParam[i] = rnd.nextInt(99) + 1;//1~99까지의 정수 생성
+				arrParam[i] = rnd.nextInt(191) + 1;//1~191까지의 정수 생성
 			}
 
 			//2.중복확인
@@ -77,16 +106,4 @@ public class RecommandRestAPIController {
 
 		}//end of while
 	}//
-	
-	// 룰렛 화면 매핑
-	@RequestMapping("/roulette.do")
-	public String roulette(Model model) {
-		return "recommand/roulette";
-	}
-	
-	// 월드컵 화면 매핑
-	@RequestMapping("/worldcup.do")
-	public String worldcup(Model model) {
-		return "recommand/worldcup";
-	}
 }

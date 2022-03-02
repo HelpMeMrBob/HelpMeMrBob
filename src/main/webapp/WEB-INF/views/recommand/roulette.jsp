@@ -6,53 +6,64 @@
 <style>
 	#menu {
 		border: 6px solid #ed6a5a; 
-		width: 400px; 
+		width: 400px;
 		height: 50px;
 		text-align: center;
 		font-size: 2rem;
 		color: #ed6a5a; 
 		font-weight: bold;
-		margin-bottom: 5px;
+		cursor:default;
+		margin-bottom: 10px;
 	}
-	#start {
-		border: 4px solid #ed6a5a; 
-		width: 100px;
-		height: 30px;
+	#changeMenu, #UnchangeMenu {
+		border: 2px solid #ed6a5a; 
+		width: 150px;
+		height: 40px;
 		text-align: center;
-		font-size: 1.5rem; 
+		font-size: 1.2rem; 
 		color: white; 
 		font-weight: bold;
-		background-color: #ed6a5a
+		background-color: #ed6a5a;
+		margin-bottom: 10px;
+		border-radius: 10px;
+		display: none;
 	}
 	#goInfo {
+		border: 2px solid white;
 		all: unset;
 		width: 200px; 
-		height: 30px; 
+		height: 40px; 
 		text-align: center;
-		font-size: 1.5rem; 
+		font-size: 1.2rem; 
 		color: white;
 		font-weight: bold; 
 		background-color: #0a151f;
 		cursor: pointer;
+		margin-bottom: 10px;
+		border-radius: 10px;
+	}
+	#numOfMenu, #addOption {
+		display: inline-block;
+		width: auto;
+		height: 40px;
+		font-size: 1.2rem; 
+		cursor: pointer;
+		margin-bottom: 10px;
+		margin-right: 5px;
 	}
 </style>
-
-  <body>
-
-
-
-    <!-- =================== SITE HEADER BEGINS ============================= -->
-
-    <jsp:include page="/WEB-INF/views/include/header.jsp" />
-
-    <!-- =================== SITE HEADER ENDS ============================= -->
-
-
-
-    <!-- =================== MAIN SECTION BEGINS ============================= -->
-
-    <main>
-	    <script>
+<body>
+	<!-- =================== SITE HEADER BEGINS ============================= -->
+	
+	<jsp:include page="/WEB-INF/views/include/header2.jsp" />
+	
+	<!-- =================== SITE HEADER ENDS ============================= -->
+	
+	<!-- =================== MAIN SECTION BEGINS ============================= -->
+	<main>
+	<!-- "visibility:hidden" 처리해서 필요없음
+		<script>
+		// 메뉴 결정되지 않았는데 식당보기 누를때
 		function resultValidate(f) {
 			if (f.menu.value == "")
 			{
@@ -62,193 +73,225 @@
 			}
 		}
 		</script>
+	 -->
+		<!-- 랜덤 룰렛 STARTS -->
+    	<section class="ministries text-center-sm default-section-spacing">
+        	<div class="ministries__content">
+			    <div class="container">
+				    <div class="row">
+			            <div class="flex-md-5"><!-- 룰렛 -->
+			            	<form action="./restaurant.do" onsubmit="return resultValidate(this);">
+				            	<div>
+				            		<input type="text" name="menu" id="menu" placeholder="메뉴 개수를 선택해 주세요." 
+										value="" readonly>
+									<button type="submit" id="goInfo" style="visibility: hidden;">근처 식당보기</button>
+				            	</div>
+				            			<a>
+											<select class="form-select" name="numOfMenu" id="numOfMenu"
+												onchange="setCount(this.value);" style="background-color: #eaada6;">
+								   				<option value="0">메뉴 개수 선택</option>
+								   				<option value="10">10개</option>
+								   				<option value="15">15개</option>
+								   				<option value="20">20개</option>
+								   				<option value="30">30개</option>
+								   			</select>
+								   			<select class="form-select" name="addOption" id="addOption"
+												onchange="setOption(this.value);">
+								   				<option value="0">추가 옵션 선택</option>
+								   				<option value="0">&nbsp;&nbsp;&nbsp;&nbsp;---------- 탭 ----------</option>
+								   				<option value="1">탭1</option>
+								   				<option value="2">탭2</option>
+								   				<option value="3">탭3</option>
+								   				<option value="4">탭4</option>
+								   				<option value="5">탭5</option>
+								   				<option value="6">탭6</option>
+								   				<option value="7">탭7</option>
+								   				<option value="8">탭8</option>
+								   				<option value="9">탭9</option>
+								   				<option value="10">탭10</option>
+								   				<option value="0">&nbsp;&nbsp;&nbsp;----- 선호도 반영 -----</option>
+								   				<option value="100">맛있는 음식</option>
+								   			</select>
+							   			</a>
+							   			<div>
+								   			<button type="button" name="changeMenu" id="changeMenu" href="#"
+												onClick="resetMenu(); return false;">
+												메뉴 바꾸고 뽑기
+											</button>
+											<button type="button" name="UnchangeMenu" id="UnchangeMenu" href="#"
+												onClick="playWheel(); return false;">
+												메뉴 그대로 뽑기
+											</button>
+										</div>
+							</form>
+			            </div><!-- .flex-* ends -->
+			            <div class="flex-md-2"><!-- 디스플레이 -->
+							<table cellpadding="0" cellspacing="0" border="0">
+						        <tr>
+						            <td width="438" height="582" class="the_wheel" align="center" valign="center">
+						                <canvas id="canvas" width="434" height="434">
+						                   <p style="{color: white}" align="center">이 브라우저에서는 지원하지 않습니다.</p>
+						               </canvas>
+						           </td>
+						       </tr>
+						   	</table>
+			            </div><!-- .flex-* ends -->
+			        </div>
+		        </div>
+	        </div>
+	    </section><!-- .welcome ends -->
+	    <!-- 랜덤 룰렛 ENDS -->
 		<div class="mar-t-md-2" align="center">
-			<form action="./restaurant.do" onsubmit="return resultValidate(this);">
-				<div>
-					<input type="text" name="menu" id="menu" placeholder="메뉴 개수를 선택해 주세요." 
-						value="" readonly>
-				</div>
-				<table>
-					<tr>
-						<td>
-							<select class="form-select" name="numOfMenu" id="numOfMenu" onchange="setCount(this.value);">
-				   				<option value="0">--메뉴 개수 선택--</option>
-				   				<option value="10">10개</option>
-				   				<option value="15">15개</option>
-				   				<option value="20">20개</option>
-				   				<option value="30">30개</option>
-				   				<option value="40">나만의 선호목록</option>
-				   			</select>
-			   			</td>
-						<td>
-							<button type="button" name="start" id="start" href="#" onClick="resetWheel(); return false;">
-								뽑기
-							</button>
-						</td>
-						<td>
-							<button type="submit" id="goInfo">근처 식당보기</button>
-						</td>
-					</tr>
-				</table>
-			</form>
 			
-            <table cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td width="438" height="582" class="the_wheel" align="center" valign="center">
-                        <canvas id="canvas" width="434" height="434">
-                            <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
-                        </canvas>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <script>
-        	function showRoulette() {
-        		// Create new wheel object specifying the parameters at creation time.
-                theWheel = new Winwheel({
-                    'numSegments'  : count,     // Specify number of segments.
-                    'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
-                    'textFontSize' : 15,    // Set font size as desired.
-                    'segments'     :        // Define segments including colour and text.
-                    [
-                       	
-                   		{'fillStyle' : '#ed6a5a', 'text' : '곱창'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '샌드위치'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '탕수육'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '닭강정'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '잔치국수'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '오야코동(닭고기 계란 덮밥)'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '닭발'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '뼈해장국'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '김치볶음밥'},
-    	                {'fillStyle' : '#ed6a5a', 'text' : '피자'},
-    	          
-                    ],
-                    'animation' :           // Specify the animation to use.
-                    {
-                        'type'     : 'spinToStop',
-                        'duration' : 5,     // Duration in seconds.
-                        'spins'    : 8,     // Number of complete spins.
-                        'callbackFinished' : showDisplay
-                    }
-                });
+		    
+	    </div>
+	    <script>
+		// 룰렛 객체를 저장할 변수
+    	let theWheel = null;
+    	// 사용자가 선택한 메뉴개수를 저장할 변수
+    	let menuCount = null;
+    	// 룰렛 회전 강도 설정을 위한 변수
+	    let wheelPower    = 0;
+	    let wheelSpinning = false;
+	    
+	    /* 룰렛 객체생성 */
+    	function showRoulette() {
+    		// Create new wheel object specifying the parameters at creation time.
+            theWheel = new Winwheel({
+                'numSegments'  : menuCount,     // Specify number of segments.
+                'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
+                'textFontSize' : 15,    // Set font size as desired.
+                'segments'     :        // Define segments including colour and text.
+                [
+                	// allData를 선택한 메뉴개수 만큼 가져옴
+                	<c:forEach items="${ allData }" var="row">
+		                {'fillStyle' : '#ed6a5a', 'text' : '${row.food}'},
+	                </c:forEach>
+                ],
+                'animation' :           // Specify the animation to use.
+                {
+                    'type'     : 'spinToStop',
+                    'duration' : 5,     // Duration in seconds.
+                    'spins'    : 8,     // Number of complete spins.
+                    'callbackFinished' : showDisplay
+                }
+            });
+    	}
+	    
+    	/* 사용자가 선택한 메뉴개수 저장 & 룰렛 객체 생성 함수 호출 */
+    	function setCount(flag) {
+    		// 사용자 실수 방지용 새로고침
+    		if(flag==0) {
+    			location.reload();
+    		}
+			menuCount = flag;
+			document.getElementById("numOfMenu").style="background-color: white;";
+			
+			// 룰렛과 버튼 보여주기
+			showRoulette();
+			document.getElementById("changeMenu").style.display = "inline";
+	    	document.getElementById("UnchangeMenu").style.display = "inline";
+    	}
+    	
+	    /* 메뉴개수 카운트 */
+    	function numOfMenu(cnt) {
+    		menuCount  = cnt;
+    		console.log(menuCount);
+    	}
+	    
+    	/* 룰렛 회전 */
+	    function startSpin() {
+	        // Ensure that spinning can't be clicked again while already running.
+	        if (wheelSpinning == false) {
+	            // Begin the spin animation by calling startAnimation on the wheel object.
+	            theWheel.startAnimation();
+	
+	            // Set to true so that power can't be changed and spin button re-enabled during
+	            // the current animation. The user will have to reset before spinning again.
+	            wheelSpinning = true;
+	        }
+	    }
+    	
+	    /* 룰렛 돌리기 */
+	    function playWheel() {
+	        theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
+	        theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+	        theWheel.draw();                // Call draw to render changes to the wheel.
+	
+	        /* document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
+	        document.getElementById('pw2').className = "";
+	        document.getElementById('pw3').className = ""; */
+	
+	        wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+	        
+	        startSpin();
+	    }
+	    
+	    /* 룰렛 메뉴변경 */
+	    function resetMenu() {
+	    	// 다른 메뉴를 가져오기 위해 새로고침
+	    	location.reload();
+	    }
+	    
+	    /* 룰렛 결과를 display에 띄운다. */
+	    function showDisplay(indicatedSegment) {
+	        document.getElementById("menu").value = indicatedSegment.text;
+	    	document.getElementById("goInfo").style.visibility = "visible";
+	    }
+	    
+	    /* 룰렛 회전 강도 설정 */
+	    /*
+	    function powerSelected(powerLevel) {
+	        // Ensure that power can't be changed while wheel is spinning.
+	        if (wheelSpinning == false) {
+	            // Reset all to grey incase this is not the first time the user has selected the power.
+	            document.getElementById('pw1').className = "";
+	            document.getElementById('pw2').className = "";
+	            document.getElementById('pw3').className = "";
+	
+	            // Now light up all cells below-and-including the one selected by changing the class.
+	            if (powerLevel >= 1) {
+	                document.getElementById('pw1').className = "pw1";
+	            }
+	
+	            if (powerLevel >= 2) {
+	                document.getElementById('pw2').className = "pw2";
+	            }
+	
+	            if (powerLevel >= 3) {
+	                document.getElementById('pw3').className = "pw3";
+	            }
+	
+            // Set wheelPower var used when spin button is clicked.
+            wheelPower = powerLevel;
+
+            // Light up the spin button by changing it's source image and adding a clickable class to it.
+            document.getElementById('spin_button').src = "./resources/recommand/spin_on.png";
+            document.getElementById('spin_button').className = "clickable";
         	}
-        	
-        	let theWheel = null;
-        	let count = null;
-        	function setCount(flag) {
-    			count = flag;
-    			showRoulette();
-        	}
-            
-           // Vars used by the code in this page to do power controls.
-           let wheelPower    = 0;
-           let wheelSpinning = false;
-           
-       	
-	       	function numOfMenu(cnt) {
-	       		count  = cnt;
-	       		console.log(count);
-	       	}
-
-           // -------------------------------------------------------
-           // Function to handle the onClick on the power buttons.
-           // -------------------------------------------------------
-           function powerSelected(powerLevel)
-           {
-               // Ensure that power can't be changed while wheel is spinning.
-               if (wheelSpinning == false) {
-                   // Reset all to grey incase this is not the first time the user has selected the power.
-                   document.getElementById('pw1').className = "";
-                   document.getElementById('pw2').className = "";
-                   document.getElementById('pw3').className = "";
-
-                   // Now light up all cells below-and-including the one selected by changing the class.
-                   if (powerLevel >= 1) {
-                       document.getElementById('pw1').className = "pw1";
-                   }
-
-                   if (powerLevel >= 2) {
-                       document.getElementById('pw2').className = "pw2";
-                   }
-
-                   if (powerLevel >= 3) {
-                       document.getElementById('pw3').className = "pw3";
-                   }
-
-                   // Set wheelPower var used when spin button is clicked.
-                   wheelPower = powerLevel;
-
-                   // Light up the spin button by changing it's source image and adding a clickable class to it.
-                   document.getElementById('spin_button').src = "./resources/recommand/spin_on.png";
-                   document.getElementById('spin_button').className = "clickable";
-               }
-           }
-
-           // -------------------------------------------------------
-           // Click handler for spin button.
-           // -------------------------------------------------------
-           function startSpin()
-           {
-               // Ensure that spinning can't be clicked again while already running.
-               if (wheelSpinning == false) {
-                   // Begin the spin animation by calling startAnimation on the wheel object.
-                   theWheel.startAnimation();
-
-                   // Set to true so that power can't be changed and spin button re-enabled during
-                   // the current animation. The user will have to reset before spinning again.
-                   wheelSpinning = true;
-               }
-           }
-
-           // -------------------------------------------------------
-           // Function for reset button.
-           // -------------------------------------------------------
-           function resetWheel()
-           {
-               theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
-               theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
-               theWheel.draw();                // Call draw to render changes to the wheel.
-
-               /* document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
-               document.getElementById('pw2').className = "";
-               document.getElementById('pw3').className = ""; */
-
-               wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
-               
-               startSpin();
-           }
-
-        // 결과를 display에 띄운다.
-        function showDisplay(indicatedSegment) {
-            document.getElementById("menu").value = indicatedSegment.text;
-        }
-        </script>
-
-    </main><!-- main ends -->
-
-    <!-- =================== MAIN SECTION ENDS ============================= -->
-
-
-    <!-- SCROLL BACK TO TOP BEGINS -->
-    <div class="scroll-to-top"><i class="ri-arrow-up-line"></i></div>
-    <!-- SCROLL BACK TO TOP ENDS -->
-
-    <!-- =================== ALL MODALS ============================= -->
-
-    <jsp:include page="/WEB-INF/views/include/search.jsp" />
-
-    <!-- =================== ALL MODALS END ============================= -->
-
-
-    <!-- =================== SITE FOOTER BEGINS ============================= -->
-
-    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-
-    <!-- =================== SITE FOOTER ENDS ============================= -->
-
+       	}
+	    */
+	    </script>
+	
+	</main><!-- main ends -->
+	
+	<!-- =================== MAIN SECTION ENDS ============================= -->
+	
+	<!-- =================== ALL MODALS ============================= -->
+	
+	<jsp:include page="/WEB-INF/views/include/search.jsp" />
+	
+	<!-- =================== ALL MODALS END ============================= -->
+	
+	
+	<!-- =================== SITE FOOTER BEGINS ============================= -->
+	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	
+	<!-- =================== SITE FOOTER ENDS ============================= -->
+	
 	<jsp:include page="/WEB-INF/views/include/jquery.jsp" />
 
-  </body>
+</body>
 
 </html>

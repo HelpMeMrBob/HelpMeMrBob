@@ -179,7 +179,7 @@ function detailView(place) {
 <body class="video-bg-homepage">
 	
 	<!-- HEADER -->  
-    <jsp:include page="/WEB-INF/views/include/header.jsp" />
+    <jsp:include page="/WEB-INF/views/include/header2.jsp" />
 	
     <main>
     
@@ -249,7 +249,7 @@ function detailView(place) {
 		   			<hr />
 		   			<c:choose>
 						<c:when test="${ empty keyword }">
-							<div style="font-size:16px;text-align:center;">해당 검색어에 대한 식당이 없습니다<br />힝ㅠㅠ</div>
+							<div style="font-size:16px;text-align:center;">해당 검색어에 대한 식당이 없습니다.</div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${ keyword }" var="row" varStatus="loop">
