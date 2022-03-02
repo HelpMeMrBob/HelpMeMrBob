@@ -194,5 +194,9 @@ public class JDBCTemplateDAO {
 
 		return (ArrayList<BoardDTO>) template.query(sql, new BeanPropertyRowMapper<BoardDTO>(BoardDTO.class));
 	}
+	
+	
+	
+	
 
 }

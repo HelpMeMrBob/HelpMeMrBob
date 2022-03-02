@@ -100,18 +100,6 @@
 
                   <h3 class="cause__tile mar-b-sm-2">${row.title} </h3>
 
-                  <div class="progress">
-
-                    <div class="progress__context mar-b-sm-06">
-                      <span class="current"></span>
-                      <span class="end"></span>
-                    </div><!-- .progress__context ends -->
-
-                    <div class="progress__bar" data-current="9020" data-end="12000">
-                      <div class="fill"></div>
-                    </div><!-- .progress__bar ends -->
-
-                  </div><!-- .progress ends -->
 
                 </div><!-- .card__body ends -->
 
@@ -122,8 +110,8 @@
                   </div><!-- .card__cta ends -->
 
                   <div class="card__share text-right-sm">
-                    <button class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line"></i></button>
+                    <button  class="transparent button button--primary button--outline share-button"><i
+                        class="ri-share-line" ></i></button>
                   </div><!-- .card__share ends -->
 
                 </div><!-- .card__footer ends -->
