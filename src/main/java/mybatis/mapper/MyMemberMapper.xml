@@ -10,6 +10,16 @@
 		parameterType="mybatis.MemberVO">
 		SELECT * FROM member WHERE id=#{id} and pass=#{pass}
 	</select> 
+	<insert id="memberRegist" parameterType="mybatis.MemberVO">
+		INSERT INTO member (id, name, pass, email, telNum)
+		
+		VALUES (#{id},#{name},#{pass},#{email}, #{telNum})
+	</insert>  
+	<insert id="setPoint" parameterType="point.PointDTO">
+		INSERT INTO point (id, point)
+		
+		VALUES (#{id},  0)
+	</insert>  
 </mapper>
 
 

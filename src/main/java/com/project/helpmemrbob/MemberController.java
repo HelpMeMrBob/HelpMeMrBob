@@ -1,9 +1,10 @@
 package com.project.helpmemrbob;
 
-import java.sql.Connection;	
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -15,25 +16,28 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.JspWriter;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import util.PagingUtil;
 import member.model.MemberDAOImpl;
 import member.model.MemberVO;
 import member.model.ParameterDTO;
 import point.PointDAO;
 import point.PointDTO;
+import util.PagingUtil;
 
 
 @Controller
@@ -45,9 +49,7 @@ public class MemberController
 	public void setSqlSession(SqlSession sqlSession)
 	{
 		this.sqlSession = sqlSession;
-		System.out.println("MyBatis 사용 준비 끝");
 	}
-	
 	
 	//	로그인 페이지 이동
 	@RequestMapping("/login.do")
@@ -65,36 +67,63 @@ public class MemberController
 	
 		ModelAndView mv = new ModelAndView();
 	
-	if (vo == null)
-	{
-		mv.addObject("LoginNG", "아이디/패스워드가 틀렸습니다.");
-		mv.setViewName("Member/Login");
-		return mv;
+		if (vo == null)
+		{
+			mv.addObject("LoginNG", "아이디/패스워드가 틀렸습니다.");
+			mv.setViewName("Member/Login");
+			return mv;
+		}
+		else
+		{
+			session.setAttribute("siteUserInfo", vo);
+			mv.setViewName("redirect:/");
+			return mv;
+		}
+	
 	}
-	else
+	
+	//	카카오 로그인
+	@RequestMapping(value = "/kakaologin.do", method = RequestMethod.POST)
+	public ModelAndView kakaoLogin(@RequestParam Map<String, Object> map, HttpSession session)
 	{
-		session.setAttribute("siteUserInfo", vo);	//	로그인 성공
-		System.out.println("로그인 아이디 : "+ vo.getId());
-		System.out.println("레벨 : "+ vo.getLev());
+		ModelAndView mv = new ModelAndView();
+		
+		String id = (String)map.get("id");
+		String name = (String)map.get("name");
+		String email = (String)map.get("email");
+		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId(id);
+		memberVO.setName(name);
+		memberVO.setEmail(email);
+		
+		//	할때마다 동의여부가 떠서 회원가입 한번하면 무조건 오류.. 어떻게 해야할지
+		//	sqlSession.getMapper(MemberDAOImpl.class).kakaoRegisterAction(memberVO);
+		
+		String kid = memberVO.getId();
+		String kname = memberVO.getName();
+		String kemail = memberVO.getEmail();
+		
+		MemberVO vo
+			= sqlSession.getMapper(MemberDAOImpl.class).kakaoLogin(kid, kname, kemail);
+		
+		System.out.println(vo.getId());
+		
+		session.setAttribute("siteUserInfo", vo);
 		mv.setViewName("redirect:/");
 		return mv;
 	}
-	/*
-	// 로그인을 하지 않은 상태에서 페이지 진입했을때 사용
-	String backUrl = req.getParameter("backUrl");
-	if (backUrl == null || backUrl.equals(""))
-	{
-	mv.setViewName("Member/Login");
-	}
-	else
-	{
-		mv.setViewName(backUrl);
-	}
-	return mv;
-	*/
-}
 	
-	
+	//	로그아웃 처리
+	@RequestMapping("/logout.do")
+	public ModelAndView logout(HttpSession session)
+	{
+		session.invalidate();
+		
+		ModelAndView mv = new ModelAndView("redirect:/");
+		return mv;
+	}
 	
 	//	아이디·비밀번호 찾기 페이지 이동
 	@RequestMapping("/findIdPassword.do")
@@ -117,7 +146,6 @@ public class MemberController
 		
 		return mv;
 	}
-	
 	
 	//	비밀번호 찾기
 	@RequestMapping("/findPassword.do")
@@ -146,13 +174,16 @@ public class MemberController
 		props.put("mail.smtp.ssl.enable", "true");
 		props.put("mail.smtp.ssl.trust", host);
 		
-		Session sessionM = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-			String userName = username;
-			String passWord = password;
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(userName, passWord);
+		Session sessionM = Session.getDefaultInstance(props, new javax.mail.Authenticator()
+			{
+				String userName = username;
+				String passWord = password;
+				protected PasswordAuthentication getPasswordAuthentication()
+				{
+					return new PasswordAuthentication(userName, passWord);
+				}
 			}
-		});
+		);
 
 		sessionM.setDebug(true);
 		
@@ -178,19 +209,7 @@ public class MemberController
 		
 		return mv;
 	}
-	
-		
-	//	로그아웃 처리
-	@RequestMapping("/logout.do")
-	public ModelAndView logout(HttpSession session)
-	{
-		session.invalidate();
-		
-		ModelAndView mv = new ModelAndView("redirect:/");
-		return mv;
-	}
 
-	
 	//	고객센터 페이지 이동
 	@RequestMapping("/customerService.do")
 	public String customerService()
@@ -226,13 +245,16 @@ public class MemberController
 		props.put("mail.smtp.ssl.enable", "true");
 		props.put("mail.smtp.ssl.trust", host);
 		
-		Session sessionM = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-			String userName = username;
-			String passWord = password;
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(userName, passWord);
+		Session sessionM = Session.getDefaultInstance(props, new javax.mail.Authenticator()
+			{
+				String userName = username;
+				String passWord = password;
+				protected PasswordAuthentication getPasswordAuthentication()
+				{
+					return new PasswordAuthentication(userName, passWord);
+				}
 			}
-		});
+		);
 
 		sessionM.setDebug(true);
 		
@@ -404,7 +426,6 @@ public class MemberController
 	}
 
 
-	
 	//	회원 정보 수정 페이지 이동
 	@RequestMapping("/memberUpdate.do")
 	public String memberUpdate(Model model, HttpServletRequest req, HttpSession session)
