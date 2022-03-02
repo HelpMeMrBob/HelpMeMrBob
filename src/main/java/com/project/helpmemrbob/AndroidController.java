@@ -44,14 +44,14 @@ public class AndroidController {
 	
 	@RequestMapping("/android/memberRegist.do")
 	@ResponseBody
-	public Map<String, Object> memberRegist(MemberVO memberVO){
+	public int memberRegist(MemberVO memberVO){
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
 		int isRegist;
-		MemberVO memberRegist =
+		int memberRegist =
 				sqlSession4.getMapper(IAndroidDAO.class).memberRegist(memberVO);
 		
-		if(memberRegist==null) {
+		if(memberRegist==0) {
 			//회원정보 불일치로 로그인에 실패한 경우..결과만 0으로 내려준다.
 			returnMap.put("isReist", 0);
 			isRegist = 0;
@@ -64,7 +64,7 @@ public class AndroidController {
 		}
 		
 		//return isRegist;
-		return returnMap;
+		return isRegist;
 	}
 
 
