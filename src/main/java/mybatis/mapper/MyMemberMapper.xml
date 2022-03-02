@@ -18,7 +18,7 @@
 	<insert id="setPoint" parameterType="point.PointDTO">
 		INSERT INTO point (id, point)
 		
-		VALUES (#{id}, #{point})
+		VALUES (#{id}, 0)
 	</insert>  
 </mapper>
 
