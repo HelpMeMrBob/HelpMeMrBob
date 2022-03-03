@@ -1,11 +1,17 @@
 package com.project.helpmemrbob;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,6 +19,7 @@ import mybatis.BoardDTO;
 import mybatis.IAndroidDAO;
 import mybatis.IBoardDAO;
 import mybatis.MemberVO;
+import mybatis.ParameterDTO;
 
 
 @Controller
@@ -143,5 +150,18 @@ public class AndroidController {
 		//return isRegist;
 		return isRegist;
 	}
+	
+	
+		///안드로이드리스트
+	//JSONArray로 데이터 반환
+		@RequestMapping("/android/list.do")
+		@ResponseBody
+		public ArrayList<BoardDTO> AndroidList(HttpServletRequest req) {
+			System.out.println("요청들어옴");
+			ArrayList<BoardDTO> lists = 
+					sqlSession4.getMapper(IBoardDAO.class).androidList();
+			return lists;
+		}
+	
 
 }
