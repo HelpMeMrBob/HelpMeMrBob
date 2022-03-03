@@ -26,6 +26,7 @@
     </style>
     <script type="text/javascript">
     
+     //Ajax로 비동기 삭제 
    	 function deleteValue(value) {
 	   	
 	 	 var url = "foodDelete.do";
@@ -39,7 +40,22 @@
     	       }
 	 	   });
 	 	}
+   	 
+   	//유효성 체크
+   	function checkValidate(f){
+		if(f.food.value==""){
+			alert("추가할 음식명을 입력하세요");
+			f.food.focus();
+			return false;
+		}
+		if(f.file.value==""){
+			alert("음식에 대한 이미지를 첨부합니다.");
+			f.file.focus();
+			return false;
+		}
+	}
     </script>
+    
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -52,7 +68,8 @@
                         </ol>
 							
 							<div class="div1">
-							<form action="foodAction.do" enctype="multipart/form-data" method="post">
+							<form action="foodAction.do" enctype="multipart/form-data" method="post"
+								onsubmit="return checkValidate(this);">
 							<table class="table table-borderless" id="addTb">
 								<colgroup>
 						            <col width=*>

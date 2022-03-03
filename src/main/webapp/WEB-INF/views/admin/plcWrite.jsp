@@ -23,6 +23,7 @@
     </style>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	//카카오 지도 API 이용하여 주소 입력
 	window.onload = function(){
 	    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
 	        //카카오 지도 발생
@@ -34,6 +35,46 @@
 	        }).open();
 	    });
 	}
+	
+	//유효성 검사
+    function checkValidate(f){
+		if(f.place.value==""){
+			alert("식당 이름을 입력하세요");
+			f.place.focus();
+			return false;
+		}
+		if(f.address_kakao.value==""){
+			alert("클릭해서 주소 찾기");
+			f.address_kakao.focus();
+			return false;
+		}
+		if(f.address_detail.value==""){
+			alert("상세 주소를 입력하세요");
+			f.address_detail.focus();
+			return false;
+		}
+		if(f.plcNum.value==""){
+			alert("식당의 전화번호를 입력하세요");
+			f.plcNum.focus();
+			return false;
+		}
+		if(f.menu.value==""){
+			alert("식당의 메뉴를 입력하세요");
+			f.menu.focus();
+			return false;
+		}
+		if(f.price.value==""){
+			alert("메뉴에 대한 가격을 입력하세요");
+			f.price.focus();
+			return false;
+		}
+		if(f.operTime.value==""){
+			alert("식당 운영 시간을 입력하세요");
+			f.operTime.focus();
+			return false;
+		}
+	}
+  
 	</script>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
@@ -47,7 +88,7 @@
                         </ol>
 							<div class="row">
 							<form id="plcFrm" name="plcFrm" method="GET" 
-							action="plcAction.do" > 
+							action="plcAction.do" onsubmit="return checkValidate(this);"> 
 							
 							<table class="table table-bordered" id="vsTb">
 								
