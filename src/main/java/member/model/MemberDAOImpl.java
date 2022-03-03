@@ -12,10 +12,12 @@ public interface MemberDAOImpl
 	public MemberVO findId(String name, String email);
 	public MemberVO findPassword(String id, String email);
 	
+	
 	public MemberVO myPage(String id);
 	public MemberVO memberUpdate(MemberVO vo);
 	public int memberUpdateAction(MemberVO vo);
 	public int myPreferenceUpdate(MemberVO vo);
+	public int myPreferenceInsert(MemberVO vo);
 	
 	public void customerServiceSave(@Param("name")String name,
 									@Param("email")String email,
