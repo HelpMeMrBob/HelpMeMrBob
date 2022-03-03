@@ -13,9 +13,11 @@ public interface IBoardDAO {
 	//게시물 갯수 카운트
 	public int getTotalCount(ParameterDTO parameterDTO);
 	//페이징 적용된 게시물 가져오기
-	public ArrayList<BoardDTO> listPage(ParameterDTO parameterDTO);
+	//public ArrayList<BoardDTO> listPage(ParameterDTO parameterDTO);
 	//게시물 내용보기
 	public ArrayList<BoardDTO> view(ParameterDTO parameterDTO);
 	//게시물 작성
 	public int write(BoardDTO boardDTO);
+	//게시물 리스트
+	public ArrayList<BoardDTO> androidList();
 }

@@ -7,36 +7,12 @@
 <!-- namespace에는 서비스객체 역할을 하는 interface의 풀경로를 기술한다. -->
 <mapper namespace="mybatis.IBoardDAO">
  	
-	<select id="getTotalCount" resultType="int" 
-		parameterType="mybatis.ParameterDTO">
-		
-		SELECT COUNT(*) FROM board		
-		<if test="searchTxt!=null"> 
-			WHERE  
-			<foreach collection="searchTxt" item="str" open="(" close=")" 
-				separator="or">
-				${searchField} like '%'||#{str}||'%'
-			</foreach>		 
-		</if>
+	<!-- 게시물list 제이슨으로 가져옴 -->
+	<select id="androidList" resultType="mybatis.BoardDTO">
+		SELECT * FROM board	ORDER BY rownum DESC
 	</select>
-	<!-- 구간에 해당하는 게시물을 추출한다. -->
-	<select id="listPage" resultType="mybatis.BoardDTO" 
-		parameterType="mybatis.ParameterDTO">			
-		SELECT * FROM (
-		    SELECT Tb.*, rownum rNum FROM (
-		        SELECT * FROM board   
-				<if test="searchTxt!=null">
-					WHERE
-					<foreach collection="searchTxt" item="str" open="(" 
-						close=")" separator="or">
-						${searchField} like '%'||#{str}||'%'
-					</foreach> 
-				</if>					
-		        ORDER BY num DESC
-		    ) Tb
-		)
-		WHERE rNum BETWEEN #{start} AND #{end}
-	</select>
+	
+	
 
 	<!-- 게시물 내용보기 -->
 	<select id="view" resultType="mybatis.BoardDTO" 

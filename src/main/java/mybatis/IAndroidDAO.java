@@ -12,5 +12,10 @@ public interface IAndroidDAO {
 	
 	public int setPoint(MemberVO memberVO);
 
+
+	public ArrayList<BoardDTO> listPage(ParameterDTO parameterDTO);
+
+	public int getTotalCount(ParameterDTO parameterDTO);
+
 }
 
