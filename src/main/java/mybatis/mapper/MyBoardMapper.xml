@@ -47,8 +47,8 @@
 	<!-- 게시물 작성하기 -->
 	<!-- resultType을 명시하지 않더라도 항상 성공 실패시 1과 0을 반환한다.  -->
 	<insert id="write" parameterType="mybatis.BoardDTO">
-		INSERT INTO board (num, title, content, id, visitcount)
-		VALUES (seq_board_num.NEXTVAL, #{title}, #{content}, #{id}, 0)
+		INSERT INTO board (idx, title, contents, id)
+		VALUES (board_seq.nextval, #{title}, #{contents}, #{id})
 	</insert>	
 	
 </mapper>

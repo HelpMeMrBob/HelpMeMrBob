@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class BoardDTO {
-    private String num;
+    private String idx;
     private String title;
-    private String content;
+    private String contents;
     private String id;    
-    //private java.sql.Date postdate;
+    private String image;
     private String postdate;
     private String visitcount;
 

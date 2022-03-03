@@ -11,5 +11,6 @@ public interface IAndroidDAO {
 	public int memberRegist(MemberVO memberVO);
 	
 	public int setPoint(MemberVO memberVO);
+
 }
 
