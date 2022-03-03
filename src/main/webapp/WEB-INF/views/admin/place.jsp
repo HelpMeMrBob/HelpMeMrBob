@@ -23,9 +23,7 @@
     	#searchBtn { border : none ; background-color:transparent;}
     	#searchWord { border: 0; border-bottom: #000000 1px solid; width: 400px; }
     </style>
-    <script type="text/javascript">
     
-    </script>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -56,11 +54,11 @@
 							
 							<!-- 내용 출력 부분 -->							
 							<div class="row">
-							<form action="" name="plcFrm">
+							<form action="" name="plcFrm" >
 							
 							<div class="col-lg-12 text-lg-end mb-1">
 							<button type="button" class="btn btn-primary" id="write" 
-								onclick="location.href='plcWrite.do';">등록</button>
+								onclick="location.href='plcWrite.do';">식당 등록</button>
 							</div>
 														
 							<!-- 반복 시작 -->
