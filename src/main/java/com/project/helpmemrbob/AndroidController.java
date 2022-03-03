@@ -116,16 +116,17 @@ public class AndroidController {
 		return isRegist;
 	}
 	
-	@RequestMapping("/android/writeBoard.do")
+	@RequestMapping("/android/write.do")
 	@ResponseBody
 	public int write(BoardDTO bdto){
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
+		System.out.println("게시글 삽입 실행1");
 		int isRegist;
 		int write =
 				sqlSession4.getMapper(IBoardDAO.class).write(bdto);
-		 System.out.println("게시글 삽입 실행");
-		 
+		
+		System.out.println("게시글 삽입 실행2");
 		if(write==0) {
 			//회원정보 불일치로 로그인에 실패한 경우..결과만 0으로 내려준다.
 			returnMap.put("write", 0);
