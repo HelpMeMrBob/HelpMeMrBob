@@ -24,22 +24,15 @@
     <main>
 
       <!-- BANNER SECTION STARTS -->
-      <section class="banner full-width">
+      <section class="category-pointshop pad-t-sm-6 pad-t-lg-8 pad-b-sm-6 pad-b-lg-8 mar-t-md-8">
 
         <div class="container">
 
           <div class="banner__content">
 
-            <div class="section-heading">
-              <span class="section-intro">Jesus is Lord</span>
-              <h1>Causes</h1>
-            </div><!-- .section-heading ends -->
-
-            <div class="breadcrumb">
-              <div class="breadcrumb__home--link"><a href="index.html">Home</a></div>
-              <span>/</span>
-              <div class="breadcrumb__current--page-link">Causes</div>
-            </div><!-- .breadcrumb ends -->
+            <h2 class="section-intro color-off-white-with-border bold">
+							리뷰게시판
+			</h2>
 
           </div><!-- .banner__content ends -->
 
@@ -55,11 +48,8 @@
         <div class="container">
 
           <div class="section-heading text-center-sm">
-            <span class="section-intro">Causes</span>
-            <h2>Our causes</h2>
           </div><!-- .section-heading ends -->
 
-          <p>Showing 6 out of 22 causes</p>
 
         </div><!-- .container ends -->
 
@@ -99,22 +89,24 @@
                 <div class="card__body">
 
                   <h3 class="cause__tile mar-b-sm-2">${row.title} </h3>
-
-
+                  
+				<!-- 얘 없으면 쪼그라들어요 -->	
+				<img src="./resources/upload/bottomBar.png" style="max-width:500px;" />
                 </div><!-- .card__body ends -->
 
-                <div class="card__footer">
+                <!-- <div class="card__footer">
 
                   <div class="card__cta">
+                  	
                     <a href="causes-single.html" class="button button--primary button--fill">Donate now</a>
-                  </div><!-- .card__cta ends -->
+                  </div>.card__cta ends
 
                   <div class="card__share text-right-sm">
                     <button  class="transparent button button--primary button--outline share-button"><i
                         class="ri-share-line" ></i></button>
-                  </div><!-- .card__share ends -->
+                  </div>.card__share ends
 
-                </div><!-- .card__footer ends -->
+                </div>.card__footer ends -->
 
               </div><!-- .card ends -->
 			

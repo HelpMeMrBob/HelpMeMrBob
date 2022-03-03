@@ -51,11 +51,8 @@ public class vsFightController {
 				.getTotalCount1();
 		
 		
-		
-		
-		
 		//페이지 처리를 위한 설정값
-		int pageSize=4;//한 페이지당 출력할 게시물의 갯수
+		int pageSize=15;//한 페이지당 출력할 게시물의 갯수
 		int blockPage=2;//한 블럭당 출력할 페이지 번호의 갯수
 		//전체 페이지 수 계산
 		int totalPage=(int)Math.ceil((double)totalRecordCount1/pageSize);
@@ -85,7 +82,7 @@ public class vsFightController {
 		
 		
 		//페이지 처리를 위한 설정값
-		int pageSize2=4;//한 페이지당 출력할 게시물의 갯수
+		int pageSize2=15;//한 페이지당 출력할 게시물의 갯수
 		int blockPage2=2;//한 블럭당 출력할 페이지 번호의 갯수
 		//전체 페이지 수 계산
 		int totalPage2=(int)Math.ceil((double)totalRecordCount2/pageSize2);
@@ -154,8 +151,12 @@ public class vsFightController {
 		int count1=sqlSession.getMapper(vsFightDAOImpl.class).count(idx);
 		session.setAttribute("count1", count1);
 		
-		int count2=sqlSession.getMapper(vsFightDAOImpl.class).count(idx);
+		int count2=sqlSession.getMapper(vsFightDAOImpl.class).count2(idx);
 		session.setAttribute("count2", count2);
+		
+		System.out.println("제대로count1 받아오나요"+count1);
+		System.out.println("제대로count2 받아오나요"+count2);
+
 //////오른쪽댓글 리스트//////////////////////////////////////////////////////////////////////		
 		
 		ArrayList<vsFight1VO> lists2=

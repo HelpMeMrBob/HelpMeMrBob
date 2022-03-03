@@ -190,37 +190,6 @@ img {
 		<div class="separator background-primary"></div>
 		<!-- SEPARATOR ENDS -->
 		
-		<!-- 푸드 캘린더 STARTS -->
-    	<section class="ministries text-center-sm default-section-spacing">
-        	<div class="ministries__content">
-			    <div class="container">
-				    <div class="row">
-				    	<div class="flex-md-6">
-			            	<div class="text-block mar-b-sm-4">
-							<!-- See _typography.scss for styling -->
-							<blockquote class="blockquote text-center-sm">
-							  <h2 class="mar-b-sm-2 italic bold">푸드 캘린더</h2>
-							  <h5 class="bold">푸드 캘린더에 대한 설명을 블라블라</h5>
-							</blockquote><!-- .blockquote ends -->
-			                </div><!-- .text-block ends -->
-			                <button onclick="location.href='../recommand/roulette.do';"
-									style="background-color: #ED6A5A; color: #F5F5F5;
-									width: 150px; height: 50px; font-size: 16px; border: none;">
-								<strong>바로가기</strong>
-							</button>
-			            </div><!-- .flex-* ends -->
-			            <div class="flex-md-5">
-			                <img src="./resources/main_img/roulette.png" style="width: 500px;">
-			            </div><!-- .flex-* ends -->
-			        </div>
-		        </div>
-	        </div>
-	    </section><!-- .welcome ends -->
-	    <!-- 푸드 캘린더 ENDS -->
-		
-		<!-- SEPARATOR STARTS -->
-		<div class="separator background-primary"></div>
-		<!-- SEPARATOR ENDS -->
 		
 		<!-- 음식 토론 STARTS -->
     	<section class="ministries text-center-sm default-section-spacing">

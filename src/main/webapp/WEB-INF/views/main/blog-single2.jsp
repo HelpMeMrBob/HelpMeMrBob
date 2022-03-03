@@ -62,17 +62,15 @@ function writeValidate(f)
     <main>
 
       <!-- BANNER SECTION STARTS -->
-      <section class="banner single-banner-blog text-center-sm full-width">
+      <section class="category-pointshop pad-t-sm-6 pad-t-lg-8 pad-b-sm-6 pad-b-lg-8 mar-t-md-8">
 
         <div class="container">
 
           <div class="banner__content">
 
-            <div class="section-heading printable">
-              <span class="section-intro">Jesus is Lord</span>
-              <h1>Being a Christian in today's society</h1>
-            </div><!-- .section-heading ends -->
-
+            <h2 class="section-intro color-off-white-with-border bold">
+							리뷰게시판
+			</h2>
 
           </div><!-- .banner__content ends -->
 
@@ -313,8 +311,8 @@ function writeValidate(f)
 				<div class="flex-md-12">
 
                 <button class="button--primary button--fill" type="submit" name="submit">댓글쓰기</button>
-
-              </div><!-- .flex-* ends -->
+				<a href='./reviewList.do' class="button button--primary button--fill">목록보기</a></div>
+				<!-- .flex-* ends -->
 
             </div><!-- .row ends -->
 

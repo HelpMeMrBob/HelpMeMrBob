@@ -37,15 +37,9 @@ function writeValidate(f)
 		
 	<div style="width: 100%; margin-Top:1%;">
 	
-      <%--  <h3>${idx}</h3> --%>
+      <%-- <h3>${count1},${count2}</h3> --%>
 		<table style="width: 60%; color: #000000; font-size: 14px;
 					border: none; padding: 10px; ">
-			<%-- <%
-				ParameterDTO parameterDTO = new ParameterDTO();
-				
-				int level = parameterDTO.getLev();
-				int experience = parameterDTO.getExp();
-			%> --%>
 			<tr>
 				<td colspan="2" style="width: 50%; padding-bottom: 0px">
 					<input style="background-color: #ED6A5A; border: 1px solid #ED6A5A;
@@ -73,12 +67,10 @@ function writeValidate(f)
 						   border: 1px solid #DFDFDF; vertical-align: top;">
 						   
 						   <div class="progress">
-<%--     <div class="progress-bar bg-danger progress-bar-striped" style="width:${totalFight1}%"></div>
- --%>						   
     <div class="progress-bar bg-danger progress-bar-striped" style="width:${count1}%"></div>
   </div>
 						   
-						   
+	<label for="fname" class="form__label"><span class="color-danger">*</span>최신댓글 15개만 불러옵니다.</label>
 						   <c:forEach items="${lists }" var="row">		
 						<div class="border mt-2 mb-2">
 							<div class="media">
@@ -103,9 +95,9 @@ function writeValidate(f)
 						</div>
 						</c:forEach>
 						<!-- 댓글페이징 -->
-						<ul class="pagination justify-content-center">
+						<%-- <ul class="pagination justify-content-center">
 							${pagingImg }
-						</ul>
+						</ul> --%>
 						   
 				</td>
 				<td style="width: 50%; padding: 20px; padding-top: 5px;
@@ -116,7 +108,7 @@ function writeValidate(f)
     <div class="progress-bar bg-danger progress-bar-striped" style="width:${count2}%"></div>
   </div>
 						   
-						   
+	<label for="fname" class="form__label"><span class="color-danger">*</span>최신댓글 15개만 불러옵니다.</label>					   
 						   <c:forEach items="${lists2 }" var="row">		
 						<div class="border mt-2 mb-2">
 							<div class="media">
@@ -140,9 +132,9 @@ function writeValidate(f)
 						</div>
 						</c:forEach>
 						<!-- 댓글페이징 -->
-						<ul class="pagination justify-content-center">
+						<%-- <ul class="pagination justify-content-center">
 							${pagingImg2}
-						</ul>
+						</ul> --%>
 <!--─────────────────────────────────── 오른쪽댓글받아요 ─────────────────────────────────────-->
 <!--────────────────────────────────── 오른쪽댓글받아요 ───────────────────────────────────-->	   
 				</td>
@@ -181,7 +173,7 @@ function writeValidate(f)
 
 				<div class="flex-md-12">
 
-                <button class="button--primary button--fill" type="submit" name="submit">댓글쓰기</button>
+                <button class="button--primary button--fill" type="submit" name="submit">1댓글쓰기</button>
 
               </div><!-- .flex-* ends -->
 
@@ -223,7 +215,7 @@ function writeValidate(f)
 
 				<div class="flex-md-12">
 
-                <button class="button--primary button--fill" type="submit" name="submit">댓글쓰기</button>
+                <button class="button--primary button--fill" type="submit" name="submit">2댓글쓰기</button>
 
               </div><!-- .flex-* ends -->
 
