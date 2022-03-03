@@ -121,7 +121,7 @@ public class AndroidController {
 	public int write(BoardDTO bdto){
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
-		System.out.println("게시글 삽입 실행1");
+		System.out.println("게시글 삽입 실행1입니다");
 		int isRegist;
 		int write =
 				sqlSession4.getMapper(IBoardDAO.class).write(bdto);
