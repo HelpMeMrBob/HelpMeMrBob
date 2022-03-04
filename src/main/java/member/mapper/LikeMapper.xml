@@ -39,6 +39,15 @@
   <delete id="scrap_delete">
     DELETE FROM doLike WHERE id=#{id} AND idx=#{idx} AND scrapNo=1
   </delete>
-
+  
+  <select id="checkLike" resultType="int">
+  	select count(lno) from doLike
+    	where id=#{param1} and idx=#{param2}
+  </select>
+  
+	<select id="checkScrap" resultType="int">
+	  	select count(scrapno) from doLike
+	    	where id=#{param1} and idx=#{param2}
+  	</select>	
   
 </mapper>

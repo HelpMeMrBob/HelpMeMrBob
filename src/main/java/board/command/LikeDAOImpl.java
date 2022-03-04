@@ -3,6 +3,8 @@ package board.command;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import board.model.LikeVO;
+
 @Service
 public interface LikeDAOImpl {
 	
@@ -26,5 +28,7 @@ public interface LikeDAOImpl {
 	public int scrap_delete(@Param("id") String id, @Param("idx") String idx);
 
 	public int scrap_count(@Param("id") String id,@Param("idx") String idx,@Param("scrapNo") String scrapNo);
-
+	
+	public int checkLike(String id, String idx);
+	public int checkScrap(String id, String idx);
 }

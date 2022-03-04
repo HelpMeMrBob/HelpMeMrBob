@@ -136,18 +136,6 @@ public class FileuploadController {
 			
 			exist++;
 		}
-		/////////일단 지우지 말아봐여 여기 의문이 조금 남음//////////////////////////////////////
-		////경험치!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////
-		//int applyRow = sqlSession.getMapper(MemberDAOImpl.class).memberExpAction(vo);
-		//System.out.println("경험치업뎃:" + applyRow);
-		//System.out.println("경험치"+vo.getExp());
-		//System.out.println(vo.getId());
-		//dao.selectMem(id);
-		
-		//System.out.println("으으ㅏ어널;ㅓㅈ;ㄴㅇㅎㄹㅍ"+vo.getId());
-		//dao.expEdit(vo);
-		System.out.println("으으ㅏ어널;ㅓㅈ;ㄴㅇㅎㄹㅍ"+vo.getExp());
-		//dao.updateExp(id);
 		
 		
 		dao.reviewWrite(dto);

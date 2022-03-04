@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.transaction.PlatformTransactionManager;
-
 import member.model.MemberVO;
 
 public class JDBCTemplateDAO {
@@ -92,6 +91,7 @@ public class JDBCTemplateDAO {
 	
 	
 	
+
 	
 	// 게시물 조회수 증가
 	public void updateVisitCnt(final String idx) {
@@ -167,6 +167,7 @@ public class JDBCTemplateDAO {
 	}
 	
 	
+
 	
 		//member 부르기!!!!!!실험용!!!!!!!!!!!!!
 		public MemberVO selectMem(String id) {
