@@ -123,13 +123,13 @@
 								<tr>
 									<th class="table-primary">메뉴</th>
 									<td>
-									<textarea name="menu" id="menu" cols="100" rows="3"></textarea>
+									<textarea name="menu" id="menu" cols="100" rows="3">메뉴와 메뉴 사이 @를 넣어 구분합니다.</textarea>
 									</td>
 								</tr>	
 								<tr>
 									<th class="table-primary">가격</th>
 									<td>
-									<textarea name="price" id="price" cols="100" rows="3"></textarea>
+									<textarea name="price" id="price" cols="100" rows="3">가격과 가격 사이 @를 넣어 구분합니다.</textarea>
 									</td>
 								</tr>
 								<tr>

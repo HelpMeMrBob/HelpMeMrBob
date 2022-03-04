@@ -42,10 +42,15 @@ public class LikeController {
 			
 			int likeResult = sqlSession.getMapper(LikeDAOImpl.class).checkLike(id, idx);
 			
+			//int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx,lno);
 			System.out.println("좋아요다 이자식아 : " + likeResult);
 			session.setAttribute("likeResult", likeResult);
+			//session.setAttribute("lno", LikeCount);
+			session.setAttribute("like_id", id);
+			session.setAttribute("like_idx", idx);
+			//System.out.println("=====LikeCount는==="+LikeCount);
 			
-			//int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx,lno);
+			
 			
 			//session.setAttribute("lno", LikeCount);
 			//System.out.println("=====LikeCount는==="+LikeCount);

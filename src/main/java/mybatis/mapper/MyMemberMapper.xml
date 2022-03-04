@@ -19,7 +19,12 @@
 		INSERT INTO point (id, point)
 		
 		VALUES (#{id},  0)
-	</insert>  
+	</insert> 
+
+	<select id="findId" resultType="mybatis.MemberVO" 
+		parameterType="mybatis.MemberVO">
+		SELECT * FROM member WHERE name=#{name} and email=#{email}
+	</select> 
 </mapper>
 
 

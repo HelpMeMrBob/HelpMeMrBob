@@ -50,12 +50,12 @@
 							<form id="plcFrm" name="plcFrm" method="GET" 
 							action="plcEditAction.do" > 
 							
+							<input type="hidden" name="idx" value="${viewRow.idx}"/>
 							<table class="table table-bordered" id="vsTb">
 								
 								 <colgroup>
 								 	<col width=10%>
 						            <col width=*>
-						            
 					 	        </colgroup>
 							
 								<tr>

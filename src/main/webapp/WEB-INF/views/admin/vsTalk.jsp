@@ -44,16 +44,11 @@
 								 <colgroup>
 								 	<col width=5%>
 						            <col width=*>
-						            <col width=6%>
-						            <col width=6%>
-						            
 						        </colgroup>
 							
 								<tr class="table-success">
 									<th>번호</th>
 									<th>주제</th>
-									<th>1:투표수</th>
-									<th>2:투표수</th>
 								</tr>
 								
 								<!-- 반복 시작 -->
@@ -62,8 +57,7 @@
 									<td>${row.virtualNum }</td>
 									<td>
 									<a href="./vsView.do?idx=${row.idx}&nowPage=${nowPage }">${row.topic}</a>
-									</td>
-									<td></td>								
+									</td>								
 								</tr>
 								</c:forEach>
 								<!-- 반복 끝 -->
