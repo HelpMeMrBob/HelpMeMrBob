@@ -479,15 +479,18 @@ public class MemberController
 	//회원가입 액션페이지
 	@RequestMapping("/registerAction.do")
 	public String registerAction (HttpServletRequest req,Model model, MemberVO vo)
-	{	
-		PointDAO pdao = new PointDAO(); 
+	{	 
 		final PointDTO pdto = new PointDTO();
 	
+		ParameterDTO parameterDTO = new ParameterDTO();
 		String id = req.getParameter("id");
-		pdto.setId(id);
+
 		
 		
 		sqlSession.getMapper(MemberDAOImpl.class).registerAction(vo);
+		int preference
+		= sqlSession.getMapper(MemberDAOImpl.class).myPreferenceInsert(vo);
+		
 		System.out.println("회원가입페이지에서 넘어온 아이디: "+id);
 		
 		try {

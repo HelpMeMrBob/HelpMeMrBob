@@ -151,8 +151,7 @@ public class AndroidController {
 		return isRegist;
 	}
 	
-	
-		///안드로이드리스트
+	///안드로이드리스트
 	//JSONArray로 데이터 반환
 		@RequestMapping("/android/list.do")
 		@ResponseBody
@@ -162,6 +161,5 @@ public class AndroidController {
 					sqlSession4.getMapper(IBoardDAO.class).androidList();
 			return lists;
 		}
-	
 
 }

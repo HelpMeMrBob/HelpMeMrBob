@@ -49,6 +49,13 @@
 		SELECT * FROM preference WHERE id = #{ id }
 	</select>
 	
+	<!-- 회원가입 (대분류 입력) -->
+	<insert id="myPreferenceInsert" parameterType="member.model.MemberVO">
+		INSERT INTO preference (id, prenoodle,prerice,presoup,premeat,preseafood ,preetc)
+			VALUES ( #{ id }, ${ prenoodle }, ${ prerice },${ presoup },${ premeat },${ preseafood },${ preetc })
+	
+	</insert>
+	
 	<!-- 회원 정보 수정 (대분류 수정) -->
 	<update id="myPreferenceUpdate" parameterType="member.model.MemberVO">
 		UPDATE preference SET

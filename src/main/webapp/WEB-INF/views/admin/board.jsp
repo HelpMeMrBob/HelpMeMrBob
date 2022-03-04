@@ -60,6 +60,9 @@
     	       }
     	   });
     	}
+       
+       
+		//유효성 체크
 
     </script>
     
@@ -75,10 +78,10 @@
                         </ol>
 							<div class="row">
 							
-							<form id="boardFrm" name="boardFrm" method="POST" action="delete.do">
+							<form id="boardFrm" name="boardFrm" method="POST" action="delete.do" onclick="deleteValue();">
 							
 							<div class="col-lg-12 text-lg-end mb-1">
-							<button type="submit" class="btn btn-dark" id="delete" onclick="deleteValue();">선택 삭제</button>
+							<button type="submit" class="btn btn-dark" id="delete">선택 삭제</button>
 							</div>								
 							<table class="table table-bordered" id="boardTb">
 								

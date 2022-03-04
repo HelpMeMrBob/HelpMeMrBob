@@ -165,9 +165,28 @@ create table VStalk(
     topic varchar(200), --주제
     sel1vote number default 0, --선택1에 대한 투표수
     sel2vote number default 0, --선택2에 대한 투표수
-    sel1img varchar2(80), --선택1에 대한 이미지
-    sel2img varchar2(80), --선택2에 대한 이미지
+    ofile1 varchar2(80), 
+    sfile1 varchar2(80), 
+    ofile2 varchar2(80), 
+    sfile2 varchar2(80),
     primary KEY (idx));
+    
+--vs용 댓글 테이블
+create table fight1(
+    rno varchar2(30),--댓글 번호
+    idx number,
+    id varchar2(30), --아이디
+    contents varchar(500), --댓글 내용
+    writeDate date default sysdate, --작성일
+    cate varchar2(30)); --게시판 분류 컬럼
+--vs용 댓글 시퀀스
+create sequence fight1_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue 
+    nocycle
+    nocache;
     
 --댓글테이블
 drop table comnt;
@@ -228,7 +247,18 @@ alter table haveItem
 -- haveItem테이블의 temOname과, 기존의 adminItem테이블의 temOname을 외래키걸기        
 alter table haveItem
     add foreign key (temOname) 
-        references adminItem(temOname);        
+        references adminItem(temOname);   
+        
+--  나만의 음식 목록
+drop table myfood;
+create table myfood (
+    id VARCHAR(30),
+    tab number,
+    myfood VARCHAR(30)
+);
+alter table myfood
+    add foreign key (id) 
+        references member(id);        
      
 -- admin계정으로 등록된 adminItem 테이블
 drop table adminItem;
