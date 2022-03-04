@@ -16,6 +16,9 @@ public interface IAndroidDAO {
 	public ArrayList<BoardDTO> listPage(ParameterDTO parameterDTO);
 
 	public int getTotalCount(ParameterDTO parameterDTO);
+	
+	//Id찾기
+	public MemberVO findId(MemberVO memberVO);
 
 }
 

@@ -1,13 +1,25 @@
 @charset "UTF-8";
 
+.member-register__wrapper {
+	padding: 2rem;
+}
+
+.member-register__wrapper > h1 {
+text-align: center;
+font-size: 2rem;
+}
+
 .member-register__wrapper  > form {
-	width: 20rem;
+	width: 80%;
 	margin: 0 auto;
 	margin-top: 3rem;
 }
 .member-register__wrapper  > form > div {
-	width: 100%;
+	width: 50%;
+	margin: 0 auto !important;
+	margin-bottom: 1.5rem !important;
 }
+
 
 .member-register__wrapper  > form > div > input {
 	display: block;
@@ -19,6 +31,9 @@
 .member-register__wrapper  > form > div > input:first-child {
 	border: none !important;
 	font-weight: bold;
+	background-color: #fff !important;
+	text-align: left !important;
+	font-size: 1.4rem !important;
 }
 
 .member-register__wrapper  > form > div:last-child {
@@ -27,17 +42,36 @@
 }
 
 .member-register__wrapper  > form > div:last-child > button {
-	width: 7rem;
-	padding: 0.3rem;
+	width: 8.5rem !important;
+	padding: 0.5rem !important;
+	font-size: 1.5rem !important;
 }
 
 .member-register__wrapper  > form > div:last-child > button:first-child {
-	background-color: #555;
-	border:1px solid #555;
+	background-color: #0F202E !important;
+	border:1px solid #0F202E;
 	color: #fff;
 }
 .member-register__wrapper  > form > div:last-child > button:last-child {
 	background-color: #fff;
 	border: 1px solid #555;
 	color: #555;
+}
+
+.member-register__wrapper  > form > table {
+	margin: 0 auto;
+	width: 100% !important;
+	margin-bottom: 5rem;
+}
+
+.member-register__wrapper  > form > table input[type="text"]{
+	width: 20% !important;
+	height: 3rem !important;
+}
+
+.member-register__wrapper  > form > table label {
+	font-size: 1.3rem !important;
+}
+.member-register__wrapper  > form > table select {
+		height: 3rem !important;
 }

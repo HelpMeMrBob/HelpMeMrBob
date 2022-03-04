@@ -11,10 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
-
 import member.model.MemberVO;
 
 public class JDBCTemplateDAO {
@@ -92,46 +88,6 @@ public class JDBCTemplateDAO {
 				}
 			});
 		}
-	
-	
-	
-	/*트랜잭션.ㅣ.......안된다..........
-	 * public void reviewWrite(final BoardDTO boardDTO) {
-	 * 
-	 * TransactionDefinition def=new DefaultTransactionDefinition(); //해당 객체를 통해 최종
-	 * 트랜잭션 처리를 하게됨 TransactionStatus status=transactionManager.getTransaction(def);
-	 * 
-	 * template.update(new PreparedStatementCreator() {
-	 * 
-	 * @Override public PreparedStatement createPreparedStatement(Connection con)
-	 * throws SQLException {
-	 * 
-	 * String sql = "INSERT INTO board (" + " idx, id, tag, title, contents,cate," +
-	 * " userfile1, userfile2, userfile3, userfile4, userfile5)" + " VALUES (" +
-	 * " board_seq.NEXTVAL,?,?,?,?,'rwv'," + "?,?,?,?,?" + " )"; PreparedStatement
-	 * psmt = con.prepareStatement(sql); psmt.setString(1, boardDTO.getId());
-	 * psmt.setString(2, boardDTO.getTag()); psmt.setString(3, boardDTO.getTitle());
-	 * psmt.setString(4, boardDTO.getContents()); psmt.setString(5,
-	 * boardDTO.getUserfile1()); psmt.setString(6, boardDTO.getUserfile2());
-	 * psmt.setString(7, boardDTO.getUserfile3()); psmt.setString(8,
-	 * boardDTO.getUserfile4()); psmt.setString(9, boardDTO.getUserfile5());
-	 * 
-	 * return psmt; } });
-	 * 
-	 * template.update(new PreparedStatementCreator() {
-	 * 
-	 * @Override public PreparedStatement createPreparedStatement(Connection con)
-	 * throws SQLException { String query =
-	 * "update member set exp = exp+100 where id =?"; PreparedStatement psmt=
-	 * con.prepareStatement(query);
-	 * 
-	 * psmt.setString(1, boardDTO.getId()); return psmt; } });
-	 * System.out.println("글도 쓰고 경험치도 올렸음"); transactionManager.commit(status); }
-	 */
-	
-	
-	
-	
 	
 	
 	// 게시물 조회수 증가
@@ -219,9 +175,6 @@ public class JDBCTemplateDAO {
 		}); 		
 	}
 		
-	
-	
-	
 		//member 부르기!!!!!!실험용!!!!!!!!!!!!!
 		public MemberVO selectMem(String id) {
 

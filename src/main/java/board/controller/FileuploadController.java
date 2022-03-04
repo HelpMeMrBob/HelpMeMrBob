@@ -136,23 +136,6 @@ public class FileuploadController {
 			
 			exist++;
 		}
-		//ParameterDTO parameterDTO = new ParameterDTO();
-		//parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
-		
-	
-////경험치!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////
-		//int applyRow = sqlSession.getMapper(MemberDAOImpl.class).memberExpAction(vo);
-		//System.out.println("경험치업뎃:" + applyRow);
-		//System.out.println("경험치"+vo.getExp());
-		//System.out.println(vo.getId());
-		//dao.selectMem(id);
-		
-		//System.out.println("으으ㅏ어널;ㅓㅈ;ㄴㅇㅎㄹㅍ"+vo.getId());
-		//dao.expEdit(vo);
-		System.out.println("으으ㅏ어널;ㅓㅈ;ㄴㅇㅎㄹㅍ"+vo.getExp());
-		//dao.updateExp(id);
-		
-		
 		dao.reviewWrite(dto);
 		
 		model.addAttribute("resultList", resultList);	

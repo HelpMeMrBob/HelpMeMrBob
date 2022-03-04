@@ -41,21 +41,19 @@
 	<update id="memberUpdateAction" parameterType="member.model.MemberVO">
 		UPDATE member SET email = #{ email }, telNum = #{ telNum } where id = #{ id } 
 	</update>
-	
-	<select id="selectMem" resultType="member.model.MemberVO">
-		SELECT * FROM member WHERE id = #{ 0 }
-	</select>
-	
-	<!-- 경험치오르기 -->
-	<update id="memberExpAction" parameterType="member.model.MemberVO">
-		update member set exp = exp+100 where id = #{ id } 
-	</update>
-	
+
 	<!-- 대분류 취향 -->
 	<select id="myPreference" resultType="member.model.MemberVO"
 			parameterType="member.model.ParameterDTO">
 		SELECT * FROM preference WHERE id = #{ id }
 	</select>
+	
+	<!-- 회원가입 (대분류 입력) -->
+	<insert id="myPreferenceInsert" parameterType="member.model.MemberVO">
+		INSERT INTO preference (id, prenoodle,prerice,presoup,premeat,preseafood ,preetc)
+			VALUES ( #{ id }, ${ prenoodle }, ${ prerice },${ presoup },${ premeat },${ preseafood },${ preetc })
+	
+	</insert>
 	
 	<!-- 회원 정보 수정 (대분류 수정) -->
 	<update id="myPreferenceUpdate" parameterType="member.model.MemberVO">

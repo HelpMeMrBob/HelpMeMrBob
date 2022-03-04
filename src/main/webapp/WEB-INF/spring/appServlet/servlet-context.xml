@@ -77,6 +77,7 @@
 		<beans:constructor-arg index="0" ref="sqlSessionFactory4" />
 	</beans:bean>
     
+<<<<<<< HEAD
     <!-- 트랜잭션 -->
     <beans:bean name="transactionManager"
 	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -86,6 +87,8 @@
 
 
    
+=======
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
     <!-- 파일 업로드를 위한 빈 생성 -->
 	<beans:bean id="multipartResolver" 
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

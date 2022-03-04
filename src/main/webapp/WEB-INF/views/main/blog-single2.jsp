@@ -19,6 +19,10 @@ function writeValidate(f)
 		return false;
 	} 
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
 /* function checkValidate(frm) {
 	
 	var idx = frm.idx.value;
@@ -32,6 +36,10 @@ function writeValidate(f)
 	return false;
 } */
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
 </script>
   <body>
 
@@ -42,6 +50,11 @@ function writeValidate(f)
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
     <!-- =================== SITE HEADER ENDS ============================= -->
+<<<<<<< HEAD
+=======
+<!-- 좋아요실험 -->
+<input type="button" value="좋아요" id="btnBoard" />
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 	
 
@@ -133,7 +146,14 @@ function writeValidate(f)
                     <!-- ////////좋아요한 게시글  and viewRow.idx eq idx/////// -->
                     <c:choose>
                     	<c:when test="${sessionScope.siteUserInfo.id eq Lid  and likeResult eq 1 }">
+<<<<<<< HEAD
                     		<form name="writeFrm" method="post" 
+=======
+                    		<form name="writeFrm" method="post" >
+                    <!-- ////////좋아요한 게시글/////// -->
+					<%--  <c:if test="${(lno eq 1 ) and( like_idx eq viewRow.idx ) and ( like_id eq sessionScope.siteUserInfo.id)}">--%>
+					<form name="writeFrm" method="post" 
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
 					          action="./like.do" class="form contact__form"
 					          onsubmit="return checkValidate(this);">
 							 	<input type="hidden" name="idx" value="${viewRow.idx }" />
@@ -166,7 +186,27 @@ function writeValidate(f)
 					<%-- <c:if test="${likeResult eq '1'}">
 					</c:if>
 					<!-- //////////좋아요안한 게시글////////// -->
+<<<<<<< HEAD
 					<c:if test="${likeResult ne '1'}">
+=======
+<<<<<<< HEAD
+					<c:if test="${likeResult ne '1'}">
+=======
+					<c:if test="${(lno ne 1 ) and ( like_idx eq viewRow.idx ) and ( like_id eq sessionScope.siteUserInfo.id) }">
+					<form name="writeFrm" method="post" 
+					          action="./like.do" class="form contact__form"
+					          onsubmit="return checkValidate(this);">
+					 <input type="hidden" name="idx" value="${viewRow.idx }" />
+					<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+					<div class="single-page__share pad-b-sm-2">
+					  <div class="display-flex align-items-center"><div class="social">
+					  <!-- ${row.id } -->
+						<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♡</button>
+					   </div></div><!-- .display-flex ends -->
+					</div><!-- .single-page__share ends -->
+					</form>
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
 					</c:if>
 					<!-- ////////좋아요버튼/////// --> --%>
 					
@@ -174,7 +214,12 @@ function writeValidate(f)
 					
                     <!-- //////////스크랩버튼////////// -->
 					<!-- //////////스크랩한 게시글////////// -->
+<<<<<<< HEAD
 					<c:if test="${scrapResult eq 1}">
+=======
+					<%-- <c:if test="${scrapResult eq 1}"> --%>
+					<c:if test="${(scrapNo eq 1 ) and ( idx eq viewRow.idx ) and ( id eq sessionScope.siteUserInfo.id) }">
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
 					<form name="writeFrm" method="post" 
 					          action="./scrap.do" class="form contact__form"
 					          onsubmit="return checkValidate(this);">
@@ -188,7 +233,12 @@ function writeValidate(f)
 					</form>
 					</c:if>
 					<!-- //////////스크랩안한 게시글////////// -->
+<<<<<<< HEAD
 					<c:if test="${scrapResult ne 1}">
+=======
+					<%-- <c:if test="${scrapResult ne 1}"> --%>
+					<c:if test="${( scrapNo ne 1 ) and ( idx eq viewRow.idx ) and (id eq sessionScope.siteUserInfo.id)}">
+>>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
 					<form name="writeFrm" method="post" 
 					          action="./scrap.do" class="form contact__form"
 					          onsubmit="return checkValidate(this);">

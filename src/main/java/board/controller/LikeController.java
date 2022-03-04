@@ -44,11 +44,12 @@ public class LikeController {
 			
 			System.out.println("좋아요다 이자식아 : " + likeResult);
 			session.setAttribute("likeResult", likeResult);
-			
 			//int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx,lno);
-			
+			System.out.println("좋아요다 이자식아 : " + likeResult);
+			session.setAttribute("likeResult", likeResult);
 			//session.setAttribute("lno", LikeCount);
-			//System.out.println("=====LikeCount는==="+LikeCount);
+			session.setAttribute("like_id", id);
+			session.setAttribute("like_idx", idx);
 			
 			if(likeResult==0) {
 				//insert문을 실행시 입력에 성공한 행의 갯수가 정수로 반환된다 얘 머임

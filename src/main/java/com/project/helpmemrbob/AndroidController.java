@@ -151,8 +151,7 @@ public class AndroidController {
 		return isRegist;
 	}
 	
-	
-		///안드로이드리스트
+	///안드로이드리스트
 	//JSONArray로 데이터 반환
 		@RequestMapping("/android/list.do")
 		@ResponseBody
@@ -162,6 +161,29 @@ public class AndroidController {
 					sqlSession4.getMapper(IBoardDAO.class).androidList();
 			return lists;
 		}
-	
+		
+	//Id 찾기
+	@RequestMapping("/android/findId.do")
+	@ResponseBody
+	public Map<String, Object> findId(MemberVO memberVO) {
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+
+		MemberVO memberInfo =
+			sqlSession4.getMapper(IAndroidDAO.class).findId(memberVO);
+		
+		if(memberInfo==null) {
+			//회원정보 불일치
+			returnMap.put("findId", 0);
+		}
+		else {
+			//회원 정보 일치 
+			returnMap.put("memberInfo", memberInfo);
+			returnMap.put("findId", 1);
+		}
+		
+		System.out.println("요청들어옴:"+returnMap);
+		return returnMap;
+	}
 
 }
