@@ -108,6 +108,8 @@ public class MemberController
 		MemberVO vo
 			= sqlSession.getMapper(MemberDAOImpl.class).kakaoLogin(kid, kname, kemail);
 		
+		
+		
 		System.out.println(vo.getId());
 		
 		session.setAttribute("siteUserInfo", vo);

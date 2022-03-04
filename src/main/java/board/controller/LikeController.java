@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import board.command.LikeDAOImpl;
-import board.command.MybatisDAOImpl;
 import board.model.LikeVO;
 import member.model.MemberVO;
 
@@ -40,36 +39,36 @@ public class LikeController {
 			
 			String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
 			String idx = req.getParameter("idx");
-			String lno = req.getParameter("lno");
 			
-			int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx,lno);
+			int likeResult = sqlSession.getMapper(LikeDAOImpl.class).checkLike(id, idx);
 			
-			session.setAttribute("lno", LikeCount);
-			System.out.println("=====LikeCount는==="+LikeCount);
+			System.out.println("좋아요다 이자식아 : " + likeResult);
+			session.setAttribute("likeResult", likeResult);
 			
-			if(LikeCount==0) {
+			//int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx,lno);
+			
+			//session.setAttribute("lno", LikeCount);
+			//System.out.println("=====LikeCount는==="+LikeCount);
+			
+			if(likeResult==0) {
 				//insert문을 실행시 입력에 성공한 행의 갯수가 정수로 반환된다 얘 머임
 				int result= sqlSession.getMapper(LikeDAOImpl.class).create(
 				req.getParameter("lno"),req.getParameter("idx"),
 				((MemberVO)session.getAttribute("siteUserInfo")).getId());
 				System.out.println("입력한 결과"+result);
-				
-				model.addAttribute("lno",req.getParameter("lno"));
-				model.addAttribute("idx",req.getParameter("idx"));
-				model.addAttribute("id",req.getParameter("id"));
 			}
-			if(LikeCount==1) {
+			else if(likeResult==1) {
 				//삭제처리를 위해 delete() 호출
 				sqlSession.getMapper(LikeDAOImpl.class).delete(
 				((MemberVO)session.getAttribute("siteUserInfo")).getId(),
 				req.getParameter("idx"));
-				
-				model.addAttribute("idx",req.getParameter("idx"));
-				model.addAttribute("id",req.getParameter("id"));
 			}
 			
+			model.addAttribute("idx",req.getParameter("idx"));
+			model.addAttribute("id", id);
+			session.setAttribute("Lid", id);
 			
-			return "redirect:reviewView.do";
+			return "redirect:reviewView.do?idx="+ idx + "&id=" + id;
 		  
 	}
 	  
@@ -113,7 +112,12 @@ public class LikeController {
 			}
 			
 			
-			return "redirect:reviewView.do";
+			int result = sqlSession.getMapper(LikeDAOImpl.class).checkScrap(id, idx);
+			
+			System.out.println("스크랩이다 이자식아 : " + result);
+			session.setAttribute("scrapResult", result);
+			
+			return "redirect:reviewView.do?idx="+ idx;
 		  
 	}
 	  

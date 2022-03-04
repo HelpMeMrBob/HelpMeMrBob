@@ -2,6 +2,7 @@ package board.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import board.command.BbsCommandImpl;
 import board.command.DeleteActionCommand;
 import board.command.EditActionCommand;
 import board.command.EditCommand;
+import board.command.LikeDAOImpl;
 import board.command.ListCommand;
 import board.command.MybatisDAOImpl;
 import board.command.ViewCommand;
@@ -25,6 +27,9 @@ import board.model.BoardDTO;
 import board.model.BoardReplyVO;
 import board.model.JDBCTemplateDAO;
 import board.model.JdbcTemplateConst;
+import board.model.LikeVO;
+import member.model.MemberVO;
+import member.model.ParameterDTO;
 import util.ReplyPagingUtil;
 
 @Controller
@@ -75,6 +80,9 @@ public class BbsController {
 			// 만약 세션이 끊어졌다면 로그인페이지로 이동한다.
 			return "redirect:login.do";
 		}
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
 		return "main/contact4";
 	}
 
@@ -94,7 +102,7 @@ public class BbsController {
 
 	// HttpSession session 에러뜨면 얘떄문임
 	@RequestMapping("/reviewView.do")
-	public String reviewView(Model model, HttpServletRequest req) {
+	public String reviewView(Model model,HttpSession session, HttpServletRequest req) {
 		// 사용자의 요청을 저장한 request객체를 Model객체에 저장한 후 전달한다.
 		model.addAttribute("req", req);
 		command = new ViewCommand();
@@ -126,10 +134,10 @@ public class BbsController {
 		 * 서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨 전달된 파라미터는 #{param1}과 같이 순서대로 사용한다.
 		 */
 		ArrayList<BoardReplyVO> lists = sqlSession.getMapper(MybatisDAOImpl.class).listPage(start, end, idx);
-		/*
-		 * String pagingImg= PagingUtil.pagingImg(totalRecordCount,pageSize, blockPage,
-		 * nowPage, req.getContextPath()+"/reviewView.do?");
-		 */
+		
+		////////////////좋아요버튼//////////////////////////
+		
+		
 		String pagingImg = ReplyPagingUtil.ReplypagingImg(totalRecordCount, pageSize, blockPage, nowPage,
 				req.getContextPath() + "/reviewView.do?", idx);
 		model.addAttribute("pagingImg", pagingImg);
@@ -155,39 +163,6 @@ public class BbsController {
 		return "main/password";
 	}
 
-	// 패스워드 검증
-	/*
-	 * @RequestMapping("passwordAction.do") public String passwordAction(Model
-	 * model, HttpServletRequest req) { String modePage=null; //폼값받기 String
-	 * mode=req.getParameter("mode"); String idx=req.getParameter("idx"); String
-	 * nowPage=req.getParameter("nowPage"); String id=req.getParameter("id");
-	 * 
-	 * //DAO에서 일련번호와 패스워드를 통해 검증 JDBCTemplateDAO dao=new JDBCTemplateDAO();
-	 * 
-	 * int rowExist=dao.id(idx,id);
-	 * 
-	 * if(rowExist<=0) { //패스워드 검증실패시에는 이전 페이지로 돌아간다.
-	 * model.addAttribute("isCorrMsg","패스워드가 일치하지 않습니다.");
-	 * model.addAttribute("idx",idx);
-	 * 
-	 * //패스워드 검증 페이지를 반환한다. modePage="main/password"; } else { //검증에 성공한 경우 수정 혹은 삭제
-	 * 처리를 한다. System.out.println("검증완료"); } if(mode.equals("edit")) {
-	 * 
-	 * mode가 수정인 경우 수정페이지로 이동한다.
-	 * 
-	 * model.addAttribute("req",req); command=new EditCommand();
-	 * command.execute(model);
-	 * 
-	 * modePage="main/contact6"; } else if(mode.equals("delete")) {
-	 * model.addAttribute("req",req); command=new DeleteActionCommand();
-	 * command.execute(model);
-	 * 
-	 * //삭제 후에는 리스트페이지로 이동한다. model.addAttribute("nowPage",
-	 * req.getParameter("nowPage")); modePage="redirect:reviewList.do"; }
-	 * 
-	 * 
-	 * return modePage; }
-	 */
 	// 글쓰기 페이지로 진입하기 위한 매핑처리
 	@RequestMapping("/reviewEdit.do")
 	public String reviewEdit(Model model, HttpServletRequest req) {
@@ -256,11 +231,5 @@ public class BbsController {
 		return "redirect:reviewList.do";
 	}
 	
-	//────────────────────────────────── FoodFight ───────────────────────────────────//
-	
-	/*
-	 * @RequestMapping("/VSFight.do") public String VSFight(Model model,
-	 * HttpServletRequest req) { return "main/vsFight"; }
-	 */
 
 }

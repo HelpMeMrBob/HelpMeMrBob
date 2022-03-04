@@ -77,6 +77,12 @@
 		<beans:constructor-arg index="0" ref="sqlSessionFactory4" />
 	</beans:bean>
     
+    <!-- 트랜잭션 -->
+    <beans:bean name="transactionManager"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<beans:property name="dataSource" ref="dataSource" />
+</beans:bean> 
+    
 
 
    
