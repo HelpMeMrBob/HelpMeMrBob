@@ -92,8 +92,8 @@
 						            <col width=*>
 						            <col width=*>
 						            <col width=10%>
-						            <col width=5%>
-						            <col width=5%>
+						           <%--  <col width=5%>
+						            <col width=5%> --%>
 						        </colgroup>
 							
 								<tr class="table-success">
@@ -105,8 +105,8 @@
 									<th>제목</th>
 									<th>내용</th>
 									<th>작성일</th>
-									<th>방문수</th>									
-									<th>추천수</th>
+									<!-- <th>방문수</th>									
+									<th>추천수</th> -->
 								</tr>
 								
 								<!-- 반복 시작 -->
@@ -116,12 +116,14 @@
 									<input type="checkbox" id="RowCheck" name="idx" value="${row.idx }"/>
 									</td>
 									<td>${row.virtualNum }</td>
-									<td>${row.sfile }</td>
+									<td> 
+									<img src="../resources/upload/${row.userfile1 }" style="max-width:200px;" />
+									</td>
 									<td>${row.title }</td>
 									<td>${row.contents }</td>
 									<td>${row.postdate }</td>
-									<td>${row.visitCnt }</td>
-									<td>${row.recomndCnt }</td>
+									<%-- <td>${row.visitCnt }</td>
+									<td>${row.recomndCnt }</td> --%>
 								</tr>
 								</c:forEach>
 								<!-- 반복 끝 -->
