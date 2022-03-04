@@ -61,6 +61,10 @@
     	   });
     	}
 
+       
+     	//유효성 체크
+           
+     	}
     </script>
     
     <body class="sb-nav-fixed">

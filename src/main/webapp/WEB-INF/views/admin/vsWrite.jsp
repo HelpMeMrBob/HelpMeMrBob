@@ -15,12 +15,34 @@
         <link href="${ path }/adsources/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <style>
     	.row { width: 90% ;}
     	
     	#topic{ border: none; }
     </style>
+    <script>
+    
+    	//유효성 검사
+	   function checkValidate(f){
+		if(f.topic.value==""){
+			alert("이번 주제를 입력해주세요.");
+			f.topic.focus();
+			return false;
+		}
+		if(f.file1.value==""){
+			alert("사진 두장을 첨부해야합니다.");
+			
+			return false;
+		}
+		if(f.file2.value==""){
+			alert("사진 두장을 첨부해야합니다.");
+			
+			return false;
+		}
+	}
+    </script>
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -33,7 +55,7 @@
                         </ol>
 							<div class="row">
 							<form id="vsFrm" name="vsFrm" method="post" 
-							action="uploadAction.do" enctype="multipart/form-data"> 
+							action="uploadAction.do" enctype="multipart/form-data" onsubmit="return checkValidate(this);"> 
 							
 							<table class="table table-bordered" id="vsTb">
 								
@@ -52,13 +74,13 @@
 								<tr>
 									<th class="table-primary">아이템 1</th>
 									<td>
-								 	<input type="file" name="file1" />
+								 	<input type="file" name="file1" id="file1"/>
 									</td>
 								</tr>
 								<tr>
 									<th class="table-primary">아이템 2</th>
 									<td>
-									<input type="file" name="file2" />
+									<input type="file" name="file2" id="file2"/>
 									</td>
 								</tr>				
 							</table>
