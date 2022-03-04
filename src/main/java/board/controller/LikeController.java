@@ -45,6 +45,8 @@ public class LikeController {
 			int LikeCount=sqlSession.getMapper(LikeDAOImpl.class).count(id, idx,lno);
 			
 			session.setAttribute("lno", LikeCount);
+			session.setAttribute("like_id", id);
+			session.setAttribute("like_idx", idx);
 			System.out.println("=====LikeCount는==="+LikeCount);
 			
 			if(LikeCount==0) {

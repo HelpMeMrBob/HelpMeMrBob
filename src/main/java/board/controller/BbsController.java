@@ -25,6 +25,8 @@ import board.model.BoardDTO;
 import board.model.BoardReplyVO;
 import board.model.JDBCTemplateDAO;
 import board.model.JdbcTemplateConst;
+import member.model.MemberVO;
+import member.model.ParameterDTO;
 import util.ReplyPagingUtil;
 
 @Controller
@@ -75,6 +77,9 @@ public class BbsController {
 			// 만약 세션이 끊어졌다면 로그인페이지로 이동한다.
 			return "redirect:login.do";
 		}
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
 		return "main/contact4";
 	}
 

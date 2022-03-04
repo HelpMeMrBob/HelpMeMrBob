@@ -36,4 +36,5 @@ public interface MemberDAOImpl
 	
 	public int registerAction(MemberVO vo);
 	public int kakaoRegisterAction(MemberVO vo);
+	
 }

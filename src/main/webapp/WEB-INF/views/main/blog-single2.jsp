@@ -19,30 +19,8 @@ function writeValidate(f)
 		return false;
 	} 
 }
-////////////ajax보류////////////////
-/* function like_func(){
-	  var idx = $('#idx').val();
-	  var id = $('#id').val();
-	  console.log("idx, id : " + idx +","+ id);
-	   $.ajax({
-		    url: "./like.do",
-		    type: "GET",
-		    cache: false,
-		    dataType: "json",
-		    data: 'idx=' +idx+ '&id=' +id,
-		    success: function(data) {
-		      if(data.lno == 0){
-		        like_img = "♡";
-		      } else {
-		        like_img = "♥";
-		      }
-		      $('#lno').html(data.lno);
-		    },
-		    error: function(request, status, error){
-		      alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		    }
-		  });
-} */
+
+
 </script>
   <body>
 
@@ -53,9 +31,8 @@ function writeValidate(f)
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
     <!-- =================== SITE HEADER ENDS ============================= -->
-
-
-
+<!-- 좋아요실험 -->
+<input type="button" value="좋아요" id="btnBoard" />
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 	
 
@@ -147,7 +124,7 @@ function writeValidate(f)
                   <div class="icon-text mar-b-sm-2">
                     <span class="icon">
                     <!-- ////////좋아요한 게시글/////// -->
-					<c:if test="${lno eq 0 and idx eq idx and id eq id}">
+					<c:if test="${(lno eq 1 ) and( like_idx eq viewRow.idx ) and ( like_id eq sessionScope.siteUserInfo.id)}">
 					<form name="writeFrm" method="post" 
 					          action="./like.do" class="form contact__form"
 					          onsubmit="return checkValidate(this);">
@@ -162,7 +139,7 @@ function writeValidate(f)
 					</form>
 					</c:if>
 					<!-- //////////좋아요안한 게시글////////// -->
-					<c:if test="${lno eq null or lno eq 1 and idx eq idx and id eq id}">
+					<c:if test="${(lno ne 1 ) and ( like_idx eq viewRow.idx ) and ( like_id eq sessionScope.siteUserInfo.id) }">
 					<form name="writeFrm" method="post" 
 					          action="./like.do" class="form contact__form"
 					          onsubmit="return checkValidate(this);">
@@ -179,7 +156,7 @@ function writeValidate(f)
 					<!-- ////////좋아요버튼/////// -->
                     <!-- //////////스크랩버튼////////// -->
 					<!-- //////////스크랩한 게시글////////// -->
-					<c:if test="${scrapNo eq 0 and idx eq idx and id eq id}">
+					<c:if test="${(scrapNo eq 1 ) and ( idx eq viewRow.idx ) and ( id eq sessionScope.siteUserInfo.id) }">
 					<form name="writeFrm" method="post" 
 					          action="./scrap.do" class="form contact__form"
 					          onsubmit="return checkValidate(this);">
@@ -193,7 +170,7 @@ function writeValidate(f)
 					</form>
 					</c:if>
 					<!-- //////////스크랩안한 게시글////////// -->
-					<c:if test="${scrapNo eq null or scrapNo eq 1 and idx eq idx and id eq id}">
+					<c:if test="${( scrapNo ne 1 ) and ( idx eq viewRow.idx ) and (id eq sessionScope.siteUserInfo.id)}">
 					<form name="writeFrm" method="post" 
 					          action="./scrap.do" class="form contact__form"
 					          onsubmit="return checkValidate(this);">
