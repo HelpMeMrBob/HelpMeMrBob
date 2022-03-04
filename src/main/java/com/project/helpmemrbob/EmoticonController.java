@@ -80,7 +80,6 @@ public class EmoticonController {
 			return "emoticon/shop";
 		}
 		
-		
 		@RequestMapping("/buyProcess.do")
 		public String realBuyProcess(HttpServletRequest request,  Model model, HttpSession session) {
 			String sticker = request.getParameter("sticker");
