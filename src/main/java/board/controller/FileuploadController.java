@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,51 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-
-import board.command.BbsCommandImpl;
-import board.command.EditActionCommand;
 import board.model.BoardDTO;
 import board.model.JDBCTemplateDAO;
+import member.model.MemberVO;
 
 @Controller
 public class FileuploadController {
-
-	//파일업로드를 위한 디렉토리의 물리적 경로 확인하기
-	@RequestMapping("/fileUpload/uploadPath.do")
-	//request, response내장객체를 사용하기위해 매개변수로 선언
-	public void uploadPath(HttpServletRequest req, 
-			HttpServletResponse resp) throws IOException {
-		
-		//request내장객체를 통해 서버의 물리적 경로 얻어옴
-		String path = req.getSession().getServletContext()
-				.getRealPath("/resources/upload");
-		//upload디렉토리는 정적파일을 저장하기 위한 resources하위에 생성한다.
-		
-		//response내장객체를 통해 MIME타입을 설정한다. 
-		resp.setContentType("text/html; charset=utf-8");
-		//View를 호출하지 않고 컨트롤러에서 즉시 출력한다. 
-		PrintWriter pw = resp.getWriter();
-		pw.print("/upload 디렉토리의 물리적경로 : "+ path);
-	}
 	
-	//파일 업로드 폼 매핑
-	@RequestMapping("/fileUpload/uploadForm.do")
-	public String uploadForm() {
-		return "06FileUpload/uploadForm";
-	}
-	//파일 업로드폼 테스트
-		@RequestMapping("/uploadFormTest.do")
-		public String uploadFormTest() {
-			return "main/contact4";
-		}
-
-	/*
-	UUID(Universally Unique IDentifier)
-		 : 범용고유식별자. randomUUID()를 통해 문자열을 생성하면
-		 하이픈이 4개 포함된 32자의 랜덤하고 유니크한 문자열이 생성된다. 
-		 JDK에서 기본 클래스로 제공된다.  
-	 */
+	
 	public static String getUuid(){
 		String uuid = UUID.randomUUID().toString();		
 		System.out.println("생성된UUID-1:"+ uuid);
@@ -80,10 +42,18 @@ public class FileuploadController {
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="/reviewUploadAction.do")
 	//파일업로드를 위한 객체를 매개변수로 선언한다. 
-	public String uploadAction(Model model, MultipartHttpServletRequest req) {
+	public String uploadAction(Model model, HttpSession session, MultipartHttpServletRequest req) {
+		
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		
 		
 		JDBCTemplateDAO dao=new JDBCTemplateDAO();
 		BoardDTO dto = new BoardDTO();
+		MemberVO vo=new MemberVO();
 		
 		
 		//물리적경로 얻어오기
@@ -136,40 +106,54 @@ public class FileuploadController {
 				//index++;
 				//dao.reviewWrite(dto);				
 			}
-			
-			//나머지 폼값 받기
-			String title = req.getParameter("title");
-			String contents = req.getParameter("contents");
-			String tag = req.getParameter("tag");
-			String id=req.getParameter("id");
-			
-			//폼값받아넣기
-			dto.setTitle(title);
-			dto.setContents(contents);
-			dto.setTag(tag);
-			dto.setId(id);
-			
-			
-			int exist = 1;
-			for(String obj : resultList) {
-				//dto.setUserfile1(resultList.get(0));
-				
-				if(exist==1) dto.setUserfile1(obj);
-				else if(exist==2) dto.setUserfile2(obj);
-				else if(exist==3) dto.setUserfile3(obj);
-				else if(exist==4) dto.setUserfile4(obj);
-				else if(exist==5) dto.setUserfile5(obj);
-				
-				exist++;
-			}
-			
-			
-			dao.reviewWrite(dto);	
 		}		 
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+			
+		//나머지 폼값 받기
+		String title = req.getParameter("title");
+		String contents = req.getParameter("contents");
+		String tag = req.getParameter("tag");
+		String id=req.getParameter("id");
 		
+		//폼값받아넣기
+		dto.setTitle(title);
+		dto.setContents(contents);
+		dto.setTag(tag);
+		dto.setId(id);
+		
+		
+		int exist = 1;
+		for(String obj : resultList) {
+			//dto.setUserfile1(resultList.get(0));
+			
+			if(exist==1) dto.setUserfile1(obj);
+			else if(exist==2) dto.setUserfile2(obj);
+			else if(exist==3) dto.setUserfile3(obj);
+			else if(exist==4) dto.setUserfile4(obj);
+			else if(exist==5) dto.setUserfile5(obj);
+			
+			exist++;
+		}
+		//ParameterDTO parameterDTO = new ParameterDTO();
+		//parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+	
+////경험치!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////
+		//int applyRow = sqlSession.getMapper(MemberDAOImpl.class).memberExpAction(vo);
+		//System.out.println("경험치업뎃:" + applyRow);
+		//System.out.println("경험치"+vo.getExp());
+		//System.out.println(vo.getId());
+		//dao.selectMem(id);
+		
+		//System.out.println("으으ㅏ어널;ㅓㅈ;ㄴㅇㅎㄹㅍ"+vo.getId());
+		//dao.expEdit(vo);
+		System.out.println("으으ㅏ어널;ㅓㅈ;ㄴㅇㅎㄹㅍ"+vo.getExp());
+		//dao.updateExp(id);
+		
+		
+		dao.reviewWrite(dto);
 		
 		model.addAttribute("resultList", resultList);	
 		return "redirect:reviewList.do?nowPage=1";
