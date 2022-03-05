@@ -142,11 +142,17 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.13.1</version>
 		</dependency>
-		<!-- org.json.simple.JSONObject 쓰려고... -->
+		<!-- org.json.simple 의존설정 -->
 		<dependency>
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1.1</version>
+		</dependency>
+		<!-- org.json 의존설정 -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180813</version>
 		</dependency>
 		
 		<!-- 안드로이드 통신 -->
