@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import infomation.model.FavoriteDTO;
 import infomation.model.InfomationDAOInter;
 import infomation.model.InfomationDTO;
+import infomation.model.ReviewDTO;
 import member.model.MemberVO;
 
 @Controller
@@ -140,6 +141,10 @@ public class InfomationController {
 		ArrayList<InfomationDTO> detailView = 
 				sqlSession2.getMapper(InfomationDAOInter.class).detailView(place);
 		
+		ArrayList<ReviewDTO> review = 
+				sqlSession2.getMapper(InfomationDAOInter.class).review(place);
+		
+		model.addAttribute("review", review);
 		model.addAttribute("detailView", detailView);
 		
 		return "main/detailView";

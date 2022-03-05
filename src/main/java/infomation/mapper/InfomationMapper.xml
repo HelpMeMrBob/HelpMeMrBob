@@ -34,5 +34,10 @@
 	<select id="detailView" resultType="infomation.model.InfomationDTO">
 		SELECT * FROM restaurant WHERE place=#{param1} 
 	</select>
+	
+	<select id="review" resultType="infomation.model.ReviewDTO">
+		SELECT idx, title FROM board WHERE tag LIKE
+    		'%'||(SELECT place FROM restaurant WHERE place LIKE '%'||#{param1}||'%')||'%'
+	</select>
 </mapper>
 	

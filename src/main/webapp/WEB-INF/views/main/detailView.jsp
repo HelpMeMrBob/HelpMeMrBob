@@ -39,13 +39,25 @@
 					<c:if test="${ row.operTime == 'null' }"><li style="color:red;">영업시간 : 정보제공없음</li></c:if>
 				</ul>
 				<hr />
-				
-				
-				<div align="center">
-					여기는 리뷰 게시판
-				</div>
 			</c:forEach>
   		</div>
+  		
+  		
+		<div align="center">
+		<h1>- 리뷰 상세보기 -</h1><br />
+			<c:choose>
+				<c:when test="${ empty review }">
+					<span>아직 작성된 리뷰가 없어요</span>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${ review }" var="row" varStatus="loop">
+						<span style="font-size: 14px;">${ loop.count }번째 리뷰 : </span>
+						<a href="./reviewView.do?idx=${ row.idx }" style="font-size: 20px;">${ row.title }</a><br />
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			<hr />
+		</div>
   		
   		<div align="right">
 			<button id="locationCheck" type="button" class="button button-block-sm button--primary button--fill" 
