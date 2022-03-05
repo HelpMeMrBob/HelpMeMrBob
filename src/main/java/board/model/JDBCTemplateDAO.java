@@ -62,10 +62,8 @@ public class JDBCTemplateDAO {
 	}
 	
 	
-	// 파일올리는 글쓰기
 		public void reviewWrite(final BoardDTO boardDTO) {
 			updateExp(boardDTO.getId());
-			
 			template.update(new PreparedStatementCreator() {
 				@Override
 				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
@@ -83,7 +81,6 @@ public class JDBCTemplateDAO {
 					psmt.setString(7, boardDTO.getUserfile3());
 					psmt.setString(8, boardDTO.getUserfile4());
 					psmt.setString(9, boardDTO.getUserfile5());
-
 					return psmt;
 				}
 			});
@@ -108,11 +105,7 @@ public class JDBCTemplateDAO {
 	
 	
 	public void updateExp(final String id) {
-		// 쿼리문 작성
 		String sql = "update member set exp = exp+100 where id =?";
-		/*
-		 * 행의 변화를 주는 쿼리문 실행이므로 update메서드를 사용함 첫번째인자는 쿼리문, 두번째 인자는 익명클래스를 통해 인파라미터를 설정한다.
-		 */
 		template.update(sql, new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
