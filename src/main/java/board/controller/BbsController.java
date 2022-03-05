@@ -151,6 +151,24 @@ public class BbsController {
 
 		System.out.println(start + "=" + end + "=" + idx);
 		System.out.println(lists.size());
+		
+		String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
+		String likeResult = req.getParameter("likeResult");
+		String scrapResult = req.getParameter("scrapResult");
+		
+		if (likeResult == null) {
+			int result = sqlSession.getMapper(LikeDAOImpl.class).checkLike(id, idx);
+			likeResult = String.valueOf(result);
+		}
+		if (scrapResult == null) {
+			int result = sqlSession.getMapper(LikeDAOImpl.class).checkScrap(id, idx);
+			scrapResult = String.valueOf(result);
+		}
+		
+		model.addAttribute("id", id);
+		model.addAttribute("idx", idx);
+		model.addAttribute("likeResult", likeResult);
+		model.addAttribute("scrapResult", scrapResult);
 
 		return "main/blog-single2";
 	}

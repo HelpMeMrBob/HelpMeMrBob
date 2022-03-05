@@ -82,11 +82,11 @@
 			<input type="hidden" name="idx" value="${viewRow.idx }" />
 			<input type="hidden" name="nowPage" value="${param.nowPage }" />
 			<input type="hidden" name="pass" value="${viewRow.id }" />
-			<input type="hid-den" name="editFile1" value="${viewRow.userfile1}">
-			<input type="hid-den" name="editFile2" value="${viewRow.userfile2}">
-			<input type="hid-den" name="editFile3" value="${viewRow.userfile3}">
-			<input type="hid-den" name="editFile4" value="${viewRow.userfile4}">
-			<input type="hid-den" name="editFile5" value="${viewRow.userfile5}">
+			<input type="hidden" name="editFile1" value="${viewRow.userfile1}">
+			<input type="hidden" name="editFile2" value="${viewRow.userfile2}">
+			<input type="hidden" name="editFile3" value="${viewRow.userfile3}">
+			<input type="hidden" name="editFile4" value="${viewRow.userfile4}">
+			<input type="hidden" name="editFile5" value="${viewRow.userfile5}">
 			
 			
 			
