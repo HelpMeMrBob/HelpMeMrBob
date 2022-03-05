@@ -192,3 +192,9 @@
 
   </nav><!-- .bottom-nav ends -->
 </header><!-- .header ends -->
+<script>
+// 룰렛페이지가 아니면 세션스토리지에서 menuCount를 삭제한다.
+if(window.location.href != "http://localhost:8081/helpmemrbob/roulette.do") {
+	sessionStorage.removeItem("menuCount");
+}
+</script>
