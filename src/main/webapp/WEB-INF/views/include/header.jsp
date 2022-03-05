@@ -197,4 +197,8 @@
 if(window.location.href != "http://localhost:8081/helpmemrbob/roulette.do") {
 	sessionStorage.removeItem("menuCount");
 }
+//룰렛페이지가 아니면 세션스토리지에서 addOption를 삭제한다.
+if(window.location.href != "http://localhost:8081/helpmemrbob/roulette.do") {
+	sessionStorage.removeItem("addOption");
+}
 </script>
