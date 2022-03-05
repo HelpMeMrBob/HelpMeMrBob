@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var = "path" value = "${pageContext.request.contextPath}" />
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -31,7 +32,7 @@
           <div class="banner__content">
 
             <h2 class="section-intro color-off-white-with-border bold">
-							리뷰게시판
+				리뷰게시판
 			</h2>
 
           </div><!-- .banner__content ends -->
@@ -83,7 +84,7 @@
 
                   <!-- <img src="./resources/images/causes-3.jpg" alt="" class="card__image"> -->
 
-				<img src="./resources/upload/${row.userfile1}" alt="" class="card__image">
+				<img src="${ path }/resources/upload/${row.userfile1}" alt="" class="card__image">
                 </div><!-- .card__header ends -->
 
                 <div class="card__body">
@@ -91,7 +92,7 @@
                   <h3 class="cause__tile mar-b-sm-2">${row.title} </h3>
                   
 				<!-- 얘 없으면 쪼그라들어요 -->	
-				<img src="./resources/upload/bottomBar.png" style="max-width:500px;" />
+				<img src="${ path }/resources/upload/bottomBar.png" style="max-width:500px;" />
                 </div><!-- .card__body ends -->
 
                 <!-- <div class="card__footer">
@@ -150,10 +151,10 @@
 			</ul>
 
 			<!-- #####버튼들##### -->
-			<div class="flex-md-12">
-	           <button class="button--primary button--fill" type="submit" 
-	           onclick="location.href='./reviewWrite.do';">
-					글쓰기</button>
+			<div class="flex-md-12" align="right">
+	           	<button class="button--primary button--fill" type="submit" 
+	           		onclick="location.href='./reviewWrite.do';">글쓰기
+           		</button>
 			</div><!-- .flex-* ends -->
 			
         </div><!-- .container ends -->

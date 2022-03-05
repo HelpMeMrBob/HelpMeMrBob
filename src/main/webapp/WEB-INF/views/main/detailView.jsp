@@ -39,6 +39,11 @@
 					<c:if test="${ row.operTime == 'null' }"><li style="color:red;">영업시간 : 정보제공없음</li></c:if>
 				</ul>
 				<hr />
+				
+				
+				<div align="center">
+					여기는 리뷰 게시판
+				</div>
 			</c:forEach>
   		</div>
   		

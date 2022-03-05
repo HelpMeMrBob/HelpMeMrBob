@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var = "path" value = "${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 <!-- ajax cdn -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -19,21 +20,6 @@ function writeValidate(f)
 		return false;
 	} 
 }
-<<<<<<< HEAD
-/* function checkValidate(frm) {
-	
-	var idx = frm.idx.value;
-	var id = frm.id.value;
-	var check = confirm("좋아요 하실?");
-	
-	if (check) {
-		location.href="./like.do?idx=" + idx + "&id=" + id;
-	}
-	
-	return false;
-} */
-
-
 </script>
   <body>
 
@@ -44,13 +30,12 @@ function writeValidate(f)
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
     <!-- =================== SITE HEADER ENDS ============================= -->
-<!-- 좋아요실험 -->
-<input type="button" value="좋아요" id="btnBoard" />
+    
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 	
-
+	
     <main>
-
+	
       <!-- BANNER SECTION STARTS -->
       <section class="category-pointshop pad-t-sm-6 pad-t-lg-8 pad-b-sm-6 pad-b-lg-8 mar-t-md-8">
 
@@ -59,7 +44,7 @@ function writeValidate(f)
           <div class="banner__content">
 
             <h2 class="section-intro color-off-white-with-border bold">
-							리뷰게시판
+				리뷰게시판
 			</h2>
 
           </div><!-- .banner__content ends -->
@@ -74,7 +59,7 @@ function writeValidate(f)
       <section class="single-page single-sermon single-sermon--text default-section-spacing">
 
         <div class="container">
-
+			
           <div class="row">
 
             <div class="flex-md-8 flex-lg-9">
@@ -84,31 +69,24 @@ function writeValidate(f)
 
                 <div class="text-block mar-b-sm-4">
                   <h2>제목: ${viewRow.title }</h2>
-                  <h1>${sessionScope.siteUserInfo.id eq Lid}</h1>
                   <h5 class="mar-b-sm-2">내용: ${viewRow.contents} </h5>
-                  <h3>${likeResult}</h3>
-				  <h3>${scrapResult}</h3>
                 </div><!-- .text-block ends -->
-				<%-- <p>${idx}</p> --%>
 				
 				<c:if test="${not empty viewRow.userfile1}">
-				<p><img src="resources/upload/${viewRow.userfile1}" /></p>
+				<p><img src="${path}/resources/upload/${viewRow.userfile1}" /></p>
 				</c:if>
 				<c:if test="${not empty viewRow.userfile2}">
-				<p><img src="resources/upload/${viewRow.userfile2}" /></p>
+				<p><img src="${path}/resources/upload/${viewRow.userfile2}" /></p>
 				</c:if>
 				<c:if test="${not empty viewRow.userfile3}">
-				<p><img src="resources/upload/${viewRow.userfile3}" /></p>
+				<p><img src="${path}/resources/upload/${viewRow.userfile3}" /></p>
 				</c:if>
 				<c:if test="${not empty viewRow.userfile4}">
-				<p><img src="resources/upload/${viewRow.userfile4}" /></p>
+				<p><img src="${path}/resources/upload/${viewRow.userfile4}" /></p>
 				</c:if>
 				<c:if test="${not empty viewRow.userfile5}">
-				<p><img src="resources/upload/${viewRow.userfile5}" /></p>
+				<p><img src="${path}/resources/upload/${viewRow.userfile5}" /></p>
 				</c:if>
-				
-				<%-- <h3>${lno}</h3>
-				<h3>${scrapNo}</h3> --%>
 				
 				<div class="sidebar">
 
@@ -132,17 +110,15 @@ function writeValidate(f)
                     <span class="icon">작성자:</span>
                     <span class="text bold">${viewRow.id}</span>
                   </div>
-                  <div class="icon-text mar-b-sm-2">
+                  
+                  <!-- ////////좋아요버튼/////// -->
+                  <div class="icon-text mar-b-sm-2" style="margin-top: 10px;">
                     <span class="icon">
-                    <!-- ////////좋아요한 게시글  and viewRow.idx eq idx/////// -->
                     <c:choose>
-                    	<c:when test="${sessionScope.siteUserInfo.id eq Lid  and likeResult eq 1 }">
-                    		<form name="writeFrm" method="post" >
-                    <!-- ////////좋아요한 게시글/////// -->
-					<%--  <c:if test="${(lno eq 1 ) and( like_idx eq viewRow.idx ) and ( like_id eq sessionScope.siteUserInfo.id)}">--%>
-					<form name="writeFrm" method="post" 
-					          action="./like.do" class="form contact__form"
-					          onsubmit="return checkValidate(this);">
+                    	<c:when test="${ likeResult eq 1 and viewRow.idx eq idx }">
+							<form name="writeFrm" method="post" 
+					        	action="./like.do" class="form contact__form"
+					        	onsubmit="return checkValidate(this);">
 							 	<input type="hidden" name="idx" value="${viewRow.idx }" />
 								<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
 								<div class="single-page__share pad-b-sm-2">
@@ -155,8 +131,8 @@ function writeValidate(f)
                     	</c:when>
                     	<c:otherwise>
 							<form name="writeFrm" method="post" 
-					          action="./like.do" class="form contact__form"
-					          onsubmit="return checkValidate(this);">
+					        	action="./like.do" class="form contact__form"
+					        	onsubmit="return checkValidate(this);">
 							 	<input type="hidden" name="idx" value="${viewRow.idx }" />
 								<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
 								<div class="single-page__share pad-b-sm-2">
@@ -168,79 +144,84 @@ function writeValidate(f)
 							</form>                    	
                     	</c:otherwise>
                     </c:choose>
-                    
-                    
-					<%-- <c:if test="${likeResult eq '1'}">
-					</c:if>
-					<!-- //////////좋아요안한 게시글////////// -->
-<<<<<<< HEAD
-					<c:if test="${likeResult ne '1'}">
-=======
-					<c:if test="${(lno ne 1 ) and ( like_idx eq viewRow.idx ) and ( like_id eq sessionScope.siteUserInfo.id) }">
-					<form name="writeFrm" method="post" 
-					          action="./like.do" class="form contact__form"
-					          onsubmit="return checkValidate(this);">
-					 <input type="hidden" name="idx" value="${viewRow.idx }" />
-					<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-					<div class="single-page__share pad-b-sm-2">
-					  <div class="display-flex align-items-center"><div class="social">
-					  <!-- ${row.id } -->
-						<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♡</button>
-					   </div></div><!-- .display-flex ends -->
-					</div><!-- .single-page__share ends -->
-					</form>
->>>>>>> branch 'main' of https://github.com/HelpMeMrBob/HelpMeMrBob.git
-					</c:if>
-					<!-- ////////좋아요버튼/////// --> --%>
-					
+                    <!-- ////////좋아요버튼/////// -->
 					
 					
                     <!-- //////////스크랩버튼////////// -->
 					<!-- //////////스크랩한 게시글////////// -->
-					<%-- <c:if test="${scrapResult eq 1}"> --%>
-					<c:if test="${(scrapNo eq 1 ) and ( idx eq viewRow.idx ) and ( id eq sessionScope.siteUserInfo.id) }">
-					<form name="writeFrm" method="post" 
-					          action="./scrap.do" class="form contact__form"
-					          onsubmit="return checkValidate(this);">
-					 <input type="hidden" name="idx" value="${viewRow.idx }" />
-					<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-					<div class="single-page__share pad-b-sm-2">
-					  <div class="display-flex align-items-center"><div class="social">
-						<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">★</button>
-					   </div></div><!-- .display-flex ends -->
-					</div><!-- .single-page__share ends -->
-					</form>
-					</c:if>
-					<!-- //////////스크랩안한 게시글////////// -->
-					<%-- <c:if test="${scrapResult ne 1}"> --%>
-					<c:if test="${( scrapNo ne 1 ) and ( idx eq viewRow.idx ) and (id eq sessionScope.siteUserInfo.id)}">
-					<form name="writeFrm" method="post" 
-					          action="./scrap.do" class="form contact__form"
-					          onsubmit="return checkValidate(this);">
-					 <input type="hidden" name="idx" value="${viewRow.idx }" />
-					<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-					<div class="single-page__share pad-b-sm-2">
-					  <div class="display-flex align-items-center"><div class="social">
-						<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">☆</button>
-					   </div></div><!-- .display-flex ends -->
-					</div><!-- .single-page__share ends -->
-					</form>
-					</c:if>
+					<c:choose>
+                    	<c:when test="${ scrapResult eq 1 and viewRow.idx eq idx }">
+							<form name="writeFrm" method="post" 
+					        	action="./scrap.do" class="form contact__form"
+					        	onsubmit="return checkValidate(this);">
+								<input type="hidden" name="idx" value="${viewRow.idx }" />
+								<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+								<div class="single-page__share pad-b-sm-2">
+									<div class="display-flex align-items-center">
+										<div class="social">
+											<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">★</button>
+									   	</div>
+							   		</div><!-- .display-flex ends -->
+								</div><!-- .single-page__share ends -->
+							</form>
+                    	</c:when>
+                    	<c:otherwise>
+							<form name="writeFrm" method="post" 
+					        	action="./scrap.do" class="form contact__form"
+					        	onsubmit="return checkValidate(this);">
+							<input type="hidden" name="idx" value="${viewRow.idx }" />
+							<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+							<div class="single-page__share pad-b-sm-2">
+								<div class="display-flex align-items-center">
+									<div class="social">
+										<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">☆</button>
+									</div>
+								</div><!-- .display-flex ends -->
+							</div><!-- .single-page__share ends -->
+							</form>
+                    	</c:otherwise>
+                    </c:choose>
 					<!-- ////////스크랩버튼/////// -->
-                    
                     </span>
-                    <span class="text bold">
-                    
-					</span>
                   </div>
                 </div><!-- .sidebar__widget ends -->
-		</div>
+			</div>
 		</div>
             </div><!-- .flex-* ends -->
-
           </div><!-- .row ends -->
-
         </div><!-- .container ends -->
+
+
+	<!-- SCROLL BACK TO TOP BEGINS -->
+    <div class="scroll-to-top"><i class="ri-arrow-up-line"></i></div>
+    <!-- SCROLL BACK TO TOP ENDS -->
+          <!-- #####버튼들##### -->
+    <div class="flex-md-12" align="right">
+	<%-- <button class="button--primary button--fill" type="submit" 
+          onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
+	수정하기원본</button>
+	<button class="button--primary button--fill" type="submit" 
+	onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
+	삭제하기원본</button>
+     		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>--%>
+	    <c:if test="${sessionScope.siteUserInfo.id eq viewRow.id}">
+	    <!-- //////삭제하기///// -->
+	    <form name="writeFrm" method="post" class="form contact__form" action="./deleteAction.do">
+			<input type="hidden" name="idx" value="${viewRow.idx}" />
+			<input type="hidden" name="id" value="${viewRow.id}" />
+			<input type="hidden" name="nowPage" value="${param.nowPage }" />
+			<button class="button--primary button--fill" type="submit" name="submit">글 삭제하기</button>
+		</form>
+		
+		<form name="writeFrm" method="post" class="form contact__form" action="./reviewEdit.do">
+			<input type="hidden" name="idx" value="${viewRow.idx}" />
+			<input type="hidden" name="id" value="${viewRow.id}" />
+			<input type="hidden" name="nowPage" value="${param.nowPage }" />
+			<button class="button--primary button--fill" type="submit" name="submit">글 수정하기</button>
+		</form>
+		</c:if>
+	</div><!-- .flex-* ends -->
+
 
         <!-- See _singles.scss for styling -->
         
@@ -339,37 +320,7 @@ function writeValidate(f)
           </form><!-- .form ends -->
           
 	
-    <!-- SCROLL BACK TO TOP BEGINS -->
-    <div class="scroll-to-top"><i class="ri-arrow-up-line"></i></div>
-    <!-- SCROLL BACK TO TOP ENDS -->
-          <!-- #####버튼들##### -->
-    <div class="flex-md-12">
-	<%-- <button class="button--primary button--fill" type="submit" 
-          onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
-	수정하기원본</button>
-	<button class="button--primary button--fill" type="submit" 
-	onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
-	삭제하기원본</button>
-     		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>--%>
-    <c:if test="${sessionScope.siteUserInfo.id eq viewRow.id}">
-    <!-- //////삭제하기///// -->
-    <form name="writeFrm" method="post" class="form contact__form" action="./deleteAction.do">
-	<input type="hidden" name="idx" value="${viewRow.idx}" />
-	<input type="hidden" name="id" value="${viewRow.id}" />
-	<input type="hidden" name="nowPage" value="${param.nowPage }" />
-	<button class="button--primary button--fill" type="submit" name="submit">삭제하기</button>
-	</form>
-	<form name="writeFrm" method="post" class="form contact__form" action="./reviewEdit.do">
-	<input type="hidden" name="idx" value="${viewRow.idx}" />
-	<input type="hidden" name="id" value="${viewRow.id}" />
-	<input type="hidden" name="nowPage" value="${param.nowPage }" />
-	<button class="button--primary button--fill" type="submit" name="submit">수정하기</button>
-	</form>
-	</c:if>
-	
-	
-	
-	</div><!-- .flex-* ends -->
+    
 
         </div><!-- .container ends -->
         
