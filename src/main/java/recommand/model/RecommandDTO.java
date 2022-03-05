@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class RecommandDTO {
+	// 메뉴
 	private String idx;
 	private String food;// 음식 이름
 	private String image;// 이미지 이름
