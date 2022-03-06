@@ -45,17 +45,7 @@ public class MemberVO
 	//	스크랩 테이블
 	private int scrapNum;
 	private java.sql.Date sdate;
-	private int tab;
-	private String tab1Name;
-	private String tab2Name;
-	private String tab3Name;
-	private String tab4Name;
-	private String tab5Name;
-	private String tab6Name;
-	private String tab7Name;
-	private String tab8Name;
-	private String tab9Name;
-	private String tab10Name;
+	private int scrapno;
 	
 	//	스티커 테이블
 	private String temOname;
@@ -67,6 +57,15 @@ public class MemberVO
 	private int premeat;
 	private int preseafood;
 	private int preetc;
+	
+	//	음식 테이블
+	private String food;
+	private String image;
+	private String lgroup;
+	
+	//	나만의 음식
+	private String myfood;
+	private int tab;
 	
 	//	포인트
 	private String point;

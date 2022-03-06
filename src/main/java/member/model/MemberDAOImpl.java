@@ -3,21 +3,25 @@ package member.model;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public interface MemberDAOImpl
 {
 	public MemberVO login(String id, String pass);
+	public int myLevel(MemberVO memberVO);
 	public MemberVO kakaoLogin(String id, String name, String email);
-	public MemberVO findId(String name, String email);
-	public MemberVO findPassword(String id, String email);
-	
+	public ArrayList<MemberVO> findId(String name, String email);
+	public ArrayList<MemberVO> findPassword(String id, String email);
 	
 	public MemberVO myPage(String id);
+	public ArrayList<MemberVO> myFoodList(ParameterDTO parameterDTO);
+	public ArrayList<MemberVO> foodList();
+	public int countMyFood(ParameterDTO parameterDTO);
+	public void insertMyFood(ParameterDTO parameterDTO);
+	public void deleteMyFood(ParameterDTO parameterDTO);
+	
 	public MemberVO memberUpdate(MemberVO vo);
 	public int memberUpdateAction(MemberVO vo);
 	public int myPreferenceUpdate(MemberVO vo);
-	public int myPreferenceInsert(MemberVO vo);
 	
 	public void customerServiceSave(@Param("name")String name,
 									@Param("email")String email,
@@ -38,7 +42,4 @@ public interface MemberDAOImpl
 	
 	public int registerAction(MemberVO vo);
 	public int kakaoRegisterAction(MemberVO vo);
-	
-	public int memberExpAction(MemberVO vo);
-	public MemberVO selectMem(String id);
 }

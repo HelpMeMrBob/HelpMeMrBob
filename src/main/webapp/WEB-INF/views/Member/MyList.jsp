@@ -9,14 +9,23 @@
 	<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;">
 		<table style="width: 60%; margin:0.5px">
 			<tr style="border: 1px solid #DFDFDF">
-				<td style="width: 15%;">
+				<td style="width: 12%;">
 					<button onclick="location.href='./mypage.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;">
 						나의 정보 보기
 					</button>
 				</td>
-				<td style="width: 15%;">
+				<td style="width: 12%;">
+					<button onclick="location.href='./myfood.do';"
+							style="background-color: #FFFFFF; color: #ED6A5A;
+								   width: 100%; height: 80px; font-size: 18px;
+	  							   border-left: 1px solid #DFDFDF;
+	  							   border-right: 1px solid #DFDFDF;">
+						나의 음식 목록
+					</button>
+				</td>
+				<td style="width: 12%;">
 					<button onclick="location.href='./mylist.do';"
 							style="background-color: #ED6A5A; color: #FFFFFF;
 								   width: 100%; height: 80px; font-size: 18px;
@@ -25,15 +34,15 @@
 						나의 작성 목록
 					</button>
 				</td>
-				<td style="width: 15%;">
-					<button onclick="location.href='./myscrap1.do';"
+				<td style="width: 12%;">
+					<button onclick="location.href='./myscrap.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-right: 1px solid #DFDFDF;">
 						나의 스크랩 목록
 					</button>
 				</td>
-				<td style="width: 15%;">
+				<td style="width: 12%;">
 					<button onclick="location.href='./memberUpdate.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
@@ -104,7 +113,10 @@
 					${ mylist.virtualNum }
 				</td>
 				<td style="width: 50%; height: 15px; padding: 15px; padding-left: 20px">
-					${ mylist.title }
+					<a href="./reviewView.do?idx=${ mylist.idx }"
+					   style="color: #000000; text-decoration: none;">
+						${ mylist.title }
+					</a>
 				</td>
 				<td style="width: 20%; height: 15px; padding: 15px; text-align: center">
 					${ mylist.visitCnt }

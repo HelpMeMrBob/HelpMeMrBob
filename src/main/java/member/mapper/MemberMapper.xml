@@ -16,6 +16,10 @@
 		SELECT * FROM member WHERE id = #{ 0 } AND pass = #{ 1 }
 	</select>
 	
+	<update id="myLevel" parameterType="member.model.MemberVO">
+		UPDATE member SET lev = TRUNC(${ exp }/1000) WHERE id = #{ id }
+	</update>
+	
 	<!-- 카카오 로그인 등록 -->
 	<insert id="kakaoRegisterAction" parameterType="member.model.MemberVO">
 		INSERT INTO member (id, name, email)
@@ -41,19 +45,38 @@
 	<update id="memberUpdateAction" parameterType="member.model.MemberVO">
 		UPDATE member SET email = #{ email }, telNum = #{ telNum } where id = #{ id } 
 	</update>
-
+	
 	<!-- 대분류 취향 -->
 	<select id="myPreference" resultType="member.model.MemberVO"
 			parameterType="member.model.ParameterDTO">
 		SELECT * FROM preference WHERE id = #{ id }
 	</select>
 	
-	<!-- 회원가입 (대분류 입력) -->
-	<insert id="myPreferenceInsert" parameterType="member.model.MemberVO">
-		INSERT INTO preference (id, prenoodle,prerice,presoup,premeat,preseafood ,preetc)
-			VALUES ( #{ id }, ${ prenoodle }, ${ prerice },${ presoup },${ premeat },${ preseafood },${ preetc })
+	<!-- 나의 음식 목록 출력 -->
+	<select id="myFoodList" resultType="member.model.MemberVO"
+			parameterType="member.model.ParameterDTO">
+		SELECT * FROM myfood WHERE id = #{ id } AND tab = #{ tab }
+	</select>
 	
-	</insert>
+	<!-- 나의 음식 목록 갯수 -->
+	<select id="countMyFood" resultType="int" parameterType="member.model.ParameterDTO">
+		SELECT COUNT(*) FROM myfood WHERE id = #{ id } AND tab = #{ tab }
+	</select>
+	
+	<!-- 음식 데이터 삭제 -->
+	<select id="deleteMyFood" parameterType="member.model.ParameterDTO">
+		DELETE FROM myfood WHERE ID = #{ id } AND myfood = #{ myfood } AND tab = #{ tab }
+	</select>
+	
+	<!-- 음식 데이터 삽입 -->
+	<select id="insertMyFood" parameterType="member.model.ParameterDTO">
+		INSERT INTO myfood (id, tab, myfood) VALUES ( #{ id }, ${ tab }, #{ myfood } )
+	</select>
+	
+	<!-- 음식 데이터 출력 -->
+	<select id="foodList" resultType="member.model.MemberVO">
+		SELECT * FROM food
+	</select>
 	
 	<!-- 회원 정보 수정 (대분류 수정) -->
 	<update id="myPreferenceUpdate" parameterType="member.model.MemberVO">
@@ -127,7 +150,7 @@
 	<!-- 나의 스크랩 목록 -->
 	<select id="getScrapTotalCountSearch" resultType="int"
 			parameterType="member.model.ParameterDTO">
-		SELECT COUNT(*) FROM scrap WHERE id = #{ id } AND tab = ${ tab }
+		SELECT COUNT(*) FROM dolike WHERE id = #{ id } AND scrapno = 1
 		<if test="searchTxt != null and !searchTxt.equals('')">
 			AND ${ searchField } like '%'||#{ searchTxt }||'%'
 		</if>
@@ -135,9 +158,9 @@
 	
 	<select id="scrapListPageSearch" resultType="member.model.MemberVO"
 			parameterType="member.model.ParameterDTO">
-		SELECT * FROM board INNER JOIN scrap
-    		ON board.idx = scrap.idx
-    		WHERE scrap.id = #{ id } AND scrap.tab = ${ tab }
+		SELECT * FROM board INNER JOIN dolike
+    		ON board.idx = dolike.idx
+    		WHERE dolike.id = #{ id } AND dolike.scrapno = 1
 	</select>
 	
 	<!-- 고객센터 내용 저장 -->

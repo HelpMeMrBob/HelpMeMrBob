@@ -12,7 +12,7 @@
 	<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;">
 		<table style="width: 60%; margin:0.5px">
 			<tr style="border: 1px solid #DFDFDF">
-				<td style="width: 15%;">
+				<td style="width: 12%;">
 					<button onclick="location.href='./mypage.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
@@ -20,7 +20,16 @@
 						나의 정보 보기
 					</button>
 				</td>
-				<td style="width: 15%;">
+				<td style="width: 12%;">
+					<button onclick="location.href='./myfood.do';"
+							style="background-color: #FFFFFF; color: #ED6A5A;
+								   width: 100%; height: 80px; font-size: 18px;
+	  							   border-left: 1px solid #DFDFDF;
+	  							   border-right: 1px solid #DFDFDF;">
+						나의 음식 목록
+					</button>
+				</td>
+				<td style="width: 12%;">
 					<button onclick="location.href='./mylist.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
@@ -29,15 +38,15 @@
 						나의 작성 목록
 					</button>
 				</td>
-				<td style="width: 15%;">
-					<button onclick="location.href='./myscrap1.do';"
+				<td style="width: 12%;">
+					<button onclick="location.href='./myscrap.do';"
 							style="background-color: #ED6A5A; color: #FFFFFF;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-right: 1px solid #DFDFDF;">
 						나의 스크랩 목록
 					</button>
 				</td>
-				<td style="width: 15%;">
+				<td style="width: 12%;">
 					<button onclick="location.href='./memberUpdate.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
@@ -49,118 +58,35 @@
 		</table>
 	
 	
-	<div style="width: 100%; margin-Top:3%;">
-		<table style="width: 60%; font-size: 14px; padding: 10px; text-align: center">
-			<tr>
-				<td>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #ED6A5A;
-							   color: #FFFFFF; text-align: center">
-						TAP 1
-				</button>
+	<div>
+	<div style="margin-left: 4%; margin-top: 3%; margin-right: 4.5%;">
+	<form method="get">
+	<table style="width: 100%; text-align: center">
+		<tr>
+			<td>
+				<select name="searchField"
+						style="width:4%; height: 40px; font-size: 12px; padding: 0px;
+					   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;
+					   		  text-align: center">
+					<option value="title">제목</option>
+					<option value="contents">내용</option>
+				</select>
 				
-				<%
-					ParameterDTO parameterDTO = new ParameterDTO();
-					parameterDTO.setTab(1);
-					
-					parameterDTO.setLev(((MemberVO)session.getAttribute("siteUserInfo")).getLev());
-					int level = parameterDTO.getLev();
-				
-					if (level > 5)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap2.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 2
-				</button>
-				<%
-					}
-					if (level > 10)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 3
-				</button>
-				<%
-					}
-					if (level > 15)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 4
-				</button>
-				<%
-					}
-					if (level > 20)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 5
-				</button>
-					<%
-					}
-					if (level > 25)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 6
-				</button>
-					<%
-					}
-					if (level > 30)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 7
-				</button>
-					<%
-					}
-					if (level > 35)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 8
-				</button>
-					<%
-					}
-					if (level > 40)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 9
-				</button>
-				<%
-					}
-					if (level > 45)
-					{
-				%>
-				<button type="button" onClick="location.href='./myscrap1.do';"
-						style="width: 9%; height: 40px; background-color: #10212F;
-							   color: #FFFFFF; text-align: center">
-						TAB 10
-				</button>
-				<%
-					}
-				%>
-				</td>
-			</tr>
-		</table>
-		
+				<input type="hidden" name="id" value="${ sessionScope.siteUserInfo.id }" readonly
+					   style="width: 10%; height: 40px; font-size: 12px; padding-left: 20px;
+					   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;"/>
+				<input type="text" name="searchTxt"
+					   style="width: 10%; height: 40px; font-size: 12px; padding-left: 20px;
+					   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;"/>
+				<input type="submit" value="검색"
+					   style="width: 3%; height: 40px; font-size: 12px; padding: 0px;
+					   		  background-color: #10212F; color: #FFFFFF; border-radius: 5px"/>
+			</td>
+		</tr>
+	</table>
+	</form>
+	</div>
+	
 	<div style="width: 90%; margin-Top:2%; margin-left: 2%; padding-left: 20px;">
 		<table style="width: 60%; margin-top:20px; margin-bottom: 0px">
 			<tr style="text-align: center; border-top: 1px solid #DFDFDF;
