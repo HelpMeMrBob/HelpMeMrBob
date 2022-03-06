@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -19,23 +16,17 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import member.model.MemberDAOImpl;
@@ -73,20 +64,18 @@ public class MemberController
 		
 		MemberVO memberVO = sqlSession.getMapper(MemberDAOImpl.class).login(userId, password);
 
-		sqlSession.getMapper(MemberDAOImpl.class).myLevel(memberVO);
-		
-		
 		
 		ModelAndView mv = new ModelAndView();
 	
 		if (memberVO == null)
 		{
-			mv.addObject("LoginNG", "아이디/패스워드가 틀렸습니다.");
+			mv.addObject("LoginNG", "일치하는 정보가 없습니다.");
 			mv.setViewName("Member/Login");
 			return mv;
 		}
 		else
 		{
+			sqlSession.getMapper(MemberDAOImpl.class).myLevel(memberVO);
 			session.setAttribute("siteUserInfo", memberVO);
 			mv.setViewName("redirect:/");
 			return mv;
