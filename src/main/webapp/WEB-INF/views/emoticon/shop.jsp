@@ -59,7 +59,7 @@
           <div class="container">
             <div class="row">
               <div class="flex-lg-7">
-						<h2>꾸미기 상점입니다.</h2>
+						<h2>밥알 포인트 샵</h2>
 						<br/><br/><br/>
 						<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 						<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
@@ -80,7 +80,7 @@
 		                        </c:forEach>
 		                        </tr> 
                      		</table>
-							<button type="submit" class="btn btn-danger" >구매하기</button>
+							<button type="submit" class="btn btn-danger" style="height:50px; margin-left:480px;" >구매하기</button>
 						</form>
 					</div>
 				</div>
