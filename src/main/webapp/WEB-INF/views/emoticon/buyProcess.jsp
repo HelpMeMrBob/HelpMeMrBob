@@ -33,14 +33,14 @@
           <div class="container">
             <div class="row">
               <div class="flex-lg-7">
-						<h2>구매과정 페이지2</h2>
+						<h1>구매결과 페이지</h1>
 						<br/><br/><br/>
 						<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 						
-						구매 아이디: ${pdto.id}
+						<h2>구매스티커<h2><br/>
+						<img src="./resources/upload2/${pdto.sticker}" style="width:140px; height:140px; align:center;">
 						<br/>
-						구매스티커: ${pdto.sticker}
-						<br/>
+						<h4>구매 아이디: ${pdto.id}</h4>
 						잔여포인트: ${pdto.point}
 						<br/>				
 					</div>
