@@ -155,18 +155,30 @@
     	
 	    /* 룰렛 객체생성 */
     	function showRoulette() {
-	    	
+	    	if(addOption == 1) {
+	    		console.log("addOption 전역변수 : "+ addOption);
+	    		console.log("addOption값 : "+ sessionStorage.getItem('addOption'));
+	    		// ajax사용
+		    	$.ajax({
+		            type : 'get',// 전송방식
+		            url : './addOption1.do',// 요청URL
+		            contentType : "text/html;charset:utf-8",
+		            dataType : "json",// 콜백데이터 타입
+		            success : addOption10Suc,// 요청에 성공했을때 호출되는 콜백함수
+		            error : addOption10Fail// 요청에 실패했을때 호출되는 콜백함수
+		        });
+	    	}
 	    	if(addOption == 10) {
 	    		// ajax사용
 		    	$.ajax({
 		            type : 'get',// 전송방식
 		            url : './addOption10.do',// 요청URL
 		            contentType : "text/html;charset:utf-8",
+		            dataType : "json",// 콜백데이터 타입
 		            success : addOption10Suc,// 요청에 성공했을때 호출되는 콜백함수
 		            error : addOption10Fail// 요청에 실패했을때 호출되는 콜백함수
 		        });
 	    	}
-           	console.log('${allData}');
             theWheel = new Winwheel({
                 'numSegments'  : menuCount,     // Specify number of segments.
                 'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
@@ -174,8 +186,8 @@
                 'segments'     : [
                 	<c:choose>
 						<c:when test="${sessionStorage.getItem('addOption')==10}">
-							<c:forEach items="${ favList }" var="fav" varStatus="index">
-				                {'fillStyle' : '#ed6a5a', 'text' : '${fav.arr[index.index]}'},
+							<c:forEach items="${ sessionStorage.getItem('favList') }" var="fav">
+				                {'fillStyle' : '#ed6a5a', 'text' : '${fav}'},
 			                </c:forEach>
 		                </c:when>
 					  	<c:otherwise>
@@ -197,6 +209,8 @@
     	//요청에 성공했을때 호출되는 콜백함수
 		function addOption10Suc(resData){
 			console.log("맛있는 음식 요청성공");
+			console.log(resData.arr);
+			sessionStorage.setItem("favList", resData.arr);
 			
 /* 			// 룰렛과 버튼을 보여준다.
 			showRoulette();
@@ -210,9 +224,15 @@
 
 
     	/* 사용자가 메뉴개수를 선택하면 호출되는 함수 */
-    	function setCount() {
-    		if (document.getElementById("numOfMenu").value != 0) {
-				// 선택이 되면 배경색을 흰색으로 변경
+    	function setCount(value) {
+    		if (document.getElementById("numOfMenu").value == 0) {
+    			alert("매뉴 개수를 선택해주세요.");
+    			document.getElementById("numOfMenu").style="background-color: #eaada6;";
+    			document.getElementById("changeMenu").style.display = "none";
+		    	document.getElementById("UnchangeMenu").style.display = "none";
+    		}
+    		else {
+    			// 선택이 되면 배경색을 흰색으로 변경
 				document.getElementById("numOfMenu").style="background-color: white;";
 				
 	    		// ajax사용
@@ -238,6 +258,11 @@
 			// 세션 스토리지에 menuCount값을 저장
 	    	sessionStorage.setItem("menuCount", menuCount);
 			
+			// 추가옵션 선택값이 있으면 다시 가져옴
+			if (addOption > 0) {
+				location.reload();
+			}
+			
 			// 비회원은 메뉴 개수만 선택하면 뽑기 버튼을 보여줌
 			if( ${ empty sessionScope.siteUserInfo } ) {
 				// 룰렛과 버튼 보여주기
@@ -252,25 +277,15 @@
 		}
 
 
-	    /* 메뉴개수 카운트 */
-	    /*
-    	function numOfMenu(cnt) {
-    		menuCount  = cnt;
-    		console.log(menuCount);
-    	}
-	     */
-
 	  	// 회원전용 옵션 번호를 저장할 변수
     	let addOption = 0;
    		// 로그인 상태일 때...
-		/* 
-			1. 회원의 대분류 선호도 값 저장할 변수 & 선호도 배열 생성
-			2. 모든 선호도 값의 합
-	    	3. 대분류 메뉴를 각각 배열에 저장
-    	*/
 		<c:if test="${ not empty sessionScope.siteUserInfo }">
 			/* 사용자가 추가옵션을 선택하면 호출되는 함수 */
 	    	function setOption(value) {
+	    		if (document.getElementById("addOption").value == 100) {
+					location.reload();
+				}
 	    		// ajax사용
 		    	$.ajax({
 		            type : 'get',// 전송방식
@@ -301,96 +316,6 @@
 			    console.log(errData.status +":"+ errData.statusText);
 			}
         </c:if>
-    	/* 
-		    let prenoodle = ${ fav.prenoodle };
-		    let prerice = ${ fav.prerice };
-		    let presoup = ${ fav.presoup };
-		    let premeat = ${ fav.premeat };
-		    let preseafood = ${ fav.preseafood };
-		    let preetc = ${ fav.preetc };
-		    
-		    let noodleList = [
-		    	<c:forEach items="${ noodleList }" var="noodleMenu">
-                	'${noodleMenu}',
-               	</c:forEach>
-              	]
-		    let riceList = [
-		    	<c:forEach items="${ riceList }" var="riceMenu">
-                	'${riceMenu}',
-               	</c:forEach>
-              	]
-		    let soupList = [
-		    	<c:forEach items="${ soupList }" var="soupMenu">
-                	'${soupMenu}',
-               	</c:forEach>
-              	]
-		    let meatList = [
-		    	<c:forEach items="${ meatList }" var="meatMenu">
-                	'${meatMenu}',
-               	</c:forEach>
-              	]
-		    let seafoodList = [
-		    	<c:forEach items="${ seafoodList }" var="seafoodMenu">
-                	'${seafoodMenu}',
-               	</c:forEach>
-              	]
-		    let etcList = [
-		    	<c:forEach items="${ etcList }" var="etcMenu">
-                	'${etcMenu}',
-               	</c:forEach>
-              	]
-		    
-		    console.log("------- [회원 대분류별 선호도 값] -------");
-		    console.log("------------ 정렬 before --------------");
-		    let favCategory = [
-		    	{ name : "noodleList", val : prenoodle, arr : noodleList},
-		    	{ name : "riceList", val : prerice, arr : riceList},
-		    	{ name : "soupList", val : presoup, arr : soupList},
-		    	{ name : "meatList", val : premeat, arr : meatList},
-		    	{ name : "seafoodList", val : preseafood, arr : seafoodList},
-		    	{ name : "etcList", val : preetc, arr : etcList}
-		    ]
-		    favCategory.forEach(function(value) {
-		    	console.log(value);
-		    	console.log(value.arr);
-		    });
-		    
-		    console.log("------------ 정렬 after --------------");
-		    let descVal = null;
-		    descVal = favCategory.sort(function (a, b) {
-		    	return b.val - a.val;
-		    });
-		    descVal.forEach(function(value) {
-		    	console.log(value);
-		    	console.log(value.arr);
-		    });
-		    
-		    console.log("------------ 선호도 값 총합 --------------");
-		    let totalFav = 0;
-		    for (let i=0; i<favCategory.length; i++) {
-		    	totalFav += favCategory[i].val;
-		    }
-		    console.log("totalFav : "+ totalFav);
-		 */
-		 
-		/* 대분류별 메뉴를 가져옴  */
-		/* 
-		function selectCateMenu () {
-			
-			// descVal을 얕은복사해서 사용
-			let cateMenu = []
-			let copy = Object.assign(cateMenu, '${descFav}')
-			
-			// 총 menuCount 개수만큼 가져와야함.
-       		while (favList.length < menuCount) {
-	       		// 중복없이 랜덤으로 값 추출
-       			var ranArr = copy[0].arr.splice(Math.floor(Math.random() * copy[0].arr.length), 1)[0]
-				favList.push(ranArr)
-       		}
-			console.log(favList);
-		}
-		 */
-		
 		
 	    
 	    /* 비회원 - 사용 원하면 로그인 하도록 유도 */

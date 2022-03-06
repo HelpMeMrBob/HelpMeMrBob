@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -321,7 +323,7 @@ public class RecommandRestAPIController {
 	/* 룰렛 만들기 */
 	@RequestMapping("/addOption10.do")
 	@ResponseBody
-	public HashMap<String, ArrayList<String>> addOption10(Model model, HttpServletRequest req) {
+	public Map<String, ArrayList<String>> addOption10() {
 		
 		// 선호도를 반영한 메뉴 목록을 담을 HashSet객체 선언
 		ArrayList<String> favList = new ArrayList<String>();
@@ -341,49 +343,97 @@ public class RecommandRestAPIController {
 		
 		int count = 0;
 		
-//		while(favList.size() < menuCount) {
-			// 총 메뉴 개수에 따라 순위별 메뉴 개수를 다르게 가져온다.
-			if (menuCount == 10) {
-				// 선호도 1위 메뉴 : 3개
-				for(int i=0; i<3; i++) {
-//					String food = (String)first.get(i);
-					favList.add((String)first.get(i));
-				}
-				// 선호도 2위 메뉴 : 2개
-				for(int i=0; i<2; i++) {
-//					String food = (String)second.get(i);
-					favList.add((String)second.get(i));
-				}
-				// 선호도 3위 메뉴 : 2개
-				for(int i=0; i<2; i++) {
-//					String food = (String)third.get(i);
-					favList.add((String)third.get(i));
-				}
-				// 선호도 4위 메뉴 : 1개
-				for(int i=0; i<1; i++) {
-//					String food = (String)fourth.get(i);
-					favList.add((String)fourth.get(i));
-				}
-				// 선호도 5위 메뉴 : 1개
-				for(int i=0; i<1; i++) {
-//					String food = (String)fifth.get(i);
-					favList.add((String)fifth.get(i));
-				}
-				// 선호도 6위 메뉴 : 1개
-				for(int i=0; i<1; i++) {
-//					String food = (String)sixth.get(i);
-					favList.add((String)sixth.get(i));
-				}
+		// 선호도 순위에 따라 메뉴 개수를 다르게 가져온다.
+		while(favList.size() < menuCount) {
+			// 선호도 1위 메뉴 : 60프로
+			for(int i=0; i<menuCount*0.6; i++) {
+				favList.add((String)first.get(i));
 			}
-			
-			
-//		}
+			// 선호도 2위 메뉴 : 30프로
+			for(int i=0; i<menuCount*0.3; i++) {
+				favList.add((String)second.get(i));
+			}
+			// 선호도 3위 메뉴 : 20프로
+			for(int i=0; i<menuCount*0.2; i++) {
+				favList.add((String)third.get(i));
+			}
+			// 선호도 4위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)fourth.get(i));
+			}
+			// 선호도 5위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)fifth.get(i));
+			}
+			// 선호도 6위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)sixth.get(i));
+			}
+		}
 		System.out.println("favList : " + favList + "\n" + "favList.size() : " + favList.size());
 		
 		
 		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 		map.put("arr", favList);
-		model.addAttribute("favList", favList);
+		
+		return map;
+	}
+	
+	/* 룰렛 만들기 */
+	@RequestMapping("/addOption1.do")
+	@ResponseBody
+	public Map<String, ArrayList<String>> addOption1(Model model, HttpServletRequest req) {
+		
+		// 선호도를 반영한 메뉴 목록을 담을 HashSet객체 선언
+		ArrayList<String> favList = new ArrayList<String>();
+		JSONArray first = (JSONArray)descFav.getJSONObject(0).get("arr");
+		JSONArray second = (JSONArray)descFav.getJSONObject(1).get("arr");
+		JSONArray third = (JSONArray)descFav.getJSONObject(2).get("arr");
+		JSONArray fourth = (JSONArray)descFav.getJSONObject(3).get("arr");
+		JSONArray fifth = (JSONArray)descFav.getJSONObject(4).get("arr");
+		JSONArray sixth = (JSONArray)descFav.getJSONObject(5).get("arr");
+		
+		System.out.println("descFav.getJSONObject(0).get(\"arr\")"+ first);
+		System.out.println("descFav.getJSONObject(1).get(\"arr\")"+ second);
+		System.out.println("descFav.getJSONObject(2).get(\"arr\")"+ third);
+		System.out.println("descFav.getJSONObject(3).get(\"arr\")"+ fourth);
+		System.out.println("descFav.getJSONObject(4).get(\"arr\")"+ fifth);
+		System.out.println("descFav.getJSONObject(5).get(\"arr\")"+ sixth);
+		
+		int count = 0;
+		
+		// 선호도 순위에 따라 메뉴 개수를 다르게 가져온다.
+		while(favList.size() < menuCount) {
+			// 선호도 1위 메뉴 : 60프로
+			for(int i=0; i<menuCount*0.6; i++) {
+				favList.add((String)first.get(i));
+			}
+			// 선호도 2위 메뉴 : 30프로
+			for(int i=0; i<menuCount*0.3; i++) {
+				favList.add((String)second.get(i));
+			}
+			// 선호도 3위 메뉴 : 20프로
+			for(int i=0; i<menuCount*0.2; i++) {
+				favList.add((String)third.get(i));
+			}
+			// 선호도 4위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)fourth.get(i));
+			}
+			// 선호도 5위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)fifth.get(i));
+			}
+			// 선호도 6위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)sixth.get(i));
+			}
+		}
+		System.out.println("favList : " + favList + "\n" + "favList.size() : " + favList.size());
+		
+		
+		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+		map.put("arr", favList);
 		
 		return map;
 	}
