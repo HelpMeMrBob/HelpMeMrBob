@@ -25,6 +25,11 @@
 		parameterType="mybatis.MemberVO">
 		SELECT * FROM member WHERE name=#{name} and email=#{email}
 	</select> 
+	
+	<select id="findPwd" resultType="mybatis.MemberVO" 
+		parameterType="mybatis.MemberVO">
+		SELECT * FROM member WHERE name=#{name} and email=#{email} and id=#{id}
+	</select>
 </mapper>
 
 

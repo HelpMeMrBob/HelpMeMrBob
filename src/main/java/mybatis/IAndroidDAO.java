@@ -19,6 +19,9 @@ public interface IAndroidDAO {
 	
 	//Id찾기
 	public MemberVO findId(MemberVO memberVO);
+	
+	//비밀번호 찾기
+	public MemberVO findPwd(MemberVO memberVO);
 
 }
 
