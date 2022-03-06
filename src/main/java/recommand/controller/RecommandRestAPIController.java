@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import member.model.MemberVO;
 import recommand.model.FavCategoryDTO;
+import recommand.model.MyFoodDTO;
 import recommand.model.RecParameterDTO;
 import recommand.model.RecommandDAO;
 import recommand.model.RecommandDTO;
@@ -276,7 +277,7 @@ public class RecommandRestAPIController {
 //				favList.push(ranArr)
 //       		}
 			
-		
+			
 		}// end of if (로그인 상태일 때)
 		
 		System.out.println("\n"+"allData 개수 : " + allData.size());
@@ -382,7 +383,7 @@ public class RecommandRestAPIController {
 	/* 룰렛 만들기 */
 	@RequestMapping("/addOption1.do")
 	@ResponseBody
-	public Map<String, ArrayList<String>> addOption1(Model model, HttpServletRequest req) {
+	public Map<String, ArrayList<String>> addOption1(Model model, HttpServletRequest req, HttpSession session) {
 		
 		// 선호도를 반영한 메뉴 목록을 담을 HashSet객체 선언
 		ArrayList<String> favList = new ArrayList<String>();
@@ -431,9 +432,47 @@ public class RecommandRestAPIController {
 		}
 		System.out.println("favList : " + favList + "\n" + "favList.size() : " + favList.size());
 		
+		/**********************************************************/
+		// 현재 접속중인 사용자의 ID 얻어오기
+		String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
 		
-		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-		map.put("arr", favList);
+		// 1번 탭에 해당하는 음식목록을 배열에 담기
+		ArrayList<MyFoodDTO> myfood = sqlSession3.getMapper(RecommandDAO.class).myfoodTab(id, addOption);
+		
+		//확인용 로그
+		System.out.print("퍼킹 마이 푸드 : ");
+		for (int i = 0; i < myfood.size(); i++) {
+			System.out.print(myfood.get(i).getMyfood() + " ");
+		}
+		System.out.println();
+		
+		//440번째 줄에서 반환받은 myfood 배열을 찜 쪄먹기
+		//menuCount 10개면 그냥 이대로 날리면 됨
+		//menuCount가 10개보다 크면 남은 개수만큼 선호도 반영한 favList에서 가져와서 채워서 날려야 함
+		//10개가 꽉 안차있을 수도 있다. menuCount보다 myfood가 적으면 favList에서 채워야 함
+		
+		ArrayList<String> menuList = new ArrayList<String>();
+		
+		if (myfood.size() < menuCount) {
+			int temp = menuCount - myfood.size();
+			
+			for (int i = 0; i < myfood.size(); i++) {
+				menuList.add(myfood.get(i).getMyfood());
+			}
+			for (int i = 0; i < temp; i++) {
+				menuList.add(favList.get(i));
+			}
+		}
+		else {
+			for (int i = 0; i < myfood.size(); i++) {
+				menuList.add(myfood.get(i).getMyfood());
+			}
+		}
+		/**********************************************************/
+		
+		Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+		map.put("arr", menuList);
+		System.out.println("손준영 바보 : "+ map.get("arr"));
 		
 		return map;
 	}
