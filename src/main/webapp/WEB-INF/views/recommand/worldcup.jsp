@@ -48,6 +48,34 @@
 
                 <div class="wc_card__header">
 
+                  <img src="./resources/recommand/worldcup64.png" alt="" class="card__image">
+
+
+                </div><!-- .card__header ends -->
+
+                <div class="card__body">
+
+                  <h3 class="ministry__tile mar-b-sm-2">64강</h3>
+
+                </div><!-- .card__body ends -->
+
+                <div class="card__footer">
+
+                  <div class="card__cta">
+                    <a href="./resources/worldcup_react_build64/index.html" class="button button--primary button--fill">바로가기</a>
+                  </div><!-- .card__cta ends -->
+
+                </div><!-- .card__footer ends -->
+
+              </div><!-- .card ends -->
+
+            </div><!-- .flex-* ends -->
+            <div class="flex-md-6 flex-lg-4">
+
+              <div class="card ministry">
+
+                <div class="wc_card__header">
+
                   <img src="./resources/recommand/worldcup.png" alt="" class="card__image">
 
 
@@ -70,8 +98,7 @@
               </div><!-- .card ends -->
 
             </div><!-- .flex-* ends -->
-
-            <div class="flex-md-12 flex-lg-4 mar-t-md-2 mar-t-lg-0">
+            <div class="flex-md-6 flex-lg-4">
 
               <div class="card ministry">
 
@@ -84,14 +111,14 @@
 
                 <div class="card__body">
 
-                  <h3 class="ministry__tile mar-b-sm-2">랭킹보기</h3>
+                  <h3 class="ministry__tile mar-b-sm-2">8강</h3>
 
                 </div><!-- .card__body ends -->
 
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="./resources/worldcup_react_build8/index.html" class="button button--primary button--fill">바로가기</a>
+                    <a href="./worldcupRounds.do?rounds=32" class="button button--primary button--fill">바로가기</a>
                   </div><!-- .card__cta ends -->
 
                 </div><!-- .card__footer ends -->

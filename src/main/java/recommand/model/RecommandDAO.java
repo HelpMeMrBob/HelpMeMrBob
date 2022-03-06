@@ -13,9 +13,6 @@ public interface RecommandDAO {
 	// 전체 메뉴 정보를 가져온다.
 	public ArrayList<RecommandDTO> allData(RecommandDTO recommandDTO);
 	
-	// 대분류별 메뉴 정보를 가져온다.
-	public ArrayList<RecommandDTO> selectCateMenu(RecommandDTO recommandDTO);
-	
 	// 회원의 선호 대분류 정보를 가져온다.
 	public FavCategoryDTO favCategory(String id);
 	

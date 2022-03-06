@@ -62,7 +62,7 @@ public class RecommandRestAPIController {
 		System.out.println("req.getParameter : " + req.getParameter("rounds"));
 		System.out.println("RecParameterDTO : " + recParameterDTO.getRounds());
 
-		return "redirect:resources/worldcup_react_build8/index.html?rounds=" + rounds;
+		return "redirect:resources/worldcup_react_build64/index.html?rounds=" + rounds;
 	}
 
 	/* 월드컵 화면 매핑 */

@@ -14,11 +14,6 @@
 			)
 	</select>
 	
-	<!-- 대분류별 메뉴 가져오기 -->
-	<select id="selectCateMenu" resultType="recommand.model.RecommandDTO">
-		SELECT * FROM food WHERE Lgroup='noodle';
-	</select>
-	
 	<!-- 회원의 대분류 선호 정보 가져오기   -->
 	<select id="favCategory" resultType="recommand.model.FavCategoryDTO"
 		parameterType="recommand.model.FavCategoryDTO">
