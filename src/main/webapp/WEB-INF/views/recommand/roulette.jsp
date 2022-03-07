@@ -164,8 +164,8 @@
 		            url : './addOption1.do',// 요청URL
 		            contentType : "text/html;charset:utf-8",
 		            dataType : "json",// 콜백데이터 타입
-		            success : addOption10Suc,// 요청에 성공했을때 호출되는 콜백함수
-		            error : addOption10Fail// 요청에 실패했을때 호출되는 콜백함수
+		            success : addOption1Suc,// 요청에 성공했을때 호출되는 콜백함수
+		            error : addOption1Fail// 요청에 실패했을때 호출되는 콜백함수
 		        });
 	    	}
 	    	if(addOption == 10) {
@@ -179,6 +179,12 @@
 		            error : addOption10Fail// 요청에 실패했을때 호출되는 콜백함수
 		        });
 	    	}
+	    	
+	    	//addOption1과 addOption10이 요청명이 요상하게 겹친다
+	    	//"${sessionStorage.getItem('addOption')==1}" 이 조건이 false다
+	    	console.log("${sessionStorage.getItem('addOption')==1}"); //false
+	    	//중복확인까지 딱 해놓고 잘라 했는데 이거 조건식 해결할려다가 4시 됐다.. 난 잔다....
+	    	
             theWheel = new Winwheel({
                 'numSegments'  : menuCount,     // Specify number of segments.
                 'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
@@ -188,6 +194,11 @@
 						<c:when test="${sessionStorage.getItem('addOption')==10}">
 							<c:forEach items="${ sessionStorage.getItem('favList') }" var="fav">
 				                {'fillStyle' : '#ed6a5a', 'text' : '${fav}'},
+			                </c:forEach>
+		                </c:when>
+		                <c:when test="${sessionStorage.getItem('addOption')==1}">
+							<c:forEach items="${ sessionStorage.getItem('menuList').split(',') }" var="menu">
+				                {'fillStyle' : '#ed6a5a', 'text' : '${menu}'},
 			                </c:forEach>
 		                </c:when>
 					  	<c:otherwise>
@@ -207,16 +218,21 @@
             });
     	}
     	//요청에 성공했을때 호출되는 콜백함수
+		function addOption1Suc(resData){
+			console.log("맛있는 음식 요청성공");
+			console.log(resData.arr);
+			sessionStorage.setItem("menuList", resData.arr);
+		}
+		// 요청에 실패했을때 호출되는 콜백함수
+		function addOption1Fail(errData){
+		    console.log(errData.status +":"+ errData.statusText);
+		}
+    	//요청에 성공했을때 호출되는 콜백함수
 		function addOption10Suc(resData){
 			console.log("맛있는 음식 요청성공");
 			console.log(resData.arr);
 			sessionStorage.setItem("favList", resData.arr);
-			
-/* 			// 룰렛과 버튼을 보여준다.
-			showRoulette();
-			document.getElementById("changeMenu").style.display = "inline";
-	    	document.getElementById("UnchangeMenu").style.display = "inline";
- */		}
+		}
 		// 요청에 실패했을때 호출되는 콜백함수
 		function addOption10Fail(errData){
 		    console.log(errData.status +":"+ errData.statusText);
@@ -283,9 +299,7 @@
 		<c:if test="${ not empty sessionScope.siteUserInfo }">
 			/* 사용자가 추가옵션을 선택하면 호출되는 함수 */
 	    	function setOption(value) {
-	    		if (document.getElementById("addOption").value == 100) {
 					location.reload();
-				}
 	    		// ajax사용
 		    	$.ajax({
 		            type : 'get',// 전송방식

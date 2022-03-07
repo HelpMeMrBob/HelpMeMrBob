@@ -201,4 +201,12 @@ if(window.location.href != "http://localhost:8081/helpmemrbob/roulette.do") {
 if(window.location.href != "http://localhost:8081/helpmemrbob/roulette.do") {
 	sessionStorage.removeItem("addOption");
 }
+// 룰렛페이지가 아니면 세션스토리지에서 favList를 삭제한다.
+if(window.location.href != "http://localhost:8081/helpmemrbob/roulette.do") {
+	sessionStorage.removeItem("favList");
+}
+//룰렛페이지가 아니면 세션스토리지에서 menuList를 삭제한다.
+if(window.location.href != "http://localhost:8081/helpmemrbob/roulette.do") {
+	sessionStorage.removeItem("menuList");
+}
 </script>

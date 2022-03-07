@@ -709,10 +709,11 @@ public class MemberController
 		final PointDTO pdto = new PointDTO();
 	
 		String id = req.getParameter("id");
+		vo.setId(id);
 		pdto.setId(id);
 		
-		
 		sqlSession.getMapper(MemberDAOImpl.class).registerAction(vo);
+		sqlSession.getMapper(MemberDAOImpl.class).registerPreference(vo);
 		System.out.println("회원가입페이지에서 넘어온 아이디: "+id);
 		try {
 			 template.update( new PreparedStatementCreator() {

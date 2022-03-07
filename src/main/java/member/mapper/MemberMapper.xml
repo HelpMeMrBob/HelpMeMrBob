@@ -10,6 +10,13 @@
 		INSERT INTO member (id, name, pass, email, telNum)
 			VALUES ( #{ id }, #{ name }, #{ pass }, #{ email }, #{ telNum } )
 	</insert>
+	
+	<!-- 회원 정보 수정 (대분류 수정) -->
+	<insert id="registerPreference" parameterType="member.model.MemberVO">
+		INSERT INTO preference (id, prenoodle, prerice, presoup, premeat, preseafood, preetc)
+			VALUES ( #{ id }, ${ prenoodle }, ${ prerice }, ${ presoup }, ${ premeat },
+					 ${ preseafood }, ${ preetc })
+	</insert>
 
 	<!-- 로그인 -->
 	<select id="login" resultType="member.model.MemberVO">
@@ -165,7 +172,7 @@
 	
 	<!-- 고객센터 내용 저장 -->
 	<insert id="customerServiceSave" parameterType="member.model.ParameterDTO">
-		INSERT INTO QnA (name, email, contents) VALUES ( #{ name }, #{ email }, #{ contents } )
+		INSERT INTO QnA (name, email, contents) VALUES (#{ name }, #{ email }, #{ contents })
 	</insert>
 </mapper>
 

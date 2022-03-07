@@ -31,6 +31,12 @@
 				) where rn <= (#{rounds} * 2)
 		]]>
 	</select>
+	
+	<!-- myfood 테이블에 있는 메뉴들을 가져온다 (탭 단위로) -->
+	<select id="myfoodTab" resultType="recommand.model.MyFoodDTO"
+		parameterType="recommand.model.MyFoodDTO">
+		SELECT * FROM myfood WHERE id=#{param1} AND tab=#{param2}
+	</select>
 </mapper>
 
 <!--

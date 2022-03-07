@@ -41,5 +41,6 @@ public interface MemberDAOImpl
 	public ArrayList<MemberVO> scrapListPageSearch(ParameterDTO parameterDTO);
 	
 	public int registerAction(MemberVO vo);
+	public int registerPreference(MemberVO vo);
 	public int kakaoRegisterAction(MemberVO vo);
 }

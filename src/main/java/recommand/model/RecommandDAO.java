@@ -18,4 +18,7 @@ public interface RecommandDAO {
 	
 	// 월드컵에 필요한 데이터를 가져온다. (food:음식이름, image:이미지 이름, recomndCnt:월드컵에서 우승한 횟수)
 	public ArrayList<RecommandDTO> worldcupData(RecParameterDTO recParameterDTO);
+	
+	// myfood 테이블에 있는 메뉴들을 가져온다 (탭 단위로)
+	public ArrayList<MyFoodDTO> myfoodTab(String id, int addOption);
 }

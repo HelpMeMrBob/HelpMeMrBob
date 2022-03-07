@@ -174,7 +174,7 @@ public class AndroidController {
 			return lists;
 		}
 		
-	//Id 찾기
+	//Id 찾기 & 비밀번호 찾기
 	@RequestMapping("/android/findId.do")
 	@ResponseBody
 	public Map<String, Object> findId(MemberVO memberVO) {
@@ -197,5 +197,7 @@ public class AndroidController {
 		System.out.println("요청들어옴:"+returnMap);
 		return returnMap;
 	}
+
+	
 
 }
