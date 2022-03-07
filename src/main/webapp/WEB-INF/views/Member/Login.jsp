@@ -102,11 +102,18 @@ function loginValidate(loginForm)
     <main>
    	<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;
    			    text-align: center">
-   	<span style="font-size:1.5em; color:red;">${ LoginNG }</span>
    	<form name="loginForm" method="post" action="./loginAction.do"
    		  onsubmit="return loginValidate(this);">
    	<input type="hidden" name="backUrl" value="${ param.backUrl }"/>
+   	
 	<table style="width: 60%; margin:0.5px">
+		<tr style="padding-left: 20px">
+			<td colspan="2" style="width: 60%; padding-Bottom: 3%">
+				<span style="font-size:1.5em; color: #ED6A5A; font-weight: bold">
+					${ LoginNG }
+				</span>
+			</td>
+		</tr>
 		<tr style="padding-left: 20px">
 			<td colspan="2" style="width: 60%; padding-left: 45%">
 				<img alt="LOGIN" src="./resources/include_img/bob_logo1.png"
