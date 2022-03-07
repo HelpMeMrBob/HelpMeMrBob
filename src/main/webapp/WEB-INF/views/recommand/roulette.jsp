@@ -299,9 +299,7 @@
 		<c:if test="${ not empty sessionScope.siteUserInfo }">
 			/* 사용자가 추가옵션을 선택하면 호출되는 함수 */
 	    	function setOption(value) {
-	    		if (document.getElementById("addOption").value == 100) {
 					location.reload();
-				}
 	    		// ajax사용
 		    	$.ajax({
 		            type : 'get',// 전송방식

@@ -76,7 +76,7 @@
 
                 <div class="wc_card__header">
 
-                  <img src="./resources/recommand/worldcup.png" alt="" class="card__image">
+                  <img src="./resources/recommand/worldcup32.png" alt="" class="card__image">
 
 
                 </div><!-- .card__header ends -->
@@ -90,7 +90,7 @@
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="./worldcupRounds.do?rounds=32" class="button button--primary button--fill">바로가기</a>
+                    <a href="./resources/worldcup_react_build32/index.html" class="button button--primary button--fill">바로가기</a>
                   </div><!-- .card__cta ends -->
 
                 </div><!-- .card__footer ends -->
@@ -104,8 +104,7 @@
 
                 <div class="wc_card__header">
 
-                  <img src="./resources/recommand/worldcup.png" alt="" class="card__image">
-
+                  <img src="./resources/recommand/worldcup8.png" alt="" class="card__image">
 
                 </div><!-- .card__header ends -->
 
@@ -118,7 +117,7 @@
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="./worldcupRounds.do?rounds=32" class="button button--primary button--fill">바로가기</a>
+                    <a href="./resources/worldcup_react_build8/index.html" class="button button--primary button--fill">바로가기</a>
                   </div><!-- .card__cta ends -->
 
                 </div><!-- .card__footer ends -->
