@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import recommand.model.MyFoodDTO;
+import recommand.model.RecommandDTO;
+
 @Service
 public interface InfomationDAOInter {
 	public ArrayList<InfomationDTO> keyword(String search);
@@ -13,4 +16,6 @@ public interface InfomationDAOInter {
 	public int favoriteDelete(String idx);
 	public ArrayList<InfomationDTO> detailView(String place);
 	public ArrayList<ReviewDTO> review(String place);
+	public ArrayList<RecommandDTO> allFood();
+//	public ArrayList<MyFoodDTO> favoriteList(String id, String tab);
 }

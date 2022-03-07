@@ -39,5 +39,19 @@
 		SELECT idx, title FROM board WHERE tag LIKE
     		'%'||(SELECT place FROM restaurant WHERE place LIKE '%'||#{param1}||'%')||'%'
 	</select>
+	
+	<!-- 전체 메뉴 가져오기 -->
+	<select id="allFood" resultType="recommand.model.RecommandDTO">
+		SELECT idx, food, image, recomndCnt, Lgroup
+			from (
+		    	select rownum rn, idx, food, image, recomndCnt, Lgroup
+		    		from food order by DBMS_random.random
+			)
+	</select>
+	
+	<!-- 선호 목록 리스트 가져오기 -->
+	<!-- <select id="favoriteList" resultType="recommand.model.MyFoodDTO">
+		SELECT * FROM myfood WHERE id=#{param1} AND tab=#{param2};
+	</select> -->
 </mapper>
 	

@@ -19,6 +19,9 @@ import infomation.model.InfomationDAOInter;
 import infomation.model.InfomationDTO;
 import infomation.model.ReviewDTO;
 import member.model.MemberVO;
+import recommand.model.MyFoodDTO;
+import recommand.model.RecommandDAO;
+import recommand.model.RecommandDTO;
 
 @Controller
 public class InfomationController {
@@ -26,7 +29,7 @@ public class InfomationController {
 	private SqlSession sqlSession2;
 	
 	@Autowired
-	public InfomationController(SqlSession sqlSession2) {
+	public InfomationController(SqlSession sqlSession2, SqlSession sqlSession3) {
 		this.sqlSession2 = sqlSession2;
 	}
 	
@@ -97,8 +100,7 @@ public class InfomationController {
 		}
 		
 		MemberVO vo = (MemberVO)session.getAttribute("siteUserInfo");
-		ArrayList<FavoriteDTO> favoriteList = 
-				sqlSession2.getMapper(InfomationDAOInter.class).favoriteList(vo.getId());
+		ArrayList<FavoriteDTO> favoriteList = sqlSession2.getMapper(InfomationDAOInter.class).favoriteList(vo.getId());
 		
 		model.addAttribute("favoriteList", favoriteList);
 		
@@ -172,4 +174,33 @@ public class InfomationController {
 		
 		return result;
 	}
+	
+	//전체 음식목록을 가져오는 REST API
+	@RequestMapping("/allFood.do")
+	@ResponseBody
+	public Map<String, Object> allFood() {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		ArrayList<RecommandDTO> allFood = sqlSession2.getMapper(InfomationDAOInter.class).allFood();
+		
+		map.put("allFood", allFood);
+		
+		return map;
+	}
+	
+//	//선호 목록을 가져오는 REST API
+//	@RequestMapping("/favoriteList.do")
+//	@ResponseBody
+//	public Map<String, Object> favoriteList(HttpSession session) {
+//		
+//		String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
+//		String tab = "1";
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		ArrayList<MyFoodDTO> favList = sqlSession2.getMapper(InfomationDAOInter.class).favoriteList(id, tab);
+//		
+//		map.put("favList", favList);
+//		
+//		return map;
+//	}
 }
