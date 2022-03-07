@@ -296,7 +296,7 @@ public class FileuploadController2 {
 				}catch(Exception e) {
 					System.out.println("게시글 삽입 실행2()중 오류가 발생했습니다.");
 				}
-				System.out.println("게시글 삽입2 완료");
+				System.out.println("게시글 삽입2 완료22");
 			}
 		}		 
 		catch(Exception e) {
