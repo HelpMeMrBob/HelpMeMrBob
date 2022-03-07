@@ -31,7 +31,7 @@
           <!-- Contains donation button for mobile and tablet devices -->
           <li class="header__extra">
             <div class="cta">
-              <a href="donations.html" class="button button-block-sm button--primary button--fill">로그인</a>
+              <a href="./login.do" class="button button-block-sm button--primary button--fill">로그인</a>
             </div>
           </li><!-- .header__extra ends -->
 <!-- 홈은 따로 쓰지말고 좌측상단의 로고 클릭하면 홈으로 이동하게 만들께요.

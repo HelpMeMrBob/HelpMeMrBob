@@ -27,7 +27,7 @@ function writeValidate(f)
 
     <!-- =================== SITE HEADER BEGINS ============================= -->
 
-    <jsp:include page="/WEB-INF/views/include/header.jsp" />
+    <jsp:include page="/WEB-INF/views/include/header2.jsp" />
 
     <!-- =================== SITE HEADER ENDS ============================= -->
     

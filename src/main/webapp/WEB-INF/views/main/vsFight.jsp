@@ -6,7 +6,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!--────────────────────────────────── SITE HEADER BEGINS ─────────────────────────────────── -->
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/header2.jsp" />
 <!--─────────────────────────────────── SITE HEADER ENDS ─────────────────────────────────────-->
 <!--────────────────────────────────── MAIN SECTION BEGINS ───────────────────────────────────-->
 <script>
