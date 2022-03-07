@@ -714,9 +714,8 @@ public class MemberController
 		
 		sqlSession.getMapper(MemberDAOImpl.class).registerAction(vo);
 		System.out.println("회원가입페이지에서 넘어온 아이디: "+id);
-		
 		try {
-			template.update( new PreparedStatementCreator() {
+			 template.update( new PreparedStatementCreator() {
 				int resultSet = 0;
 				
 				//이자체가 오류를 던진걸 catch하지는 못하는건가??
@@ -731,10 +730,9 @@ public class MemberController
 						con.prepareStatement(sql);
 				psmt.setString(1, pdto.getId());
 				
-				
 				System.out.println(sql);
 				return psmt;
-				}
+			 }
 				
 			});	
 			System.out.println("회원가입 포인트 0으로 설정완료.");

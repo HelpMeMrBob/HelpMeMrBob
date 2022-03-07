@@ -3,6 +3,9 @@ package com.project.helpmemrbob;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,6 +16,9 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import mybatis.BoardDTO;
+
 @Controller
 public class FileuploadController2 {
+	@Autowired
+	JdbcTemplate template;
 
 	//파일업로드를 위한 디렉토리의 물리적 경로 확인하기
 	@RequestMapping("/fileUpload/uploadPath.do")
@@ -72,6 +82,8 @@ public class FileuploadController2 {
 	@RequestMapping(method=RequestMethod.POST, value="/fileUpload/uploadAction.do")
 	//파일업로드를 위한 객체를 매개변수로 선언한다. 
 	public String uploadAction(Model model, MultipartHttpServletRequest req) {
+		AndroidController And = new AndroidController();
+		
 		
 		//물리적경로 얻어오기
 		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
@@ -81,7 +93,11 @@ public class FileuploadController2 {
 		List<Object> resultList = new ArrayList<Object>();			
 		
 		try {
+			String id = req.getParameter("id");
 			String title = req.getParameter("title");
+			String contents = req.getParameter("contents");
+			
+			System.out.println("id title contents"+id+" "+title+" "+contents);
 			
 			//업로드폼의 file속성의 필드를 가져온다.(여기서는 2개임)
 			Iterator itr = req.getFileNames();
@@ -115,6 +131,7 @@ public class FileuploadController2 {
 				
 				//하나의 파일정보를 저장한 Map을 List에 저장한다.(현재 파일 2개임)
 				resultList.add(fileMap);
+				
 			}
 		}		 
 		catch(Exception e) {
@@ -189,18 +206,23 @@ public class FileuploadController2 {
 	 */
 	@RequestMapping(method=RequestMethod.POST, value="/fileUpload/uploadAndroid.do")
 	@ResponseBody 
-	public List<Object> uploadAndroid(Model model, MultipartHttpServletRequest req) {
+	public List<Object> uploadAndroid(Model model, MultipartHttpServletRequest req, final BoardDTO bdto) {
 		System.out.println("helpmemrbob 파일업로드 실행1111");
+		AndroidController And = new AndroidController();
 		
 		//물리적경로 얻어오기
 		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
 		System.out.println("helpmemrbob 파일업로드 경로111"+path);
+		
 		MultipartFile mfile = null;
 		//파일정보를 저장한 Map컬렉션을 2개이상 저장하기 위한 용도의 List컬렉션
 		List<Object> resultList = new ArrayList<Object>();			
 		
 		try {
+			String id = req.getParameter("id");
 			String title = req.getParameter("title");
+			String contents = req.getParameter("contents");
+			System.out.println("id title contents: "+id+" "+title+" "+contents);
 			
 			//업로드폼의 file속성의 필드를 가져온다.(여기서는 2개임)
 			Iterator itr = req.getFileNames();
@@ -234,6 +256,47 @@ public class FileuploadController2 {
 				
 				//하나의 파일정보를 저장한 Map을 List에 저장한다.(현재 파일 2개임)
 				resultList.add(fileMap);
+				bdto.setId(id);
+				bdto.setTitle(title);
+				bdto.setContents(contents);
+				bdto.setUserfile1(saveFileName);
+					
+				String userfile1 = bdto.getUserfile1();
+				String userfile2="";
+				userfile2 = bdto.getUserfile2();
+			
+				System.out.println(bdto.getId());
+				System.out.println(bdto.getTitle());
+				System.out.println(bdto.getContents());
+				System.out.println(bdto.getUserfile1());
+				
+				System.out.println("게시글 삽입 실행2입니다");
+				
+				try {
+					 template.update( new PreparedStatementCreator() {
+						int resultSet = 0;
+						
+					
+						@Override
+						public PreparedStatement createPreparedStatement(Connection con) 
+								throws SQLException {
+						String sql = " INSERT INTO board (idx, id, title, contents, userfile1)"
+								+" VALUES (board_seq.nextval,?,?,?,?)";
+						PreparedStatement psmt =
+								con.prepareStatement(sql);
+						psmt.setString(1, bdto.getId());
+						psmt.setString(2, bdto.getTitle());
+						psmt.setString(3, bdto.getContents());
+						psmt.setString(4, bdto.getUserfile1());
+						System.out.println(sql);
+						return psmt;
+					 }
+						
+					});	
+				}catch(Exception e) {
+					System.out.println("게시글 삽입 실행2()중 오류가 발생했습니다.");
+				}
+				System.out.println("게시글 삽입2 완료");
 			}
 		}		 
 		catch(Exception e) {
@@ -242,4 +305,5 @@ public class FileuploadController2 {
 				
 		return resultList;
 	}	
+	
 }

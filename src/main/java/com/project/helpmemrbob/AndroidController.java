@@ -1,5 +1,8 @@
 package com.project.helpmemrbob;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +33,8 @@ public class AndroidController {
 	
 	@Autowired
 	private SqlSession sqlSession4;
+	@Autowired
+	JdbcTemplate template;
 	
 	@RequestMapping("/android/memberLogin.do")
 	@ResponseBody
@@ -130,6 +137,8 @@ public class AndroidController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
 		System.out.println("게시글 삽입 실행1입니다");
+		FileuploadController2 up2 = new FileuploadController2();
+
 		int isRegist;
 		int write =
 				sqlSession4.getMapper(IBoardDAO.class).write(bdto);
@@ -151,6 +160,8 @@ public class AndroidController {
 		//return isRegist;
 		return isRegist;
 	}
+	
+	
 	
 	///안드로이드리스트
 	//JSONArray로 데이터 반환
