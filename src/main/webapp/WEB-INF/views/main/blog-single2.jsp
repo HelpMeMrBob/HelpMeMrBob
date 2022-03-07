@@ -58,8 +58,6 @@ function writeValidate(f)
       <!-- SINGLE PAGE SECTION STARTS -->
       <section class="single-page single-sermon single-sermon--text default-section-spacing">
 
-        <div class="container">
-			
           <div class="row">
 
             <div class="flex-md-8 flex-lg-9">
