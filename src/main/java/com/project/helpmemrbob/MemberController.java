@@ -319,6 +319,36 @@ public class MemberController
 	}
 	
 	
+	
+//	마이 페이지 페이지 이동(안드로이드용)
+	@RequestMapping("/mypageAnd.do")
+	public String myPageAnd(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		ArrayList<MemberVO> point
+		= sqlSession.getMapper(MemberDAOImpl.class).myPoint(parameterDTO);
+		
+		ArrayList<MemberVO> stickers
+		= sqlSession.getMapper(MemberDAOImpl.class).mySticker(parameterDTO);
+		
+		ArrayList<MemberVO> preference
+		= sqlSession.getMapper(MemberDAOImpl.class).myPreference(parameterDTO);
+		
+		model.addAttribute("stickers", stickers);
+		model.addAttribute("preference", preference);
+		model.addAttribute("point", point);
+		
+		return "androidMember/MyPage";
+	}
+	
+	
 	//	나의 음식 목록 1 이동
 	@RequestMapping("/myfood.do")
 	public String myFood(Model model, HttpServletRequest req, HttpSession session)
