@@ -19,8 +19,6 @@ import infomation.model.InfomationDAOInter;
 import infomation.model.InfomationDTO;
 import infomation.model.ReviewDTO;
 import member.model.MemberVO;
-import recommand.model.MyFoodDTO;
-import recommand.model.RecommandDAO;
 import recommand.model.RecommandDTO;
 
 @Controller
