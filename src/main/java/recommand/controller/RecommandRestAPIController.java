@@ -1,5 +1,6 @@
 package recommand.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,26 +33,16 @@ import recommand.model.RecommandDAO;
 import recommand.model.RecommandDTO;
 
 @Controller
-public class RecommandRestAPIController {
+public class RecommandRestAPIController implements Serializable {
 
 	// 월드컵(리액트)에서 사용할 랜덤한 메뉴를 rounds개수만큼 가져와서 DTO에 저장
 	@Autowired
 	private SqlSession sqlSession3;
 	
-	// 회원 - 대분류 선호도 총합
-	private int totalFav;
 	// 회원 - 대분류 선호도 내림차순 정렬한 Array
 	JSONArray descFav;
-	// 사용자가 선택한 메뉴 개수
-	private int menuCount;
-	// 사용자가 선택한 추가옵션 번호
-	private int addOption;
-
-	/*
-	 * public RecommandRestAPIController() { test(); }
-	 */
 	
-	/* 월드컵 라운드 수 매핑 */
+	/** 월드컵 라운드 수 매핑 */
 	@RequestMapping("/worldcupRounds.do")
 	public String worldcup_react_build8(Model model, HttpServletRequest req, RecParameterDTO recParameterDTO) {
 
@@ -66,13 +57,13 @@ public class RecommandRestAPIController {
 		return "redirect:resources/worldcup_react_build64/index.html?rounds=" + rounds;
 	}
 
-	/* 월드컵 화면 매핑 */
+	/** 월드컵 화면 매핑 */
 	@RequestMapping("/worldcup.do")
 	public String worldcup(Model model) {
 		return "recommand/worldcup";
 	}
 
-	/* 룰렛 화면 매핑 */
+	/** 룰렛 화면 매핑 */
 	@RequestMapping("/roulette.do")
 	public String roulette(Model model, HttpSession session, RecommandDTO recommandDTO, FavCategoryDTO favCategoryDTO,
 			HttpServletRequest req) {
@@ -121,7 +112,7 @@ public class RecommandRestAPIController {
 		model.addAttribute("seafoodList", seafoodList);
 		model.addAttribute("etcList", etcList);
 		
-		/* 로그인 상태이면 회원의 대분류 선호도 값을 가져온다. */
+		/** 로그인 상태이면 회원의 대분류 선호도 값을 가져온다. */
 		if (session.getAttribute("siteUserInfo") != null) {
 			
 			// 회원의 아이디를 넘겨서 대분류 선호도 값을 가져옴
@@ -138,12 +129,6 @@ public class RecommandRestAPIController {
 			String preseafood = fav.getPreseafood();
 			String preetc = fav.getPreetc();
 			
-			// 선호도 값의 총합
-			totalFav =
-				Integer.parseInt(prenoodle) + Integer.parseInt(prerice) + Integer.parseInt(presoup) +
-				Integer.parseInt(premeat) + Integer.parseInt(preseafood) + Integer.parseInt(preetc);
-			System.out.println("totalFav : "+ totalFav);
-
 			//대분류별 JSON정보를 담을 Array 선언
 			JSONArray favCategory = new JSONArray();
 			
@@ -232,295 +217,419 @@ public class RecommandRestAPIController {
 			System.out.println("--정렬 after--\n"+"descFav"+ descFav);// favCategory를 val값 기준으로 정렬한 Array 확인
 			// 멤버변수에 저장
 			this.descFav = descFav;
-			
-//			// 정렬된 대분류 Array를 모델에 저장
-//			model.addAttribute("descFav", descFav);
-			
-//			
-//			System.out.println("(JSONArray) : " + (JSONArray)descFav.getJSONObject(0).get("arr"));
-//			System.out.println("아몰랑 0번인덱스 : " + (JSONArray)descFav.getJSONObject(0).get("arr"));
-//			
-//			
-//			
-//			
-//			JSONArray index0Array = (JSONArray)descFav.getJSONObject(0).get("arr");
-//			System.out.println();
-//			JSONObject element;
-//			Random generator = new Random();
-//			int randomIndex = generator.nextInt(index0Array.length());
-//			System.out.println("아몰랑에서 랜덤으로 : "+ Math.floor(Math.random() * index0Array.length()));
-//			for (int i = 0; i < index0Array.length(); i++) {
-//				element = (JSONObject) index0Array.opt(i);
-//				System.out.println(element.optString("key"));
-//				System.out.println(element.optString("value"));
-//			}
-//
-//			
-//			while(favList.size() < menuCount) {
-//				
-//				
-////				favList.add
-//				
-//				
-//				
-////				for (int i=0; i<allData.size(); i++) {
-////				}
-//			}
-//			
-			
-			
-//		    while(favList.size() < menuCount) {
-//		    	// 중복없이 랜덤으로 값 추출
-//		    	favList.add((int)(Math.random() * 45 + 1));
-//		    }
-//       			var ranArr = copy[0].arr.splice(Math.floor(Math.random() * copy[0].arr.length), 1)[0]
-//				favList.push(ranArr)
-//       		}
-			
-			
 		}// end of if (로그인 상태일 때)
-		
 		System.out.println("\n"+"allData 개수 : " + allData.size());
 		
 		return "recommand/roulette";
 	}
 	
-	/* 메뉴개수 ajax로 받아와서 저장 */
-	@RequestMapping("/numOfMenuData.do")
-	@ResponseBody
-	public HashMap<String, Integer> numOfMenuData(Model model, HttpServletRequest req) {
-		// 반환할 데이터를 담을 HashMap객체 생성
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		
-		// 사용자가 선택한 메뉴개수를 요청 파라미터로 전달받아서 여기저기 저장
-		int menuCount = Integer.parseInt(req.getParameter("menuCount"));
-		map.put("menuCount", menuCount);// 반환할 map 객체에 저장
-		model.addAttribute("menuCount", menuCount);// 모델객체에 저장
-		this.menuCount = menuCount;// 멤버변수에 저장
-		
-		System.out.println("menuCount : "+ menuCount);
-		
-		return map;
-	}
-	
-	/* 추가옵션 값 ajax로 받아와서 저장 */
-	@RequestMapping("/addOptionData.do")
-	@ResponseBody
-	public HashMap<String, Integer> addOptionData(Model model, HttpServletRequest req) {
-		// 반환할 데이터를 담을 HashMap객체 생성
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		
-		// 사용자가 선택한 메뉴개수를 요청 파라미터로 전달받아서 여기저기 저장
-		int addOption = Integer.parseInt(req.getParameter("addOption"));
-		map.put("addOption", addOption);// 반환할 map 객체에 저장
-		model.addAttribute("addOption", addOption);// 모델객체에 저장
-		this.addOption = addOption;// 멤버변수에 저장
-		
-		System.out.println("addOption : "+ addOption);
-		
-		return map;
-	}
-	
-	/* 룰렛 만들기 */
-	@RequestMapping("/addOption10.do")
-	@ResponseBody
-	public Map<String, ArrayList<String>> addOption10() {
-		
-		// 선호도를 반영한 메뉴 목록을 담을 HashSet객체 선언
-		ArrayList<String> favList = new ArrayList<String>();
-		JSONArray first = (JSONArray)descFav.getJSONObject(0).get("arr");
-		JSONArray second = (JSONArray)descFav.getJSONObject(1).get("arr");
-		JSONArray third = (JSONArray)descFav.getJSONObject(2).get("arr");
-		JSONArray fourth = (JSONArray)descFav.getJSONObject(3).get("arr");
-		JSONArray fifth = (JSONArray)descFav.getJSONObject(4).get("arr");
-		JSONArray sixth = (JSONArray)descFav.getJSONObject(5).get("arr");
-		
-		System.out.println("descFav.getJSONObject(0).get(\"arr\")"+ first);
-		System.out.println("descFav.getJSONObject(1).get(\"arr\")"+ second);
-		System.out.println("descFav.getJSONObject(2).get(\"arr\")"+ third);
-		System.out.println("descFav.getJSONObject(3).get(\"arr\")"+ fourth);
-		System.out.println("descFav.getJSONObject(4).get(\"arr\")"+ fifth);
-		System.out.println("descFav.getJSONObject(5).get(\"arr\")"+ sixth);
-		
-		int count = 0;
-		
-		// 선호도 순위에 따라 메뉴 개수를 다르게 가져온다.
-		while(favList.size() < menuCount) {
-			// 선호도 1위 메뉴 : 60프로
-			for(int i=0; i<menuCount*0.6; i++) {
-				favList.add((String)first.get(i));
-			}
-			// 선호도 2위 메뉴 : 30프로
-			for(int i=0; i<menuCount*0.3; i++) {
-				favList.add((String)second.get(i));
-			}
-			// 선호도 3위 메뉴 : 20프로
-			for(int i=0; i<menuCount*0.2; i++) {
-				favList.add((String)third.get(i));
-			}
-			// 선호도 4위 메뉴 : 10프로
-			for(int i=0; i<menuCount*0.1; i++) {
-				favList.add((String)fourth.get(i));
-			}
-			// 선호도 5위 메뉴 : 10프로
-			for(int i=0; i<menuCount*0.1; i++) {
-				favList.add((String)fifth.get(i));
-			}
-			// 선호도 6위 메뉴 : 10프로
-			for(int i=0; i<menuCount*0.1; i++) {
-				favList.add((String)sixth.get(i));
-			}
-		}
-		System.out.println("favList : " + favList + "\n" + "favList.size() : " + favList.size());
-		
-		
-		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-		map.put("arr", favList);
-		
-		return map;
-	}
-	
-	/* 룰렛 만들기 */
-	@RequestMapping("/addOption1.do")
-	@ResponseBody
-	public Map<String, ArrayList<String>> addOption1(Model model, HttpServletRequest req, HttpSession session) {
-		
-		// 선호도를 반영한 메뉴 목록을 담을 HashSet객체 선언
-		ArrayList<String> favList = new ArrayList<String>();
-		JSONArray first = (JSONArray)descFav.getJSONObject(0).get("arr");
-		JSONArray second = (JSONArray)descFav.getJSONObject(1).get("arr");
-		JSONArray third = (JSONArray)descFav.getJSONObject(2).get("arr");
-		JSONArray fourth = (JSONArray)descFav.getJSONObject(3).get("arr");
-		JSONArray fifth = (JSONArray)descFav.getJSONObject(4).get("arr");
-		JSONArray sixth = (JSONArray)descFav.getJSONObject(5).get("arr");
-		
-		System.out.println("descFav.getJSONObject(0).get(\"arr\")"+ first);
-		System.out.println("descFav.getJSONObject(1).get(\"arr\")"+ second);
-		System.out.println("descFav.getJSONObject(2).get(\"arr\")"+ third);
-		System.out.println("descFav.getJSONObject(3).get(\"arr\")"+ fourth);
-		System.out.println("descFav.getJSONObject(4).get(\"arr\")"+ fifth);
-		System.out.println("descFav.getJSONObject(5).get(\"arr\")"+ sixth);
-		
-		int count = 0;
-		
-		// 선호도 순위에 따라 메뉴 개수를 다르게 가져온다.
-		while(favList.size() < menuCount) {
-			// 선호도 1위 메뉴 : 60프로
-			for(int i=0; i<menuCount*0.6; i++) {
-				favList.add((String)first.get(i));
-			}
-			// 선호도 2위 메뉴 : 30프로
-			for(int i=0; i<menuCount*0.3; i++) {
-				favList.add((String)second.get(i));
-			}
-			// 선호도 3위 메뉴 : 20프로
-			for(int i=0; i<menuCount*0.2; i++) {
-				favList.add((String)third.get(i));
-			}
-			// 선호도 4위 메뉴 : 10프로
-			for(int i=0; i<menuCount*0.1; i++) {
-				favList.add((String)fourth.get(i));
-			}
-			// 선호도 5위 메뉴 : 10프로
-			for(int i=0; i<menuCount*0.1; i++) {
-				favList.add((String)fifth.get(i));
-			}
-			// 선호도 6위 메뉴 : 10프로
-			for(int i=0; i<menuCount*0.1; i++) {
-				favList.add((String)sixth.get(i));
-			}
-		}
-		System.out.println("favList : " + favList + "\n" + "favList.size() : " + favList.size());
-		
-		/**********************************************************/
-		// 현재 접속중인 사용자의 ID 얻어오기
-		String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
-		
-		// 1번 탭에 해당하는 음식목록을 배열에 담기
-		ArrayList<MyFoodDTO> myfood = sqlSession3.getMapper(RecommandDAO.class).myfoodTab(id, addOption);
-		
-		//확인용 로그
-		System.out.print("퍼킹 마이 푸드 : ");
-		for (int i = 0; i < myfood.size(); i++) {
-			System.out.print(myfood.get(i).getMyfood() + " ");
-		}
-		System.out.println();
-		
-		//440번째 줄에서 반환받은 myfood 배열을 찜 쪄먹기
-		//menuCount 10개면 그냥 이대로 날리면 됨
-		//menuCount가 10개보다 크면 남은 개수만큼 선호도 반영한 favList에서 가져와서 채워서 날려야 함
-		//10개가 꽉 안차있을 수도 있다. menuCount보다 myfood가 적으면 favList에서 채워야 함
-		
-		ArrayList<String> menuList = new ArrayList<String>();
-		
-		if (myfood.size() < menuCount) {
-			int temp = menuCount - myfood.size();
-			
-			for (int i = 0; i < myfood.size(); i++) {
-				menuList.add(myfood.get(i).getMyfood());
-			}
-			for (int i = 0; i < temp; i++) {
-				menuList.add(favList.get(i));
-			}
-		}
-		else {
-			for (int i = 0; i < myfood.size(); i++) {
-				menuList.add(myfood.get(i).getMyfood());
-			}
-		}
-		/**********************************************************/
-		
-		Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-		map.put("arr", menuList);
-		System.out.println("손준영 바보 : "+ map.get("arr"));
-		
-		return map;
-	}
-
-
-//	// 보류 - 난수생성
-//	public void randomCreate(int[] arrParam) {
+//	
+//	/** ajax로 요청받음 - addOption 값에 따라 다른 메뉴목록을 return */
+//	@RequestMapping("/addOption.do")
+//	@ResponseBody
+//	public String addOption(HttpServletRequest req, HttpSession session) {
 //		
-//		//난수생성을 위한 씨드설정
-//		Random rnd = new Random();
-//		rnd.setSeed(System.currentTimeMillis());
-//
-//		/*
-//		난수생성 방법1:
-//			1]난수 10개를 우선 생성한후 배열에 담아준다.
-//			2]배열 전체를 대상으로 중복확인을 한다.
-//			3]만약 중복되는 요소가 발견되면 다시 1번으로 돌아가서 난수를
-//			생성한다.
-//			4]중복되는 요소가 없다면 함수를 종료하고 메인으로 돌아간다.
-//		 */
-//		while(true) {
-//
-//			//1.난수191개 생성후 배열담기
-//			for(int i=0 ; i<arrParam.length ; i++) {
-//				arrParam[i] = rnd.nextInt(191) + 1;//1~191까지의 정수 생성
+//		// 반환할 객체 선언
+////		HashMap<String, ArrayList<String>> map = null;
+//		JSONArray resultArr = null;
+//		String jsonSt = null;
+//		
+//		// 사용자가 선택한 메뉴개수를 요청 파라미터로 전달받음
+//		int menuCount = Integer.parseInt(req.getParameter("menuCount"));
+//		// 사용자가 선택한 추가옵션 값을 요청 파라미터로 전달받음
+//		int addOption = Integer.parseInt(req.getParameter("addOption"));
+//		
+//		System.out.println("--- addOption.do 호출됨 ------------------------------------");
+//		System.out.println("menuCount : "+ menuCount);
+//		System.out.println("addOption : "+ addOption);
+//		
+//		
+//		// 선호도를 반영한 메뉴 목록을 담을 HashSet객체 선언 (중복방지)
+//		ArrayList<String> favList = new ArrayList<String>();
+//		JSONArray first = (JSONArray)descFav.getJSONObject(0).get("arr");
+//		JSONArray second = (JSONArray)descFav.getJSONObject(1).get("arr");
+//		JSONArray third = (JSONArray)descFav.getJSONObject(2).get("arr");
+//		JSONArray fourth = (JSONArray)descFav.getJSONObject(3).get("arr");
+//		JSONArray fifth = (JSONArray)descFav.getJSONObject(4).get("arr");
+//		JSONArray sixth = (JSONArray)descFav.getJSONObject(5).get("arr");
+//		
+//		System.out.println("descFav.getJSONObject(0).get(\"arr\")"+ first);
+//		System.out.println("descFav.getJSONObject(1).get(\"arr\")"+ second);
+//		System.out.println("descFav.getJSONObject(2).get(\"arr\")"+ third);
+//		System.out.println("descFav.getJSONObject(3).get(\"arr\")"+ fourth);
+//		System.out.println("descFav.getJSONObject(4).get(\"arr\")"+ fifth);
+//		System.out.println("descFav.getJSONObject(5).get(\"arr\")"+ sixth);
+//		
+//		// 선호도 순위에 따라 메뉴 개수를 다르게 가져온다.
+//		while(favList.size() < menuCount) {
+//			// 선호도 1위 메뉴 : 60프로
+//			for(int i=0; i<menuCount*0.6; i++) {
+//				favList.add((String)first.get(i));
 //			}
-//
-//			//2.중복확인
-//			boolean rndFlag = false;/*중복체크를 위한 변수(false라면 중복된
-//				난수가 없는경우이고, 중복된 난수가 발견된다면 true로
-//				값을 변경할것임 */
-//
-//			for(int i=0 ; i<arrParam.length ; i++) {
-//				for(int j=0 ; j<arrParam.length ; j++) {
-//					/*
-//					비교의 조건은 인덱스i와 인덱스j가 서로 다를때이다.
-//					인덱스가 동일하다면 같은숫자일테니까...
-//					 */
-//					if(i!=j && arrParam[i]==arrParam[j]) {
-//						//중복된 값이 발견된다면 true로 값을 변경
-//						rndFlag = true;
+//			// 선호도 2위 메뉴 : 30프로
+//			for(int i=0; i<menuCount*0.3; i++) {
+//				favList.add((String)second.get(i));
+//			}
+//			// 선호도 3위 메뉴 : 20프로
+//			for(int i=0; i<menuCount*0.2; i++) {
+//				favList.add((String)third.get(i));
+//			}
+//			// 선호도 4위 메뉴 : 10프로
+//			for(int i=0; i<menuCount*0.1; i++) {
+//				favList.add((String)fourth.get(i));
+//			}
+//			// 선호도 5위 메뉴 : 10프로
+//			for(int i=0; i<menuCount*0.1; i++) {
+//				favList.add((String)fifth.get(i));
+//			}
+//			// 선호도 6위 메뉴 : 10프로
+//			for(int i=0; i<menuCount*0.1; i++) {
+//				favList.add((String)sixth.get(i));
+//			}
+//		}
+//		System.out.println("favList : " + favList + "\n" + "favList.size() : " + favList.size());
+//		
+//		/******************************************************************** 공통 **/
+//		/** 선호도만 반영 */
+//		if (addOption == 10) {
+//			
+//			// 세션영역에 기존에 저장되어있던 데이터를 지운다.
+//			session.removeAttribute("menuCount");
+//			session.removeAttribute("addOption");
+//			session.removeAttribute("favList");
+//			
+//			/** 반환할 map에 담을 JSONArray ************************************************/
+//			//대분류별 JSON정보를 담을 객체 생성
+//			resultArr = new JSONArray();
+//			// 대분류 하나의 정보가 들어갈 JSONObject 선언
+//			JSONObject resultRow = null; 
+//			
+//			for (int i=0; i<favList.size(); i++) {
+//				resultRow = new JSONObject();
+//				// 정보 입력 - 면
+//				resultRow.put("fillStyle", "#ed6a5a");
+//				resultRow.put("text", favList.get(i));
+//				// Array에 입력
+//				resultArr.put(resultRow);
+//			}
+//			jsonSt = resultArr.toString();
+//			System.out.println("--favList가 반영된 resultArr--\n"+"jsonSt : "+ jsonSt);
+//			/*******************************************************************************/
+//			
+////			// 반환할 맵 객체에 선호도 순위를 반영한 favList를 저장
+////			map = new HashMap<String, ArrayList<String>>();
+////			map.put("arr", favList);
+////			System.out.println("favList 반환 맵 : "+ map.get("arr"));
+//			
+//			// 리퀘스트 영역에 저장 (jstl에서 사용하기 위함)
+//			session.setAttribute("menuCount", menuCount);
+//			session.setAttribute("addOption", addOption);
+//			session.setAttribute("favList", favList);
+//			
+//			// 확인용
+//			System.out.println("session.getAttribute(\"menuCount\")"+ session.getAttribute("menuCount"));
+//			System.out.println("session.getAttribute(\"addOption\")"+ session.getAttribute("addOption"));
+//			System.out.println("session.getAttribute(\"favList\")"+ session.getAttribute("favList"));
+//		}
+//		/** 탭 + 선호도 반영 */
+//		else if (addOption == 1) {
+//			
+//			// 세션영역에 기존에 저장되어있던 데이터를 지운다.
+//			session.removeAttribute("menuCount");
+//			session.removeAttribute("addOption");
+//			session.removeAttribute("menuList");
+//			
+//			// 현재 접속중인 사용자의 ID 얻어오기
+//			String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
+//			// 사용자가 선택한 탭에 해당하는 음식목록을 배열에 담기
+//			ArrayList<MyFoodDTO> myfood = sqlSession3.getMapper(RecommandDAO.class).myfoodTab(id, addOption);
+//			
+//			// 탭 목록 확인용
+//			System.out.print("myfood : ");
+//			for (int i = 0; i < myfood.size(); i++) {
+//				System.out.print(myfood.get(i).getMyfood() + " ");
+//			}
+//			System.out.println();
+//			
+//			// 탭의 메뉴 목록 + 선호도 메뉴 목록을 담을 객체 생성
+//			HashSet<String> menuList = new HashSet<String>();
+//			
+//			if (myfood.size() < menuCount) {// 탭의 메뉴개수가 사용자가 선택한 메뉴개수보다 적으면...
+//				// (전체 메뉴 개수) - (탭 메뉴 개수) 
+//				int temp = menuCount - myfood.size();
+//				/** [2번 for문] favList에서 마지막으로 가져온 메뉴의 인덱스를 저장할 변수 */
+//				int favIndex = 0;
+//				// favIndex에 저장하기 전에 한번 거칠 변수
+//				int before = 0;
+//				System.out.println("temp : "+ temp);
+//				
+//				// 먼저 탭의 메뉴를 모두 넣음
+//				for (int i=0; i<myfood.size(); i++) {
+//					menuList.add(myfood.get(i).getMyfood());
+//				}
+//				// 결과 목록의 개수가 사용자가 선택한 메뉴개수보다 적으면...
+//				while (menuList.size() < menuCount) {
+//					/** [2번 for문] 선호도 순위가 반영된 favList에서 부족한 만큼 순서대로 가져온다. */
+//					for (int i=favIndex; i<(favIndex+temp); i++) {
+//						menuList.add(favList.get(i));
+//						System.out.println("favList.get(i) : "+ favList.get(i));
+//						before = i;
+//						// 결과목록의 개수와 사용자가 선택한 메뉴개수가 같으면 for문을 탈출
+//						if (menuList.size() == menuCount) break;
 //					}
+//					favIndex = before;
 //				}
 //			}
-//
-//			//3.중복된값이 없다면 break로 while루프 탈출하기
-//			if(rndFlag==false) break;
-//
-//		}//end of while
-//	}//
+//			else {// 같으면 (탭의 최대 메뉴개수는 10개, 사용자 지정 최소 메뉴개수는 10개이므로 더 많은 경우는 없음)
+//				for (int i = 0; i < myfood.size(); i++) {
+//					menuList.add(myfood.get(i).getMyfood());
+//				}
+//			}
+//			/** 반환할 map에 담을 JSONArray ************************************************/
+//			//대분류별 JSON정보를 담을 객체 생성
+//			resultArr = new JSONArray();
+//			// 대분류 하나의 정보가 들어갈 JSONObject 선언
+//			JSONObject resultRow = null;
+//			// menuList를 ArrayList로 변환
+//			ArrayList<String> copyMenuList = new ArrayList<String>();
+//			copyMenuList.addAll(menuList);
+//			
+//			for (int i=0; i<copyMenuList.size(); i++) {
+//				resultRow = new JSONObject();
+//				// 정보 입력 - 면
+//				resultRow.put("fillStyle", "#ed6a5a");
+//				resultRow.put("text", copyMenuList);
+//				// Array에 입력
+//				resultArr.put(resultRow);
+//			}
+//			jsonSt = resultArr.toString();
+//			System.out.println("--favList가 반영된 resultArr--\n"+"jsonSt : "+ jsonSt);
+//			/*******************************************************************************/
+////			map = new HashMap<String, ArrayList<String>>();
+////			map.put("arr", copyMenuList);
+////			System.out.println("[탭+선호도 반영] 최종 메뉴 목록 : "+ map.get("arr"));
+////			System.out.println("사이즈 : "+ map.get("arr").size());
+////			
+//			// 리퀘스트 영역에 저장 (jstl에서 사용하기 위함)
+//			session.setAttribute("menuCount", menuCount);
+//			session.setAttribute("addOption", addOption);
+//			session.setAttribute("menuList", menuList);
+//			
+//			// 확인용
+//			System.out.println("session.getAttribute(\"menuCount\")"+ session.getAttribute("menuCount"));
+//			System.out.println("session.getAttribute(\"addOption\")"+ session.getAttribute("addOption"));
+//			System.out.println("session.getAttribute(\"menuList\")"+ session.getAttribute("menuList"));
+//		}//end of if(addOption==1)
+//		
+//		return jsonSt;
+//	}
+	/** ajax로 요청받음 - addOption 값에 따라 다른 메뉴목록을 return */
+	@RequestMapping("/addOption.do")
+	@ResponseBody
+	public HashMap<String, ArrayList<String>> addOption(HttpServletRequest req, HttpSession session) {
+		
+		// 세션영역에 기존에 저장되어있던 데이터를 지운다.
+		session.removeAttribute("menuCount");
+		session.removeAttribute("addOption");
+		session.removeAttribute("favList");
+		session.removeAttribute("menuList");
+		
+		// 반환할 객체 선언
+		HashMap<String, ArrayList<String>> map = null;
+		JSONArray resultArr = null;
+		
+		// 사용자가 선택한 메뉴개수를 요청 파라미터로 전달받음
+		int menuCount = Integer.parseInt(req.getParameter("menuCount"));
+		// 사용자가 선택한 추가옵션 값을 요청 파라미터로 전달받음
+		int addOption = Integer.parseInt(req.getParameter("addOption"));
+		
+		System.out.println("--- addOption.do 호출됨 ------------------------------------");
+		System.out.println("menuCount : "+ menuCount);
+		System.out.println("addOption : "+ addOption);
+		
+		
+		// 선호도를 반영한 메뉴 목록을 담을 HashSet객체 선언 (중복방지)
+		ArrayList<String> favList = new ArrayList<String>();
+		JSONArray first = (JSONArray)descFav.getJSONObject(0).get("arr");
+		JSONArray second = (JSONArray)descFav.getJSONObject(1).get("arr");
+		JSONArray third = (JSONArray)descFav.getJSONObject(2).get("arr");
+		JSONArray fourth = (JSONArray)descFav.getJSONObject(3).get("arr");
+		JSONArray fifth = (JSONArray)descFav.getJSONObject(4).get("arr");
+		JSONArray sixth = (JSONArray)descFav.getJSONObject(5).get("arr");
+		
+		System.out.println("descFav.getJSONObject(0).get(\"arr\")"+ first);
+		System.out.println("descFav.getJSONObject(1).get(\"arr\")"+ second);
+		System.out.println("descFav.getJSONObject(2).get(\"arr\")"+ third);
+		System.out.println("descFav.getJSONObject(3).get(\"arr\")"+ fourth);
+		System.out.println("descFav.getJSONObject(4).get(\"arr\")"+ fifth);
+		System.out.println("descFav.getJSONObject(5).get(\"arr\")"+ sixth);
+		
+		// 선호도 순위에 따라 메뉴 개수를 다르게 가져온다.
+		while(favList.size() < menuCount) {
+			// 선호도 1위 메뉴 : 60프로
+			for(int i=0; i<menuCount*0.6; i++) {
+				favList.add((String)first.get(i));
+			}
+			// 선호도 2위 메뉴 : 30프로
+			for(int i=0; i<menuCount*0.3; i++) {
+				favList.add((String)second.get(i));
+			}
+			// 선호도 3위 메뉴 : 20프로
+			for(int i=0; i<menuCount*0.2; i++) {
+				favList.add((String)third.get(i));
+			}
+			// 선호도 4위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)fourth.get(i));
+			}
+			// 선호도 5위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)fifth.get(i));
+			}
+			// 선호도 6위 메뉴 : 10프로
+			for(int i=0; i<menuCount*0.1; i++) {
+				favList.add((String)sixth.get(i));
+			}
+		}
+		System.out.println("favList : " + favList + "\n" + "favList.size() : " + favList.size());
+		
+		/******************************************************************** 공통 **/
+		/** 선호도만 반영 */
+		if (addOption == 10) {
+			
+			/** 반환할 map에 담을 JSONArray ************************************************/
+			//대분류별 JSON정보를 담을 객체 생성
+			resultArr = new JSONArray();
+			// 대분류 하나의 정보가 들어갈 JSONObject 선언
+			JSONObject resultRow = null; 
+			
+			for (int i=0; i<favList.size(); i++) {
+				resultRow = new JSONObject();
+				// 정보 입력 - 면
+				resultRow.put("fillStyle", "#ed6a5a");
+				resultRow.put("text", favList.get(i));
+				// Array에 입력
+				resultArr.put(resultRow);
+			}
+//			System.out.println("--favList가 반영된 resultArr--\n"+"resultArr"+ resultArr);
+			/*******************************************************************************/
+			
+//			// 반환할 맵 객체에 선호도 순위를 반영한 favList를 저장
+			map = new HashMap<String, ArrayList<String>>();
+			map.put("arr", favList);
+			System.out.println("favList 반환 맵 : "+ map.get("arr"));
+			
+			// 리퀘스트 영역에 저장 (jstl에서 사용하기 위함)
+			session.setAttribute("menuCount", menuCount);
+			session.setAttribute("addOption", addOption);
+			session.setAttribute("favList", favList);
+			
+			// 확인용
+			System.out.println("session.getAttribute(\"menuCount\")"+ session.getAttribute("menuCount"));
+			System.out.println("session.getAttribute(\"addOption\")"+ session.getAttribute("addOption"));
+			System.out.println("session.getAttribute(\"favList\")"+ session.getAttribute("favList"));
+		}
+		/** 탭 + 선호도 반영 */
+		else if (addOption == 1) {
+			
+			// 현재 접속중인 사용자의 ID 얻어오기
+			String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
+			// 사용자가 선택한 탭에 해당하는 음식목록을 배열에 담기
+			ArrayList<MyFoodDTO> myfood = sqlSession3.getMapper(RecommandDAO.class).myfoodTab(id, addOption);
+			
+			// 탭 목록 확인용
+			System.out.print("myfood : ");
+			for (int i = 0; i < myfood.size(); i++) {
+				System.out.print(myfood.get(i).getMyfood() + " ");
+			}
+			System.out.println();
+			
+			// 탭의 메뉴 목록 + 선호도 메뉴 목록을 담을 객체 생성
+			HashSet<String> menuList = new HashSet<String>();
+			
+			if (myfood.size() < menuCount) {// 탭의 메뉴개수가 사용자가 선택한 메뉴개수보다 적으면...
+				// (전체 메뉴 개수) - (탭 메뉴 개수) 
+				int temp = menuCount - myfood.size();
+				/** [2번 for문] favList에서 마지막으로 가져온 메뉴의 인덱스를 저장할 변수 */
+				int favIndex = 0;
+				// favIndex에 저장하기 전에 한번 거칠 변수
+				int before = 0;
+				System.out.println("temp : "+ temp);
+				
+				// 먼저 탭의 메뉴를 모두 넣음
+				for (int i=0; i<myfood.size(); i++) {
+					menuList.add(myfood.get(i).getMyfood());
+				}
+				// 결과 목록의 개수가 사용자가 선택한 메뉴개수보다 적으면...
+				while (menuList.size() < menuCount) {
+					/** [2번 for문] 선호도 순위가 반영된 favList에서 부족한 만큼 순서대로 가져온다. */
+					for (int i=favIndex; i<(favIndex+temp); i++) {
+						menuList.add(favList.get(i));
+						System.out.println("favList.get(i) : "+ favList.get(i));
+						before = i;
+						// 결과목록의 개수와 사용자가 선택한 메뉴개수가 같으면 for문을 탈출
+						if (menuList.size() == menuCount) break;
+					}
+					favIndex = before;
+				}
+			}
+			else {// 같으면 (탭의 최대 메뉴개수는 10개, 사용자 지정 최소 메뉴개수는 10개이므로 더 많은 경우는 없음)
+				for (int i = 0; i < myfood.size(); i++) {
+					menuList.add(myfood.get(i).getMyfood());
+				}
+			}
+			/** 반환할 map에 담을 JSONArray ************************************************/
+			//대분류별 JSON정보를 담을 객체 생성
+			resultArr = new JSONArray();
+			// 대분류 하나의 정보가 들어갈 JSONObject 선언
+			JSONObject resultRow = null;
+			// menuList를 ArrayList로 변환
+			ArrayList<String> copyMenuList = new ArrayList<String>();
+			copyMenuList.addAll(menuList);
+			
+			for (int i=0; i<copyMenuList.size(); i++) {
+				resultRow = new JSONObject();
+				// 정보 입력 - 면
+				resultRow.put("fillStyle", "#ed6a5a");
+				resultRow.put("text", copyMenuList);
+				// Array에 입력
+				resultArr.put(resultRow);
+			}
+//			System.out.print("--menuList가 반영된 resultArr--\n"+"resultArr"+ resultArr);
+			/*******************************************************************************/
+			map = new HashMap<String, ArrayList<String>>();
+			map.put("arr", copyMenuList);
+			System.out.println("[탭+선호도 반영] 최종 메뉴 목록 : "+ map.get("arr"));
+			System.out.println("사이즈 : "+ map.get("arr").size());
+			
+			// 리퀘스트 영역에 저장 (jstl에서 사용하기 위함)
+			session.setAttribute("menuCount", menuCount);
+			session.setAttribute("addOption", addOption);
+			session.setAttribute("menuList", menuList);
+			
+			// 확인용
+			System.out.println("session.getAttribute(\"menuCount\")"+ session.getAttribute("menuCount"));
+			System.out.println("session.getAttribute(\"addOption\")"+ session.getAttribute("addOption"));
+			System.out.println("session.getAttribute(\"menuList\")"+ session.getAttribute("menuList"));
+		}//end of if(addOption==1)
+		
+		return map;
+	}
+	
+	@RequestMapping("/test.do")
+	@ResponseBody
+	public ArrayList<HashMap<String, String>> test() {
+		
+		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("do_test1", "테스트를 해보자1");
+		map.put("do_test2", "테스트를 해보자2");
+		map.put("do_test3", "테스트를 해보자3");
+		map.put("do_test4", "테스트를 해보자4");
+		
+		list.add(map);
+		
+		return list;
+	}
 }
