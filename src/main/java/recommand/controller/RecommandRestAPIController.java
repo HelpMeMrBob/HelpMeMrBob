@@ -33,7 +33,7 @@ import recommand.model.RecommandDAO;
 import recommand.model.RecommandDTO;
 
 @Controller
-public class RecommandRestAPIController implements Serializable {
+public class RecommandRestAPIController {
 
 	// 월드컵(리액트)에서 사용할 랜덤한 메뉴를 rounds개수만큼 가져와서 DTO에 저장
 	@Autowired
@@ -105,13 +105,6 @@ public class RecommandRestAPIController implements Serializable {
 		System.out.println("seafoodList : " + seafoodList + "\n" + "seafoodList.size() : " + seafoodList.size());
 		System.out.println("etcList : " + etcList + "\n" + "etcList.size() : " + etcList.size());
 
-		model.addAttribute("noodleList", noodleList);
-		model.addAttribute("riceList", riceList);
-		model.addAttribute("soupList", soupList);
-		model.addAttribute("meatList", meatList);
-		model.addAttribute("seafoodList", seafoodList);
-		model.addAttribute("etcList", etcList);
-		
 		/** 로그인 상태이면 회원의 대분류 선호도 값을 가져온다. */
 		if (session.getAttribute("siteUserInfo") != null) {
 			
@@ -223,206 +216,7 @@ public class RecommandRestAPIController implements Serializable {
 		return "recommand/roulette";
 	}
 	
-//	
-//	/** ajax로 요청받음 - addOption 값에 따라 다른 메뉴목록을 return */
-//	@RequestMapping("/addOption.do")
-//	@ResponseBody
-//	public String addOption(HttpServletRequest req, HttpSession session) {
-//		
-//		// 반환할 객체 선언
-////		HashMap<String, ArrayList<String>> map = null;
-//		JSONArray resultArr = null;
-//		String jsonSt = null;
-//		
-//		// 사용자가 선택한 메뉴개수를 요청 파라미터로 전달받음
-//		int menuCount = Integer.parseInt(req.getParameter("menuCount"));
-//		// 사용자가 선택한 추가옵션 값을 요청 파라미터로 전달받음
-//		int addOption = Integer.parseInt(req.getParameter("addOption"));
-//		
-//		System.out.println("--- addOption.do 호출됨 ------------------------------------");
-//		System.out.println("menuCount : "+ menuCount);
-//		System.out.println("addOption : "+ addOption);
-//		
-//		
-//		// 선호도를 반영한 메뉴 목록을 담을 HashSet객체 선언 (중복방지)
-//		ArrayList<String> favList = new ArrayList<String>();
-//		JSONArray first = (JSONArray)descFav.getJSONObject(0).get("arr");
-//		JSONArray second = (JSONArray)descFav.getJSONObject(1).get("arr");
-//		JSONArray third = (JSONArray)descFav.getJSONObject(2).get("arr");
-//		JSONArray fourth = (JSONArray)descFav.getJSONObject(3).get("arr");
-//		JSONArray fifth = (JSONArray)descFav.getJSONObject(4).get("arr");
-//		JSONArray sixth = (JSONArray)descFav.getJSONObject(5).get("arr");
-//		
-//		System.out.println("descFav.getJSONObject(0).get(\"arr\")"+ first);
-//		System.out.println("descFav.getJSONObject(1).get(\"arr\")"+ second);
-//		System.out.println("descFav.getJSONObject(2).get(\"arr\")"+ third);
-//		System.out.println("descFav.getJSONObject(3).get(\"arr\")"+ fourth);
-//		System.out.println("descFav.getJSONObject(4).get(\"arr\")"+ fifth);
-//		System.out.println("descFav.getJSONObject(5).get(\"arr\")"+ sixth);
-//		
-//		// 선호도 순위에 따라 메뉴 개수를 다르게 가져온다.
-//		while(favList.size() < menuCount) {
-//			// 선호도 1위 메뉴 : 60프로
-//			for(int i=0; i<menuCount*0.6; i++) {
-//				favList.add((String)first.get(i));
-//			}
-//			// 선호도 2위 메뉴 : 30프로
-//			for(int i=0; i<menuCount*0.3; i++) {
-//				favList.add((String)second.get(i));
-//			}
-//			// 선호도 3위 메뉴 : 20프로
-//			for(int i=0; i<menuCount*0.2; i++) {
-//				favList.add((String)third.get(i));
-//			}
-//			// 선호도 4위 메뉴 : 10프로
-//			for(int i=0; i<menuCount*0.1; i++) {
-//				favList.add((String)fourth.get(i));
-//			}
-//			// 선호도 5위 메뉴 : 10프로
-//			for(int i=0; i<menuCount*0.1; i++) {
-//				favList.add((String)fifth.get(i));
-//			}
-//			// 선호도 6위 메뉴 : 10프로
-//			for(int i=0; i<menuCount*0.1; i++) {
-//				favList.add((String)sixth.get(i));
-//			}
-//		}
-//		System.out.println("favList : " + favList + "\n" + "favList.size() : " + favList.size());
-//		
-//		/******************************************************************** 공통 **/
-//		/** 선호도만 반영 */
-//		if (addOption == 10) {
-//			
-//			// 세션영역에 기존에 저장되어있던 데이터를 지운다.
-//			session.removeAttribute("menuCount");
-//			session.removeAttribute("addOption");
-//			session.removeAttribute("favList");
-//			
-//			/** 반환할 map에 담을 JSONArray ************************************************/
-//			//대분류별 JSON정보를 담을 객체 생성
-//			resultArr = new JSONArray();
-//			// 대분류 하나의 정보가 들어갈 JSONObject 선언
-//			JSONObject resultRow = null; 
-//			
-//			for (int i=0; i<favList.size(); i++) {
-//				resultRow = new JSONObject();
-//				// 정보 입력 - 면
-//				resultRow.put("fillStyle", "#ed6a5a");
-//				resultRow.put("text", favList.get(i));
-//				// Array에 입력
-//				resultArr.put(resultRow);
-//			}
-//			jsonSt = resultArr.toString();
-//			System.out.println("--favList가 반영된 resultArr--\n"+"jsonSt : "+ jsonSt);
-//			/*******************************************************************************/
-//			
-////			// 반환할 맵 객체에 선호도 순위를 반영한 favList를 저장
-////			map = new HashMap<String, ArrayList<String>>();
-////			map.put("arr", favList);
-////			System.out.println("favList 반환 맵 : "+ map.get("arr"));
-//			
-//			// 리퀘스트 영역에 저장 (jstl에서 사용하기 위함)
-//			session.setAttribute("menuCount", menuCount);
-//			session.setAttribute("addOption", addOption);
-//			session.setAttribute("favList", favList);
-//			
-//			// 확인용
-//			System.out.println("session.getAttribute(\"menuCount\")"+ session.getAttribute("menuCount"));
-//			System.out.println("session.getAttribute(\"addOption\")"+ session.getAttribute("addOption"));
-//			System.out.println("session.getAttribute(\"favList\")"+ session.getAttribute("favList"));
-//		}
-//		/** 탭 + 선호도 반영 */
-//		else if (addOption == 1) {
-//			
-//			// 세션영역에 기존에 저장되어있던 데이터를 지운다.
-//			session.removeAttribute("menuCount");
-//			session.removeAttribute("addOption");
-//			session.removeAttribute("menuList");
-//			
-//			// 현재 접속중인 사용자의 ID 얻어오기
-//			String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
-//			// 사용자가 선택한 탭에 해당하는 음식목록을 배열에 담기
-//			ArrayList<MyFoodDTO> myfood = sqlSession3.getMapper(RecommandDAO.class).myfoodTab(id, addOption);
-//			
-//			// 탭 목록 확인용
-//			System.out.print("myfood : ");
-//			for (int i = 0; i < myfood.size(); i++) {
-//				System.out.print(myfood.get(i).getMyfood() + " ");
-//			}
-//			System.out.println();
-//			
-//			// 탭의 메뉴 목록 + 선호도 메뉴 목록을 담을 객체 생성
-//			HashSet<String> menuList = new HashSet<String>();
-//			
-//			if (myfood.size() < menuCount) {// 탭의 메뉴개수가 사용자가 선택한 메뉴개수보다 적으면...
-//				// (전체 메뉴 개수) - (탭 메뉴 개수) 
-//				int temp = menuCount - myfood.size();
-//				/** [2번 for문] favList에서 마지막으로 가져온 메뉴의 인덱스를 저장할 변수 */
-//				int favIndex = 0;
-//				// favIndex에 저장하기 전에 한번 거칠 변수
-//				int before = 0;
-//				System.out.println("temp : "+ temp);
-//				
-//				// 먼저 탭의 메뉴를 모두 넣음
-//				for (int i=0; i<myfood.size(); i++) {
-//					menuList.add(myfood.get(i).getMyfood());
-//				}
-//				// 결과 목록의 개수가 사용자가 선택한 메뉴개수보다 적으면...
-//				while (menuList.size() < menuCount) {
-//					/** [2번 for문] 선호도 순위가 반영된 favList에서 부족한 만큼 순서대로 가져온다. */
-//					for (int i=favIndex; i<(favIndex+temp); i++) {
-//						menuList.add(favList.get(i));
-//						System.out.println("favList.get(i) : "+ favList.get(i));
-//						before = i;
-//						// 결과목록의 개수와 사용자가 선택한 메뉴개수가 같으면 for문을 탈출
-//						if (menuList.size() == menuCount) break;
-//					}
-//					favIndex = before;
-//				}
-//			}
-//			else {// 같으면 (탭의 최대 메뉴개수는 10개, 사용자 지정 최소 메뉴개수는 10개이므로 더 많은 경우는 없음)
-//				for (int i = 0; i < myfood.size(); i++) {
-//					menuList.add(myfood.get(i).getMyfood());
-//				}
-//			}
-//			/** 반환할 map에 담을 JSONArray ************************************************/
-//			//대분류별 JSON정보를 담을 객체 생성
-//			resultArr = new JSONArray();
-//			// 대분류 하나의 정보가 들어갈 JSONObject 선언
-//			JSONObject resultRow = null;
-//			// menuList를 ArrayList로 변환
-//			ArrayList<String> copyMenuList = new ArrayList<String>();
-//			copyMenuList.addAll(menuList);
-//			
-//			for (int i=0; i<copyMenuList.size(); i++) {
-//				resultRow = new JSONObject();
-//				// 정보 입력 - 면
-//				resultRow.put("fillStyle", "#ed6a5a");
-//				resultRow.put("text", copyMenuList);
-//				// Array에 입력
-//				resultArr.put(resultRow);
-//			}
-//			jsonSt = resultArr.toString();
-//			System.out.println("--favList가 반영된 resultArr--\n"+"jsonSt : "+ jsonSt);
-//			/*******************************************************************************/
-////			map = new HashMap<String, ArrayList<String>>();
-////			map.put("arr", copyMenuList);
-////			System.out.println("[탭+선호도 반영] 최종 메뉴 목록 : "+ map.get("arr"));
-////			System.out.println("사이즈 : "+ map.get("arr").size());
-////			
-//			// 리퀘스트 영역에 저장 (jstl에서 사용하기 위함)
-//			session.setAttribute("menuCount", menuCount);
-//			session.setAttribute("addOption", addOption);
-//			session.setAttribute("menuList", menuList);
-//			
-//			// 확인용
-//			System.out.println("session.getAttribute(\"menuCount\")"+ session.getAttribute("menuCount"));
-//			System.out.println("session.getAttribute(\"addOption\")"+ session.getAttribute("addOption"));
-//			System.out.println("session.getAttribute(\"menuList\")"+ session.getAttribute("menuList"));
-//		}//end of if(addOption==1)
-//		
-//		return jsonSt;
-//	}
+	
 	/** ajax로 요청받음 - addOption 값에 따라 다른 메뉴목록을 return */
 	@RequestMapping("/addOption.do")
 	@ResponseBody
@@ -496,25 +290,7 @@ public class RecommandRestAPIController implements Serializable {
 		/******************************************************************** 공통 **/
 		/** 선호도만 반영 */
 		if (addOption == 10) {
-			
-			/** 반환할 map에 담을 JSONArray ************************************************/
-			//대분류별 JSON정보를 담을 객체 생성
-			resultArr = new JSONArray();
-			// 대분류 하나의 정보가 들어갈 JSONObject 선언
-			JSONObject resultRow = null; 
-			
-			for (int i=0; i<favList.size(); i++) {
-				resultRow = new JSONObject();
-				// 정보 입력 - 면
-				resultRow.put("fillStyle", "#ed6a5a");
-				resultRow.put("text", favList.get(i));
-				// Array에 입력
-				resultArr.put(resultRow);
-			}
-//			System.out.println("--favList가 반영된 resultArr--\n"+"resultArr"+ resultArr);
-			/*******************************************************************************/
-			
-//			// 반환할 맵 객체에 선호도 순위를 반영한 favList를 저장
+			// 반환할 맵 객체에 선호도 순위를 반영한 favList를 저장
 			map = new HashMap<String, ArrayList<String>>();
 			map.put("arr", favList);
 			System.out.println("favList 반환 맵 : "+ map.get("arr"));
@@ -595,7 +371,6 @@ public class RecommandRestAPIController implements Serializable {
 				// Array에 입력
 				resultArr.put(resultRow);
 			}
-//			System.out.print("--menuList가 반영된 resultArr--\n"+"resultArr"+ resultArr);
 			/*******************************************************************************/
 			map = new HashMap<String, ArrayList<String>>();
 			map.put("arr", copyMenuList);
@@ -614,22 +389,5 @@ public class RecommandRestAPIController implements Serializable {
 		}//end of if(addOption==1)
 		
 		return map;
-	}
-	
-	@RequestMapping("/test.do")
-	@ResponseBody
-	public ArrayList<HashMap<String, String>> test() {
-		
-		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		map.put("do_test1", "테스트를 해보자1");
-		map.put("do_test2", "테스트를 해보자2");
-		map.put("do_test3", "테스트를 해보자3");
-		map.put("do_test4", "테스트를 해보자4");
-		
-		list.add(map);
-		
-		return list;
 	}
 }
