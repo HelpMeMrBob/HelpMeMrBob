@@ -197,9 +197,6 @@ public class FileuploadController2 {
 		return mv;		
 	}
 	
-	
-	
-	
 	/*
 	기존 업로드 처리 메서드인 uploadAction() 그대로 복사한 후 Rest API형식으로
 	수정한다. 
