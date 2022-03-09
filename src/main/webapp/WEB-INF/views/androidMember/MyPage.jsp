@@ -107,7 +107,7 @@
 				<td style="width: 50%; padding: 20px; padding-top: 5px;
 						   border: 1px solid #DFDFDF; vertical-align: top;">
 					<c:forEach items="${ stickers }" var="stickers">
-						<img src="./resources/upload/${ stickers.temOname }"
+						<img src="./resources/upload2/${ stickers.temOname }"
 							 style="width: 50px; height: 50px; float: left;
 							 		margin: 5px">
 					</c:forEach>
