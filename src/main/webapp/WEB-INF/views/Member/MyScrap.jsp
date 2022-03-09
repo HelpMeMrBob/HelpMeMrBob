@@ -120,7 +120,7 @@
 					</a>
 				</td>
 				<td style="width: 10%; height: 15px; padding: 15px; text-align: center">
-					${ mylist.name }
+					${ mylist.id }
 				</td>
 				<td style="width: 10%; height: 15px; padding: 15px; text-align: center">
 					${ mylist.visitCnt }

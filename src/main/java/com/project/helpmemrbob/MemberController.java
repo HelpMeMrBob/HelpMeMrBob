@@ -61,9 +61,8 @@ public class MemberController
 	{
 		String userId = req.getParameter("id");
 		String password = req.getParameter("pass");
-		
-		MemberVO memberVO = sqlSession.getMapper(MemberDAOImpl.class).login(userId, password);
 
+		MemberVO memberVO = sqlSession.getMapper(MemberDAOImpl.class).login(userId, password);
 		
 		ModelAndView mv = new ModelAndView();
 	
@@ -92,6 +91,7 @@ public class MemberController
 		String id = (String)map.get("id");
 		String name = (String)map.get("name");
 		String email = (String)map.get("email");
+		System.out.println(id + name + email);
 		
 		MemberVO memberVO = new MemberVO();
 		
@@ -99,21 +99,42 @@ public class MemberController
 		memberVO.setName(name);
 		memberVO.setEmail(email);
 		
-		//	할때마다 동의여부가 떠서 회원가입 한번하면 무조건 오류.. 어떻게 해야할지
-		//	sqlSession.getMapper(MemberDAOImpl.class).kakaoRegisterAction(memberVO);
+		ArrayList<String> idList = sqlSession.getMapper(MemberDAOImpl.class).idList();
+		
+		int i = 0;
+		while (i < idList.size())
+		{
+			if (idList.get(i).equals(id))
+			{
+				System.out.println("가입 완료한 카카오 계정");
+				break;
+			}
+			else
+			{
+				memberVO.setId(id);
+				memberVO.setName(name);
+				memberVO.setEmail(email);
+				sqlSession.getMapper(MemberDAOImpl.class).kakaoRegisterAction(memberVO);
+				sqlSession.getMapper(MemberDAOImpl.class).kakaoRegisterPoint(memberVO);
+				sqlSession.getMapper(MemberDAOImpl.class).kakaoRegisterPreference(memberVO);
+				break;
+			}
+		}
 		
 		String kid = memberVO.getId();
 		String kname = memberVO.getName();
 		String kemail = memberVO.getEmail();
 		
 		MemberVO vo
-			= sqlSession.getMapper(MemberDAOImpl.class).kakaoLogin(kid, kname, kemail);
+		= sqlSession.getMapper(MemberDAOImpl.class).kakaoLogin(kid, kname, kemail);
 		
-		System.out.println(vo.getId());
+		
 		
 		session.setAttribute("siteUserInfo", vo);
+		
 		mv.setViewName("redirect:/");
 		return mv;
+
 	}
 	
 	//	로그아웃 처리
@@ -700,7 +721,8 @@ public class MemberController
 		
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
-		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
+		int countMyFood
+			= sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		int myFoodTab = Integer.parseInt(req.getParameter("tab"));
 
 		if (countMyFood == 10)
@@ -716,8 +738,8 @@ public class MemberController
 			model.addAttribute("myFood", myFood);
 			model.addAttribute("food", food);
 			
-			String referer = req.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
-			return "redirect:"+ referer; // 이전 페이지로 리다이렉트
+			String referer = req.getHeader("Referer");
+			return "redirect:"+ referer;
 		}
 		
 		String insertFood = req.getParameter("myfood");

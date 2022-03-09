@@ -43,4 +43,7 @@ public interface MemberDAOImpl
 	public int registerAction(MemberVO vo);
 	public int registerPreference(MemberVO vo);
 	public int kakaoRegisterAction(MemberVO vo);
+	public int kakaoRegisterPoint(MemberVO vo);
+	public int kakaoRegisterPreference(MemberVO vo);
+	public ArrayList<String> idList();
 }

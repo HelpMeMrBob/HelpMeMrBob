@@ -5,7 +5,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member.model.MemberDAOImpl">
-	<!-- 회원 가입 (favMenu 추가 예정) -->
+	<!-- 회원 가입 -->
 	<insert id="registerAction" parameterType="member.model.MemberVO">
 		INSERT INTO member (id, name, pass, email, telNum)
 			VALUES ( #{ id }, #{ name }, #{ pass }, #{ email }, #{ telNum } )
@@ -27,15 +27,31 @@
 		UPDATE member SET lev = TRUNC(${ exp }/1000) WHERE id = #{ id }
 	</update>
 	
-	<!-- 카카오 로그인 등록 -->
+	<!-- 카카오 로그인 회원정보 등록 -->
 	<insert id="kakaoRegisterAction" parameterType="member.model.MemberVO">
-		INSERT INTO member (id, name, email)
-			VALUES ( #{ id }, #{ name }, #{ email } )
+		INSERT INTO member (id, name, email, lev, exp)
+			VALUES ( #{ id }, #{ name }, #{ email }, 0, 0 )
+	</insert>
+	
+	<!-- 카카오 로그인 포인트 등록 -->
+	<insert id="kakaoRegisterPoint" parameterType="member.model.MemberVO">
+		INSERT INTO point (id, point) VALUES ( #{ id }, 0 )
+	</insert>
+	
+	<!-- 카카오 로그인 선호도 등록 (디폴트값 3) -->
+	<insert id="kakaoRegisterPreference" parameterType="member.model.MemberVO">
+		INSERT INTO preference (id, prenoodle, prerice, presoup, premeat, preseafood, preetc)
+			VALUES ( #{ id }, 3, 3, 3, 3 ,3, 3 )
 	</insert>
 	
 	<!-- 카카오 로그인 -->
 	<select id="kakaoLogin" resultType="member.model.MemberVO">
 		SELECT * FROM member WHERE id = #{ 0 } AND name = #{ 1 } AND email = #{ 2 }
+	</select>
+	
+	<!-- 아이디 출력 -->
+	<select id="idList" resultType="String">
+		SELECT id FROM member
 	</select>
 	
 	<!-- 아이디 찾기 -->
