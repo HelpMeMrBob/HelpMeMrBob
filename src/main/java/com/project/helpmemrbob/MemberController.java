@@ -318,9 +318,7 @@ public class MemberController
 		return "Member/MyPage";
 	}
 	
-	
-	
-//	마이 페이지 페이지 이동(안드로이드용)
+	//	마이 페이지 페이지 이동(안드로이드용)
 	@RequestMapping("/mypageAnd.do")
 	public String myPageAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
@@ -348,7 +346,6 @@ public class MemberController
 		return "androidMember/MyPage";
 	}
 	
-	
 	//	나의 음식 목록 1 이동
 	@RequestMapping("/myfood.do")
 	public String myFood(Model model, HttpServletRequest req, HttpSession session)
@@ -375,6 +372,34 @@ public class MemberController
 		model.addAttribute("food", food);
 		
 		return "Member/MyFoodList";
+	}
+	
+	//	나의 음식 목록 1 이동(안드로이드용)
+	@RequestMapping("/myfoodAnd.do")
+	public String myFoodAnd(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setTab(1);
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
+		
+		ArrayList<MemberVO> food
+		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
+		
+		ArrayList<MemberVO> myFood
+		= sqlSession.getMapper(MemberDAOImpl.class).myFoodList(parameterDTO);
+		
+		model.addAttribute("countMyFood", countMyFood);
+		model.addAttribute("myFood", myFood);
+		model.addAttribute("food", food);
+		
+		return "androidMember/MyFoodList";
 	}
 	
 	//	나의 음식 목록 2 이동
@@ -406,6 +431,34 @@ public class MemberController
 	}
 	
 	//	나의 음식 목록 2 이동
+	@RequestMapping("/myfood2And.do")
+	public String myFood2And(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setTab(2);
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
+		
+		ArrayList<MemberVO> food
+		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
+		
+		ArrayList<MemberVO> myFood
+		= sqlSession.getMapper(MemberDAOImpl.class).myFoodList(parameterDTO);
+		
+		model.addAttribute("countMyFood", countMyFood);
+		model.addAttribute("myFood", myFood);
+		model.addAttribute("food", food);
+		
+		return "androidMember/MyFoodList2";
+	}
+	
+	//	나의 음식 목록 3 이동
 	@RequestMapping("/myfood3.do")
 	public String myFood3(Model model, HttpServletRequest req, HttpSession session)
 	{
@@ -433,7 +486,35 @@ public class MemberController
 		return "Member/MyFoodList3";
 	}
 	
-	//	나의 음식 목록 2 이동
+	//	나의 음식 목록 3 이동(안드로이드용)
+	@RequestMapping("/myfood3And.do")
+	public String myFood3And(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setTab(3);
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
+		
+		ArrayList<MemberVO> food
+		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
+		
+		ArrayList<MemberVO> myFood
+		= sqlSession.getMapper(MemberDAOImpl.class).myFoodList(parameterDTO);
+		
+		model.addAttribute("countMyFood", countMyFood);
+		model.addAttribute("myFood", myFood);
+		model.addAttribute("food", food);
+		
+		return "androidMember/MyFoodList3";
+	}
+	
+	//	나의 음식 목록 4 이동
 	@RequestMapping("/myfood4.do")
 	public String myFood4(Model model, HttpServletRequest req, HttpSession session)
 	{
@@ -459,6 +540,34 @@ public class MemberController
 		model.addAttribute("food", food);
 		
 		return "Member/MyFoodList4";
+	}
+	
+	//	나의 음식 목록 4 이동(안드로이드용)
+	@RequestMapping("/myfood4And.do")
+	public String myFood4And(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setTab(4);
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
+		
+		ArrayList<MemberVO> food
+		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
+		
+		ArrayList<MemberVO> myFood
+		= sqlSession.getMapper(MemberDAOImpl.class).myFoodList(parameterDTO);
+		
+		model.addAttribute("countMyFood", countMyFood);
+		model.addAttribute("myFood", myFood);
+		model.addAttribute("food", food);
+		
+		return "androidMember/MyFoodList4";
 	}
 	
 	//	나의 음식 목록 5 이동
@@ -487,6 +596,34 @@ public class MemberController
 		model.addAttribute("food", food);
 		
 		return "Member/MyFoodList5";
+	}
+	
+	//	나의 음식 목록 5 이동(안드로이드용)
+	@RequestMapping("/myfood5And.do")
+	public String myFood5And(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setTab(5);
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
+		
+		ArrayList<MemberVO> food
+		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
+		
+		ArrayList<MemberVO> myFood
+		= sqlSession.getMapper(MemberDAOImpl.class).myFoodList(parameterDTO);
+		
+		model.addAttribute("countMyFood", countMyFood);
+		model.addAttribute("myFood", myFood);
+		model.addAttribute("food", food);
+		
+		return "androidMember/MyFoodList5";
 	}
 	
 	@RequestMapping("/deletemyfood.do")
@@ -521,6 +658,37 @@ public class MemberController
 		return "redirect:"+ referer; // 이전 페이지로 리다이렉트
 	}
 	
+	@RequestMapping("/deletemyfoodAnd.do")
+	public String deleteMyFoodAnd(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		String deleteFood = req.getParameter("myfood");
+		int myFoodTab = Integer.parseInt(req.getParameter("tab"));
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setMyfood(deleteFood);
+		parameterDTO.setTab(myFoodTab);
+		
+		sqlSession.getMapper(MemberDAOImpl.class).deleteMyFood(parameterDTO);
+		
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		ArrayList<MemberVO> food
+		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
+		
+		ArrayList<MemberVO> myFood
+		= sqlSession.getMapper(MemberDAOImpl.class).myFoodList(parameterDTO);
+		
+		model.addAttribute("myFood", myFood);
+		model.addAttribute("food", food);
+		
+		String referer = req.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
+		return "redirect:"+ referer; // 이전 페이지로 리다이렉트
+	}
 	
 	@RequestMapping("/insertmyfood.do")
 	public String insertMyFood(Model model, HttpServletRequest req, HttpSession session)
@@ -535,6 +703,58 @@ public class MemberController
 		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		int myFoodTab = Integer.parseInt(req.getParameter("tab"));
 
+		if (countMyFood == 10)
+		{
+			parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+			
+			ArrayList<MemberVO> food
+			= sqlSession.getMapper(MemberDAOImpl.class).foodList();
+			
+			ArrayList<MemberVO> myFood
+			= sqlSession.getMapper(MemberDAOImpl.class).myFoodList(parameterDTO);
+			
+			model.addAttribute("myFood", myFood);
+			model.addAttribute("food", food);
+			
+			String referer = req.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
+			return "redirect:"+ referer; // 이전 페이지로 리다이렉트
+		}
+		
+		String insertFood = req.getParameter("myfood");
+		
+		parameterDTO.setMyfood(insertFood);
+		parameterDTO.setTab(myFoodTab);
+		
+		sqlSession.getMapper(MemberDAOImpl.class).insertMyFood(parameterDTO);
+		
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		ArrayList<MemberVO> food
+		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
+		
+		ArrayList<MemberVO> myFood
+		= sqlSession.getMapper(MemberDAOImpl.class).myFoodList(parameterDTO);
+		
+		model.addAttribute("myFood", myFood);
+		model.addAttribute("food", food);
+		
+		String referer = req.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
+		return "redirect:"+ referer; // 이전 페이지로 리다이렉트
+	}
+	
+	@RequestMapping("/insertmyfoodAnd.do")
+	public String insertMyFoodAnd(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{			
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
+		int myFoodTab = Integer.parseInt(req.getParameter("tab"));
+		
 		if (countMyFood == 10)
 		{
 			parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
@@ -627,6 +847,59 @@ public class MemberController
 		return "Member/MyList";
 	}
 	
+	// 나의 작성 리스트 페이지 (리뷰 게시판)(안드로이드용)
+	@RequestMapping("/mylistAnd.do")
+	public String myListAnd(Model model, HttpServletRequest req, HttpSession session)
+	{
+		
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		
+		parameterDTO.setSearchField(req.getParameter("searchField"));
+		parameterDTO.setSearchTxt(req.getParameter("searchTxt"));
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		int totalRecordCount
+		= sqlSession.getMapper(MemberDAOImpl.class).getTotalCountSearch(parameterDTO);
+		
+		int pageSize = 10;
+		int blockPage = 2;
+		
+		int nowPage
+		= (req.getParameter("nowPage") == null || req.getParameter("nowPage").equals("")) 
+		? 1 : Integer.parseInt(req.getParameter("nowPage"));
+		
+		int start = (nowPage - 1) * pageSize + 1;
+		int end = nowPage * pageSize;
+		
+		parameterDTO.setStart(start);
+		parameterDTO.setEnd(end);
+		
+		ArrayList<MemberVO> lists
+		= sqlSession.getMapper(MemberDAOImpl.class).listPageSearch(parameterDTO);
+		
+		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
+				req.getContextPath() +"/mylist.do?");
+		
+		model.addAttribute("pagingImg", pagingImg);
+		
+		int virtualNum = 0;
+		int countNum = 0;
+		
+		for (MemberVO vo : lists)
+		{
+			virtualNum = totalRecordCount - (((nowPage - 1) * pageSize) + countNum++);
+			vo.setVirtualNum(virtualNum);
+		}
+		
+		model.addAttribute("lists", lists);
+		return "androidMember/MyList";
+	}
+	
 	
 	//	나의 작성 리스트 페이지 (댓글)
 	@RequestMapping("/mycommentlist.do")
@@ -682,6 +955,60 @@ public class MemberController
 		
 		return "Member/MyCommentList";
 	}
+	//	나의 작성 리스트 페이지 (댓글)(안드로이드용)
+	@RequestMapping("/mycommentlistAnd.do")
+	public String myCommentListAnd(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		
+		parameterDTO.setSearchField(req.getParameter("searchField"));
+		parameterDTO.setSearchTxt(req.getParameter("searchTxt"));
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		int totalRecordCount
+		= sqlSession.getMapper(MemberDAOImpl.class)
+		.getCommentTotalCountSearch(parameterDTO);
+		
+		int pageSize = 10;
+		int blockPage = 2;
+		
+		int nowPage
+		= (req.getParameter("nowPage") == null || req.getParameter("nowPage").equals("")) 
+		? 1 : Integer.parseInt(req.getParameter("nowPage"));
+		
+		int start = (nowPage - 1) * pageSize + 1;
+		int end = nowPage * pageSize;
+		
+		parameterDTO.setStart(start);
+		parameterDTO.setEnd(end);
+		
+		ArrayList<MemberVO> lists
+		= sqlSession.getMapper(MemberDAOImpl.class).commentListPageSearch(parameterDTO);
+		
+		
+		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
+				req.getContextPath() +"/mycommentlist.do?");
+		model.addAttribute("pagingImg", pagingImg);
+		
+		int virtualNum = 0;
+		int countNum = 0;
+		
+		for (MemberVO vo : lists)
+		{
+			virtualNum = totalRecordCount - (((nowPage - 1) * pageSize) + countNum++);
+			vo.setVirtualNum(virtualNum);
+			String temp = vo.getContents().replace("\r\n", "<br />");
+			vo.setContents(temp);
+		}
+		model.addAttribute("lists", lists);
+		
+		return "androidMember/MyCommentList";
+	}
 
 
 	//	회원 정보 수정 페이지 이동
@@ -704,6 +1031,28 @@ public class MemberController
 		
 		
 		return "Member/MemberUpdate";
+	}
+	
+	//	회원 정보 수정 페이지 이동(안드로이드용)
+	@RequestMapping("/memberUpdateAnd.do")
+	public String memberUpdateAnd(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		ArrayList<MemberVO> preference
+		= sqlSession.getMapper(MemberDAOImpl.class).myPreference(parameterDTO);
+		
+		model.addAttribute("preference", preference);
+		
+		
+		
+		return "androidMember/MemberUpdate";
 	}
 	
 	//	회원 정보 수정 처리
@@ -820,5 +1169,49 @@ public class MemberController
 		model.addAttribute("lists", lists);
 		
 		return "Member/MyScrap";
+	}
+	
+	//	나의 스크랩 목록(안드로이드용)
+	@RequestMapping("/myscrapAnd.do")
+	public String myScrapAnd(Model model, HttpServletRequest req, HttpSession session)
+	{
+		if (session.getAttribute("siteUserInfo") == null)
+		{
+			return "redirect:login.do";
+		}
+		
+		ParameterDTO parameterDTO = new ParameterDTO();
+		
+		parameterDTO.setSearchField(req.getParameter("searchField"));
+		parameterDTO.setSearchTxt(req.getParameter("searchTxt"));	
+		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		
+		model.addAttribute("scrap", parameterDTO);
+		parameterDTO.setScrapNo(1);
+		
+		int totalRecordCount
+		= sqlSession.getMapper(MemberDAOImpl.class).getScrapTotalCountSearch(parameterDTO);
+		
+		int pageSize = 10;
+		
+		int nowPage
+		= (req.getParameter("nowPage") == null || req.getParameter("nowPage").equals("")) 
+		? 1 : Integer.parseInt(req.getParameter("nowPage"));
+		
+		ArrayList<MemberVO> lists
+		= sqlSession.getMapper(MemberDAOImpl.class).scrapListPageSearch(parameterDTO);
+		
+		int virtualNum = 0;
+		int countNum = 0;
+		
+		for (MemberVO vo : lists)
+		{
+			virtualNum = totalRecordCount - (((nowPage - 1) * pageSize) + countNum++);
+			vo.setVirtualNum(virtualNum);
+		}
+		
+		model.addAttribute("lists", lists);
+		
+		return "androidMember/MyScrap";
 	}
 }

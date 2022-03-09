@@ -12,14 +12,14 @@
 		<table style="width: 60%; margin:0.5px">
 			<tr style="border: 1px solid #DFDFDF">
 				<td style="width: 12%;">
-					<button onclick="location.href='./mypage.do';"
+					<button onclick="location.href='./mypageAnd.do';"
 							style="background-color: #ED6A5A; color: #FFFFFF;
 								   width: 100%; height: 80px; font-size: 18px;">
 						나의 정보 보기
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./myfood.do';"
+					<button onclick="location.href='./myfoodAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-left: 1px solid #DFDFDF;
@@ -28,7 +28,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./mylist.do';"
+					<button onclick="location.href='./mylistAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-left: 1px solid #DFDFDF;
@@ -37,7 +37,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./myscrap.do';"
+					<button onclick="location.href='./myscrapAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-right: 1px solid #DFDFDF;">
@@ -45,7 +45,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./memberUpdate.do';"
+					<button onclick="location.href='./memberUpdateAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   ">

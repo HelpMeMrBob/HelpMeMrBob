@@ -9,21 +9,21 @@
 		<table style="width: 60%; margin:0.5px">
 			<tr style="border: 1px solid #DFDFDF">
 				<td style="width: 12%;">
-					<button onclick="location.href='./mypage.do';"
+					<button onclick="location.href='./mypageAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;">
 						나의 정보 보기
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./myfood.do';"
+					<button onclick="location.href='./myfoodAnd.do';"
 							style="background-color: #ED6A5A; color: #FFFFFF;
 								   width: 100%; height: 80px; font-size: 18px;">
 						나의 음식 목록
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./mylist.do';"
+					<button onclick="location.href='./mylistAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-left: 1px solid #DFDFDF;
@@ -32,7 +32,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./myscrap.do';"
+					<button onclick="location.href='./myscrapAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-right: 1px solid #DFDFDF;">
@@ -40,7 +40,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./memberUpdate.do';"
+					<button onclick="location.href='./memberUpdateAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   ">
@@ -69,7 +69,7 @@
 			</tr>
 			<tr>
 				<td style="width: 60%; text-align: center; padding-Top: 3%;">
-					<button type="button" onclick="location.href='./myfood.do';"
+					<button type="button" onclick="location.href='./myfoodAnd.do';"
 						   style="width: 16%; height: 40px; background-color: #FFFFFF;
 								  border: 1px solid #10212F; margin: 1px;
 								  font-size: 14px; border-radius: 5px;
@@ -77,7 +77,7 @@
 							나의 첫번째 목록
 					</button>
 					<c:if test="${ sessionScope.siteUserInfo.lev >= 10 }">
-					<button type="button" onclick="location.href='./myfood2.do';"
+					<button type="button" onclick="location.href='./myfood2And.do';"
 						   style="width: 16%; height: 40px; background-color: #ED6A5A;
 								  border: 1px solid #ED6A5A; margin: 1px; color: #FFFFFF;
 								  font-size: 14px; border-radius: 5px;
@@ -86,7 +86,7 @@
 					</button>
 					</c:if>
 					<c:if test="${ sessionScope.siteUserInfo.lev >= 20 }">
-					<button type="button" onclick="location.href='./myfood3.do';"
+					<button type="button" onclick="location.href='./myfood3And.do';"
 						   style="width: 16%; height: 40px; background-color: #FFFFFF;
 								  border: 1px solid #10212F; margin: 1px;
 								  font-size: 14px; border-radius: 5px;
@@ -95,7 +95,7 @@
 					</button>
 					</c:if>
 					<c:if test="${ sessionScope.siteUserInfo.lev >= 30 }">
-					<button type="button" onclick="location.href='./myfood4.do';"
+					<button type="button" onclick="location.href='./myfood4And.do';"
 						   style="width: 16%; height: 40px; background-color: #FFFFFF;
 								  border: 1px solid #10212F; margin: 1px;
 								  font-size: 14px; border-radius: 5px;
@@ -104,7 +104,7 @@
 					</button>
 					</c:if>
 					<c:if test="${ sessionScope.siteUserInfo.lev >= 40 }">
-					<button type="button" onclick="location.href='./myfood5.do';"
+					<button type="button" onclick="location.href='./myfood5And.do';"
 						   style="width: 16%; height: 40px; background-color: #FFFFFF;
 								  border: 1px solid #10212F; margin: 1px;
 								  font-size: 14px; border-radius: 5px;
@@ -135,7 +135,7 @@
 						   padding-right: 0px;
 						   padding-Bottom: 0px; padding-Top: 1%; padding-Bottom: 3%">
 					<c:forEach items="${ myFood }" var="myFood">
-						<form action="./deletemyfood.do"
+						<form action="./deletemyfoodAnd.do"
 							  style="width:18%; height: 40px; float: left;
 							  		 margin: 2px">
 						<input type="hidden" name="myfood" value="${ myFood.myfood }"/>
@@ -168,7 +168,7 @@
 				<td style="width: 60%; padding: 20px; padding-Left: 40px; text-align: left">
 					<c:forEach items="${ food }" var="food">
 						<c:if test="${ food.lgroup == 'noodle' }">
-							<form action="./insertmyfood.do"
+							<form action="./insertmyfoodAnd.do"
 								  style="width: 16%; height: 40px; float: left; margin: 2px">
 							<input type="hidden" name="myfood" value="${ food.food }"/>
 							<input type="hidden" name="tab" value="2"/>
@@ -198,7 +198,7 @@
 				<td style="width: 60%; padding: 20px; padding-Left: 40px; text-align: left">
 					<c:forEach items="${ food }" var="food">
 						<c:if test="${ food.lgroup == 'rice' }">
-							<form action="./insertmyfood.do"
+							<form action="./insertmyfoodAnd.do"
 								  style="width: 16%; height: 40px; float: left; margin: 2px">
 							<input type="hidden" name="myfood" value="${ food.food }"/>
 							<input type="hidden" name="tab" value="2"/>
@@ -228,7 +228,7 @@
 				<td style="width: 60%; padding: 20px; padding-Left: 40px; text-align: left">
 					<c:forEach items="${ food }" var="food">
 						<c:if test="${ food.lgroup == 'soup' }">
-							<form action="./insertmyfood.do"
+							<form action="./insertmyfoodAnd.do"
 								  style="width: 16%; height: 40px; float: left; margin: 2px">
 							<input type="hidden" name="myfood" value="${ food.food }"/>
 							<input type="hidden" name="tab" value="2"/>
@@ -258,7 +258,7 @@
 				<td style="width: 60%; padding: 20px; padding-Left: 40px; text-align: left">
 					<c:forEach items="${ food }" var="food">
 						<c:if test="${ food.lgroup == 'meat' }">
-							<form action="./insertmyfood.do"
+							<form action="./insertmyfoodAnd.do"
 								  style="width: 16%; height: 40px; float: left; margin: 2px">
 							<input type="hidden" name="myfood" value="${ food.food }"/>
 							<input type="hidden" name="tab" value="2"/>
@@ -288,7 +288,7 @@
 				<td style="width: 60%; padding: 20px; padding-Left: 40px; text-align: left">
 					<c:forEach items="${ food }" var="food">
 						<c:if test="${ food.lgroup == 'seafood' }">
-							<form action="./insertmyfood.do"
+							<form action="./insertmyfoodAnd.do"
 								  style="width: 16%; height: 40px; float: left; margin: 2px">
 							<input type="hidden" name="myfood" value="${ food.food }"/>
 							<input type="hidden" name="tab" value="2"/>
@@ -318,7 +318,7 @@
 				<td style="width: 60%; padding: 20px; padding-Left: 40px; text-align: left">
 					<c:forEach items="${ food }" var="food">
 						<c:if test="${ food.lgroup == 'etc' }">
-							<form action="./insertmyfood.do"
+							<form action="./insertmyfoodAnd.do"
 								  style="width: 16%; height: 40px; float: left; margin: 2px">
 							<input type="hidden" name="myfood" value="${ food.food }"/>
 							<input type="hidden" name="tab" value="2"/>

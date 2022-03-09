@@ -11,7 +11,7 @@
 		<table style="width: 60%; margin:0.5px">
 			<tr style="border: 1px solid #DFDFDF">
 				<td style="width: 12%;">
-					<button onclick="location.href='./mypage.do';"
+					<button onclick="location.href='./mypageAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   ">
@@ -19,7 +19,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./myfood.do';"
+					<button onclick="location.href='./myfoodAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-left: 1px solid #DFDFDF;
@@ -28,7 +28,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./mylist.do';"
+					<button onclick="location.href='./mylistAnd.do';"
 							style="background-color: #ED6A5A; color: #FFFFFF;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-left: 1px solid #DFDFDF;
@@ -37,7 +37,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./myscrap.do';"
+					<button onclick="location.href='./myscrapAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   border-right: 1px solid #DFDFDF;">
@@ -59,12 +59,12 @@
 
 	<div style="margin-left: 4%; margin-top: 3%; margin-right: 4.5%">
 	<form method="get">
-		<button type="button" onclick="location.href='./mylist.do';"
+		<button type="button" onclick="location.href='./mylistAnd.do';"
 				style="width: 5%; height: 40px; font-size: 14px;
 					   background-color: #FFFFFF; color: #10212F; border: none;">
 			리뷰 게시판
 		</button>
-		<button type="button" onclick="location.href='./mycommentlist.do';"
+		<button type="button" onclick="location.href='./mycommentlistAnd.do';"
 				style="width: 5%; height: 40px; font-size: 14px; margin-right: 28%;
 					   background-color: #FFFFFF; color: #10212F; border: none;
 					   font-weight: bold;">
