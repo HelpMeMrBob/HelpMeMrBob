@@ -44,26 +44,31 @@
 
     <main>
 	
-      <!-- BANNER SECTION STARTS -->
-      <section class="banner full-width">
-
-       
-
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
+      	<!-- BANNER SECTION STARTS -->
+     	<section class="category-pointshop full-width"
+     			style="height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem;">
+      		<div class="container">
+       			<div class="banner__content">
+		            <h2 class="section-intro color-off-white-with-border bold">
+						밥알 포인트샵
+					</h2>
+       			</div><!-- .banner__content ends -->
+      		</div><!-- .container ends -->
+  		</section><!-- .banner ends -->
+    	<!-- BANNER SECTION ENDS -->
 
 	
       <!-- STAFFS SINGLE SECTION STARTS -->
+      <div align="center">
       <section class="staffs-single default-section-spacing">
       <div class="staffs-single__content">
           <div class="container">
             <div class="row">
-              <div class="flex-lg-7">
-						<h2>밥알 포인트 샵</h2>
+              <div class="">
 						<br/><br/><br/>
 						<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 						<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
-							<table border="1" style="width:720px; margin-bottom:50px;" >
+							<table style="width:720px; margin-bottom:50px; border: 2px solid #ed6a5a;" >
 		                        <tr>
 		                        <c:forEach items="${fileMap}" var="file" varStatus="vs">
 		                        <c:if test="${vs.index%3==0}"></tr><tr></c:if>
@@ -80,24 +85,20 @@
 		                        </c:forEach>
 		                        </tr> 
                      		</table>
-							<button type="submit" class="btn btn-danger" style="height:50px; margin-left:480px;" >구매하기</button>
+                     		<div type="submit"  class="flex-md-12" align="right">
+					           	<button id="apibtn" type="submit" class="button--primary button--fill">구매하기</button>
+							</div><!-- .flex-* ends -->
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
       </section><!-- .staffs-single ends -->
+      </div>
       <!-- STAFFS SINGLE SECTION ENDS -->
 
-
-      <!-- STAFF POSTS SECTION STARTS -->
-      <section class="staff-posts default-section-spacing background-off-white">
-
-     
-      </section><!-- .staff-posts ends -->
-      <!-- STAFF POSTS SECTION ENDS -->
-	
-
+	<!-- 컨텐츠와 Footer 사이의 간격을 띄우기 위한 div -->
+	<div class="mar-t-md-2" align="center"></div>
     </main><!-- main ends -->
 
     <!-- =================== MAIN SECTION ENDS ============================= -->

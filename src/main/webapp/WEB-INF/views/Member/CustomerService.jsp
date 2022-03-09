@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 <!--────────────────────────────────── SITE HEADER BEGINS ────────────────────────────────────-->
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/header2.jsp" />
 <script>
 function btn() {
 	alert('고객센터로 전송이 완료되었습니다.');
@@ -36,29 +36,23 @@ function validate(form)
     <main>
     <div style="width: 100%">
     
-   	<div style="width: 100%">
-	   	<table style="width: 100%; margin-Top: 6%; text-align: center">
-	   		<tr>
-	   			<td style="width: 100%; padding-left: 47.1%">
-	   				<img alt="LOGIN" src="./resources/include_img/bob_logo1.png"
-					 style="width: 100px%; height: 100px;">
-	   			</td>
-	   		</tr>
-	   		<tr>
-	   			<td style="width: 100%;">
-					<label style="width: 40%; height: 60px; border: none; color: #585858;
-						   		  font-size: 80px; margin-bottom: 5%">
+   	<!-- BANNER SECTION STARTS -->
+      	<section class="category-cs full-width"
+      			style="height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem;">
+       		<div class="container">
+         			<div class="banner__content">
+		            <h2 class="section-intro color-off-white-with-border bold">
 						고객센터
-					</label>
-	   			</td>
-	   		</tr>
-	   	</table>
-   	</div>
+					</h2>
+         			</div><!-- .banner__content ends -->
+       		</div><!-- .container ends -->
+   		</section><!-- .banner ends -->
+      	<!-- BANNER SECTION ENDS -->
    	
-   	<div style="width: 100%; text-align: center;">
+   	<div class="mar-t-md-8" style="width: 100%; text-align: center;">
 	<form name="form" action="./customerServiceSend.do" method="post"
 		onsubmit="return validate(this); ">
-	<table style="width: 100%; margin:0.5px">
+	<table style="width: 100%; margin:0.5px;">
 		<tr>
 			<td>
 				<input type="text" value="이름" readonly
@@ -131,13 +125,6 @@ function validate(form)
 		</tr>
 		<tr>
 			<td>
-				<button type="submit" onclick="javascript:btn()"
-					    style="width: 8%; height: 60px; border: 1px solid #ED6A5A;
-			  				   text-align: center; font-size: 16px; margin-bottom: 1%;
-			  				   padding: 10px; background-color: #ED6A5A; color: #FFFFFF;
-					    	   border-radius: 10px;">
-					작성완료
-				</button>
 				<button type="reset"
 					    style="width: 8%; height: 60px; border: 1px solid #0F202E;
 			  				   text-align: center; font-size: 16px; margin-bottom: 1%;
@@ -145,6 +132,14 @@ function validate(form)
 					    	   border-radius: 10px;">
 					새로작성
 				</button>
+				<button type="submit" onclick="javascript:btn()"
+					    style="width: 8%; height: 60px; border: 1px solid #ED6A5A;
+			  				   text-align: center; font-size: 16px; margin-bottom: 1%;
+			  				   padding: 10px; background-color: #ED6A5A; color: #FFFFFF;
+					    	   border-radius: 10px;">
+					작성완료
+				</button>
+				
 			</td>
 		</tr>
 	</table>
@@ -154,9 +149,12 @@ function validate(form)
    	
 	
 	</div>
+	<!-- 컨텐츠와 Footer 사이의 간격을 띄우기 위한 div -->
+  	<div class="mar-t-md-6" align="center"></div>
 <!--──────────────────────────────────── MAIN SECTION END ────────────────────────────────────-->
  	</main>
 <jsp:include page="/WEB-INF/views/include/search.jsp" />
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 <!--──────────────────────────────────── SITE FOOTER ENDS ────────────────────────────────────-->
 <jsp:include page="/WEB-INF/views/include/jquery.jsp" />
 </body>

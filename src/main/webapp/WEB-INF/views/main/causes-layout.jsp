@@ -24,50 +24,25 @@
 
     <main>
 
-      <!-- BANNER SECTION STARTS -->
-      <section class="category-pointshop pad-t-sm-6 pad-t-lg-8 pad-b-sm-6 pad-b-lg-8 mar-t-md-8">
-
-        <div class="container">
-
-          <div class="banner__content">
-
-            <h2 class="section-intro color-off-white-with-border bold">
-				리뷰게시판
-			</h2>
-
-          </div><!-- .banner__content ends -->
-
-        </div><!-- .container ends -->
-
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
-
-
-      <!-- INNER PAGES HEADER STARTS -->
-      <div class="inner-pages-header default-section-spacing">
-
-        <div class="container">
-
-          <div class="section-heading text-center-sm">
-          </div><!-- .section-heading ends -->
-
-
-        </div><!-- .container ends -->
-
-
-      </div><!-- .inner-pages-header ends -->
-      
-      
-      
-      
-      
+      	<!-- BANNER SECTION STARTS -->
+      	<section class="category-community full-width"
+      		style="height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem;">
+        	<div class="container">
+	        	<div class="banner__content">
+		            <h2 class="section-intro color-off-white-with-border bold">
+						리뷰게시판
+					</h2>
+          		</div><!-- .banner__content ends -->
+        	</div><!-- .container ends -->
+      	</section><!-- .banner ends -->
+      	<!-- BANNER SECTION ENDS -->
 
 <!-- /////////////////////여기가 리스트////////////////////// -->
       <!-- ALL RESULTS SECTION STARTS -->
-      	<section class="all-results all-results--causes">
+      	<section class="all-results all-results--causes mar-t-md-8">
 
         <div class="container">
-
+		<div class="flex-md-10">
           <div class="row">
 			<c:forEach begin="1" end="1" step="1" var="i">
 			<c:forEach items="${listRows }" var="row"  varStatus="loop">
@@ -92,7 +67,7 @@
                   <h3 class="cause__tile mar-b-sm-2">${row.title} </h3>
                   
 				<!-- 얘 없으면 쪼그라들어요 -->	
-				<img src="${ path }/resources/upload/bottomBar.png" style="max-width:500px;" />
+				<img src="${ path }/resources/upload/bottomBar.png" style="max-width:390px;" />
                 </div><!-- .card__body ends -->
 
                 <!-- <div class="card__footer">
@@ -120,6 +95,7 @@
       </div><!-- .row ends -->
 
         </div><!-- .container ends -->
+       </div>
 
       </section><!-- .all-results -->
       <!-- ALL RESULTS SECTION ENDS -->
@@ -160,7 +136,8 @@
         </div><!-- .container ends -->
 
       </div><!-- .inner-pages-navigation ends -->
-
+	<!-- 컨텐츠와 Footer 사이의 간격을 띄우기 위한 div -->
+	<div class="mar-t-md-2" align="center"></div>
     </main><!-- main ends -->
 
     <!-- =================== MAIN SECTION ENDS ============================= -->

@@ -36,28 +36,9 @@ function writeValidate(f)
 	
     <main>
 	
-      <!-- BANNER SECTION STARTS -->
-      <section class="category-pointshop pad-t-sm-6 pad-t-lg-8 pad-b-sm-6 pad-b-lg-8 mar-t-md-8">
-
-        <div class="container">
-
-          <div class="banner__content">
-
-            <h2 class="section-intro color-off-white-with-border bold">
-				리뷰게시판
-			</h2>
-
-          </div><!-- .banner__content ends -->
-
-        </div><!-- .container ends -->
-
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
-
-
       <!-- SINGLE PAGE SECTION STARTS -->
       <section class="single-page single-sermon single-sermon--text default-section-spacing">
-
+		<div class="container">
           <div class="row">
 
             <div class="flex-md-8 flex-lg-9">
@@ -86,9 +67,7 @@ function writeValidate(f)
 				<p><img src="${path}/resources/upload/${viewRow.userfile5}" /></p>
 				</c:if>
 				
-				<div class="sidebar">
-
-                <div class="sidebar__widget text-center-sm mar-b-sm-2">
+			
 
 				<div class="sidebar__widget mar-b-sm-2">
 
@@ -183,8 +162,7 @@ function writeValidate(f)
                     </span>
                   </div>
                 </div><!-- .sidebar__widget ends -->
-			</div>
-		</div>
+		
             </div><!-- .flex-* ends -->
           </div><!-- .row ends -->
         </div><!-- .container ends -->
@@ -222,7 +200,7 @@ function writeValidate(f)
 
 
         <!-- See _singles.scss for styling -->
-        
+        </div>
       </section><!-- .single-page ends -->
       <!-- SINGLE PAGE SECTION ENDS -->
 
@@ -323,7 +301,8 @@ function writeValidate(f)
         </div><!-- .container ends -->
         
         
-	
+	<!-- 컨텐츠와 Footer 사이의 간격을 띄우기 위한 div -->
+	  <div class="mar-t-md-2" align="center"></div>
       </section><!-- .contact ends -->
 
 	<!-- =================== 댓글창e ============================= -->

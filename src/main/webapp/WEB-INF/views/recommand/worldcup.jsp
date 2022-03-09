@@ -19,24 +19,22 @@
 
     <main>
 	
-	
 		<!-- BANNER SECTION STARTS -->
-		<section class="worldcup-banner full-width">
-			<div class="container">
-				<div class="banner__content">
-					<div class="flex-lg-9">
-						<h2 class="section-intro color-off-white-with-border bold">
-							음식 월드컵
-				  		</h2>
-					</div>
-				</div><!-- .banner__content ends -->
-			</div><!-- .container ends -->
-		</section><!-- .banner ends -->
-		<!-- BANNER SECTION ENDS -->
-      
-      
-      <!-- RECOMMENDED STARTS -->
-      <section class="recommended default-section-spacing pad-t-sm-0 mar-t-md-8">
+      	<section class="category-worldcup full-width"
+      			style="height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem;">
+       		<div class="container">
+         			<div class="banner__content">
+		            <h2 class="section-intro color-off-white-with-border bold">
+						음식 월드컵
+					</h2>
+         			</div><!-- .banner__content ends -->
+       		</div><!-- .container ends -->
+   		</section><!-- .banner ends -->
+      	<!-- BANNER SECTION ENDS -->
+      	
+      	
+      	<!-- RECOMMENDED STARTS -->
+      	<section class="recommended default-section-spacing pad-t-sm-0 mar-t-md-8">
 
         <div class="container">
 
@@ -62,7 +60,11 @@
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="./resources/worldcup_react_build64/index.html" class="button button--primary button--fill">바로가기</a>
+	                <button onclick="location.href='./resources/worldcup_react_build64/index.html';"
+							style="background-color: #ED6A5A; color: #F5F5F5;
+							width: 150px; height: 50px; font-size: 16px; border: none;">
+						<strong>바로가기</strong>
+					</button>
                   </div><!-- .card__cta ends -->
 
                 </div><!-- .card__footer ends -->
@@ -90,7 +92,11 @@
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="./resources/worldcup_react_build32/index.html" class="button button--primary button--fill">바로가기</a>
+	                <button onclick="location.href='./resources/worldcup_react_build32/index.html';"
+							style="background-color: #ED6A5A; color: #F5F5F5;
+							width: 150px; height: 50px; font-size: 16px; border: none;">
+						<strong>바로가기</strong>
+					</button>
                   </div><!-- .card__cta ends -->
 
                 </div><!-- .card__footer ends -->
@@ -117,7 +123,11 @@
                 <div class="card__footer">
 
                   <div class="card__cta">
-                    <a href="./resources/worldcup_react_build8/index.html" class="button button--primary button--fill">바로가기</a>
+                	<button onclick="location.href='./resources/worldcup_react_build8/index.html';"
+							style="background-color: #ED6A5A; color: #F5F5F5;
+							width: 150px; height: 50px; font-size: 16px; border: none;">
+						<strong>바로가기</strong>
+					</button>
                   </div><!-- .card__cta ends -->
 
                 </div><!-- .card__footer ends -->
@@ -132,15 +142,14 @@
 
       </section><!-- .recommended ends -->
       <!-- RECOMMENDED ENDS -->
+      
+      <!-- 컨텐츠와 Footer 사이의 간격을 띄우기 위한 div -->
+	  <div class="mar-t-md-2" align="center"></div>
 
     </main><!-- main ends -->
 
     <!-- =================== MAIN SECTION ENDS ============================= -->
 
-
-    <!-- SCROLL BACK TO TOP BEGINS -->
-    <div class="scroll-to-top"><i class="ri-arrow-up-line"></i></div>
-    <!-- SCROLL BACK TO TOP ENDS -->
 
     <!-- =================== ALL MODALS ============================= -->
 

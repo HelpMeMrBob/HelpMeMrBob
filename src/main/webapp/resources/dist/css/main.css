@@ -2,6 +2,25 @@
 @import url("https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css");
 /*
 =================================================
+					커스텀
+=================================================
+*/
+.bobPointBtn {
+	width: 7%; height: 60px; border: 1px solid #ED6A5A;
+	background-color: #ED6A5A; border-radius: 10px;
+	color: #FFFFFF; text-align: center; font-size: 14px; margin-bottom: 1%
+}
+.bobWhiteBtn {
+	width: 8%; height: 60px; border: 1px solid #0F202E;
+	text-align: center; font-size: 16px; margin-bottom: 1%;
+	padding: 10px; background-color: #FFFFFF; color: #0F202E;
+	border-radius: 10px;
+}
+
+
+
+/*
+=================================================
                     CSS RESET
 =================================================
 */
@@ -472,7 +491,11 @@ s { text-decoration: line-through; }
 
 .background-off-white { background-color: #f5f5f5 !important; }
 
-.background-body-text { background-color: #0f202e !important; }
+.background-white { background-color: white !important; }
+
+.background-menuBar { background-color: #0A151F !important; }
+
+.background-body-text { background-color: #0A151F !important; }
 
 .container { width: 90%; margin: 0 auto; }
 
@@ -2891,6 +2914,8 @@ body .ui-tooltip { border-width: 2px; }
 .category-map { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/map.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
 .category-community { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/community.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
 .category-pointshop { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/pointshop.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
+.category-worldcup { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/worldcupB.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
+.category-cs { background-image: linear-gradient(to right, rgba(237, 106, 90, 0.4) 44%, rgba(237, 106, 90, 0.9)), url("../../main_img/csCenter.jpg"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
 
 
 .combine-section { position: relative; }
