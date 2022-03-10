@@ -53,7 +53,98 @@ function writeValidate(f)
 
       </section><!-- .banner ends -->
       <!-- BANNER SECTION ENDS -->
-
+	
+   	<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;
+   			    text-align: center;">
+   		<table style="width: 60%; text-align: center;">
+   		<tr>
+			<td style="width: 50%;">
+                  <h2 style="font-weight: bold; color: #484848">
+                  	${viewRow.title }
+                  </h2>
+			</td>
+		</tr>
+		<tr style="margin-Bottom: 1%">
+			<td style="width: 50%; height: 30px; padding-Bottom:10px ;margin-Bottom: 20px;
+					   border-Bottom: 1px Solid #DFDFDF">
+				<span class="icon"><i class="ri-calendar-line"></i></span>
+                <span class="text">${viewRow.postdate }</span>
+                &nbsp;&nbsp;
+                <span class="icon"><i class="ri-eye-line"></i></span>
+                <span class="text">${viewRow.visitCnt }</span>
+                &nbsp;&nbsp;
+                <span class="text bold" style="color: #ED6A5A">by </span>
+				<span class="text">${viewRow.id}</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<c:if test="${ not empty viewRow.userfile1 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile1 }"
+						 style="display: block; margin: 0px auto; width: 300px; height: 300px;
+						 		margin-Top: 10px; margin-Bottom: 30px"/>
+				</c:if>
+				<c:if test="${ not empty viewRow.userfile2 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile2 }"
+						 style="display: block; margin: 0px auto;" />
+				</c:if>
+				<c:if test="${ not empty viewRow.userfile3 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile3 }"
+						 style="display: block; margin: 0px auto;"/>
+				</c:if>
+				<c:if test="${ not empty viewRow.userfile4 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile4 }" 
+						 style="display: block; margin: 0px auto;"/>
+				</c:if>
+				<c:if test="${ not empty viewRow.userfile5 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile5 }" 
+						 style="display: block; margin: 0px auto;"/>
+				</c:if>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p style="color: #484848; font-size: 16px">
+					${ viewRow.contents }
+				</p>
+			</td>
+		</tr>
+		<tr>
+			                 <div class="icon-text mar-b-sm-2" style="margin-top: 10px;">
+                    <span class="icon">
+                    <c:choose>
+                    	<c:when test="${ likeResult eq 1 and viewRow.idx eq idx }">
+							<form name="writeFrm" method="post" 
+					        	action="./like.do" class="form contact__form"
+					        	onsubmit="return checkValidate(this);">
+							 	<input type="hidden" name="idx" value="${viewRow.idx }" />
+								<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+								<div class="single-page__share pad-b-sm-2">
+							  	<div class="display-flex align-items-center"><div class="social">
+							  	<!-- ${row.id } -->
+								<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♥</button>
+							   	</div></div><!-- .display-flex ends -->
+							</div><!-- .single-page__share ends -->
+							</form>
+                    	</c:when>
+                    	<c:otherwise>
+							<form name="writeFrm" method="post" 
+					        	action="./like.do" class="form contact__form"
+					        	onsubmit="return checkValidate(this);">
+							 	<input type="hidden" name="idx" value="${viewRow.idx }" />
+								<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+								<div class="single-page__share pad-b-sm-2">
+							  	<div class="display-flex align-items-center"><div class="social">
+							  	<!-- ${row.id } -->
+								<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♡</button>
+							   	</div></div><!-- .display-flex ends -->
+								</div><!-- .single-page__share ends -->
+							</form>                    	
+                    	</c:otherwise>
+                    </c:choose>
+		</tr>
+   		</table>
+	</div>
 
       <!-- SINGLE PAGE SECTION STARTS -->
       <section class="single-page single-sermon single-sermon--text default-section-spacing">

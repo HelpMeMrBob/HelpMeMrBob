@@ -5,6 +5,17 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <!--─────────────────────────────────── SITE HEADER ENDS ─────────────────────────────────────-->
 <!--────────────────────────────────── MAIN SECTION BEGINS ───────────────────────────────────-->
+<style>
+#page {
+	background-color: #ED6A5A;
+	color: #FFFFFF;
+	font-size: 16px;
+	width: 35px;
+	height: 35x;
+	padding: 5px;
+	text-align: center;
+}
+</style>
 	<main>
 	<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;">
 		<table style="width: 60%; margin:0.5px">

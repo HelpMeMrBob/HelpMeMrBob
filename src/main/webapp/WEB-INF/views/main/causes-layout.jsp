@@ -7,6 +7,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
+<style>
+#page {
+	background-color: #ED6A5A;
+	color: #FFFFFF;
+	font-size: 16px;
+	width: 35px;
+	height: 35x;
+	padding: 5px;
+	text-align: center;
+}
+</style>
 
   <body>
 
@@ -43,19 +54,6 @@
       <!-- BANNER SECTION ENDS -->
 
 
-      <!-- INNER PAGES HEADER STARTS -->
-      <div class="inner-pages-header default-section-spacing">
-
-        <div class="container">
-
-          <div class="section-heading text-center-sm">
-          </div><!-- .section-heading ends -->
-
-
-        </div><!-- .container ends -->
-
-
-      </div><!-- .inner-pages-header ends -->
       
       
       
@@ -64,64 +62,66 @@
 
 <!-- /////////////////////여기가 리스트////////////////////// -->
       <!-- ALL RESULTS SECTION STARTS -->
-      	<section class="all-results all-results--causes">
-
-        <div class="container">
-
-          <div class="row">
+	<section class="all-results all-results--causes">
+	<div class="container"
+		 style="margin-Top: 40px">
+	<div class="flex-md-12" align="right">
+       	<button class="button--primary button--fill" type="submit" 
+       			onclick="location.href='./reviewWrite.do';"
+       			style="width: 100px; height: 50px; padding: 10px; font-size: 14px">
+       		글쓰기
+      	</button>
+	</div><!-- .flex-* ends -->
+		<div class="row">
 			<c:forEach begin="1" end="1" step="1" var="i">
-			<c:forEach items="${listRows }" var="row"  varStatus="loop">
+			<c:forEach items="${ listRows }" var="row"  varStatus="loop">
 			<%-- ${(row.idx!=0 && (row.idx % 3==0))?"</div><div class='row'>":"" } --%>
-            ${(i!=0 && (i % 3==0))?"</div><div class='row'>":"" }
+            <div class="col-4"
+            	 style="margin-Top:20px">
+				<a href="./reviewView.do?idx=${row.idx}&nowPage=${nowPage}">
+					<div class="card cause" style="width: 100%; height: 100%;">
+						<div class="card__header no-overlay">
+							<img src="${ path }/resources/upload/${row.userfile1}"
+								 class="card__image"
+						 	     style="padding: 20px;">
+	                	</div><!-- .card__header ends -->
+	                	<div class="card__body">
+							<h3 style="font-size: 18px; color: #585858; font-weight: bold">
+								${ row.title }
+							</h3>
+							<table>
+								<tr>
+									<td>
+										<img src="${ path }/resources/include_img/bob_logo1.png"
+											 style="width: 20px; height: 20px; margin-bottom: 5px"/>
+									</td>
+									<td>
+										<h3 style="font-size: 14px; color: #585858; padding-Left: 5px;
+												   width: 100px">
+											${ row.id }
+										</h3>
+									</td>
+									<td style="width: *; text-align: right">
+										<h3 style="font-size: 14px; color: #585858;
+												   width: 250px; text-align: right">
+											${ row.postdate }
+										</h3>
+									</td>
+								</tr>
+							</table>
+							<!-- 얘 없으면 쪼그라들어요 -->	
+							<img src="${ path }/resources/upload/bottomBar.png"
+								 style="width:500px; padding: 0px; margin: 0px;" />
+	                	</div><!-- .card__body ends -->
+                	</div>
+				</a>
+			</div><!-- .card ends -->
             
-            <div class="col-4">
-			
-			<a href="./reviewView.do?idx=${row.idx}&nowPage=${nowPage}">
-								
-              <div class="card cause">
-
-                <div class="card__header no-overlay">
-
-                  <!-- <img src="./resources/images/causes-3.jpg" alt="" class="card__image"> -->
-
-				<img src="${ path }/resources/upload/${row.userfile1}" alt="" class="card__image">
-                </div><!-- .card__header ends -->
-
-                <div class="card__body">
-
-                  <h3 class="cause__tile mar-b-sm-2">${row.title} </h3>
-                  
-				<!-- 얘 없으면 쪼그라들어요 -->	
-				<img src="${ path }/resources/upload/bottomBar.png" style="max-width:500px;" />
-                </div><!-- .card__body ends -->
-
-                <!-- <div class="card__footer">
-
-                  <div class="card__cta">
-                  	
-                    <a href="causes-single.html" class="button button--primary button--fill">Donate now</a>
-                  </div>.card__cta ends
-
-                  <div class="card__share text-right-sm">
-                    <button  class="transparent button button--primary button--outline share-button"><i
-                        class="ri-share-line" ></i></button>
-                  </div>.card__share ends
-
-                </div>.card__footer ends -->
-
-              </div><!-- .card ends -->
-			
-			</a>
-			
-            </div><!-- .flex-* ends -->
-          </c:forEach>
-      </c:forEach>
-      
-      </div><!-- .row ends -->
-
-        </div><!-- .container ends -->
-
-      </section><!-- .all-results -->
+	        </c:forEach>
+     		</c:forEach>
+    	</div><!-- .row ends -->
+    </div><!-- .container ends -->
+	</section><!-- .all-results -->
       <!-- ALL RESULTS SECTION ENDS -->
 <!--//////////////////////////리스트끝///////////////////////////  -->
       <div class="inner-pages-navigation pad-t-sm-4 pad-b-sm-4">
@@ -144,18 +144,14 @@
               class="pagination__arrow arrow-right transparent button--primary button--outline button share-button"><i
                 class="ri-arrow-right-s-line"></i></button>
           </div>.pagination ends -->
-          
-           	
 			<ul class="pagination justify-content-center">
-				${pagingImg }
+				<li>
+					${ pagingImg }
+				</li>
 			</ul>
 
 			<!-- #####버튼들##### -->
-			<div class="flex-md-12" align="right">
-	           	<button class="button--primary button--fill" type="submit" 
-	           		onclick="location.href='./reviewWrite.do';">글쓰기
-           		</button>
-			</div><!-- .flex-* ends -->
+
 			
         </div><!-- .container ends -->
 
