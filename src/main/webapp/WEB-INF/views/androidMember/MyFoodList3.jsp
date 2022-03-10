@@ -76,7 +76,7 @@
 								  text-align: center; padding: 1px">
 							나의 첫번째 목록
 					</button>
-					<c:if test="${ sessionScope.siteUserInfo.lev >= 10 }">
+					<c:if test="${ sessionScope.AndroidID.lev >= 10 }">
 					<button type="button" onclick="location.href='./myfood2And.do';"
 						   style="width: 16%; height: 40px; background-color: #FFFFFF;
 								  border: 1px solid #10212F; margin: 1px;
@@ -85,7 +85,7 @@
 							나의 두번째 목록
 					</button>
 					</c:if>
-					<c:if test="${ sessionScope.siteUserInfo.lev >= 20 }">
+					<c:if test="${ sessionScope.AndroidID.lev >= 20 }">
 					<button type="button" onclick="location.href='./myfood3And.do';"
 						   style="width: 16%; height: 40px; background-color: #ED6A5A;
 								  border: 1px solid #ED6A5A; margin: 1px; color: #FFFFFF;
@@ -94,7 +94,7 @@
 							나의 세번째 목록
 					</button>
 					</c:if>
-					<c:if test="${ sessionScope.siteUserInfo.lev >= 30 }">
+					<c:if test="${ sessionScope.AndroidID.lev >= 30 }">
 					<button type="button" onclick="location.href='./myfood4And.do';"
 						   style="width: 16%; height: 40px; background-color: #FFFFFF;
 								  border: 1px solid #10212F; margin: 1px;
@@ -103,7 +103,7 @@
 							나의 네번째 목록
 					</button>
 					</c:if>
-					<c:if test="${ sessionScope.siteUserInfo.lev >= 40 }">
+					<c:if test="${ sessionScope.AndroidID.lev >= 40 }">
 					<button type="button" onclick="location.href='./myfood5And.do';"
 						   style="width: 16%; height: 40px; background-color: #FFFFFF;
 								  border: 1px solid #10212F; margin: 1px;

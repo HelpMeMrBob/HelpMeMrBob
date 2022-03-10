@@ -70,7 +70,7 @@
 					<option value="contents">내용</option>
 				</select>
 				
-				<input type="hidden" name="id" value="${ sessionScope.siteUserInfo.id }" readonly
+				<input type="hidden" name="id" value="${ sessionScope.AndroidID.id }" readonly
 					   style="width: 10%; height: 40px; font-size: 12px; padding-left: 20px;
 					   		  background-color: #FFFFFF; color: #10212F; border-radius: 5px;"/>
 				<input type="text" name="searchTxt"
