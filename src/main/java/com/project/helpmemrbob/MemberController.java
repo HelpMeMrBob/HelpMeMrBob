@@ -72,6 +72,20 @@ public class MemberController
 			mv.setViewName("Member/Login");
 			return mv;
 		}
+		else if ( memberVO.getId().equals("admin")) {
+			
+			session.setAttribute("siteUserInfo", memberVO);
+
+			mv.setViewName("redirect:admin.do");
+			
+			return mv;
+		}
+		else if ( memberVO.getGrade().equals("black")) {
+			
+			mv.addObject("LoginNG", "이용할 수 없는 아이디입니다.");
+			mv.setViewName("Member/Login");
+			return mv;
+		}
 		else
 		{
 			sqlSession.getMapper(MemberDAOImpl.class).myLevel(memberVO);
@@ -339,17 +353,25 @@ public class MemberController
 		return "Member/MyPage";
 	}
 	
+	@RequestMapping("/checkLogin.do")
+	public String checkLogin(HttpServletRequest req, HttpSession session) {
+		String id = req.getParameter("id");
+		String pass = req.getParameter("pass");
+		
+		System.out.println("Android에서 넘어온 ID : " + id);
+		MemberVO memberVO = null;
+		
+		memberVO = sqlSession.getMapper(MemberDAOImpl.class).login(id, pass);
+		session.setAttribute("AndroidID", memberVO);
+		return "redirect:mypageAnd.do";
+	}
+	
 	//	마이 페이지 페이지 이동(안드로이드용)
 	@RequestMapping("/mypageAnd.do")
 	public String myPageAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
 		ParameterDTO parameterDTO = new ParameterDTO();
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(((MemberVO)session.getAttribute("AndroidID")).getId());
 		
 		ArrayList<MemberVO> point
 		= sqlSession.getMapper(MemberDAOImpl.class).myPoint(parameterDTO);
@@ -363,6 +385,7 @@ public class MemberController
 		model.addAttribute("stickers", stickers);
 		model.addAttribute("preference", preference);
 		model.addAttribute("point", point);
+		
 		
 		return "androidMember/MyPage";
 	}
@@ -399,14 +422,10 @@ public class MemberController
 	@RequestMapping("/myfoodAnd.do")
 	public String myFoodAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setTab(1);
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		
@@ -455,14 +474,10 @@ public class MemberController
 	@RequestMapping("/myfood2And.do")
 	public String myFood2And(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setTab(2);
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		
@@ -511,14 +526,10 @@ public class MemberController
 	@RequestMapping("/myfood3And.do")
 	public String myFood3And(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setTab(3);
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		
@@ -567,14 +578,10 @@ public class MemberController
 	@RequestMapping("/myfood4And.do")
 	public String myFood4And(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setTab(4);
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		
@@ -623,14 +630,10 @@ public class MemberController
 	@RequestMapping("/myfood5And.do")
 	public String myFood5And(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setTab(5);
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		
@@ -682,15 +685,11 @@ public class MemberController
 	@RequestMapping("/deletemyfoodAnd.do")
 	public String deleteMyFoodAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
 		String deleteFood = req.getParameter("myfood");
 		int myFoodTab = Integer.parseInt(req.getParameter("tab"));
 		
 		ParameterDTO parameterDTO = new ParameterDTO();
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId((String)session.getAttribute("AndroidID"));
 		parameterDTO.setMyfood(deleteFood);
 		parameterDTO.setTab(myFoodTab);
 		
@@ -767,13 +766,8 @@ public class MemberController
 	@RequestMapping("/insertmyfoodAnd.do")
 	public String insertMyFoodAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{			
-			return "redirect:login.do";
-		}
-		
 		ParameterDTO parameterDTO = new ParameterDTO();
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId((String)session.getAttribute("AndroidID"));
 		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		int myFoodTab = Integer.parseInt(req.getParameter("tab"));
 		
@@ -873,17 +867,12 @@ public class MemberController
 	@RequestMapping("/mylistAnd.do")
 	public String myListAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
-		
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		
 		parameterDTO.setSearchField(req.getParameter("searchField"));
 		parameterDTO.setSearchTxt(req.getParameter("searchTxt"));
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		int totalRecordCount
 		= sqlSession.getMapper(MemberDAOImpl.class).getTotalCountSearch(parameterDTO);
@@ -981,16 +970,12 @@ public class MemberController
 	@RequestMapping("/mycommentlistAnd.do")
 	public String myCommentListAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		
 		parameterDTO.setSearchField(req.getParameter("searchField"));
 		parameterDTO.setSearchTxt(req.getParameter("searchTxt"));
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		int totalRecordCount
 		= sqlSession.getMapper(MemberDAOImpl.class)
@@ -1059,13 +1044,9 @@ public class MemberController
 	@RequestMapping("/memberUpdateAnd.do")
 	public String memberUpdateAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		ArrayList<MemberVO> preference
 		= sqlSession.getMapper(MemberDAOImpl.class).myPreference(parameterDTO);
@@ -1197,16 +1178,12 @@ public class MemberController
 	@RequestMapping("/myscrapAnd.do")
 	public String myScrapAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
-		if (session.getAttribute("siteUserInfo") == null)
-		{
-			return "redirect:login.do";
-		}
-		
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		
 		parameterDTO.setSearchField(req.getParameter("searchField"));
 		parameterDTO.setSearchTxt(req.getParameter("searchTxt"));	
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(id);
 		
 		model.addAttribute("scrap", parameterDTO);
 		parameterDTO.setScrapNo(1);

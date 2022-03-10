@@ -68,7 +68,6 @@
 
                 <li class="header__list"><a href="reviewList.do">리뷰 게시판</a></li>
                 <li class="header__list"><a href="VSFight.do">음식 토론</a></li>
-                <li class="header__list"><a href="./customerService.do">고객센터</a></li>
 
               </ul>
 
@@ -81,12 +80,13 @@
             <div class="header__submenu">
               <ul>
 
-                <li class="header__list"><a href="./shop.do">아이템 구매하기</a></li>
-                <li class="header__list"><a href="./chargeBob.do">밥알 충전하기</a></li>
+                <li class="header__list"><a href="./shop.do">밥알 포인트샵</a></li>
+                <li class="header__list"><a href="./chargeBob.do">밥알 충전소</a></li>
 
               </ul>
             </div><!-- .header__submenu ends -->
           </li><!-- .header__list ends -->
+          
           
           
 <!-- 필요한 경우 주석해제해서 사용
@@ -144,7 +144,7 @@
 								<button onclick="location.href='./mypage.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
 										       width: 100px; height: 50px; font-size: 12px;
-										       border: none; border-right: 5px solid #0F202E">
+										       border: none; border-right: 5px solid #0F202E;">
 									마이페이지
 								</button>
 							</td>
@@ -152,7 +152,7 @@
 								<button onclick="location.href='./logout.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
 											   width: 100px ; height: 50px; font-size: 12px;
-											   border: none; border-left: 3px solid #0f202e">
+											   border: none; border-left: 3px solid #0f202e;">
 									로그아웃
 								</button>
 							</td>
@@ -166,7 +166,7 @@
 								<button onclick="location.href='./login.do';"
 										  style="background-color: #ED6A5A; color: #F5F5F5;
 												 width: 100px; height: 50px; font-size: 12px;
-												 border: none; border-right: 3px solid #0a151f">
+												 border: none; border-right: 3px solid #0a151f;">
 									로그인
 								</button>
 							</td>
@@ -174,7 +174,7 @@
 								<button onclick="location.href='./memberRegister.do';"
 										style="background-color: #ED6A5A; color: #F5F5F5;
 											   width: 100px; height: 50px; font-size: 12px;
-											   border: none; border-left: 3px solid #0a151f">
+											   border: none; border-left: 3px solid #0a151f;">
 									회원가입
 								</button>
 							</td>

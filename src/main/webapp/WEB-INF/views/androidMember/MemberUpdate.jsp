@@ -69,7 +69,7 @@ function btn() {
 						   style="width: 70%; height: 60px; padding-left: 30px; border: none;
 							      border: none; border-bottom: 1px solid #DFDFDF;
 							      font-weight: bold;"
-						   value=${ sessionScope.siteUserInfo.id } readonly />
+						   value=${ sessionScope.AndroidID.id } readonly />
 				</td>
 				<td style="padding-right: 18%; padding-top: 40px;">
 					<input type="text" value="이름" readonly 
@@ -80,7 +80,7 @@ function btn() {
 						   style="width: 70%; height: 60px; padding-left: 30px; border: none;
 							      border: none; border-bottom: 1px solid #DFDFDF;
 							      font-weight: bold;"
-						   value=${ sessionScope.siteUserInfo.name } readonly />
+						   value=${ sessionScope.AndroidID.name } readonly />
 				</td>
 			</tr>
 
@@ -94,7 +94,7 @@ function btn() {
 					<input type="text" id="email" name="email"
 						   style="width: 70%; height: 60px; padding: 30px; bodrer: none;
 						   		  border: none; border-bottom: 1px solid #DFDFDF;"
-						   value=${ sessionScope.siteUserInfo.email } />
+						   value=${ sessionScope.AndroidID.email } />
 				</td>
 				<td style="padding-right: 18%; padding-top: 20px; padding-bottom: 60px">
 					<input type="text" value="핸드폰 번호" readonly 
@@ -104,7 +104,7 @@ function btn() {
 					<input type="text" id="telNum" name="telNum"
 						   style="width: 70%; height: 60px; padding-left: 30px;
 						   	      border: none; border-bottom: 1px solid #DFDFDF"
-						   value=${ sessionScope.siteUserInfo.telNum } />
+						   value=${ sessionScope.AndroidID.telNum } />
 				</td>
 			</tr>
 			<tr style="text-align: center;">

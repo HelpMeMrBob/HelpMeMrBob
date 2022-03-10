@@ -41,31 +41,6 @@
 	
     <main>
 	
-      <!-- BANNER SECTION STARTS -->
-      <section class="banner full-width">
-		
-        <div class="container">
-			
-          <div class="banner__content">
-			
-            <div class="section-heading">
-              <span class="section-intro">${sessionScope.siteUserInfo.id}</span>
-              <h1>Contact</h1>
-            </div><!-- .section-heading ends -->
-			
-            <div class="breadcrumb">
-              <div class="breadcrumb__home--link"><a href="index.html">Home</a></div>
-              <span>/</span>
-              <div class="breadcrumb__current--page-link">Contact</div>
-            </div><!-- .breadcrumb ends -->
-			
-          </div><!-- .banner__content ends -->
-			
-        </div><!-- .container ends -->
-		
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
-		
       <!-- CONTACT FORM STARTS -->
       <section class="contact default-section-spacing">
 		
@@ -163,7 +138,7 @@
                 <div class="flex-md-12 mar-b-md-2">
 				
                 <div class="form__group">
-                  <label for="subject" class="form__label">첨부파일5뻐큐 <span class="color-danger">*</span></label>
+                  <label for="subject" class="form__label">첨부파일5 <span class="color-danger">*</span></label>
                   <input type="file" id="subject" class="form__input" name="userfile5" value="${viewRow.userfile5}">
                 </div><!-- .form__group ends -->
 				
@@ -172,7 +147,7 @@
               <div class="flex-md-12">
 				
                 <button class="button--primary button--fill" type="submit" name="submit">작성완료</button>
-                <button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>
+                <button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">목록보기</button>
 				
               </div><!-- .flex-* ends -->
 				

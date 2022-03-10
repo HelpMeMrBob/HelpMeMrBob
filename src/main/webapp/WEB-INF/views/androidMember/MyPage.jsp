@@ -70,14 +70,14 @@
 						style="width: 100px; height: 100px; text-align: center; border: none;
 							   background-color: #10212F; color: #FFFFFF; font-size: 30px;
 							   border-radius: 50px; font-weight: bold"
-						value="Lv. ${ sessionScope.siteUserInfo.lev }" readonly />
+						value="Lv. ${ sessionScope.AndroidID.lev }" readonly />
 				</td>
 			</tr>
 			<tr style="text-align: center">
 				<td colspan="2" style="width: 50%; padding: 10px;">
 					<label style="padding: 15px; border: none; text-align: center;
 						   		  border-bottom: 1px solid #10212F; color: #10212F;">
-						   		  EXP  ${ sessionScope.siteUserInfo.exp }
+						   		  EXP  ${ sessionScope.AndroidID.exp }
 					</label>
 					<c:forEach items="${ point }" var="point">
 					<label style="padding: 15px; border: none; text-align: center;

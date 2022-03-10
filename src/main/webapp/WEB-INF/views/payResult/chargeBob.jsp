@@ -45,26 +45,30 @@ var isValidate = function(frm){
 
     <main>
 	
-      <!-- BANNER SECTION STARTS -->
-      <section class="banner full-width">
+      	<!-- BANNER SECTION STARTS -->
+     	<section class="category-pointshop full-width"
+     			style="height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem;">
+      		<div class="container">
+       			<div class="banner__content">
+		            <h2 class="section-intro color-off-white-with-border bold">
+						밥알 충전소
+					</h2>
+       			</div><!-- .banner__content ends -->
+      		</div><!-- .container ends -->
+  		</section><!-- .banner ends -->
+    	<!-- BANNER SECTION ENDS -->
 
-       
-
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
-
-	
-      <!-- STAFFS SINGLE SECTION STARTS -->
+		<!-- STAFFS SINGLE SECTION STARTS -->
+      <div align="center">
       <section class="staffs-single default-section-spacing">
-      <div class="staffs-single__content" style="margin: 0 auto;">
+      <div class="staffs-single__content">
           <div class="container">
             <div class="row">
-              <div class="flex-lg-6" style="margin-top:120px;">
-						<h2>밥알 충전하기</h2>
+              <div class="">
 						<br/><br/><br/>
 						<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 						<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
-							<table class="table table-bordered" style="width:520px; margin-bottom:100px;">
+							<table class="table table-bordered" style="width:520px; margin-bottom:100px; border: 2px solid #ed6a5a;">
 								<tr>
 									<td>
 										<img src="./resources/img/1rice.png" style="width: 150px;height:100px;"alt="" />	
@@ -82,24 +86,19 @@ var isValidate = function(frm){
 									<td style="height:35px;text-align:center">5000원 <input type="radio" id="5000" name="money" value="5000"></td>
 								</tr>
 							</table>
-						<button id="apibtn" type="submit" class="btn btn-danger" style="width:250px; height:35px; margin-left:270px">충전하기</button>
-					</form>
+                     		<div class="flex-md-12" align="right">
+					           	<button id="apibtn" type="submit" class="button--primary button--fill">충전하기</button>
+							</div><!-- .flex-* ends -->
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
       </section><!-- .staffs-single ends -->
+      </div>
       <!-- STAFFS SINGLE SECTION ENDS -->
-
-
-      <!-- STAFF POSTS SECTION STARTS -->
-      <section class="staff-posts default-section-spacing background-off-white">
-
-     
-      </section><!-- .staff-posts ends -->
-      <!-- STAFF POSTS SECTION ENDS -->
-	
-
+	<!-- 컨텐츠와 Footer 사이의 간격을 띄우기 위한 div -->
+	<div class="mar-t-md-2" align="center"></div>
     </main><!-- main ends -->
 
     <!-- =================== MAIN SECTION ENDS ============================= -->

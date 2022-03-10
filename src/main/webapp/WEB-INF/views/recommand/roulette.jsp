@@ -68,7 +68,7 @@
 	<main>
 		
 		<!-- 랜덤 룰렛 STARTS -->
-    	<section class="ministries text-center-sm default-section-spacing">
+    	<section class="ministries text-center-sm default-section-spacing mar-t-md-2">
         	<div class="ministries__content">
 			    <div class="container">
 				    <div class="row">
@@ -99,7 +99,7 @@
 									   				<option value="-2">&nbsp;&nbsp;&nbsp;&nbsp;---------- 탭 ----------</option>
 									   				<option value="1">탭1</option>
 									   				<option value="-3">&nbsp;&nbsp;&nbsp;----- 선호도 반영 -----</option>
-									   				<option value="10">맛있는 음식</option>
+									   				<option value="10">선호 메뉴</option>
 									   			</select>
 										  	</c:when>
 										  	<c:otherwise>
@@ -109,7 +109,7 @@
 									   				<option value="0">&nbsp;&nbsp;&nbsp;&nbsp;---------- 탭 ----------</option>
 									   				<option value="1">탭1</option>
 									   				<option value="0">&nbsp;&nbsp;&nbsp;----- 선호도 반영 -----</option>
-									   				<option value="100">맛있는 음식</option>
+									   				<option value="100">선호 메뉴</option>
 									   			</select>
 											</c:otherwise>
 										</c:choose>
@@ -143,8 +143,6 @@
 		        </div>
 	        </div>
 	    </section><!-- .welcome ends -->
-	    <!-- 랜덤 룰렛 ENDS : 룰렛과 Footer 사이의 간격을 띄우기 위한 div -->
-		<div class="mar-t-md-2" align="center"></div>
 	    <script>
 			// 룰렛 객체를 저장할 변수
 	    	let theWheel = null;
@@ -255,8 +253,10 @@
 	    		}
 	    		// 올바르게 선택한 경우
 	    		else {
-	    			// 1. 배경색을 흰색으로 변경
+	    			// 1-1. 배경색을 흰색으로 변경
 					document.getElementById("menuCount").style="background-color: white;";
+					// 1-2. 좌측상단의 디스플레이 화면의 placeholder값을 변경
+					document.getElementById("menu").placeholder="두근두근";
 					
 					// **비회원** 2.룰렛과 버튼을 보여줌
 					if( ${ empty sessionScope.siteUserInfo } ) {

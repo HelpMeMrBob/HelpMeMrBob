@@ -7,8 +7,8 @@
 <mapper namespace="member.model.MemberDAOImpl">
 	<!-- 회원 가입 -->
 	<insert id="registerAction" parameterType="member.model.MemberVO">
-		INSERT INTO member (id, name, pass, email, telNum)
-			VALUES ( #{ id }, #{ name }, #{ pass }, #{ email }, #{ telNum } )
+		INSERT INTO member (id, name, pass, email, telNum, grade)
+			VALUES ( #{ id }, #{ name }, #{ pass }, #{ email }, #{ telNum }, 'member' )
 	</insert>
 	
 	<!-- 회원 정보 수정 (대분류 수정) -->

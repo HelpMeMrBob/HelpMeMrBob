@@ -221,16 +221,8 @@ public class RecommandRestAPIController {
 	@RequestMapping("/addOption.do")
 	@ResponseBody
 	public HashMap<String, ArrayList<String>> addOption(HttpServletRequest req, HttpSession session) {
-		
-		// 세션영역에 기존에 저장되어있던 데이터를 지운다.
-		session.removeAttribute("menuCount");
-		session.removeAttribute("addOption");
-		session.removeAttribute("favList");
-		session.removeAttribute("menuList");
-		
 		// 반환할 객체 선언
 		HashMap<String, ArrayList<String>> map = null;
-		JSONArray resultArr = null;
 		
 		// 사용자가 선택한 메뉴개수를 요청 파라미터로 전달받음
 		int menuCount = Integer.parseInt(req.getParameter("menuCount"));
@@ -354,24 +346,10 @@ public class RecommandRestAPIController {
 					menuList.add(myfood.get(i).getMyfood());
 				}
 			}
-			/** 반환할 map에 담을 JSONArray ************************************************/
-			//대분류별 JSON정보를 담을 객체 생성
-			resultArr = new JSONArray();
-			// 대분류 하나의 정보가 들어갈 JSONObject 선언
-			JSONObject resultRow = null;
 			// menuList를 ArrayList로 변환
 			ArrayList<String> copyMenuList = new ArrayList<String>();
 			copyMenuList.addAll(menuList);
 			
-			for (int i=0; i<copyMenuList.size(); i++) {
-				resultRow = new JSONObject();
-				// 정보 입력 - 면
-				resultRow.put("fillStyle", "#ed6a5a");
-				resultRow.put("text", copyMenuList);
-				// Array에 입력
-				resultArr.put(resultRow);
-			}
-			/*******************************************************************************/
 			map = new HashMap<String, ArrayList<String>>();
 			map.put("arr", copyMenuList);
 			System.out.println("[탭+선호도 반영] 최종 메뉴 목록 : "+ map.get("arr"));

@@ -41,30 +41,6 @@
 	
     <main>
 	
-      <!-- BANNER SECTION STARTS -->
-      <section class="banner full-width">
-		
-        <div class="container">
-			
-          <div class="banner__content">
-			
-            <div class="section-heading">
-              <span class="section-intro">${sessionScope.siteUserInfo.id}</span>
-              <h1>Contact</h1>
-            </div><!-- .section-heading ends -->
-			
-            <div class="breadcrumb">
-              <div class="breadcrumb__home--link"><a href="index.html">Home</a></div>
-              <span>/</span>
-              <div class="breadcrumb__current--page-link">Contact</div>
-            </div><!-- .breadcrumb ends -->
-			
-          </div><!-- .banner__content ends -->
-			
-        </div><!-- .container ends -->
-		
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
 		
       <!-- CONTACT FORM STARTS -->
       <section class="contact default-section-spacing">
@@ -87,7 +63,7 @@
 				
                 <div class="form__group">
                   <label for="subject" class="form__label">제목 <span class="color-danger">*</span></label>
-                  <input type="text" id="subject" class="form__input" name="title" placeholder="제목을 입력하세여">
+                  <input type="text" id="subject" class="form__input" name="title" placeholder="제목을 입력하세요.">
                 </div><!-- .form__group ends -->
                 
                 </div>
@@ -98,7 +74,7 @@
                 <div class="form__group">
                   <label for="message-2" class="form__label">내용 <span class="color-danger">*</span></label>
                   <textarea name="contents" id="message-2" class="form__textarea form__input"
-                    placeholder="내용을 입력하세여"></textarea>
+                    placeholder="내용을 입력하세요."></textarea>
                 </div><!-- .form__group ends -->
 				
               </div><!-- .flex-* ends -->
@@ -107,7 +83,7 @@
 				
                 <div class="form__group">
                   <label for="subject" class="form__label">태그 <span class="color-danger">*</span></label>
-                  <input type="text" id="tags" class="form__input" name="tag" placeholder="태그를 입력하세여">
+                  <input type="text" id="tags" class="form__input" name="tag" placeholder="식당 이름을 태그에 추가하면 해당 식당에 리뷰가 등록됩니다.">
                 </div><!-- .form__group ends -->
                 
                 </div>
