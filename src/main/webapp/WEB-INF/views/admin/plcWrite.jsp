@@ -20,7 +20,13 @@
     	.row { width: 90% ;}
     	
     	#place, #plcNum, #operTime, #address_kakao, #address_detail, #menu, #price { border: none; }
+    	
+    	#addBtn { border: 0; background-color:transparent; }
+    	#xBtn { border: 0; background-color:transparent; }
+    	#addBtn2 { border: 0; background-color:transparent; }
+    	#xBtn2 { border: 0; background-color:transparent; }
     </style>
+    
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	//카카오 지도 API 이용하여 주소 입력
@@ -58,24 +64,37 @@
 			f.plcNum.focus();
 			return false;
 		}
-		if(f.menu.value==""){
-			alert("식당의 메뉴를 입력하세요");
-			f.menu.focus();
-			return false;
-		}
-		if(f.price.value==""){
-			alert("메뉴에 대한 가격을 입력하세요");
-			f.price.focus();
-			return false;
-		}
 		if(f.operTime.value==""){
 			alert("식당 운영 시간을 입력하세요");
 			f.operTime.focus();
 			return false;
 		}
 	}
-  
+	
+	//메뉴 input태그 추가 부분
+    const add_textbox = () => {
+        const box = document.getElementById("box");
+        const newP = document.createElement('p');
+        newP.innerHTML = "<input type='text' id='menu' name='menu'> <button type='button' id='xBtn' onclick='remove(this)'><i class='bi bi-patch-minus'></i></button>";
+        box.appendChild(newP);
+    }
+    const remove = (obj) => {
+        document.getElementById('box').removeChild(obj.parentNode);
+    }
+    
+    //가격 input태그 추가 부분
+    const add_textbox2 = () => {
+        const box = document.getElementById("box2");
+        const newP = document.createElement('p');
+        newP.innerHTML = "<input type='text' id='price' name='price'> <button type='button' id='xBtn2' onclick='remove2(this)'><i class='bi bi-patch-minus'></i></button>";
+        box.appendChild(newP);
+    }
+    const remove2 = (obj) => {
+        document.getElementById('box2').removeChild(obj.parentNode);
+    }
+   
 	</script>
+	
     <body class="sb-nav-fixed">
         <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
             </div>
@@ -95,7 +114,6 @@
 								 <colgroup>
 								 	<col width=10%>
 						            <col width=*>
-						            
 					 	        </colgroup>
 							
 								<tr>
@@ -120,16 +138,24 @@
 									<input type="text" name="plcNum" id="plcNum" style="width:1000px;"/>
 									</td>
 								</tr>
+								<!-- 메뉴 추가 부분 -->
 								<tr>
-									<th class="table-primary">메뉴</th>
+									<th class="table-primary">메뉴</th> 
 									<td>
-									<textarea name="menu" id="menu" cols="100" rows="3">메뉴와 메뉴 사이 @를 넣어 구분합니다.</textarea>
+									<div id="box">
+				                       <input type="text" id="menu" name="menu">
+				                       <button type="button" onclick="add_textbox()" id="addBtn"><i class="bi bi-patch-plus-fill"></i></button>
+				                   	</div>
 									</td>
-								</tr>	
+								</tr>
+								<!-- 가격 추가 부분 -->	
 								<tr>
 									<th class="table-primary">가격</th>
 									<td>
-									<textarea name="price" id="price" cols="100" rows="3">가격과 가격 사이 @를 넣어 구분합니다.</textarea>
+									<div id="box2">
+				                       <input type="text" id="price" name="price">
+				                       <button type="button" onclick="add_textbox2()" id="addBtn2"><i class="bi bi-patch-plus-fill"></i></button>
+				                   	</div>
 									</td>
 								</tr>
 								<tr>

@@ -35,8 +35,31 @@ public class AdPlcWriteCommand implements AdminCommandImpl{
 		
 		adPlaceDTO.setAddress(address + "@" + address1);
 		
+		String[] menuList = req.getParameterValues("menu");
+		String[] priceList = req.getParameterValues("price");
+		System.out.println(menuList[0]);	
+		System.out.println(priceList[0]);	
+		
+		String menu = "" ;
+		for(int i=0; i<menuList.length; i++) {
+			
+			menu += "@" + menuList[i];
+		
+		}
+		String price = "" ;
+		for(int i=0; i<priceList.length; i++) {
+			
+			price += "@" + priceList[i];
+		
+		}
+		
+		adPlaceDTO.setMenu(menu);
+		adPlaceDTO.setPrice(price);
+		
 		//폼 값 확인용
 		System.out.println("adPlaceDTO.place=" + adPlaceDTO.getPlace());
+		System.out.println("adPlaceDTO.menu=" + adPlaceDTO.getMenu());
+		System.out.println("adPlaceDTO.price=" + adPlaceDTO.getPrice());
 		
 		//DAO객체 생성 및 쓰기 처리
 		int affected = dao.plcWrite(adPlaceDTO);
