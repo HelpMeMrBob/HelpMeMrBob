@@ -51,7 +51,7 @@ function writeValidate(f)
    		<tr>
 			<td colspan="2" style="width: 50%;">
                   <h2 style="font-weight: bold; color: #484848">
-                  	${viewRow.title }
+                  	${ viewRow.title }
                   </h2>
 			</td>
 		</tr>
@@ -101,20 +101,19 @@ function writeValidate(f)
 			</td>
 		</tr>
 		<tr>
-			<td	style="width: 10%; height: 10%; text-align: right; padding-Right: 10px;">
+			<td	style="width: 10%; height: 10%; text-align: right; padding-Right: 20px;">
 				<input type="text" value="좋아요" readonly
 					   style="font-size: 16px; witdh: 3px; height: 30px; text-align: right;
-						      color: #ED6A5A; border: none; padding-right: 55px"/>
+						      color: #ED6A5A; border: none; padding-right: 20px"/>
 			</td>
-			<td	style="width: 10%; height: 10%; text-align: left; padding-Left: 10px;">
+			<td	style="width: 10%; height: 10%; text-align: left; padding-Left: 20px;">
 				<input type="text" value="스크랩" readonly
 					   style="font-size: 16px; witdh: 3px; height: 30px; text-align: left;
-						      color: #ED6A5A; border: none; padding-left: 55px"/>
+						      color: #ED6A5A; border: none; padding-left: 20px"/>
 			</td>
 		</tr>
 		<tr>
-			<td	style="width: 10%; height: 10%; text-align: right; padding-Right: 5px;
-					   margin-Bottom: 100px">
+			<td	style="width: 10%; height: 10%; text-align: right; padding-Right: 30px;">
 				<c:choose>
 					<c:when test="${ likeResult eq 1 and viewRow.idx eq idx }">
 						<form name="writeFrm" method="post" action="./like.do"
@@ -122,9 +121,10 @@ function writeValidate(f)
 						<input type="hidden" name="idx" value="${viewRow.idx }" />
 						<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
 						<button type="submit" name="submit"
-								style="font-size: 24px; witdh: 30px; height: 60px;
+								style="font-size: 16px; witdh: 30px; height: 60px;
 									   background-color: #FFFFFF; color: #ED6A5A;
-									   border: 1px solid #ED6A5A;"
+									   border: 1px solid #ED6A5A; padding: 20px;
+										   border-radius: 30px"
 								onMouseOver="this.style.backgroundColor='#ED6A5A';
 											 this.style.color='#FFFFFF'"
 								onMouseOut="this.style.backgroundColor='#FFFFFF'
@@ -140,7 +140,8 @@ function writeValidate(f)
 						<button type="submit" name="submit"
 								style="font-size: 16px; witdh: 60px; height: 60px;
 									   background-color: #FFFFFF; color: #ED6A5A;
-									   border: 1px solid #ED6A5A;"
+									   border: 1px solid #ED6A5A; padding: 20px;
+										   border-radius: 30px"
 								onMouseOver="this.style.backgroundColor='#ED6A5A';
 											 this.style.color='#FFFFFF'"
 								onMouseOut="this.style.backgroundColor='#FFFFFF'
@@ -150,9 +151,9 @@ function writeValidate(f)
 					</form>                    	
 					</c:otherwise>
 				</c:choose>
-				<br/><br/><br/>
+				<br/>
 			</td>
-			<td	style="width: 10%; height: 10%; text-align: left; padding-Left: 5px">
+			<td	style="width: 10%; height: 10%; text-align: left; padding-Left: 30px">
 				<c:choose>
                    	<c:when test="${ scrapResult eq 1 and viewRow.idx eq idx }">
 						<form name="writeFrm" method="post" 
@@ -163,7 +164,8 @@ function writeValidate(f)
 							<button type="submit" name="submit"
 									style="font-size: 16px; witdh: 15px; height: 60px;
 										   background-color: #FFFFFF; color: #ED6A5A;
-										   border: 1px solid #ED6A5A;"
+										   border: 1px solid #ED6A5A; padding: 20px;
+										   border-radius: 30px"
 									onMouseOver="this.style.backgroundColor='#ED6A5A';
 												 this.style.color='#FFFFFF'"
 									onMouseOut="this.style.backgroundColor='#FFFFFF'
@@ -180,7 +182,8 @@ function writeValidate(f)
 							<button type="submit" name="submit"
 									style="font-size: 16px; witdh: 60px; height: 60px;
 										   background-color: #FFFFFF; color: #ED6A5A;
-										   border: 1px solid #ED6A5A;"
+										   border: 1px solid #ED6A5A; padding: 20px;
+										   border-radius: 30px"
 									onMouseOver="this.style.backgroundColor='#ED6A5A';
 												 this.style.color='#FFFFFF'"
 									onMouseOut="this.style.backgroundColor='#FFFFFF'
@@ -190,40 +193,165 @@ function writeValidate(f)
 						</form>
                 	</c:otherwise>
 				</c:choose>
-				<br/><br/><br/>
+				<br/>
 			</td>
 		</tr>
 		
+		<c:if test="${sessionScope.siteUserInfo.id eq viewRow.id}">
+		<table style="width: 60%; text-align: center;">
+		<tr>
+			<td style="width: 20%; text-align: right">
+				<form name="writeFrm" method="post"
+					  action="./reviewEdit.do">
+					<input type="hidden" name="idx" value="${viewRow.idx}" />
+					<input type="hidden" name="id" value="${viewRow.id}" />
+					<input type="hidden" name="nowPage" value="${param.nowPage }" />
+					<button type="submit" name="submit"
+							style="font-size: 14px; witdh: 100px; height: 50px;
+					  			   background-color: #ED6A5A; color: #FFFFFF;
+								   border: 1px solid #ED6A5A; padding: 20px">
+										수정하기
+					</button>
+				</form>
+				<br/><br/>
+			</td>
+			<td style="width: 5%">
+		   		<form name="writeFrm" method="post"
+		   			  action="./deleteAction.do">
+				<input type="hidden" name="idx" value="${viewRow.idx}" />
+				<input type="hidden" name="id" value="${viewRow.id}" />
+				<input type="hidden" name="nowPage" value="${param.nowPage }" />
+				<button type="submit"
+						style="font-size: 14px; witdh: 100px; height: 50px;
+				  			   background-color: #10212F; color: #FFFFFF;
+							   border: 1px solid #10212F; padding: 20px">
+					삭제하기
+				</button>
+			</form>
+			<br/><br/>
+			</td>
+			<td style="width: 20%; text-align: left">
+		   		<form name="writeFrm" method="post"
+		   			  action="./deleteAction.do">
+				<button type="button"
+						style="font-size: 14px; witdh: 100px; height: 50px; padding: 15px;
+							   padding-Left: 20px; padding-Right: 20px;
+							   padding-Bottom: 30px;
+				  			   background-color: #10212F; color: #FFFFFF;
+							   border: 1px solid #10212F;"
+						onclick="location.href='./reviewList.do'">
+					목록보기
+				</button>
+			</form>
+			<br/><br/>
+			</td>
+		</tr>
+		</table>
+		</c:if>
+		
 		<table style="width: 60%; text-align: center;">
 		<tr style="margin-Top: 20px">
-			<td colspan="2" style="width: 50%; height: 30px; border-Top: 1px Solid #DFDFDF;
+			<td colspan="3" style="width: 50%; height: 30px; border-Top: 1px Solid #DFDFDF;
 							 	   padding-Top: 10px; margin-Top: 30px;">
-				  <h3 style="font-weight: bold; color: #888888;">
+				  <h3 style="font-weight: bold; color: #888888; text-align: center;">
                   	Comment
                   </h3>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<c:forEach items="${ lists }" var="row">
-					<input type="text" value=${ row.name }(${ row.id }) readonly/>
-					<h4 class="media-heading">작성자:${row.name }(${row.id })</h4>
-					<p>${row.contents }</p>
-				  
-					<c:if test="${sessionScope.siteUserInfo.id eq row.id}">
-						<button class="btn btn-primary" 
+		<c:forEach items="${ lists }" var="row">
+		<tr style="margin-Top: 20px">
+			<td style="width: 10%; height: 20px; border: none; text-align: center;
+					   border-right: 1px solid #DFDFDF">
+				<img src="${ path }/resources/include_img/bob_logo1.png"
+					 style="width: 30px; height: 30px; display: block; margin: 0px auto;">
+				<input type="text" value="${ row.id }" readonly
+					   style="font-size: 14px; text-align: center; width: 100px; height: 30px;
+					   		  border: none"/>
+				
+			</td>
+			<td style="width: 70%; height: 40px; border: none; text-align: left;
+					   padding-Left: 20px;">
+				<p>${row.contents }</p>
+			</td>
+			<td style="width: 20%; height: 40px; text-align: right; padding-right: 20px;
+					   margin-Bottom: 10px">
+			<c:choose>
+			<c:when test="${ sessionScope.siteUserInfo.id eq row.id }">
+						<button style="width: 50px; height: 30px; background-color: #ED6A5A;
+									   color: #FFFFFF;" 
 						onclick="location.href='modify.do?idx=${row.idx}';">
 						수정</button>	
 						<!-- 삭제 버튼을 누를 경우 idx값을 JS의 함수로 전달한다. -->
-						<button class="btn btn-danger" 
-						onclick="javascript:deleteRow(${row.idx});">
+						<button  style="width: 50px; height: 30px; background-color: #10212F;
+									   color: #FFFFFF;"
+								 onclick="deleteRow(${row.idx});">
 						삭제</button>
-					</c:if>
-
-				</c:forEach>
-		</td>
+			</c:when>
+			<c:otherwise>
+				
+			</c:otherwise>
+			</c:choose>
+			</td>
+		</tr>
+		</c:forEach>
+   		</table>
+   		
+   	<div>
+   		<form name="writeFrm" method="post" onsubmit="return writeValidate(this);"
+			  action="./replyWrite.do" >
+		<table style="width: 60%; text-align: center; border-Top: 1px solid #DFDFDF;
+					  margin-Top: 50px">
+		<tr style="margin-Top: 20px">
+			<td colspan="3" style="width: 50%; height: 30px; border-Top: 1px Solid #DFDFDF;
+							 	   padding-Top: 10px; margin-Top: 30px;">
+				<input type="hidden" name="idx" value="${viewRow.idx }" />
+			    <h3 style="font-weight: bold; color: #888888; text-align: center;">
+                 	Write Comment
+                </h3>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 10%; height: 20px; border: none; text-align: center;
+					   border-right: 1px solid #DFDFDF">
+				<img src="${ path }/resources/include_img/bob_logo1.png"
+					 style="width: 30px; height: 30px; display: block; margin: 0px auto;">
+				<input type="text" name="name" value="${ sessionScope.siteUserInfo.name }" readonly
+					   style="font-size: 14px; text-align: center; width: 100px; height: 30px;
+					   		  border: none"/>
+				
+			</td>
+			<td style="width: 70%; height: 40px; border: none; text-align: left;
+					   ">
+				<textarea name="contents" placeholder="댓글을 입력하세요"
+					   style="font-size: 14px; text-align: left; width: 100%; height: 30px;
+					   		  border: none; padding-Left: 20px"></textarea>
+			</td>
+			<td style="width: 20%; height: 40px; text-align: right; padding-right: 20px;
+					   margin-Bottom: 10px">
+				<button style="width: 105px; height: 30px; background-color: #ED6A5A;
+							   color: #FFFFFF; font-size: 14px; padding: 0px" 
+						type="submit" id="submit">
+				작성완료</button>
+			</td>
 		</tr>
    		</table>
+   		</form>
+   		
+   		<table style="width: 60%; text-align: right; border: none; margin-Top: 30px;
+   					  margin-Bottom: 50px; margin-Right: 40px">
+   		<tr>
+   			<td style="width: 100%; height: 30px; padding-Right: 20px">
+				<button type="button"
+						style="font-size: 14px; witdh: 200px; height: 100px; padding: 23px;
+				  			   background-color: #10212F; color: #FFFFFF;
+							   border: 1px solid #10212F;"
+						onclick="location.href='./reviewList.do'">
+					목록보기
+				</button>
+			</td>
+		</tr>
+   		</table>
+   	</div>
 	</div>
 
 
@@ -233,26 +361,6 @@ function writeValidate(f)
 
 	<!-- SCROLL BACK TO TOP BEGINS -->
     <div class="scroll-to-top"><i class="ri-arrow-up-line"></i></div>
-    <!-- SCROLL BACK TO TOP ENDS -->
-          <!-- #####버튼들##### -->
-    <div class="flex-md-12" align="right">
-	    <c:if test="${sessionScope.siteUserInfo.id eq viewRow.id}">
-	    <!-- //////삭제하기///// -->
-	    <form name="writeFrm" method="post" class="form contact__form" action="./deleteAction.do">
-			<input type="hidden" name="idx" value="${viewRow.idx}" />
-			<input type="hidden" name="id" value="${viewRow.id}" />
-			<input type="hidden" name="nowPage" value="${param.nowPage }" />
-			<button class="button--primary button--fill" type="submit" name="submit">글 삭제하기</button>
-		</form>
-		
-		<form name="writeFrm" method="post" class="form contact__form" action="./reviewEdit.do">
-			<input type="hidden" name="idx" value="${viewRow.idx}" />
-			<input type="hidden" name="id" value="${viewRow.id}" />
-			<input type="hidden" name="nowPage" value="${param.nowPage }" />
-			<button class="button--primary button--fill" type="submit" name="submit">글 수정하기</button>
-		</form>
-		</c:if>
-	</div><!-- .flex-* ends -->
 
 
         <!-- See _singles.scss for styling -->
@@ -261,105 +369,12 @@ function writeValidate(f)
       <!-- SINGLE PAGE SECTION ENDS -->
 
     </main><!-- main ends -->
-    <!-- =================== MAIN SECTION ENDS ============================= -->
-
-	<!-- =================== 댓글창s ============================= -->
- 	
-		<!-- =================== 댓글창뷰s ============================= -->
-		<section class="single-page single-cause default-section-spacing">
-
-        <div class="single-page__share background-off-white pad-t-sm-2 pad-b-sm-2">
-
-          <div class="container">
-		<h3 class="mar-b-sm-2">댓글창</h3>
-		<c:forEach items="${lists }" var="row">		
-		<div class="border mt-2 mb-2">
-			<div class="media">
-				<!-- 여기다가 회원 프사같은거 넣을수있어여 -->
-				<!-- <div class="media-left mr-3">
-					<img src="../images/img_avatar3.png" class="media-object" style="width:60px">
-				</div> -->
-				<div class="media-body">
-					<h4 class="media-heading">작성자:${row.name }(${row.id })</h4>
-					<p>${row.contents }</p>
-				</div>	  
-				<!--  수정,삭제버튼 -->
-				<div class="media-right">
-					<!-- 작성자 본인에게만 수정/삭제 버튼 보임 처리 -->
-					<c:if test="${sessionScope.siteUserInfo.id eq row.id}">
-						<button class="btn btn-primary" 
-						onclick="location.href='modify.do?idx=${row.idx}';">
-						수정</button>
-						
-						<!-- 삭제 버튼을 누를 경우 idx값을 JS의 함수로 전달한다. -->
-						<button class="btn btn-danger" 
-						onclick="javascript:deleteRow(${row.idx});">
-						삭제</button>
-					</c:if>
-				</div>
-			</div>
-		</div>
-	</c:forEach>
-	<!-- 댓글페이징 -->
-	<ul class="pagination justify-content-center">
-		${pagingImg }
-	</ul>
-	
-	</div>
-	</div>
-	</section>
-	
-	<!-- =================== 댓글창뷰e ============================= -->	
-		<section class="contact default-section-spacing">
-        <div class="container">
 
 
-
-		<form name="writeFrm" method="post" 
-			onsubmit="return writeValidate(this);"
-			action="<c:url value="/replyWrite.do" />" 
-			class="form contact__form">
-			<input type="hidden" name="idx" value="${viewRow.idx }" />
-			
-            <div class="row">
-            
-            <div class="flex-md-6">
+                
 				
-                <div class="form__group">
-                  <label for="fname" class="form__label">작성자 <span class="color-danger">*</span></label>
-                  <input type="text" id="fname" class="form__input" name="name" readonly value="${sessionScope.siteUserInfo.name }">
-                </div><!-- .form__group ends -->
-				
-              </div><!-- .flex-* ends -->
-			
-              <div class="flex-md-12 mar-b-md-2">
-
-                <div class="form__group">
-                  <textarea name="contents" id="message-2" class="form__textarea form__input"
-                    placeholder="댓글을 입력하세요..."></textarea>
-                </div><!-- .form__group ends -->
-
-              </div><!-- .flex-* ends -->
-
-				<div class="flex-md-12">
-
-                <button class="button--primary button--fill" type="submit" name="submit">댓글쓰기</button>
-				<a href='./reviewList.do' class="button button--primary button--fill">목록보기</a></div>
 				<!-- .flex-* ends -->
 
-            </div><!-- .row ends -->
-
-          </form><!-- .form ends -->
-          
-	
-    
-
-        </div><!-- .container ends -->
-        
-        
-	<!-- 컨텐츠와 Footer 사이의 간격을 띄우기 위한 div -->
-	  <div class="mar-t-md-2" align="center"></div>
-      </section><!-- .contact ends -->
 
 	<!-- =================== 댓글창e ============================= -->
 	

@@ -110,7 +110,7 @@
 						   border: 1px solid #DFDFDF; vertical-align: top;">
 					<c:forEach items="${ stickers }" var="stickers">
 						<img src="./resources/upload2/${ stickers.temOname }"
-							 style="width: 100px; height: 100px; float: left;
+							 style="width: 200px; height: 200px; float: left;
 							 		margin: 5px">
 					</c:forEach>
 				</td>
