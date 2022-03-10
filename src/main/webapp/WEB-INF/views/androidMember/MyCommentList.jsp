@@ -45,7 +45,7 @@
 					</button>
 				</td>
 				<td style="width: 12%;">
-					<button onclick="location.href='./memberUpdate.do';"
+					<button onclick="location.href='./memberUpdateAnd.do';"
 							style="background-color: #FFFFFF; color: #ED6A5A;
 								   width: 100%; height: 80px; font-size: 18px;
 	  							   ">
@@ -113,7 +113,7 @@
 					${ mylist.virtualNum }
 				</td>
 				<td style="width: 65%; height: 15px; padding: 15px; padding-left: 20px">
-					<a href="./reviewView.do?idx=${ mylist.idx }"
+					<a href="./reviewViewAnd.do?idx=${ mylist.idx }"
 					   style="color: #000000; text-decoration: none;">
 						${ mylist.contents }
 					</a>

@@ -171,6 +171,77 @@ public class BbsController {
 		
 		return "main/blog-single2";
 	}
+	
+	@RequestMapping("/reviewViewAnd.do")
+	public String reviewViewAnd(Model model,HttpSession session, HttpServletRequest req) {
+		// 사용자의 요청을 저장한 request객체를 Model객체에 저장한 후 전달한다.
+		model.addAttribute("req", req);
+		command = new ViewCommand();
+		command.execute(model);
+
+		// 여기는 댓글불러오기
+		// 방명록 테이블의 게시물 갯수 카운트
+		int totalRecordCount = sqlSession.getMapper(MybatisDAOImpl.class).getTotalCount();
+		// 페이지 처리를 위한 설정값
+		int pageSize = 4;// 한 페이지당 출력할 게시물의 갯수
+		int blockPage = 2;// 한 블럭당 출력할 페이지 번호의 갯수
+		// 전체 페이지 수 계산
+		int totalPage = (int) Math.ceil((double) totalRecordCount / pageSize);
+		// 현재페이지 번호 설정
+		/*
+		 * 방명록URL?nowPage= ->이 경우 페이지번호는 빈값 방명록URL?nowPage=10 ->10으로 설정 방명록URL ->null로
+		 * 판단
+		 */
+		// 페이지 번호가 null이거나 빈값인 경우 1페이지로 설정한다.
+		int nowPage = (req.getParameter("nowPage") == null || req.getParameter("nowPage").equals("")) ? 1
+				: Integer.parseInt(req.getParameter("nowPage"));
+		// 해당 페이지에 출력할 게시물의 구간을 계산한다.
+		int start = (nowPage - 1) * pageSize + 1;
+		int end = nowPage * pageSize;
+
+		model.addAttribute("idx", req.getParameter("idx"));
+		String idx = req.getParameter("idx");
+		/*
+		 * 서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨 전달된 파라미터는 #{param1}과 같이 순서대로 사용한다.
+		 */
+		ArrayList<BoardReplyVO> lists = sqlSession.getMapper(MybatisDAOImpl.class).listPage(start, end, idx);
+		
+		////////////////좋아요버튼//////////////////////////
+		
+		
+		String pagingImg = ReplyPagingUtil.ReplypagingImg(totalRecordCount, pageSize, blockPage, nowPage,
+				req.getContextPath() + "/reviewView.do?", idx);
+		model.addAttribute("pagingImg", pagingImg);
+
+		for (BoardReplyVO dto : lists) {
+			String temp = dto.getContents().replace("\r\n", "<br/>");
+			dto.setContents(temp);
+		}
+		model.addAttribute("lists", lists);
+		// 댓글불러오기끝
+
+		
+		if (session.getAttribute("siteUserInfo") != null)
+		{
+			String id = ((MemberVO)session.getAttribute("siteUserInfo")).getId();
+			String likeResult = req.getParameter("likeResult");
+			String scrapResult = req.getParameter("scrapResult");
+			if (likeResult == null) {
+				int result = sqlSession.getMapper(LikeDAOImpl.class).checkLike(id, idx);
+				likeResult = String.valueOf(result);
+			}
+			if (scrapResult == null) {
+				int result = sqlSession.getMapper(LikeDAOImpl.class).checkScrap(id, idx);
+				scrapResult = String.valueOf(result);
+			}
+			model.addAttribute("id", id);
+			model.addAttribute("idx", idx);
+			model.addAttribute("likeResult", likeResult);
+			model.addAttribute("scrapResult", scrapResult);
+		}
+		
+		return "main/blog-single4";
+	}
 
 	// 패스워드 검색페이지 진입
 	@RequestMapping("/reviewId.do")

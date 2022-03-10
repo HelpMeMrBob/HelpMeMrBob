@@ -57,7 +57,7 @@ function btn() {
 		</table>
 		
 	<div style="width: 100%; margin-Top:1%;">
-		<form action="./memberUpdateAction.do" method="post">
+		<form action="./memberUpdateActionAnd.do" method="post">
 		<table style="width: 60%; color: #000000; font-size: 14px; padding: 10px; ">
 			<tr>
 				<td style="width: 50%; padding-left: 19.5%; padding-top: 40px">
