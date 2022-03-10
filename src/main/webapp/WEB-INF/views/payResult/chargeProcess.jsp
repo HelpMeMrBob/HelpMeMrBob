@@ -38,18 +38,6 @@
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 
     <main>
-    	<!-- BANNER SECTION STARTS -->
-     	<section class="category-pointshop full-width"
-     			style="height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem;">
-      		<div class="container">
-       			<div class="banner__content">
-		            <h2 class="section-intro color-off-white-with-border bold">
-						밥알 충전소
-					</h2>
-       			</div><!-- .banner__content ends -->
-      		</div><!-- .container ends -->
-  		</section><!-- .banner ends -->
-    	<!-- BANNER SECTION ENDS -->
 	
       <!-- STAFFS SINGLE SECTION STARTS -->
       <section class="staffs-single default-section-spacing">
