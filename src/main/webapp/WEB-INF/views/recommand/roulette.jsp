@@ -247,6 +247,7 @@
 	    		// '메뉴 개수 선택' 옵션을 선택한 경우 : 1.알림 / 2.배경색(#eaada6) 변경 / 3.버튼 숨김
 	    		if (value == 0) {
 	    			alert("매뉴 개수를 선택해주세요.");
+	    			document.getElementById("menu").placeholder="메뉴 개수를 선택해 주세요.";
 	    			document.getElementById("menuCount").style="background-color: #eaada6;";
 	    			document.getElementById("changeMenu").style.display = "none";
 			    	document.getElementById("UnchangeMenu").style.display = "none";

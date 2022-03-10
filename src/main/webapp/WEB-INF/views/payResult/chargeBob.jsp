@@ -60,7 +60,7 @@ var isValidate = function(frm){
 
 		<!-- STAFFS SINGLE SECTION STARTS -->
       <div align="center">
-      <section class="staffs-single default-section-spacing">
+      <section class="staffs-single default-section-spacing mar-t-md-8">
       <div class="staffs-single__content">
           <div class="container">
             <div class="row">

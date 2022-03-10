@@ -57,6 +57,7 @@ img {
 									<br><br><br>
 									마음에 드는 메뉴가 선정되면<br>
 									근처 식당보기 버튼을 눌러서 식당정보를 확인 해보세요.
+									<br><br>
 								</h5>
 							</blockquote><!-- .blockquote ends -->
 			                </div><!-- .text-block ends -->
@@ -89,6 +90,7 @@ img {
 							  <h5 class="bold"><br>
 							  	토너먼트 형식으로 음식을 선택하여,<br>
 							  	제일 좋아하는 음식이 무엇인지 알아보세요.
+							  	<br><br>
 							  </h5>
 							</blockquote><!-- .blockquote ends -->
 			                </div><!-- .text-block ends -->
@@ -134,7 +136,7 @@ img {
 			            	<div class="text-block mar-b-sm-4">
 							<!-- See _typography.scss for styling -->
 							<blockquote class="blockquote text-center-sm">
-							  <h2 class="mar-b-sm-2 italic bold">밥 지도</h2>
+							  <h3 class="mar-b-sm-2 italic bold">밥 지도</h3>
 							  <h5 class="bold"><br>
 							  '지도' 탭에서 메뉴를 검색하면<br>
 							  해당 메뉴를 판매하는 식당의 목록과 위치를 확인할 수 있습니다.
@@ -143,7 +145,7 @@ img {
 							  리뷰 글 목록이 포함된 상세정보를 볼 수 있습니다.
 							  <br><br><br>
 							  '즐겨찾기' 탭에서 즐겨찾기 한 식당 목록을 한 눈에 볼 수 있습니다.
-							  
+							  <br><br>
 							  </h5>
 							</blockquote><!-- .blockquote ends -->
 			                </div><!-- .text-block ends -->
@@ -186,7 +188,7 @@ img {
 			            	<div class="text-block mar-b-sm-4">
 							<!-- See _typography.scss for styling -->
 							<blockquote class="blockquote text-center-sm">
-							  <h2 class="mar-b-sm-2 italic bold">리뷰 게시판</h2>
+							  <h3 class="mar-b-sm-2 italic bold">리뷰 게시판</h3>
 							  <h5 class="bold"><br>
 							  리뷰를 작성해서 경험치를 올리면<br>
 							  '나의 음식 목록'의 탭을 잠금해제 할 수 있습니다.
@@ -195,6 +197,7 @@ img {
 							  마이페이지에서 관리할 수 있습니다.
 							  <br><br><br>
 							  댓글을 통해 서로 의견을 나누어 보세요.
+							  <br><br>
 							  </h5>
 							</blockquote><!-- .blockquote ends -->
 			                </div><!-- .text-block ends -->
@@ -227,13 +230,13 @@ img {
 			            	<div class="text-block mar-b-sm-4">
 							<!-- See _typography.scss for styling -->
 							<blockquote class="blockquote text-center-sm">
-							  <h2 class="mar-b-sm-2 italic bold">음식 토론</h2>
+							  <h3 class="mar-b-sm-2 italic bold">음식 토론</h3>
 							  <h5 class="bold"><br>
-							  첨예하게 대립하는 토론 주제에 대해<br>
-							  댓글을 통해 토론해 보세요.
+							  대립하는 주제에 대해 토론해 보세요.
 							  <br><br><br>
 							  더 높은 공감을 받고있는 의견이 무엇인지<br>
 							  실시간으로 확인할 수 있습니다.
+							  <br><br>
 							  </h5>
 							</blockquote><!-- .blockquote ends -->
 			                </div><!-- .text-block ends -->
@@ -269,14 +272,19 @@ img {
 			    <div class="container">
 				    <div class="row">
 			            <div class="flex-md-5">
-			                <img src="./resources/main_img/roulette.png" style="width: 500px;">
+			                <img src="./resources/main_img/main_point.png" style="width: 500px;">
 			            </div><!-- .flex-* ends -->
 			            <div class="flex-md-6">
 			            	<div class="text-block mar-b-sm-4">
 							<!-- See _typography.scss for styling -->
 							<blockquote class="blockquote text-center-sm">
-							  <h2 class="mar-b-sm-2 italic bold">밥알 상점</h2>
-							  <h5 class="bold">밥알 상점에 대한 설명을 블라블라</h5>
+							  <h3 class="mar-b-sm-2 italic bold">밥알 포인트샵</h3>
+							  <h5 class="bold"><br>
+							  커뮤니티에서 사용가능한 아이템을 자체 포인트인 밥알로 판매하는 샵입니다.<br>
+							  <br><br>
+							  밥알 충전소에서 포인트를 충전할 수 있습니다.
+							  <br><br>
+							  </h5>
 							</blockquote><!-- .blockquote ends -->
 			                </div><!-- .text-block ends -->
 			                <button onclick="location.href='./shop.do';"

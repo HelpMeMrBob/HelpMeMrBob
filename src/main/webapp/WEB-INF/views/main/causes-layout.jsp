@@ -34,37 +34,23 @@
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 
     <main>
-
-      <!-- BANNER SECTION STARTS -->
-      <section class="category-pointshop pad-t-sm-6 pad-t-lg-8 pad-b-sm-6 pad-b-lg-8 mar-t-md-8">
-
-        <div class="container">
-
-          <div class="banner__content">
-
-            <h2 class="section-intro color-off-white-with-border bold">
-				리뷰게시판
-			</h2>
-
-          </div><!-- .banner__content ends -->
-
-        </div><!-- .container ends -->
-
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
-
-
-      
-      
-      
-      
-      
+		<!-- BANNER SECTION STARTS -->
+      	<section class="category-community full-width"
+      		style="height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem;">
+        	<div class="container">
+	        	<div class="banner__content">
+		            <h2 class="section-intro color-off-white-with-border bold">
+						리뷰 게시판
+					</h2>
+          		</div><!-- .banner__content ends -->
+        	</div><!-- .container ends -->
+      	</section><!-- .banner ends -->
+      	<!-- BANNER SECTION ENDS -->
 
 <!-- /////////////////////여기가 리스트////////////////////// -->
       <!-- ALL RESULTS SECTION STARTS -->
-	<section class="all-results all-results--causes">
-	<div class="container"
-		 style="margin-Top: 40px">
+	<section class="all-results all-results--causes mar-t-md-8">
+	<div class="container">
 	<div class="flex-md-12" align="right">
        	<button class="button--primary button--fill" type="submit" 
        			onclick="location.href='./reviewWrite.do';"
@@ -72,7 +58,7 @@
        		글쓰기
       	</button>
 	</div><!-- .flex-* ends -->
-		<div class="row">
+		<div class="row ">
 			<c:forEach begin="1" end="1" step="1" var="i">
 			<c:forEach items="${ listRows }" var="row"  varStatus="loop">
 			<%-- ${(row.idx!=0 && (row.idx % 3==0))?"</div><div class='row'>":"" } --%>
@@ -156,7 +142,8 @@
         </div><!-- .container ends -->
 
       </div><!-- .inner-pages-navigation ends -->
-
+	<!-- 컨텐츠와 Footer 사이의 간격을 띄우기 위한 div -->
+  	<div class="mar-t-md-2" align="center"></div>
     </main><!-- main ends -->
 
     <!-- =================== MAIN SECTION ENDS ============================= -->

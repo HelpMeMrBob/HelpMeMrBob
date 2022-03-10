@@ -34,18 +34,9 @@ function writeValidate(f)
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 	
 	
-	<main>
-	<section class="category-pointshop pad-t-sm-6 pad-t-lg-8 pad-b-sm-6 pad-b-lg-8 mar-t-md-8">
-		<div class="container">
-			<div class="banner__content">
-				<h2 class="section-intro color-off-white-with-border bold">
-					리뷰게시판
-				</h2>
-			</div>
-        </div>
-	</section><!-- .banner ends -->
 	
-   	<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;
+   	<div class = "mar-t-md-8"
+   		style="width: 100%; margin-Left: 20%; margin-Right: 20%;
    			    text-align: center;">
    		<table style="width: 60%; text-align: center;">
    		<tr>

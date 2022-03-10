@@ -38,15 +38,18 @@
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 
     <main>
-	
-      <!-- BANNER SECTION STARTS -->
-      <section class="banner full-width">
-
-       
-
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
-
+    	<!-- BANNER SECTION STARTS -->
+     	<section class="category-pointshop full-width"
+     			style="height: 20rem; margin-top: -8rem; padding: 15rem 0 10rem;">
+      		<div class="container">
+       			<div class="banner__content">
+		            <h2 class="section-intro color-off-white-with-border bold">
+						밥알 충전소
+					</h2>
+       			</div><!-- .banner__content ends -->
+      		</div><!-- .container ends -->
+  		</section><!-- .banner ends -->
+    	<!-- BANNER SECTION ENDS -->
 	
       <!-- STAFFS SINGLE SECTION STARTS -->
       <section class="staffs-single default-section-spacing">
@@ -54,7 +57,7 @@
           <div class="container">
             <div class="row">
               <div class="flex-lg-7">
-						<h2>카카오충전 밥알 교환 페이지 </h2>
+              		<h1>결제 진행중 입니다.</h1>
 						<br/><br/><br/>
 						<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 						
@@ -65,14 +68,6 @@
       </section><!-- .staffs-single ends -->
       <!-- STAFFS SINGLE SECTION ENDS -->
 
-
-      <!-- STAFF POSTS SECTION STARTS -->
-      <section class="staff-posts default-section-spacing background-off-white">
-
-     
-      </section><!-- .staff-posts ends -->
-      <!-- STAFF POSTS SECTION ENDS -->
-	
 
     </main><!-- main ends -->
 
