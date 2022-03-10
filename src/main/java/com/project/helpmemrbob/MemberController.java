@@ -79,20 +79,6 @@ public class MemberController
 			mv.setViewName("Member/Login");
 			return mv;
 		}
-		else if ( memberVO.getId().equals("admin")) {
-			
-			session.setAttribute("siteUserInfo", memberVO);
-
-			mv.setViewName("redirect:admin.do");
-			
-			return mv;
-		}
-		else if ( memberVO.getGrade().equals("black")) {
-			
-			mv.addObject("LoginNG", "이용할 수 없는 아이디입니다.");
-			mv.setViewName("Member/Login");
-			return mv;
-		}
 		else
 		{
 			sqlSession.getMapper(MemberDAOImpl.class).myLevel(memberVO);

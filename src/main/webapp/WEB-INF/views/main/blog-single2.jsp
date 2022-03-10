@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var = "path" value = "${pageContext.request.contextPath}" />
+<c:set var = "path" value = "${ pageContext.request.contextPath }" />
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 <!-- ajax cdn -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -34,138 +34,201 @@ function writeValidate(f)
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 	
 	
-    <main>
-	
-      <!-- SINGLE PAGE SECTION STARTS -->
-      <section class="single-page single-sermon single-sermon--text default-section-spacing">
+	<main>
+	<section class="category-pointshop pad-t-sm-6 pad-t-lg-8 pad-b-sm-6 pad-b-lg-8 mar-t-md-8">
 		<div class="container">
-          <div class="row">
-
-            <div class="flex-md-8 flex-lg-9">
-
-              <div class="single-full-text printable">
-                <!-- See _singles.scss for styling -->
-
-                <div class="text-block mar-b-sm-4">
-                  <h2>제목: ${viewRow.title }</h2>
-                  <h5 class="mar-b-sm-2">내용: ${viewRow.contents} </h5>
-                </div><!-- .text-block ends -->
-				
-				<c:if test="${not empty viewRow.userfile1}">
-				<p><img src="${path}/resources/upload/${viewRow.userfile1}" /></p>
+			<div class="banner__content">
+				<h2 class="section-intro color-off-white-with-border bold">
+					리뷰게시판
+				</h2>
+			</div>
+        </div>
+	</section><!-- .banner ends -->
+	
+   	<div style="width: 100%; margin-Left: 20%; margin-Right: 20%; margin-Top:5%;
+   			    text-align: center;">
+   		<table style="width: 60%; text-align: center;">
+   		<tr>
+			<td colspan="2" style="width: 50%;">
+                  <h2 style="font-weight: bold; color: #484848">
+                  	${viewRow.title }
+                  </h2>
+			</td>
+		</tr>
+		<tr style="margin-Bottom: 1%">
+			<td colspan="2" style="width: 50%; height: 30px; padding-Bottom:10px ;margin-Bottom: 20px;
+					   border-Bottom: 1px Solid #DFDFDF">
+				<span class="icon"><i class="ri-calendar-line"></i></span>
+                <span class="text">${viewRow.postdate }</span>
+                &nbsp;&nbsp;
+                <span class="icon"><i class="ri-eye-line"></i></span>
+                <span class="text">${viewRow.visitCnt }</span>
+                &nbsp;&nbsp;
+                <span class="text bold" style="color: #ED6A5A">by </span>
+				<span class="text">${viewRow.id}</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" >
+				<c:if test="${ not empty viewRow.userfile1 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile1 }"
+						 style="display: block; margin: 0px auto; width: 300px; height: 300px;
+						 		margin-Top: 10px; margin-Bottom: 30px"/>
 				</c:if>
-				<c:if test="${not empty viewRow.userfile2}">
-				<p><img src="${path}/resources/upload/${viewRow.userfile2}" /></p>
+				<c:if test="${ not empty viewRow.userfile2 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile2 }"
+						 style="display: block; margin: 0px auto;" />
 				</c:if>
-				<c:if test="${not empty viewRow.userfile3}">
-				<p><img src="${path}/resources/upload/${viewRow.userfile3}" /></p>
+				<c:if test="${ not empty viewRow.userfile3 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile3 }"
+						 style="display: block; margin: 0px auto;"/>
 				</c:if>
-				<c:if test="${not empty viewRow.userfile4}">
-				<p><img src="${path}/resources/upload/${viewRow.userfile4}" /></p>
+				<c:if test="${ not empty viewRow.userfile4 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile4 }" 
+						 style="display: block; margin: 0px auto;"/>
 				</c:if>
-				<c:if test="${not empty viewRow.userfile5}">
-				<p><img src="${path}/resources/upload/${viewRow.userfile5}" /></p>
+				<c:if test="${ not empty viewRow.userfile5 }">
+					<img src="${ path }/resources/upload/${ viewRow.userfile5 }" 
+						 style="display: block; margin: 0px auto;"/>
 				</c:if>
-				
-			
-
-				<div class="sidebar__widget mar-b-sm-2">
-
-                  <h6 class="widget__title">작성정보</h6>
-
-                  <div class="icon-text">
-                    <span class="icon"><i class="ri-calendar-line"></i></span>
-                    <span class="text bold">${viewRow.postdate }</span>
-                  </div>
-
-                  <div class="icon-text">
-                    <span class="icon"><i class="ri-eye-line"></i></span>
-                    <span class="text bold">${viewRow.visitCnt }</span>
-                  </div>
-
-                  <div class="icon-text">
-                    <span class="icon">작성자:</span>
-                    <span class="text bold">${viewRow.id}</span>
-                  </div>
-                  
-                  <!-- ////////좋아요버튼/////// -->
-                  <div class="icon-text mar-b-sm-2" style="margin-top: 10px;">
-                    <span class="icon">
-                    <c:choose>
-                    	<c:when test="${ likeResult eq 1 and viewRow.idx eq idx }">
-							<form name="writeFrm" method="post" 
-					        	action="./like.do" class="form contact__form"
-					        	onsubmit="return checkValidate(this);">
-							 	<input type="hidden" name="idx" value="${viewRow.idx }" />
-								<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-								<div class="single-page__share pad-b-sm-2">
-							  	<div class="display-flex align-items-center"><div class="social">
-							  	<!-- ${row.id } -->
-								<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♥</button>
-							   	</div></div><!-- .display-flex ends -->
-							</div><!-- .single-page__share ends -->
-							</form>
-                    	</c:when>
-                    	<c:otherwise>
-							<form name="writeFrm" method="post" 
-					        	action="./like.do" class="form contact__form"
-					        	onsubmit="return checkValidate(this);">
-							 	<input type="hidden" name="idx" value="${viewRow.idx }" />
-								<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-								<div class="single-page__share pad-b-sm-2">
-							  	<div class="display-flex align-items-center"><div class="social">
-							  	<!-- ${row.id } -->
-								<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">♡</button>
-							   	</div></div><!-- .display-flex ends -->
-								</div><!-- .single-page__share ends -->
-							</form>                    	
-                    	</c:otherwise>
-                    </c:choose>
-                    <!-- ////////좋아요버튼/////// -->
-					
-					
-                    <!-- //////////스크랩버튼////////// -->
-					<!-- //////////스크랩한 게시글////////// -->
-					<c:choose>
-                    	<c:when test="${ scrapResult eq 1 and viewRow.idx eq idx }">
-							<form name="writeFrm" method="post" 
-					        	action="./scrap.do" class="form contact__form"
-					        	onsubmit="return checkValidate(this);">
-								<input type="hidden" name="idx" value="${viewRow.idx }" />
-								<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-								<div class="single-page__share pad-b-sm-2">
-									<div class="display-flex align-items-center">
-										<div class="social">
-											<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">★</button>
-									   	</div>
-							   		</div><!-- .display-flex ends -->
-								</div><!-- .single-page__share ends -->
-							</form>
-                    	</c:when>
-                    	<c:otherwise>
-							<form name="writeFrm" method="post" 
-					        	action="./scrap.do" class="form contact__form"
-					        	onsubmit="return checkValidate(this);">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<p style="color: #484848; font-size: 16px; margin-Bottom: 50px">
+					${ viewRow.contents }
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td	style="width: 10%; height: 10%; text-align: right; padding-Right: 10px;">
+				<input type="text" value="좋아요" readonly
+					   style="font-size: 16px; witdh: 3px; height: 30px; text-align: right;
+						      color: #ED6A5A; border: none; padding-right: 55px"/>
+			</td>
+			<td	style="width: 10%; height: 10%; text-align: left; padding-Left: 10px;">
+				<input type="text" value="스크랩" readonly
+					   style="font-size: 16px; witdh: 3px; height: 30px; text-align: left;
+						      color: #ED6A5A; border: none; padding-left: 55px"/>
+			</td>
+		</tr>
+		<tr>
+			<td	style="width: 10%; height: 10%; text-align: right; padding-Right: 5px;
+					   margin-Bottom: 100px">
+				<c:choose>
+					<c:when test="${ likeResult eq 1 and viewRow.idx eq idx }">
+						<form name="writeFrm" method="post" action="./like.do"
+						      onsubmit="return checkValidate(this);">
+						<input type="hidden" name="idx" value="${viewRow.idx }" />
+						<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+						<button type="submit" name="submit"
+								style="font-size: 24px; witdh: 30px; height: 60px;
+									   background-color: #FFFFFF; color: #ED6A5A;
+									   border: 1px solid #ED6A5A;"
+								onMouseOver="this.style.backgroundColor='#ED6A5A';
+											 this.style.color='#FFFFFF'"
+								onMouseOut="this.style.backgroundColor='#FFFFFF'
+											this.style.color='#ED6A5A'">❤
+						</button>
+						</form>
+					</c:when>
+					<c:otherwise>
+					<form name="writeFrm" method="post" action="./like.do"
+					      onsubmit="return checkValidate(this);">
+						<input type="hidden" name="idx" value="${viewRow.idx }" />
+						<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+						<button type="submit" name="submit"
+								style="font-size: 16px; witdh: 60px; height: 60px;
+									   background-color: #FFFFFF; color: #ED6A5A;
+									   border: 1px solid #ED6A5A;"
+								onMouseOver="this.style.backgroundColor='#ED6A5A';
+											 this.style.color='#FFFFFF'"
+								onMouseOut="this.style.backgroundColor='#FFFFFF'
+											this.style.color='#ED6A5A'">
+							🤍
+							</button>
+					</form>                    	
+					</c:otherwise>
+				</c:choose>
+				<br/><br/><br/>
+			</td>
+			<td	style="width: 10%; height: 10%; text-align: left; padding-Left: 5px">
+				<c:choose>
+                   	<c:when test="${ scrapResult eq 1 and viewRow.idx eq idx }">
+						<form name="writeFrm" method="post" 
+				        	action="./scrap.do" class="form contact__form"
+				        	onsubmit="return checkValidate(this);">
 							<input type="hidden" name="idx" value="${viewRow.idx }" />
 							<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
-							<div class="single-page__share pad-b-sm-2">
-								<div class="display-flex align-items-center">
-									<div class="social">
-										<button class="transparent button button--primary button--outline share-button" type="submit" name="submit">☆</button>
-									</div>
-								</div><!-- .display-flex ends -->
-							</div><!-- .single-page__share ends -->
-							</form>
-                    	</c:otherwise>
-                    </c:choose>
-					<!-- ////////스크랩버튼/////// -->
-                    </span>
-                  </div>
-                </div><!-- .sidebar__widget ends -->
+							<button type="submit" name="submit"
+									style="font-size: 16px; witdh: 15px; height: 60px;
+										   background-color: #FFFFFF; color: #ED6A5A;
+										   border: 1px solid #ED6A5A;"
+									onMouseOver="this.style.backgroundColor='#ED6A5A';
+												 this.style.color='#FFFFFF'"
+									onMouseOut="this.style.backgroundColor='#FFFFFF'
+												this.style.color='#ED6A5A'">
+							   🔴
+							</button>
+						</form>
+                   	</c:when>
+                   	<c:otherwise>
+						<form name="writeFrm" method="post" action="./scrap.do"
+				        	  onsubmit="return checkValidate(this);">
+						<input type="hidden" name="idx" value="${viewRow.idx }" />
+						<input type="hidden" name="id" value="${sessionScope.siteUserInfo.id}" /> 
+							<button type="submit" name="submit"
+									style="font-size: 16px; witdh: 60px; height: 60px;
+										   background-color: #FFFFFF; color: #ED6A5A;
+										   border: 1px solid #ED6A5A;"
+									onMouseOver="this.style.backgroundColor='#ED6A5A';
+												 this.style.color='#FFFFFF'"
+									onMouseOut="this.style.backgroundColor='#FFFFFF'
+												this.style.color='#ED6A5A'">
+								⚪
+							</button>
+						</form>
+                	</c:otherwise>
+				</c:choose>
+				<br/><br/><br/>
+			</td>
+		</tr>
 		
-            </div><!-- .flex-* ends -->
-          </div><!-- .row ends -->
-        </div><!-- .container ends -->
+		<table style="width: 60%; text-align: center;">
+		<tr style="margin-Top: 20px">
+			<td colspan="2" style="width: 50%; height: 30px; border-Top: 1px Solid #DFDFDF;
+							 	   padding-Top: 10px; margin-Top: 30px;">
+				  <h3 style="font-weight: bold; color: #888888;">
+                  	Comment
+                  </h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<c:forEach items="${ lists }" var="row">
+					<input type="text" value=${ row.name }(${ row.id }) readonly/>
+					<h4 class="media-heading">작성자:${row.name }(${row.id })</h4>
+					<p>${row.contents }</p>
+				  
+					<c:if test="${sessionScope.siteUserInfo.id eq row.id}">
+						<button class="btn btn-primary" 
+						onclick="location.href='modify.do?idx=${row.idx}';">
+						수정</button>	
+						<!-- 삭제 버튼을 누를 경우 idx값을 JS의 함수로 전달한다. -->
+						<button class="btn btn-danger" 
+						onclick="javascript:deleteRow(${row.idx});">
+						삭제</button>
+					</c:if>
+
+				</c:forEach>
+		</td>
+		</tr>
+   		</table>
+	</div>
+
+
+
+
 
 
 	<!-- SCROLL BACK TO TOP BEGINS -->
@@ -173,13 +236,6 @@ function writeValidate(f)
     <!-- SCROLL BACK TO TOP ENDS -->
           <!-- #####버튼들##### -->
     <div class="flex-md-12" align="right">
-	<%-- <button class="button--primary button--fill" type="submit" 
-          onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=edit&nowPage=${nowPage }';">
-	수정하기원본</button>
-	<button class="button--primary button--fill" type="submit" 
-	onclick="location.href='./reviewId.do?idx=${viewRow.idx}&mode=delete&nowPage=${nowPage }';">
-	삭제하기원본</button>
-     		<button class="button--primary button--fill" type="submit" onclick="location.href='./reviewList.do';">List</button>--%>
 	    <c:if test="${sessionScope.siteUserInfo.id eq viewRow.id}">
 	    <!-- //////삭제하기///// -->
 	    <form name="writeFrm" method="post" class="form contact__form" action="./deleteAction.do">

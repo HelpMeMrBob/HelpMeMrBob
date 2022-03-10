@@ -23,18 +23,18 @@ public class PagingUtil {
 		
 		//3.처음페이지 바로가기 & 이전페이지블럭 바로가기
 		pagingStr += "<div class='col row mt-3'>"
-				+ " <ul class='pagination justify-content-center'>";
+				+ " <ul>";
 		if(intTemp != 1) {
 			//첫번째 페이지 블럭에서는 출력되지 않음
 			//두번째 페이지 블럭부터 출력됨.
-			pagingStr += "<li class='page-item'><a class='page-link'"
-				+ " href='"+page+"nowPage=1'>"
-				+ "<i class='bi bi-skip-backward-fill'></i></a>";
+			pagingStr += "<li><button id='page' "
+				+ " onclick='location.href='./"+page+"nowPage=1'>"
+				+ "<i class='bi bi-skip-backward-fill'></i></button>";
 			pagingStr += "&nbsp;";
-			pagingStr += "<li class='page-item'><a class='page-link'"
-				+ " href='"+page+"nowPage="+
+			pagingStr += "<li><button id='page' "
+				+ " onclick='location.href='./"+page+"nowPage="+
 								(intTemp-blockPage)+"'>"
-				+ "<i class='bi bi-skip-start-fill'></i></a>";
+				+ "<i class='bi bi-skip-start-fill'></i></button>";
 		}
 		
 		//페이지표시 제어를 위한 변수
@@ -48,12 +48,12 @@ public class PagingUtil {
 		{
 			if(intTemp==nowPage) {
 				//pagingStr += "&nbsp;"+intTemp+"&nbsp;";
-				pagingStr += "<li class='page-item active'><a class='page-link' href='#'>"+intTemp+"</a></li>";
+				pagingStr += "<li><button id='page' onclick='location.href='./''>"+intTemp+"</button></li>";
 			}
 			else {
-				pagingStr += "<li class='page-item'><a class='page-link' href='"+page
+				pagingStr += "<li><button id='page' onclick='location.href='./"+page
 					+"nowPage="+intTemp+"'>"+
-					intTemp+"</a></li>";
+					intTemp+"</button></li>";
 			}
 			
 			intTemp++;
@@ -62,13 +62,13 @@ public class PagingUtil {
 		
 		//5.다음페이지블럭 & 마지막페이지 바로가기
 		if(intTemp <= totalPage) {
-			pagingStr += "<li class='page-item'><a class='page-link' href='"+page+"nowPage="+
+			pagingStr += "<li><button id='page' onclick='location.href='./"+page+"nowPage="+
 											intTemp+"'>"
-				+ "<i class='bi bi-skip-end-fill'></i></a></li>";
+				+ "<i class='bi bi-skip-end-fill'></i></button></li>";
 			pagingStr += "&nbsp;";
-			pagingStr += "<li class='page-item'><a class='page-link' href='"+page+"nowPage="+
+			pagingStr += "<li><button id='page' onclick='location.href='./"+page+"nowPage="+
 											totalPage+"'>"
-				+ "<i class='bi bi-skip-forward-fill'></i></a></li>";
+				+ "<i class='bi bi-skip-forward-fill'></i></button></li>";
 		}	
 		
 		pagingStr += "</div>"
