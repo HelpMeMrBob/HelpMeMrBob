@@ -278,7 +278,7 @@ public class AdminController {
 	
 	//식당 글 등록하기
 	@RequestMapping(value="/admin/plcAction.do")
-	public String plcAction(Model model, HttpServletRequest req, AdPlaceDTO adPlaceDTO) {
+	public String plcAction(@RequestParam List<String> menu, @RequestParam List<String> price, Model model, HttpServletRequest req, AdPlaceDTO adPlaceDTO) {
 		
 		model.addAttribute("req", req);
 		model.addAttribute("adPlaceDTO", adPlaceDTO);

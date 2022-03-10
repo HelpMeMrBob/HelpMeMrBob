@@ -21,7 +21,7 @@
     	.row { width: 90% ;}
     	.div1 { width: 45%;}
     	#food { border: 0; border-bottom: #000000 1px solid; width: 400px; }
-    	#addbtn { border: 0; background-color:transparent;}
+    	#addBtn { border: 0; background-color:transparent;}
     	#xbtn { border: 0; background-color:transparent; }
     </style>
     <script type="text/javascript">
