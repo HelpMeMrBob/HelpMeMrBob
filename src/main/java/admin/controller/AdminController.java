@@ -3,6 +3,7 @@ package admin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ import admin.command.DeleteVSTalkCommand;
 import admin.model.AdMemberDAO;
 import admin.model.AdPlaceDTO;
 import admin.model.AdVSTalkDTO;
+import member.model.MemberVO;
 
 @Controller
 public class AdminController {
@@ -80,10 +82,11 @@ public class AdminController {
 	@Autowired
 	AdplcEditActionCommand adplcEditActionCommand;
 	
-	
+
 	//어드민 메인 진입
 	@RequestMapping("/admin.do")
 	public String goAdmin() {
+		
 		return "admin/main";
 	}
 	
