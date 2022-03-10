@@ -55,6 +55,13 @@ public class MemberController
 		return "Member/Login";
 	}
 	
+//	로그인 페이지 이동(안드로이드)
+	@RequestMapping("/loginAnd.do")
+	public String loginAnd(Model model)
+	{
+		return "androidMember/Login";
+	}
+	
 	//	로그인 처리
 	@RequestMapping("/loginAction.do")
 	public ModelAndView loginAction(HttpServletRequest req, HttpSession session)
@@ -685,17 +692,18 @@ public class MemberController
 	@RequestMapping("/deletemyfoodAnd.do")
 	public String deleteMyFoodAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		String deleteFood = req.getParameter("myfood");
 		int myFoodTab = Integer.parseInt(req.getParameter("tab"));
 		
 		ParameterDTO parameterDTO = new ParameterDTO();
-		parameterDTO.setId((String)session.getAttribute("AndroidID"));
+		parameterDTO.setId(id);
 		parameterDTO.setMyfood(deleteFood);
 		parameterDTO.setTab(myFoodTab);
 		
 		sqlSession.getMapper(MemberDAOImpl.class).deleteMyFood(parameterDTO);
 		
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(((MemberVO)session.getAttribute("AndroidID")).getId());
 		
 		ArrayList<MemberVO> food
 		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
@@ -766,14 +774,15 @@ public class MemberController
 	@RequestMapping("/insertmyfoodAnd.do")
 	public String insertMyFoodAnd(Model model, HttpServletRequest req, HttpSession session)
 	{
+		String id = ((MemberVO)session.getAttribute("AndroidID")).getId();
 		ParameterDTO parameterDTO = new ParameterDTO();
-		parameterDTO.setId((String)session.getAttribute("AndroidID"));
+		parameterDTO.setId(id);
 		int countMyFood = sqlSession.getMapper(MemberDAOImpl.class).countMyFood(parameterDTO);
 		int myFoodTab = Integer.parseInt(req.getParameter("tab"));
 		
 		if (countMyFood == 10)
 		{
-			parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+			parameterDTO.setId(((MemberVO)session.getAttribute("AndroidID")).getId());
 			
 			ArrayList<MemberVO> food
 			= sqlSession.getMapper(MemberDAOImpl.class).foodList();
@@ -795,7 +804,7 @@ public class MemberController
 		
 		sqlSession.getMapper(MemberDAOImpl.class).insertMyFood(parameterDTO);
 		
-		parameterDTO.setId(((MemberVO)session.getAttribute("siteUserInfo")).getId());
+		parameterDTO.setId(((MemberVO)session.getAttribute("AndroidID")).getId());
 		
 		ArrayList<MemberVO> food
 		= sqlSession.getMapper(MemberDAOImpl.class).foodList();
@@ -894,7 +903,7 @@ public class MemberController
 		= sqlSession.getMapper(MemberDAOImpl.class).listPageSearch(parameterDTO);
 		
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
-				req.getContextPath() +"/mylist.do?");
+				req.getContextPath() +"/mylistAnd.do?");
 		
 		model.addAttribute("pagingImg", pagingImg);
 		
@@ -999,7 +1008,7 @@ public class MemberController
 		
 		
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
-				req.getContextPath() +"/mycommentlist.do?");
+				req.getContextPath() +"/mycommentlistAnd.do?");
 		model.addAttribute("pagingImg", pagingImg);
 		
 		int virtualNum = 0;
@@ -1074,6 +1083,19 @@ public class MemberController
 		
 		return "redirect:login.do";
 	}
+	
+	
+//	회원 정보 수정 처리(안드로이드)
+	@RequestMapping("/memberUpdateActionAnd.do")
+	public String memberUpdateActionAnd(Model model, HttpSession session, MemberVO vo)
+	{	
+		sqlSession.getMapper(MemberDAOImpl.class).memberUpdateAction(vo);
+		sqlSession.getMapper(MemberDAOImpl.class).myPreferenceUpdate(vo);
+		session.invalidate();
+		
+		return "redirect:loginAnd.do";
+	}
+	
 	
 	//회원가입 페이지 이동
 	@RequestMapping("/memberRegister.do")
