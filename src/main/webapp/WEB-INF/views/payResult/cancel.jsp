@@ -20,13 +20,6 @@
 
     <main>
 	
-      <!-- BANNER SECTION STARTS -->
-      <section class="banner full-width">
-
-       
-
-      </section><!-- .banner ends -->
-      <!-- BANNER SECTION ENDS -->
 
 	
       <!-- STAFFS SINGLE SECTION STARTS -->

@@ -19,7 +19,7 @@
     <!-- =================== MAIN SECTION BEGINS ============================= -->
 	<main>
       <!-- STAFFS SINGLE SECTION STARTS -->
-      <section class="staffs-single default-section-spacing mar-t-md-8">
+      <section class="staffs-single default-section-spacing">
       <div class="staffs-single__content">
           <div class="container">
             <div class="row">
