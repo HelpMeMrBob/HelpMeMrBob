@@ -59,8 +59,8 @@ public class AdPlaceDAO {
 					+ " LIKE '%"+map.get("Word")+"%' ";				
 			}
 			     
-		     sql += "ORDER BY idx DESC) Tb) "
-			     +" WHERE rNum BETWEEN " + start + " AND " + end;
+		     sql += "ORDER BY idx asc) Tb) "
+			     +" WHERE rNum BETWEEN " + start + " AND " + end ;
 		
 		System.out.println(sql);
 		return (ArrayList<AdPlaceDTO>)template.query(sql, 
