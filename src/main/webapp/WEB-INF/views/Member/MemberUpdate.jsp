@@ -4,6 +4,7 @@
 function btn() {
 	alert('수정이 완료되었습니다. 다시 로그인 해주세요.')
 }
+
 </script>
 <jsp:include page="/WEB-INF/views/include/globalHeader.jsp" />
 <!--────────────────────────────────── SITE HEADER BEGINS ─────────────────────────────────── -->
@@ -108,6 +109,7 @@ function btn() {
 						   	      border: none; border-bottom: 1px solid #DFDFDF"
 						   value=${ sessionScope.siteUserInfo.telNum } />
 				</td>
+			</tr>
 			</tr>
 			<tr style="text-align: center;">
 				<td colspan="4" style=" padding-bottom: 24px">

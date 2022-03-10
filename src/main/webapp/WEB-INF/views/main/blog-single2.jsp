@@ -259,8 +259,8 @@ function writeValidate(f)
 			</td>
 		</tr>
 		<c:forEach items="${ lists }" var="row">
-		<tr style="margin-Top: 20px">
-			<td style="width: 10%; height: 20px; border: none; text-align: center;
+		<tr style="margin-Top: 20px; margin-Bottom: 10px">
+			<td style="width: 10%; height: 40px; border: none; text-align: center;
 					   border-right: 1px solid #DFDFDF">
 				<img src="${ path }/resources/include_img/bob_logo1.png"
 					 style="width: 30px; height: 30px; display: block; margin: 0px auto;">
@@ -291,6 +291,11 @@ function writeValidate(f)
 				
 			</c:otherwise>
 			</c:choose>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br/>
 			</td>
 		</tr>
 		</c:forEach>
