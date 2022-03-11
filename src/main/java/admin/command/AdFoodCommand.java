@@ -14,6 +14,7 @@ import admin.model.AdFoodDAO;
 import admin.model.AdFoodDTO;
 import util.EnvFileReader;
 import util.PagingUtil;
+import util.PagingUtil2;
 
 @Service
 public class AdFoodCommand implements AdminCommandImpl{
@@ -75,7 +76,7 @@ public class AdFoodCommand implements AdminCommandImpl{
 			//가상 번호를 setter를 통해 저장
 			row.setVirtualNum(virtualNum);
 						
-			String pagingImg = PagingUtil.pagingImg(totalRecordCount,
+			String pagingImg = PagingUtil2.pagingImg(totalRecordCount,
 					pageSize, blockPage, nowPage,
 					req.getContextPath()+"/admin/food.do?");
 			

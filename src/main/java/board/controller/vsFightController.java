@@ -100,7 +100,7 @@ public class vsFightController {
 		int end2=nowPage2*pageSize2;
 		
 		String pagingImg2=
-				PagingUtil2.pagingImg2(totalRecordCount2,pageSize2, blockPage2, nowPage2,
+				PagingUtil.pagingImg(totalRecordCount2,pageSize2, blockPage2, nowPage2,
 						req.getContextPath()+"/VSFight.do?");
 		model.addAttribute("pagingImg2",pagingImg2);	
 		

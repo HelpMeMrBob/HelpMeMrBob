@@ -42,7 +42,7 @@ public class AdMemberDAO {
 		int start = Integer.parseInt(map.get("start").toString());
 		int end = Integer.parseInt(map.get("end").toString());
 		
-		String sql = "SELECT id, name, email, telNum FROM " 
+		String sql = "SELECT id, name, email, telNum, grade FROM " 
 			     +" (SELECT Tb.*, rownum rNum FROM "
 			     +" (SELECT * FROM member ORDER BY id ASC) Tb) "
 			     +" WHERE rNum BETWEEN " + start + " AND " + end;
